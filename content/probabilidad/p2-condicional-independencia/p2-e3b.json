@@ -1,6 +1,6 @@
 {
   "id": "p2-e3b",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p2-condicional-independencia",
   "title": "Ej. 3(b) · Test diagnóstico: precisión requerida",
@@ -8,30 +8,58 @@
   "difficulty": 3,
   "steps": [
     {
+      "id": "fp",
+      "kind": "property",
+      "prompt": "¿Cuánto vale $P(A \\mid E^c)$ (falso positivo) en función de $p$?",
+      "hint": "Complemento de la especificidad.",
+      "cards": [
+        {
+          "text": "$1 - 0{,}005$",
+          "correct": false,
+          "explanation": "Es $P(E^c)$, no una probabilidad condicional del test."
+        },
+        {
+          "text": "$p$",
+          "correct": false,
+          "explanation": "Es la especificidad: probabilidad de negativo en un sano."
+        },
+        {
+          "text": "$0{,}005\\,p$",
+          "correct": false,
+          "explanation": "Es $P(A \\cap E)$."
+        },
+        {
+          "text": "$1 - p$",
+          "correct": true,
+          "explanation": "$P(A\\mid E^c) = 1 - P(A^c \\mid E^c)$."
+        }
+      ]
+    },
+    {
       "id": "ec",
       "kind": "setup",
       "prompt": "Plantear la ecuación:",
       "hint": "Bayes en función de $p$.",
       "cards": [
         {
-          "text": "$0{,}005\\,p = 0{,}95$",
-          "correct": false,
-          "explanation": "Olvida normalizar por $P(A)$."
-        },
-        {
-          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,p} = 0{,}95$",
-          "correct": false,
-          "explanation": "La tasa de falsos positivos es $1 - p$, no $p$."
-        },
-        {
           "text": "$p = 0{,}95$",
           "correct": false,
           "explanation": "Confunde $P(A\\mid E)$ con $P(E\\mid A)$."
         },
         {
+          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,p} = 0{,}95$",
+          "correct": false,
+          "explanation": "La tasa de falsos positivos es $1 - p$."
+        },
+        {
+          "text": "$0{,}005\\,p = 0{,}95$",
+          "correct": false,
+          "explanation": "Falta normalizar por $P(A)$."
+        },
+        {
           "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,(1-p)} = 0{,}95$",
           "correct": true,
-          "explanation": "Sensibilidad $p$ y tasa de falsos positivos $1-p$."
+          "explanation": "Numerador: positivos verdaderos; denominador: todos los positivos."
         }
       ]
     },
@@ -42,24 +70,24 @@
       "hint": "Despejar: $0{,}00025\\,p = 0{,}94525\\,(1-p)$.",
       "cards": [
         {
-          "text": "No existe tal $p$",
-          "correct": false,
-          "explanation": "La función es continua y creciente en $p$ y tiende a 1; existe solución."
-        },
-        {
-          "text": "$p = 0{,}95$",
-          "correct": false,
-          "explanation": "Sólo daría $P(E\\mid A) \\approx 0{,}087$, como en (a)."
+          "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
+          "correct": true,
+          "explanation": "Despeje lineal."
         },
         {
           "text": "$p \\approx 0{,}995$",
           "correct": false,
-          "explanation": "Daría $P(E\\mid A) \\approx 0{,}5$."
+          "explanation": "Da $P(E\\mid A) \\approx 0{,}5$."
         },
         {
-          "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
-          "correct": true,
-          "explanation": "Despeje lineal de la ecuación anterior."
+          "text": "$p = 0{,}95$",
+          "correct": false,
+          "explanation": "Con $p = 0{,}95$ resulta $P(E\\mid A) \\approx 0{,}087$."
+        },
+        {
+          "text": "No existe tal $p$",
+          "correct": false,
+          "explanation": "El cociente es continuo y creciente en $p$ y tiende a 1."
         }
       ]
     },
@@ -67,13 +95,8 @@
       "id": "int",
       "kind": "interpret",
       "prompt": "¿Qué muestra el resultado?",
-      "hint": "Comparar el error permitido con la prevalencia.",
+      "hint": "Comparar la tasa de falsos positivos con la prevalencia.",
       "cards": [
-        {
-          "text": "Con prevalencia baja se necesita una tasa de falsos positivos del orden de 0,03 %",
-          "correct": true,
-          "explanation": "$1 - p \\approx 2{,}6 \\cdot 10^{-4}$, mucho menor que $P(E) = 0{,}005$."
-        },
         {
           "text": "La prevalencia no influye",
           "correct": false,
@@ -82,12 +105,17 @@
         {
           "text": "Cualquier test con precisión mayor a 0,9 alcanza",
           "correct": false,
-          "explanation": "El ítem (a) muestra que 0,95 da sólo 0,087."
+          "explanation": "Con $p = 0{,}95$ sólo se obtiene $P(E\\mid A) \\approx 0{,}087$."
         },
         {
-          "text": "Basta aumentar la sensibilidad dejando fija la especificidad",
+          "text": "Basta aumentar la sensibilidad",
           "correct": false,
-          "explanation": "Lo que domina son los falsos positivos sobre $E^c$."
+          "explanation": "Lo que domina son los falsos positivos sobre los sanos."
+        },
+        {
+          "text": "Con prevalencia baja, los falsos positivos deben ser del orden del 0,03 %",
+          "correct": true,
+          "explanation": "$1 - p \\approx 2{,}6 \\cdot 10^{-4}$, mucho menor que $P(E) = 0{,}005$."
         }
       ]
     }

@@ -1,6 +1,6 @@
 {
   "id": "p4-e2b",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p4-va-continuas",
   "title": "Ej. 2(b) · Colectivo: sigue sin llegar",
@@ -8,21 +8,39 @@
   "difficulty": 2,
   "steps": [
     {
+      "id": "va",
+      "kind": "distribution",
+      "prompt": "Modelo para la espera de Felipe:",
+      "hint": "Medir el tiempo en minutos desde las 10.",
+      "cards": [
+        {
+          "text": "$T \\sim \\mathcal{U}[10, 30]$",
+          "correct": false,
+          "explanation": "El intervalo es de 10:00 a 10:30, es decir $[0, 30]$ minutos."
+        },
+        {
+          "text": "$T \\sim \\mathcal{U}[0, 30]$",
+          "correct": true,
+          "explanation": "La espera coincide con el momento de llegada del colectivo."
+        },
+        {
+          "text": "$T \\sim \\mathcal{N}(15, 30)$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme; además una normal toma valores fuera de $[0,30]$."
+        },
+        {
+          "text": "$T \\sim \\mathcal{E}(\\tfrac1{30})$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme."
+        }
+      ]
+    },
+    {
       "id": "cond",
       "kind": "setup",
       "prompt": "Plantear:",
-      "hint": "Con $T \\sim \\mathcal{U}[0,30]$.",
+      "hint": "\"Otros 10 minutos\" se cuentan desde las 10:15.",
       "cards": [
-        {
-          "text": "$P(T \\ge 25)$",
-          "correct": false,
-          "explanation": "No condiciona."
-        },
-        {
-          "text": "$P(T \\ge 25 \\mid T > 15)$",
-          "correct": true,
-          "explanation": "\"Otros 10 minutos\" desde las 10:15."
-        },
         {
           "text": "$P(T \\ge 10)$",
           "correct": false,
@@ -32,6 +50,16 @@
           "text": "$P(T \\ge 10 \\mid T > 15)$",
           "correct": false,
           "explanation": "Ese evento ya ocurrió: daría 1."
+        },
+        {
+          "text": "$P(T \\ge 25)$",
+          "correct": false,
+          "explanation": "No condiciona."
+        },
+        {
+          "text": "$P(T \\ge 25 \\mid T > 15)$",
+          "correct": true,
+          "explanation": "Esperar al menos hasta las 10:25, sabiendo que no llegó antes de las 10:15."
         }
       ]
     },
@@ -39,17 +67,17 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "Dado $T > 15$, $T \\sim \\mathcal{U}(15, 30]$.",
+      "hint": "$\\dfrac{P(T \\ge 25)}{P(T > 15)}$.",
       "cards": [
-        {
-          "text": "$\\tfrac12$",
-          "correct": false,
-          "explanation": "Sin justificación."
-        },
         {
           "text": "$\\tfrac23$",
           "correct": false,
-          "explanation": "Es la respuesta de (a): la uniforme no tiene falta de memoria."
+          "explanation": "Es $P(T > 10)$ sin condicionar."
+        },
+        {
+          "text": "$\\dfrac{5/30}{15/30} = \\tfrac13$",
+          "correct": true,
+          "explanation": "Dado $T > 15$, $T$ es uniforme en $(15, 30]$: quedan 5 de 15 minutos."
         },
         {
           "text": "$\\tfrac16$",
@@ -57,27 +85,27 @@
           "explanation": "No divide por $P(T > 15)$."
         },
         {
-          "text": "$\\tfrac{5/30}{15/30} = \\tfrac13$",
-          "correct": true,
-          "explanation": "Quedan 5 de 15 minutos favorables."
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Sin justificación."
         }
       ]
     },
     {
       "id": "int",
       "kind": "property",
-      "prompt": "¿Qué muestra comparar con (a)?",
-      "hint": "Comparar $\\tfrac13$ con $\\tfrac23$.",
+      "prompt": "Sin información previa, $P(T > 10) = \\tfrac23$. ¿Qué muestra compararlo con $\\tfrac13$?",
+      "hint": "Falta de memoria.",
       "cards": [
-        {
-          "text": "La uniforme tiene falta de memoria",
-          "correct": false,
-          "explanation": "Si la tuviera, ambas respuestas coincidirían."
-        },
         {
           "text": "La uniforme no tiene falta de memoria",
           "correct": true,
-          "explanation": "Haber esperado cambia la probabilidad de seguir esperando."
+          "explanation": "Haber esperado cambia la probabilidad de seguir esperando otros 10 minutos."
+        },
+        {
+          "text": "La uniforme tiene falta de memoria",
+          "correct": false,
+          "explanation": "Si la tuviera, ambas probabilidades coincidirían."
         },
         {
           "text": "La espera es independiente de lo ya esperado",

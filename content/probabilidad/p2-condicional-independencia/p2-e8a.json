@@ -1,6 +1,6 @@
 {
   "id": "p2-e8a",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p2-condicional-independencia",
   "title": "Ej. 8(a) · Metegol: ¿puede no terminar?",
@@ -16,12 +16,12 @@
         {
           "text": "$\\left(\\tfrac23\\right)^{n}$",
           "correct": false,
-          "explanation": "No hay tres resultados por partido."
+          "explanation": "Cada partido tiene dos resultados, no tres."
         },
         {
           "text": "$\\tfrac{1}{n}$",
           "correct": false,
-          "explanation": "No corresponde a la estructura de partidos independientes."
+          "explanation": "No corresponde a partidos independientes."
         },
         {
           "text": "$\\left(\\tfrac12\\right)^{n-1}$",
@@ -49,7 +49,7 @@
         {
           "text": "Ley de los grandes números",
           "correct": false,
-          "explanation": "No se necesita: alcanza con la continuidad de la medida."
+          "explanation": "Alcanza con la continuidad de la medida."
         },
         {
           "text": "Independencia de los $N_n$",
@@ -67,7 +67,7 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$\\lim (1/2)^{n-1}$.",
+      "hint": "$\\lim_n (1/2)^{n-1}$.",
       "cards": [
         {
           "text": "$\\tfrac12$",
@@ -80,9 +80,9 @@
           "explanation": "El evento es medible: es intersección numerable de eventos."
         },
         {
-          "text": "$\\tfrac17$",
+          "text": "$\\tfrac18$",
           "correct": false,
-          "explanation": "Confunde con términos de la serie de (b)."
+          "explanation": "Es $P(N_4)$: seguir tras 4 partidos, no el límite."
         },
         {
           "text": "$0$",

@@ -1,50 +1,106 @@
 {
   "id": "p1-e8c",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p1-probabilidad-discreta",
   "title": "Ej. 8(c) · Todas las urnas ocupadas",
-  "statement": "Calcular la probabilidad de que al distribuir $n$ bolillas distintas en $n$ urnas numeradas se encuentren todas las urnas ocupadas.",
+  "statement": "Se distribuyen $n$ bolillas distintas en $n$ urnas numeradas; cada bolilla va a una urna elegida al azar, independientemente de las demás. Calcular la probabilidad de que todas las urnas queden ocupadas.",
   "difficulty": 2,
   "steps": [
     {
-      "id": "modelo",
+      "id": "omega",
       "kind": "setup",
-      "prompt": "¿Cómo se relaciona con el ítem (a)?",
-      "hint": "Cada bolilla elige una urna.",
+      "prompt": "¿Qué espacio muestral conviene?",
+      "hint": "Registrar la urna de cada bolilla.",
       "cards": [
         {
-          "text": "Muestra con reposición de tamaño $r = n$ de una población de $n$ urnas",
+          "text": "$\\{1, \\dots, n\\}^n$ (urna de cada bolilla), equiprobable: $n^n$ resultados",
           "correct": true,
-          "explanation": "Todas ocupadas con $n$ bolillas $\\iff$ ninguna urna se repite."
+          "explanation": "Cada bolilla elige una de las $n$ urnas, con independencia y uniformidad."
         },
         {
-          "text": "Muestra sin reposición de tamaño $n$",
+          "text": "Cantidad de bolillas por urna (multiconjuntos), equiprobables",
           "correct": false,
-          "explanation": "Las bolillas pueden ir a la misma urna."
+          "explanation": "Con bolillas distintas, esas configuraciones no son equiprobables."
         },
         {
-          "text": "$r = 1$",
+          "text": "$2^n$ resultados (urna vacía u ocupada)",
           "correct": false,
-          "explanation": "Se distribuyen $n$ bolillas, no una."
+          "explanation": "Pierde qué bolilla va a cada urna."
         },
         {
-          "text": "Bolillas indistinguibles en urnas (Bose–Einstein)",
+          "text": "Permutaciones de las $n$ bolillas: $n!$",
           "correct": false,
-          "explanation": "Las bolillas son distintas."
+          "explanation": "Excluye los casos con dos bolillas en la misma urna."
+        }
+      ]
+    },
+    {
+      "id": "equiv",
+      "kind": "property",
+      "prompt": "¿A qué equivale \"todas las urnas ocupadas\"?",
+      "hint": "Hay tantas bolillas como urnas.",
+      "cards": [
+        {
+          "text": "A que la primera urna esté ocupada",
+          "correct": false,
+          "explanation": "Es sólo una de las $n$ condiciones."
+        },
+        {
+          "text": "A que haya al menos una bolilla en total",
+          "correct": false,
+          "explanation": "Siempre ocurre."
+        },
+        {
+          "text": "A que ninguna urna reciba más de dos bolillas",
+          "correct": false,
+          "explanation": "Con dos en una urna, alguna otra queda vacía."
+        },
+        {
+          "text": "A que cada urna reciba exactamente una bolilla (asignación biyectiva)",
+          "correct": true,
+          "explanation": "Si una urna recibiera dos bolillas, sobrarían urnas vacías."
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "kind": "compute",
+      "prompt": "¿Cuántos resultados favorables hay?",
+      "hint": "Contar biyecciones entre bolillas y urnas.",
+      "cards": [
+        {
+          "text": "$1$",
+          "correct": false,
+          "explanation": "Hay muchas maneras de poner una bolilla por urna."
+        },
+        {
+          "text": "$n!$",
+          "correct": true,
+          "explanation": "Permutaciones: la primera bolilla tiene $n$ urnas, la segunda $n-1$…"
+        },
+        {
+          "text": "$n^{n-1}$",
+          "correct": false,
+          "explanation": "No resulta de ningún conteo de biyecciones."
+        },
+        {
+          "text": "$\\binom{2n-1}{n}$",
+          "correct": false,
+          "explanation": "Es el número de multiconjuntos (bolillas indistinguibles)."
         }
       ]
     },
     {
       "id": "res",
       "kind": "compute",
-      "prompt": "Resultado:",
-      "hint": "Aplicar (a) con $r = n$.",
+      "prompt": "Probabilidad:",
+      "hint": "Favorables sobre posibles.",
       "cards": [
         {
-          "text": "$\\dfrac{n!}{\\binom{2n-1}{n}}$",
-          "correct": false,
-          "explanation": "Usa el modelo de bolillas indistinguibles."
+          "text": "$\\dfrac{n!}{n^n}$",
+          "correct": true,
+          "explanation": "Cociente de los dos conteos."
         },
         {
           "text": "$\\left(1 - \\tfrac1n\\right)^n$",
@@ -52,42 +108,42 @@
           "explanation": "Es la probabilidad de que una urna dada quede vacía."
         },
         {
-          "text": "$\\dfrac{1}{n^n}$",
+          "text": "$\\dfrac{n!}{\\binom{2n-1}{n}}$",
           "correct": false,
-          "explanation": "Sólo cuenta una asignación favorable; hay $n!$."
+          "explanation": "Mezcla el modelo de bolillas indistinguibles."
         },
         {
-          "text": "$\\dfrac{n!}{n^n}$",
-          "correct": true,
-          "explanation": "Con $r = n$: $\\tfrac{n!}{0!\\,n^n}$."
+          "text": "$\\dfrac{1}{n^n}$",
+          "correct": false,
+          "explanation": "Toma un único caso favorable."
         }
       ]
     },
     {
       "id": "num",
       "kind": "interpret",
-      "prompt": "Para $n = 6$ (seis tiradas de un dado), ¿qué valor resulta?",
-      "hint": "$6! = 720$, $6^6 = 46656$.",
+      "prompt": "Para $n = 6$ (seis tiradas de un dado: ¿salen todas las caras?), ¿qué valor resulta?",
+      "hint": "$6! = 720$ y $6^6 = 46656$.",
       "cards": [
         {
-          "text": "$\\tfrac{1}{6}$",
+          "text": "$\\tfrac{1}{720}$",
           "correct": false,
-          "explanation": "Sin relación con el conteo."
+          "explanation": "Invierte el conteo de favorables."
         },
         {
-          "text": "$\\tfrac{5}{324} \\approx 0{,}0154$",
+          "text": "$\\tfrac16$",
+          "correct": false,
+          "explanation": "No resulta del conteo."
+        },
+        {
+          "text": "$\\tfrac{5}{324} \\approx 0{,}015$: es muy improbable",
           "correct": true,
           "explanation": "$720 / 46656$."
         },
         {
-          "text": "$\\tfrac{1}{720}$",
-          "correct": false,
-          "explanation": "Invierte el conteo favorable."
-        },
-        {
           "text": "$\\approx 0{,}335$",
           "correct": false,
-          "explanation": "Es $(5/6)^6$: probabilidad de que una cara dada no salga."
+          "explanation": "Es $(5/6)^6$: que una cara dada no salga."
         }
       ]
     }

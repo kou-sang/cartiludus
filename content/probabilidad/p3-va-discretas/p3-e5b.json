@@ -1,6 +1,6 @@
 {
   "id": "p3-e5b",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p3-va-discretas",
   "title": "Ej. 5(b) · La figurita de Messi",
@@ -49,7 +49,7 @@
         {
           "text": "$X \\sim \\mathcal{G}(\\tfrac{1}{638})$",
           "correct": false,
-          "explanation": "La geométrica describe el tiempo de espera, no el conteo."
+          "explanation": "La geométrica describe un tiempo de espera, no un conteo."
         },
         {
           "text": "$X \\sim \\mathrm{Bi}(5n, \\tfrac{1}{638})$",
@@ -67,7 +67,7 @@
       "id": "ineq",
       "kind": "setup",
       "prompt": "Condición sobre $n$:",
-      "hint": "Usar (a): $P(X = 0) = (1-p)^{5n}$.",
+      "hint": "Complemento: ninguna de las $5n$ figuritas es de Messi.",
       "cards": [
         {
           "text": "$\\left(\\tfrac{637}{638}\\right)^{5n} \\ge 0{,}9$",
@@ -87,7 +87,7 @@
         {
           "text": "$1 - \\left(\\tfrac{637}{638}\\right)^{5n} \\ge 0{,}9$",
           "correct": true,
-          "explanation": "$P(X \\ge 1) = 1 - P(X = 0)$."
+          "explanation": "$P(X \\ge 1) = 1 - P(X = 0)$ y $P(X=0) = (1-p)^{5n}$."
         }
       ]
     },
@@ -95,7 +95,7 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Menor $n$:",
-      "hint": "$5n \\ge \\dfrac{\\ln 0{,}1}{\\ln(637/638)} \\approx 1467{,}8$.",
+      "hint": "Tomar logaritmo: $5n \\ge \\dfrac{\\ln 0{,}1}{\\ln(637/638)} \\approx 1467{,}8$.",
       "cards": [
         {
           "text": "$n = 115$",

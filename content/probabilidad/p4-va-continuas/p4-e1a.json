@@ -1,6 +1,6 @@
 {
   "id": "p4-e1a",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p4-va-continuas",
   "title": "Ej. 1(a) · Diámetro: constante k",
@@ -10,28 +10,84 @@
     {
       "id": "cond",
       "kind": "property",
-      "prompt": "¿Qué condición determina $k$?",
-      "hint": "Propiedades de una densidad.",
+      "prompt": "¿Qué condiciones debe cumplir una densidad?",
+      "hint": "Propiedades que definen una densidad.",
       "cards": [
         {
           "text": "$f_D(10) = 1$",
           "correct": false,
-          "explanation": "Una densidad puede tomar valores mayores que 1 y no se normaliza puntualmente."
+          "explanation": "Una densidad no se normaliza en un punto."
         },
         {
-          "text": "$\\max f_D = 1$",
+          "text": "$0 \\le f_D \\le 1$",
           "correct": false,
-          "explanation": "La normalización es sobre la integral."
+          "explanation": "Una densidad puede superar 1; lo que vale 1 es la integral."
         },
         {
-          "text": "$\\int_{-\\infty}^{\\infty} f_D = 1$ (y $k \\ge 0$)",
+          "text": "$f_D \\ge 0$ y $\\int_{-\\infty}^{\\infty} f_D = 1$",
           "correct": true,
-          "explanation": "Una densidad es no negativa e integra 1."
+          "explanation": "No negativa e integral total 1."
         },
         {
-          "text": "$\\int_0^{10} x\\, dx = k$",
+          "text": "$\\int_{-\\infty}^{\\infty} f_D = 0$",
           "correct": false,
-          "explanation": "Despeja mal: la condición es $k \\int_0^{10} x\\,dx = 1$."
+          "explanation": "La integral total es 1."
+        }
+      ]
+    },
+    {
+      "id": "signo",
+      "kind": "property",
+      "prompt": "¿Qué signo debe tener $k$?",
+      "hint": "En $(0, 10)$, $x > 0$.",
+      "cards": [
+        {
+          "text": "$k = 0$",
+          "correct": false,
+          "explanation": "Entonces la integral sería 0, no 1."
+        },
+        {
+          "text": "$k < 0$",
+          "correct": false,
+          "explanation": "Daría una densidad negativa."
+        },
+        {
+          "text": "$k > 0$",
+          "correct": true,
+          "explanation": "Si $k < 0$ la densidad sería negativa en $(0,10)$."
+        },
+        {
+          "text": "Cualquiera",
+          "correct": false,
+          "explanation": "La densidad debe ser no negativa."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\int_{-\\infty}^{\\infty} f_D$ en función de $k$?",
+      "hint": "Fuera de $(0,10)$ la densidad es 0.",
+      "cards": [
+        {
+          "text": "$100k$",
+          "correct": false,
+          "explanation": "Olvida el $\\tfrac12$."
+        },
+        {
+          "text": "$10k$",
+          "correct": false,
+          "explanation": "Integra la constante $k$ en lugar de $kx$."
+        },
+        {
+          "text": "$k \\int_0^{10} x\\,dx = 50k$",
+          "correct": true,
+          "explanation": "$\\left.\\tfrac{x^2}{2}\\right|_0^{10} = 50$."
+        },
+        {
+          "text": "$k$",
+          "correct": false,
+          "explanation": "Ignora el factor $x$."
         }
       ]
     },
@@ -39,27 +95,27 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Valor de $k$:",
-      "hint": "$\\int_0^{10} x\\,dx = 50$.",
+      "hint": "$50k = 1$.",
       "cards": [
+        {
+          "text": "$k = \\tfrac{1}{100}$",
+          "correct": false,
+          "explanation": "Viene de $100k = 1$."
+        },
+        {
+          "text": "$k = \\tfrac{1}{10}$",
+          "correct": false,
+          "explanation": "Viene de $10k = 1$."
+        },
         {
           "text": "$k = 50$",
           "correct": false,
           "explanation": "Invierte la ecuación."
         },
         {
-          "text": "$k = \\tfrac{1}{100}$",
-          "correct": false,
-          "explanation": "Usa $\\int_0^{10} x\\,dx = 100$, olvidando el $\\tfrac12$."
-        },
-        {
           "text": "$k = \\tfrac{1}{50}$",
           "correct": true,
-          "explanation": "$50k = 1$."
-        },
-        {
-          "text": "$k = \\tfrac{1}{10}$",
-          "correct": false,
-          "explanation": "Normaliza como si fuera uniforme."
+          "explanation": "Despeje."
         }
       ]
     }

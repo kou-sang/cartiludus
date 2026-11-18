@@ -1,6 +1,6 @@
 {
   "id": "p5-e1",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p5-vectores-aleatorios",
   "title": "Ej. 1 · Producto de binomiales",
@@ -16,12 +16,12 @@
         {
           "text": "$\\bigcap_{i=1}^3 \\{X_i = 0\\}$",
           "correct": false,
-          "explanation": "Pide que las tres sean 0: es un subconjunto estricto."
+          "explanation": "Pide que las tres sean 0: es sólo un caso particular."
         },
         {
           "text": "$\\{X_1 + X_2 + X_3 = 0\\}$",
           "correct": false,
-          "explanation": "Equivale a la intersección anterior."
+          "explanation": "Equivale a que las tres sean 0."
         },
         {
           "text": "$\\bigcup_{i=1}^3 \\{X_i = 0\\}$",
@@ -36,30 +36,58 @@
       ]
     },
     {
-      "id": "compl",
-      "kind": "property",
-      "prompt": "¿Qué propiedad conviene usar?",
-      "hint": "Complemento de la unión.",
+      "id": "p0",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(X_i = 0)$?",
+      "hint": "$\\mathrm{Bi}(4, \\tfrac13)$: ningún éxito en 4 ensayos.",
       "cards": [
         {
-          "text": "$P(Y=0) = P(X_1 = 0)^{1/3}$",
+          "text": "$1 - \\left(\\tfrac13\\right)^4$",
           "correct": false,
-          "explanation": "Sin fundamento."
+          "explanation": "No corresponde a ningún evento útil."
         },
         {
-          "text": "$P(Y = 0) = 1 - \\prod_{i} P(X_i \\ge 1)$ por independencia",
+          "text": "$\\left(\\tfrac23\\right)^4 = \\tfrac{16}{81}$",
+          "correct": true,
+          "explanation": "$\\binom40 (\\tfrac13)^0 (\\tfrac23)^4$."
+        },
+        {
+          "text": "$\\tfrac23$",
+          "correct": false,
+          "explanation": "Probabilidad de fracaso en un solo ensayo."
+        },
+        {
+          "text": "$\\left(\\tfrac13\\right)^4$",
+          "correct": false,
+          "explanation": "Es la probabilidad de 4 éxitos."
+        }
+      ]
+    },
+    {
+      "id": "compl",
+      "kind": "property",
+      "prompt": "¿Qué conviene usar para calcular la probabilidad de la unión?",
+      "hint": "Complemento de la unión e independencia.",
+      "cards": [
+        {
+          "text": "$P(Y=0) = P(X_1 = 0)$",
+          "correct": false,
+          "explanation": "Ignora las otras dos variables."
+        },
+        {
+          "text": "$P(Y = 0) = 1 - \\prod_{i} P(X_i \\ge 1)$",
           "correct": true,
           "explanation": "$\\{Y \\ne 0\\} = \\bigcap \\{X_i \\ge 1\\}$ y los eventos son independientes."
-        },
-        {
-          "text": "$P(Y = 0) = \\prod_i P(X_i = 0)$",
-          "correct": false,
-          "explanation": "Es la probabilidad de la intersección."
         },
         {
           "text": "$P(Y=0) = \\sum_i P(X_i = 0)$",
           "correct": false,
           "explanation": "Los eventos no son disjuntos."
+        },
+        {
+          "text": "$P(Y = 0) = \\prod_i P(X_i = 0)$",
+          "correct": false,
+          "explanation": "Es la probabilidad de la intersección."
         }
       ]
     },
@@ -67,18 +95,8 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$P(X_i = 0) = (\\tfrac23)^4 = \\tfrac{16}{81}$.",
+      "hint": "$P(X_i \\ge 1) = 1 - \\tfrac{16}{81}$.",
       "cards": [
-        {
-          "text": "$1 - \\left(\\tfrac{16}{81}\\right)^3$",
-          "correct": false,
-          "explanation": "Mezcla complemento con intersección."
-        },
-        {
-          "text": "$1 - \\left(\\tfrac{65}{81}\\right)^3 \\approx 0{,}483$",
-          "correct": true,
-          "explanation": "$P(X_i \\ge 1) = \\tfrac{65}{81}$."
-        },
         {
           "text": "$3 \\cdot \\tfrac{16}{81} \\approx 0{,}593$",
           "correct": false,
@@ -88,6 +106,16 @@
           "text": "$\\left(\\tfrac{16}{81}\\right)^3 \\approx 0{,}008$",
           "correct": false,
           "explanation": "Probabilidad de que las tres sean 0."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{65}{81}\\right)^3 \\approx 0{,}483$",
+          "correct": true,
+          "explanation": "Complemento del producto."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{16}{81}\\right)^3$",
+          "correct": false,
+          "explanation": "Mezcla complemento con intersección."
         }
       ]
     }

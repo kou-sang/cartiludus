@@ -1,18 +1,51 @@
 {
   "id": "p4-e1d",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p4-va-continuas",
   "title": "Ej. 1(d) · Tres árboles",
-  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. En un área hay 3 árboles de esa especie. Calcular la probabilidad de que exactamente 2 de ellos tengan diámetro entre 4 y 6 decímetros. (Dato: $P(4 < D < 6) = \\tfrac15$.)",
-  "difficulty": 1,
+  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. En un área hay 3 árboles de esa especie, con diámetros independientes. Calcular la probabilidad de que exactamente 2 de ellos tengan diámetro entre 4 y 6 decímetros.",
+  "difficulty": 2,
   "steps": [
+    {
+      "id": "p",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $p = P(4 < D < 6)$?",
+      "hint": "Con $f_D(x) = \\tfrac{x}{50}$: $F_D(x) = \\tfrac{x^2}{100}$.",
+      "cards": [
+        {
+          "text": "$p = \\tfrac{36}{100}$",
+          "correct": false,
+          "explanation": "Es $P(D < 6)$."
+        },
+        {
+          "text": "$p = \\tfrac25$",
+          "correct": false,
+          "explanation": "Usa $F_D(x) = x^2/50$."
+        },
+        {
+          "text": "$p = \\tfrac{6 - 4}{50}$",
+          "correct": false,
+          "explanation": "Multiplica la longitud por $k$ sin integrar $x$."
+        },
+        {
+          "text": "$p = \\tfrac{36 - 16}{100} = \\tfrac15$",
+          "correct": true,
+          "explanation": "$F_D(6) - F_D(4)$."
+        }
+      ]
+    },
     {
       "id": "va",
       "kind": "identify",
       "prompt": "Variable:",
       "hint": "Contar árboles.",
       "cards": [
+        {
+          "text": "$N$ = diámetro del segundo árbol",
+          "correct": false,
+          "explanation": "Un solo árbol."
+        },
         {
           "text": "$N$ = diámetro promedio de los 3",
           "correct": false,
@@ -22,11 +55,6 @@
           "text": "$N$ = cantidad de árboles hasta el primero en $(4,6)$",
           "correct": false,
           "explanation": "Tiempo de espera, no conteo."
-        },
-        {
-          "text": "$N$ = diámetro del segundo árbol",
-          "correct": false,
-          "explanation": "Un solo árbol."
         },
         {
           "text": "$N$ = cantidad de árboles (de 3) con diámetro en $(4,6)$",
@@ -39,8 +67,13 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Distribución:",
-      "hint": "Árboles independientes.",
+      "hint": "Árboles independientes, cada uno \"éxito\" con probabilidad $p$.",
       "cards": [
+        {
+          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac15)$",
+          "correct": true,
+          "explanation": "3 ensayos independientes con éxito de prob. $\\tfrac15$."
+        },
         {
           "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac45)$",
           "correct": false,
@@ -55,11 +88,6 @@
           "text": "Hipergeométrica",
           "correct": false,
           "explanation": "No hay población finita de la que se extraiga sin reposición."
-        },
-        {
-          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac15)$",
-          "correct": true,
-          "explanation": "3 ensayos independientes con éxito de prob. $\\tfrac15$."
         }
       ]
     },
@@ -70,24 +98,24 @@
       "hint": "$\\binom32 p^2 (1-p)$.",
       "cards": [
         {
-          "text": "$3 \\cdot \\tfrac1{25} \\cdot \\tfrac45 = \\tfrac{12}{125} = 0{,}096$",
-          "correct": true,
-          "explanation": "Fórmula binomial."
-        },
-        {
-          "text": "$\\tfrac{1}{25}$",
-          "correct": false,
-          "explanation": "Ignora al tercer árbol."
-        },
-        {
           "text": "$\\tfrac{1}{25} \\cdot \\tfrac45$",
           "correct": false,
           "explanation": "Falta el $\\binom32$."
         },
         {
+          "text": "$3 \\cdot \\tfrac1{25} \\cdot \\tfrac45 = \\tfrac{12}{125} = 0{,}096$",
+          "correct": true,
+          "explanation": "Fórmula binomial."
+        },
+        {
           "text": "$3 \\cdot \\tfrac{16}{25} \\cdot \\tfrac15$",
           "correct": false,
           "explanation": "Intercambia $p$ y $1-p$."
+        },
+        {
+          "text": "$\\tfrac{1}{25}$",
+          "correct": false,
+          "explanation": "Ignora al tercer árbol."
         }
       ]
     }

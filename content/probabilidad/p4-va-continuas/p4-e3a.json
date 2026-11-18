@@ -1,6 +1,6 @@
 {
   "id": "p4-e3a",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p4-va-continuas",
   "title": "Ej. 3(a) · Transformación lineal",
@@ -8,10 +8,10 @@
   "difficulty": 1,
   "steps": [
     {
-      "id": "met",
+      "id": "pos",
       "kind": "setup",
       "prompt": "Para $c > 0$, ¿cómo se escribe $F_Y(y)$?",
-      "hint": "Despejar $X$ preservando la desigualdad.",
+      "hint": "Despejar $X$; dividir por $c > 0$ no invierte la desigualdad.",
       "cards": [
         {
           "text": "$F_Y(y) = 1 - F_X\\left(\\tfrac{y-d}{c}\\right)$",
@@ -31,7 +31,35 @@
         {
           "text": "$F_Y(y) = P\\left(X \\le \\tfrac{y-d}{c}\\right) = F_X\\left(\\tfrac{y-d}{c}\\right)$",
           "correct": true,
-          "explanation": "Multiplicar por $c > 0$ no invierte la desigualdad."
+          "explanation": "Se aplica la inversa de la transformación."
+        }
+      ]
+    },
+    {
+      "id": "neg",
+      "kind": "setup",
+      "prompt": "Para $c < 0$, ¿cómo se escribe $F_Y(y)$?",
+      "hint": "Dividir por $c < 0$ invierte la desigualdad.",
+      "cards": [
+        {
+          "text": "$F_Y(y) = -F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": false,
+          "explanation": "Una acumulada no es negativa."
+        },
+        {
+          "text": "$F_Y(y) = P\\left(X \\ge \\tfrac{y-d}{c}\\right) = 1 - F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": true,
+          "explanation": "$X$ es continua: $P(X = \\cdot) = 0$."
+        },
+        {
+          "text": "$F_Y(y) = F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": false,
+          "explanation": "No invierte la desigualdad."
+        },
+        {
+          "text": "$F_Y(y) = F_X\\left(\\tfrac{d-y}{c}\\right)$",
+          "correct": false,
+          "explanation": "Cambia el signo del argumento en lugar de complementar."
         }
       ]
     },
@@ -39,27 +67,27 @@
       "id": "res",
       "kind": "distribution",
       "prompt": "Distribución de $Y$:",
-      "hint": "Para $c<0$ el intervalo se invierte.",
+      "hint": "Derivar y mirar el rango.",
       "cards": [
-        {
-          "text": "$Y \\sim \\mathcal{N}(d, c^2)$",
-          "correct": false,
-          "explanation": "No hay normalidad."
-        },
-        {
-          "text": "$Y \\sim \\mathcal{U}$ en el intervalo de extremos $d$ y $c + d$; $f_Y = \\tfrac{1}{|c|}$ allí",
-          "correct": true,
-          "explanation": "Una transformación afín de una uniforme es uniforme."
-        },
         {
           "text": "$Y \\sim \\mathcal{U}[d, c+d]$ con densidad $c$",
           "correct": false,
-          "explanation": "La densidad es $1/|c|$; y si $c < 0$ el intervalo es $[c+d, d]$."
+          "explanation": "La densidad es $1/|c|$; si $c < 0$ el intervalo es $[c+d, d]$."
+        },
+        {
+          "text": "$Y$ uniforme en el intervalo de extremos $d$ y $c + d$, con $f_Y = \\tfrac{1}{|c|}$ allí",
+          "correct": true,
+          "explanation": "Una transformación afín de una uniforme es uniforme."
         },
         {
           "text": "$f_Y(y) = \\tfrac1c$ en $[d, c+d]$ para todo $c \\ne 0$",
           "correct": false,
           "explanation": "Si $c<0$ daría densidad negativa."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{N}(d, c^2)$",
+          "correct": false,
+          "explanation": "No hay normalidad."
         }
       ]
     }

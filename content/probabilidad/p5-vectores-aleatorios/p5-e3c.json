@@ -1,12 +1,40 @@
 {
   "id": "p5-e3c",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p5-vectores-aleatorios",
   "title": "Ej. 3(c) · Banco: un hombre y una mujer",
-  "statement": "El número de hombres y de mujeres que ingresan por día a un banco son independientes con distribución $\\mathcal{P}(2)$ y $\\mathcal{P}(2{,}5)$. Sabiendo que en un día ingresaron sólo dos personas, calcular la probabilidad de que hayan sido un hombre y una mujer.",
+  "statement": "El número de hombres $H$ y de mujeres $M$ que ingresan por día a un banco son independientes con distribución $\\mathcal{P}(2)$ y $\\mathcal{P}(2{,}5)$. Sabiendo que en un día ingresaron sólo dos personas, calcular la probabilidad de que hayan sido un hombre y una mujer.",
   "difficulty": 2,
   "steps": [
+    {
+      "id": "suma",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene el total $H + M$?",
+      "hint": "Suma de Poisson independientes (convolución).",
+      "cards": [
+        {
+          "text": "$H + M \\sim \\mathrm{Bi}(2, \\tfrac49)$",
+          "correct": false,
+          "explanation": "Esa es la distribución de $H$ dado el total, no la del total."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(4{,}5)$",
+          "correct": true,
+          "explanation": "La suma de Poisson independientes es Poisson con la suma de los parámetros."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(2{,}25)$",
+          "correct": false,
+          "explanation": "Promedia en lugar de sumar."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(5)$",
+          "correct": false,
+          "explanation": "Los parámetros se suman: $2 + 2{,}5$."
+        }
+      ]
+    },
     {
       "id": "cond",
       "kind": "setup",
@@ -14,47 +42,47 @@
       "hint": "$\\{H = 1, M = 1\\} \\subseteq \\{H + M = 2\\}$.",
       "cards": [
         {
+          "text": "$\\dfrac{P(H=1) + P(M=1)}{P(H+M=2)}$",
+          "correct": false,
+          "explanation": "Suma en lugar de intersecar."
+        },
+        {
+          "text": "$\\dfrac{P(H=1)\\,P(M=1)}{P(H+M = 2)}$",
+          "correct": true,
+          "explanation": "Definición de condicional e independencia de $H$ y $M$."
+        },
+        {
           "text": "$\\dfrac{P(H=1)}{P(H+M=2)}$",
           "correct": false,
           "explanation": "Falta $M = 1$."
         },
         {
-          "text": "$\\dfrac{P(H=1)P(M=1)}{P(H+M = 2)}$ con $H+M \\sim \\mathcal P(4{,}5)$",
-          "correct": true,
-          "explanation": "Independencia y el ítem (b)."
-        },
-        {
-          "text": "$\\tfrac12$",
-          "correct": false,
-          "explanation": "Supone los tres casos (2H, 1-1, 2M) con pesos arbitrarios."
-        },
-        {
-          "text": "$P(H=1)P(M=1)$",
+          "text": "$P(H=1)\\,P(M=1)$",
           "correct": false,
           "explanation": "Falta condicionar."
         }
       ]
     },
     {
-      "id": "dist",
+      "id": "simp",
       "kind": "distribution",
-      "prompt": "¿Qué distribución tiene $H$ dado $H + M = 2$?",
-      "hint": "Simplificar el cociente de Poisson.",
+      "prompt": "Al simplificar, ¿qué distribución tiene $H$ dado $H + M = 2$?",
+      "hint": "Cancelar $e^{-4{,}5}$ y los factoriales.",
       "cards": [
-        {
-          "text": "Uniforme en $\\{0, 1, 2\\}$",
-          "correct": false,
-          "explanation": "No hay razón para equiprobabilidad."
-        },
         {
           "text": "$\\mathrm{Bi}\\left(2, \\tfrac{2}{4{,}5}\\right) = \\mathrm{Bi}(2, \\tfrac49)$",
           "correct": true,
-          "explanation": "En general $H \\mid H+M = n \\sim \\mathrm{Bi}(n, \\tfrac{\\lambda_1}{\\lambda_1+\\lambda_2})$."
+          "explanation": "Cada persona es hombre con probabilidad $\\tfrac{\\lambda_H}{\\lambda_H + \\lambda_M}$."
         },
         {
           "text": "$\\mathrm{Bi}(2, \\tfrac12)$",
           "correct": false,
           "explanation": "Las tasas no son iguales."
+        },
+        {
+          "text": "Uniforme en $\\{0, 1, 2\\}$",
+          "correct": false,
+          "explanation": "No hay razón para equiprobabilidad."
         },
         {
           "text": "$\\mathcal P(2)$",
@@ -70,9 +98,9 @@
       "hint": "$\\binom21 \\tfrac49 \\cdot \\tfrac59$.",
       "cards": [
         {
-          "text": "$\\tfrac{40}{81} \\approx 0{,}494$",
-          "correct": true,
-          "explanation": "Binomial en $k = 1$."
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Supone $p = \\tfrac12$."
         },
         {
           "text": "$\\tfrac13$",
@@ -80,14 +108,14 @@
           "explanation": "Uniforme en los tres casos."
         },
         {
-          "text": "$\\tfrac12$",
-          "correct": false,
-          "explanation": "Supone $p = \\tfrac12$ y olvida el factor 2."
-        },
-        {
           "text": "$\\tfrac{20}{81}$",
           "correct": false,
           "explanation": "Falta el factor 2."
+        },
+        {
+          "text": "$\\tfrac{40}{81} \\approx 0{,}494$",
+          "correct": true,
+          "explanation": "Binomial en $k = 1$."
         }
       ]
     }

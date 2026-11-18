@@ -1,37 +1,65 @@
 {
   "id": "p1-e8b",
-  "version": 1,
+  "version": 2,
   "subject": "probabilidad",
   "topic": "p1-probabilidad-discreta",
   "title": "Ej. 8(b) · Problema del cumpleaños",
-  "statement": "Se eligen $r$ personas al azar. Suponiendo que el año tiene 365 días y que las fechas de nacimiento son una selección al azar con reposición, calcular la probabilidad de que todas tengan distintas fechas de cumpleaños.",
+  "statement": "Se eligen $r$ personas al azar y se les pregunta su fecha de cumpleaños. Como primera aproximación, el año tiene 365 días y elegir personas al azar equivale a elegir fechas al azar, con reposición. Calcular la probabilidad de que las $r$ personas tengan fechas de cumpleaños distintas ($r \\le 365$).",
   "difficulty": 2,
   "steps": [
     {
-      "id": "modelo",
+      "id": "omega",
       "kind": "setup",
-      "prompt": "¿Con qué caso del ítem (a) se identifica?",
-      "hint": "Población = días del año.",
+      "prompt": "¿Qué espacio muestral describe las fechas de las $r$ personas?",
+      "hint": "Registrar la fecha de cada persona, en orden.",
       "cards": [
         {
-          "text": "$n = 365$ y muestra de tamaño $r$ con reposición",
+          "text": "$\\{1, \\dots, 365\\}^r$, equiprobable: $365^r$ resultados",
           "correct": true,
-          "explanation": "Cada persona \"extrae\" un día al azar, con reposición."
+          "explanation": "Cada persona aporta una fecha entre 365, con reposición."
         },
         {
-          "text": "$n = r$ y muestra de tamaño 365",
+          "text": "Subconjuntos de $r$ fechas: $\\binom{365}{r}$",
           "correct": false,
-          "explanation": "Invierte población y muestra."
+          "explanation": "Excluye las coincidencias, que son justamente posibles."
         },
         {
-          "text": "$n = 366$",
+          "text": "Multiconjuntos de $r$ fechas, equiprobables",
           "correct": false,
-          "explanation": "El enunciado fija años de 365 días."
+          "explanation": "Con personas distinguibles, los multiconjuntos no son equiprobables."
         },
         {
-          "text": "Muestra sin reposición de 365 días",
+          "text": "$r^{365}$ resultados",
           "correct": false,
-          "explanation": "Sin reposición nunca habría coincidencias."
+          "explanation": "Invierte base y exponente: son $r$ personas eligiendo entre 365 fechas."
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "kind": "compute",
+      "prompt": "¿Cuántos resultados tienen todas las fechas distintas?",
+      "hint": "La primera persona tiene 365 opciones, la segunda una menos…",
+      "cards": [
+        {
+          "text": "$365^r - 365$",
+          "correct": false,
+          "explanation": "Sólo descarta los casos en que todas coinciden."
+        },
+        {
+          "text": "$365 \\cdot 364 \\cdots (365 - r + 1)$",
+          "correct": true,
+          "explanation": "Variaciones sin repetición de 365 fechas tomadas de a $r$."
+        },
+        {
+          "text": "$364^r$",
+          "correct": false,
+          "explanation": "Cada persona sólo evitaría una fecha fija."
+        },
+        {
+          "text": "$\\binom{365}{r}$",
+          "correct": false,
+          "explanation": "Elige las fechas pero no asigna cuál corresponde a cada persona."
         }
       ]
     },
@@ -39,55 +67,55 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Probabilidad de que no haya coincidencias:",
-      "hint": "Aplicar el ítem (a).",
+      "hint": "Favorables sobre posibles.",
       "cards": [
-        {
-          "text": "$1 - \\tfrac{r}{365}$",
-          "correct": false,
-          "explanation": "Aproximación lineal sin justificación."
-        },
-        {
-          "text": "$\\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r}$",
-          "correct": true,
-          "explanation": "Es el resultado de (a) con $n = 365$."
-        },
         {
           "text": "$\\left(\\tfrac{364}{365}\\right)^{\\binom r2}$",
           "correct": false,
-          "explanation": "Aproximación que supone independencia entre pares; no es exacta."
+          "explanation": "Supone independencia entre los pares de personas: es una aproximación, no el valor exacto."
+        },
+        {
+          "text": "$\\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r} = \\prod_{i=0}^{r-1}\\left(1 - \\tfrac{i}{365}\\right)$",
+          "correct": true,
+          "explanation": "Cociente de los dos conteos."
+        },
+        {
+          "text": "$1 - \\tfrac{r}{365}$",
+          "correct": false,
+          "explanation": "No resulta de ningún conteo del espacio muestral."
         },
         {
           "text": "$\\left(\\tfrac{364}{365}\\right)^{r}$",
           "correct": false,
-          "explanation": "Sólo evita coincidir con un día fijo."
+          "explanation": "Cada persona sólo evitaría coincidir con una fecha fija."
         }
       ]
     },
     {
       "id": "num",
       "kind": "interpret",
-      "prompt": "Para $r = 23$, ¿cómo es la probabilidad de que haya al menos una coincidencia?",
-      "hint": "Complemento del resultado anterior; para $r = 23$ el producto vale $\\approx 0{,}493$.",
+      "prompt": "Para $r = 23$ ese producto vale $\\approx 0{,}493$. ¿Qué se concluye?",
+      "hint": "Pasar al complemento.",
       "cards": [
         {
-          "text": "Exactamente $\\tfrac{23}{365}$",
-          "correct": false,
-          "explanation": "Es la probabilidad de que alguien cumpla un día fijo (aprox.); no mide coincidencias entre pares."
-        },
-        {
-          "text": "Mayor que $\\tfrac12$ ($\\approx 0{,}507$)",
+          "text": "Con 23 personas, la probabilidad de que al menos dos compartan cumpleaños es $\\approx 0{,}507 > \\tfrac12$",
           "correct": true,
-          "explanation": "$1 - 0{,}493 \\approx 0{,}507$."
+          "explanation": "$1 - 0{,}493$: hay $\\binom{23}{2} = 253$ pares que pueden coincidir."
         },
         {
-          "text": "Igual a 1",
+          "text": "La probabilidad de al menos una coincidencia es $0{,}493$",
           "correct": false,
-          "explanation": "Sólo es segura con $r \\ge 366$."
+          "explanation": "Es la probabilidad de que no haya coincidencias."
         },
         {
-          "text": "Menor que $0{,}1$",
+          "text": "La probabilidad de al menos una coincidencia es $\\approx 0{,}063$",
           "correct": false,
-          "explanation": "Subestima: hay $\\binom{23}{2} = 253$ pares que pueden coincidir."
+          "explanation": "Es $\\tfrac{23}{365}$: no cuenta los pares."
+        },
+        {
+          "text": "Hace falta $r \\ge 183$ para superar $\\tfrac12$",
+          "correct": false,
+          "explanation": "Confunde con la mitad de los días; los pares crecen como $r^2$."
         }
       ]
     }
