@@ -1,0 +1,6 @@
+{
+  "id": "probabilidad",
+  "name": "Probabilidad",
+  "order": 1,
+  "topics": [{ "id": "va-discretas", "name": "Variables aleatorias discretas", "order": 1 }]
+}

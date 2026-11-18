@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+
+:root {
+  --paper: #f4efe4;
+  --paper-2: #ebe4d4;
+  --ink: #1b1a17;
+  --muted: #6b665c;
+  --line: #d6cdb9;
+  --accent: #c8361d;
+  --ok: #2f6b3a;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16150f;
+    --paper-2: #211f18;
+    --ink: #ece6d8;
+    --muted: #9b9484;
+    --line: #3a362b;
+    --accent: #e0563c;
+    --ok: #6fb47c;
+  }
+}
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}

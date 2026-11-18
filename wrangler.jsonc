@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "cartiludus",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    // Solo el handler de Auth (/__/*) invoca el Worker; el resto son assets estáticos.
+    "run_worker_first": ["/__/*"]
+  },
+  "vars": {
+    // Proyecto Firebase compartido con CRYPTICUS (público).
+    "FIREBASE_PROJECT_ID": "crypticus-eh"
+  }
+}
