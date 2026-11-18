@@ -22,7 +22,9 @@ function readJson(file: string): unknown {
 }
 
 const dirs = (path: string) => readdirSync(path).filter((n) => statSync(join(path, n)).isDirectory()).sort();
-const jsonFiles = (path: string) => readdirSync(path).filter((n) => n.endsWith('.json')).sort();
+// Orden natural: p4-e2 < p4-e10.
+const natural = (a: string, b: string) => a.localeCompare(b, 'es', { numeric: true });
+const jsonFiles = (path: string) => readdirSync(path).filter((n) => n.endsWith('.json')).sort(natural);
 
 function latexFields(p: Problem): Array<[string, string]> {
   const out: Array<[string, string]> = [

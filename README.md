@@ -32,6 +32,21 @@ Reglas del validador:
 
 `kind` → categoría de resumen: `identify` → Identificar VA; `distribution`, `parameters` → Distribución; `property` → Propiedad; `setup`, `compute`, `interpret` → Cálculo.
 
+## Juego
+
+Cada paso muestra 4 cartas en orden aleatorio. Se reintenta hasta acertar. Puntaje por paso (`shared/engine.ts`):
+
+| Situación | Puntos |
+|---|---|
+| Acierto a la primera, sin pista | +1 |
+| Cada carta incorrecta | −1 |
+| Acierto tardío o con pista | 0 (más las incorrectas) |
+| Tiempo agotado (`timeLimitSec`) | −1 extra; el paso queda fallado y se revela la respuesta |
+
+Piso de −3 por paso. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente paso.
+
+Con sesión iniciada, al terminar se guarda la partida en una transacción (`pq_sessions/{uid}/items/{id}` + agregados en `pq_users/{uid}`). `/historial` muestra los agregados por categoría y las partidas de a 10.
+
 ## Firebase Auth en `*.workers.dev`
 
 El Worker hace proxy de `/__/auth/*` y `/__/firebase/*` a `https://crypticus-eh.firebaseapp.com` (igual que CRYPTICUS), así el login de Google ocurre en el mismo dominio. Con `VITE_AUTH_SAME_ORIGIN=true`:
