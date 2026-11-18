@@ -1,13 +1,17 @@
 import { Button, Link, Message } from './components/ui';
 import { logOut, signIn, useUser } from './lib/auth';
-import { parse, usePath } from './lib/router';
+import { parse, useLocation } from './lib/router';
 import { Catalog } from './views/Catalog';
 import { History } from './views/History';
-import { Play } from './views/Play';
+import { Home } from './views/Home';
+import { SessionFromConfig, SessionSingle } from './views/Session';
+import { Setup } from './views/Setup';
 
 export function App() {
   const { user, ready } = useUser();
-  const route = parse(usePath());
+  const loc = useLocation();
+  const route = parse(loc.path);
+  const playing = route.name === 'session' || route.name === 'play';
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-6">
@@ -35,13 +39,21 @@ export function App() {
         </nav>
       </header>
 
-      <main>
-        {route.name === 'catalog' && <Catalog />}
-        {route.name === 'play' && <Play subject={route.subject} topic={route.topic} id={route.id} user={user} />}
+      {/* `key`: cada pantalla entra con su animación. */}
+      <main key={route.name === 'session' ? loc.key : loc.path}>
+        {route.name === 'home' && <Home />}
+        {route.name === 'setup' && <Setup subject={route.subject} user={user} />}
+        {route.name === 'catalog' && <Catalog subject={route.subject} />}
+        {route.name === 'session' && <SessionFromConfig subject={route.subject} search={loc.search} user={user} ready={ready} />}
+        {route.name === 'play' && <SessionSingle subject={route.subject} topic={route.topic} id={route.id} user={user} />}
         {route.name === 'history' && <History user={user} ready={ready} />}
         {route.name === 'notFound' && (
           <Message>
-            Página no encontrada. <Link to="/" className="underline">Volver al catálogo</Link>.
+            Página no encontrada.{' '}
+            <Link to="/" className="underline">
+              Volver al inicio
+            </Link>
+            .
           </Message>
         )}
       </main>
@@ -49,7 +61,7 @@ export function App() {
       <footer className="mt-12 text-xs text-[var(--muted)]">
         v{__APP_VERSION__}
         {ready && !user && ' · sin sesión: el progreso no se guarda'}
-        {route.name === 'play' && ' · atajos: 1–4 cartas, P pista, Enter siguiente'}
+        {playing && ' · atajos: 1–4 cartas, P pista, Enter siguiente'}
       </footer>
     </div>
   );

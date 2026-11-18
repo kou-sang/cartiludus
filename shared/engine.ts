@@ -6,7 +6,7 @@
 //    0  por acertar tarde (después de errores) o con pista
 //   −1  extra si se agota el tiempo (el paso queda fallado y se revela la respuesta)
 // Piso de −3 por paso (las reglas de Firestore validan score ≥ −3·pasos).
-import { CATEGORIES, CATEGORY_OF_KIND, type Category, type Problem } from './model';
+import { CATEGORY_OF_KIND, type Category, type Problem } from './model';
 
 export const STEP_FLOOR = -3;
 
@@ -100,11 +100,14 @@ export interface GameSummary {
   byCategory: ByCategory;
 }
 
+/** Resume sólo los pasos terminados (una partida cortada por tiempo total deja pasos sin jugar). */
 export function summarize(problem: Problem, state: GameState): GameSummary {
-  const summary: GameSummary = { score: 0, steps: problem.steps.length, firstTry: 0, hintsUsed: 0, timeouts: 0, byCategory: {} };
+  const summary: GameSummary = { score: 0, steps: 0, firstTry: 0, hintsUsed: 0, timeouts: 0, byCategory: {} };
   problem.steps.forEach((step, i) => {
     const s = state.steps[i]!;
+    if (!isStepDone(s)) return;
     const r = stepResult(s);
+    summary.steps += 1;
     summary.score += r.score;
     summary.firstTry += r.firstTry ? 1 : 0;
     summary.hintsUsed += s.hintUsed ? 1 : 0;
@@ -116,36 +119,6 @@ export function summarize(problem: Problem, state: GameState): GameSummary {
     acc.score += r.score;
   });
   return summary;
-}
-
-/** Agregados de `pq_users/{uid}`. */
-export interface UserAggregates {
-  played: number;
-  score: number;
-  steps: number;
-  firstTry: number;
-  byCategory: ByCategory;
-}
-
-export function mergeAggregates(prev: UserAggregates | undefined, s: GameSummary): UserAggregates {
-  const byCategory: ByCategory = {};
-  for (const cat of CATEGORIES) {
-    const a = prev?.byCategory[cat];
-    const b = s.byCategory[cat];
-    if (!a && !b) continue;
-    byCategory[cat] = {
-      steps: (a?.steps ?? 0) + (b?.steps ?? 0),
-      firstTry: (a?.firstTry ?? 0) + (b?.firstTry ?? 0),
-      score: (a?.score ?? 0) + (b?.score ?? 0),
-    };
-  }
-  return {
-    played: (prev?.played ?? 0) + 1,
-    score: (prev?.score ?? 0) + s.score,
-    steps: (prev?.steps ?? 0) + s.steps,
-    firstTry: (prev?.firstTry ?? 0) + s.firstTry,
-    byCategory,
-  };
 }
 
 /** Permutación aleatoria de 0..n-1 (Fisher–Yates). `random` inyectable para tests. */

@@ -28,3 +28,53 @@ body {
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, sans-serif;
 }
+
+/* ---------- Animaciones ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes deal {
+  from { opacity: 0; transform: translateY(16px) rotate(-1.5deg) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(3px); }
+  30%, 50%, 70% { transform: translateX(-6px); }
+  40%, 60% { transform: translateX(6px); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pulse-soft {
+  50% { opacity: 0.55; }
+}
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.anim-in { animation: fade-up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.card-deal { animation: deal 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-shake { animation: shake 0.45s both; }
+.anim-pop { animation: pop 0.4s ease-out both; }
+.anim-reveal { animation: reveal 0.3s ease-out both; }
+.anim-pulse { animation: pulse-soft 1s ease-in-out infinite; }
+.anim-grow { transform-origin: left; animation: grow-x 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.lift { transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+.lift:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 18px -10px color-mix(in srgb, var(--ink) 45%, transparent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

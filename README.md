@@ -34,18 +34,25 @@ Reglas del validador:
 
 ## Juego
 
-Cada paso muestra 4 cartas en orden aleatorio. Se reintenta hasta acertar. Puntaje por paso (`shared/engine.ts`):
+Flujo: materia → configuración → partida → resumen.
+
+- **Configuración** (`/m/<materia>`): modo (partida nueva o repaso de errores), prácticas, cantidad de problemas (3/5/10/15), límite por paso (según el problema, sin límite, 30/60/120 s) y tiempo total (sin límite, 5/10/20/30 min). Se recuerda la última configuración.
+- **Partida** (`/partida/<materia>?…`): N problemas al azar de las prácticas elegidas. Al agotarse el tiempo total, o con «Terminar partida», cuenta lo jugado hasta ese momento.
+- **Problema puntual** (`/m/<materia>/problemas` → `/jugar/…`): un solo problema con los tiempos del contenido.
+- **Repaso de errores**: problemas donde algún paso no salió a la primera. Salen del repaso al resolverlos perfecto.
+
+Puntaje por paso (`shared/engine.ts`):
 
 | Situación | Puntos |
 |---|---|
 | Acierto a la primera, sin pista | +1 |
 | Cada carta incorrecta | −1 |
 | Acierto tardío o con pista | 0 (más las incorrectas) |
-| Tiempo agotado (`timeLimitSec`) | −1 extra; el paso queda fallado y se revela la respuesta |
+| Tiempo del paso agotado | −1 extra; el paso queda fallado y se revela la respuesta |
 
-Piso de −3 por paso. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente paso.
+Piso de −3 por paso. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente.
 
-Con sesión iniciada, al terminar se guarda la partida en una transacción (`pq_sessions/{uid}/items/{id}` + agregados en `pq_users/{uid}`). `/historial` muestra los agregados por categoría y las partidas de a 10.
+Con sesión iniciada, cada partida se guarda en una transacción: `pq_sessions/{uid}/items/{id}` (la partida, con sus problemas) y `pq_users/{uid}` (totales, `byCategory`, `byTopic` y `review`). `/historial` muestra estadísticas por práctica y por categoría, y las partidas de a 10.
 
 ## Firebase Auth en `*.workers.dev`
 
@@ -56,6 +63,6 @@ El Worker hace proxy de `/__/auth/*` y `/__/firebase/*` a `https://crypticus-eh.
 
 ## Reglas de Firestore
 
-El archivo maestro está en CRYPTICUS (`firestore.rules`). Cartiludus solo provee el bloque `firestore/pq_rules.rules`: pegarlo dentro de `match /databases/{database}/documents` en CRYPTICUS y desplegar desde allí con `npm run deploy:rules`. Este repo no despliega reglas.
+El archivo maestro está en CRYPTICUS (`firestore.rules`). Cartiludus solo provee el bloque `firestore/pq_rules.rules`: pegarlo dentro de `match /databases/{database}/documents` en CRYPTICUS y desplegar desde allí con `npm run deploy:rules` (equivale a `npx firebase-tools deploy --only firestore:rules,firestore:indexes --project crypticus-eh`). Este repo no despliega reglas.
 
 Escrituras por partida: 1 transacción = crear `pq_sessions/{uid}/items/{id}` + actualizar agregados en `pq_users/{uid}` (`played + 1`, `lastSessionId = id`). Nada por paso.
