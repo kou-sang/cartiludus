@@ -1,37 +1,93 @@
 {
   "id": "p3-e5a",
-  "version": 1,
+  "version": 3,
   "subject": "probabilidad",
   "topic": "p3-va-discretas",
   "title": "Ej. 5(a) · Binomial y geométrica",
-  "statement": "Sean $X \\sim \\mathrm{Bi}(n, p)$ e $Y \\sim \\mathcal{G}(p)$. Demostrar que $P(X = 0) = P(Y > n)$.",
+  "statement": "Sean $X \\sim \\mathrm{Bi}(n, p)$ e $Y \\sim \\mathcal{G}(p)$ ($Y$ = número de ensayo en el que aparece el primer éxito). Demostrar que $P(X = 0) = P(Y > n)$.",
   "difficulty": 1,
   "steps": [
+    {
+      "id": "evx",
+      "kind": "property",
+      "prompt": "¿Qué significa el evento $\\{X = 0\\}$?",
+      "hint": "$X$ cuenta éxitos en $n$ ensayos.",
+      "cards": [
+        {
+          "text": "Hay exactamente un fracaso",
+          "correct": false,
+          "explanation": "Confunde éxitos con fracasos."
+        },
+        {
+          "text": "No se realiza ningún ensayo",
+          "correct": false,
+          "explanation": "Los $n$ ensayos se realizan; lo que vale 0 es la cantidad de éxitos."
+        },
+        {
+          "text": "El primer ensayo es un fracaso",
+          "correct": false,
+          "explanation": "Sólo habla de un ensayo; $\\{X=0\\}$ exige que fracasen los $n$."
+        },
+        {
+          "text": "Ninguno de los $n$ ensayos es un éxito",
+          "correct": true,
+          "explanation": "$X$ cuenta los éxitos; que valga 0 es que todos fracasen."
+        }
+      ]
+    },
     {
       "id": "px0",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(X = 0)$?",
-      "hint": "Ningún éxito en $n$ ensayos.",
+      "hint": "Todos fracasan, de forma independiente.",
       "cards": [
+        {
+          "text": "$(1-p)^n$",
+          "correct": true,
+          "explanation": "Con la fórmula binomial: $\\binom n0 p^0 (1-p)^n$; cada uno de los $n$ ensayos fracasa con probabilidad $1-p$."
+        },
         {
           "text": "$1 - p^n$",
           "correct": false,
-          "explanation": "Complemento de todos éxitos, no de ningún éxito."
+          "explanation": "Es la probabilidad de que no todos sean éxitos."
         },
         {
           "text": "$n(1-p)^{n-1}p$",
           "correct": false,
-          "explanation": "Es $P(X = 1)$."
+          "explanation": "Es $P(X = 1)$: exactamente un éxito."
         },
         {
           "text": "$p^n$",
           "correct": false,
-          "explanation": "Es la probabilidad de $n$ éxitos."
+          "explanation": "Es la probabilidad de que los $n$ sean éxitos."
+        }
+      ]
+    },
+    {
+      "id": "evy",
+      "kind": "property",
+      "prompt": "¿Qué significa $\\{Y > n\\}$?",
+      "hint": "$Y$ es el número de ensayo del primer éxito.",
+      "cards": [
+        {
+          "text": "El ensayo $n$ es un éxito",
+          "correct": false,
+          "explanation": "Eso no impide que haya habido éxitos antes; además $\\{Y = n\\}$ pide fracasos antes."
         },
         {
-          "text": "$(1-p)^n$",
+          "text": "Hay más de $n$ éxitos",
+          "correct": false,
+          "explanation": "$Y$ no cuenta éxitos; marca cuándo aparece el primero."
+        },
+        {
+          "text": "El ensayo $n+1$ es un éxito",
+          "correct": false,
+          "explanation": "Es parte de $\\{Y = n+1\\}$, que es sólo uno de los casos de $\\{Y > n\\}$."
+        },
+        {
+          "text": "Los primeros $n$ ensayos son fracasos",
           "correct": true,
-          "explanation": "$\\binom n0 p^0 (1-p)^n$."
+          "explanation": "El primer éxito llega después del ensayo $n$ exactamente cuando los ensayos $1, \\dots, n$ fracasan."
         }
       ]
     },
@@ -39,55 +95,55 @@
       "id": "py",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(Y > n)$?",
-      "hint": "$Y$ = número de ensayo del primer éxito.",
+      "hint": "Usar la descripción anterior, o sumar la serie geométrica.",
       "cards": [
-        {
-          "text": "$(1-p)^n$",
-          "correct": true,
-          "explanation": "$Y > n \\iff$ los primeros $n$ ensayos son fracasos."
-        },
         {
           "text": "$(1-p)^{n+1}$",
           "correct": false,
-          "explanation": "Es $P(Y > n+1)$."
+          "explanation": "Es $P(Y > n + 1)$."
         },
         {
-          "text": "$1 - (1-p)^n$",
-          "correct": false,
-          "explanation": "Es $P(Y \\le n)$."
+          "text": "$(1-p)^n$",
+          "correct": true,
+          "explanation": "$n$ fracasos independientes. Con la serie: $\\sum_{k > n} (1-p)^{k-1} p = p\\,\\tfrac{(1-p)^n}{1 - (1-p)} = (1-p)^n$."
         },
         {
           "text": "$(1-p)^{n-1}p$",
           "correct": false,
           "explanation": "Es $P(Y = n)$."
+        },
+        {
+          "text": "$1 - (1-p)^n$",
+          "correct": false,
+          "explanation": "Es $P(Y \\le n)$: hay algún éxito entre los primeros $n$."
         }
       ]
     },
     {
       "id": "interp",
-      "kind": "property",
+      "kind": "interpret",
       "prompt": "¿Cuál es la interpretación de la igualdad?",
-      "hint": "Acoplar ambas variables a la misma sucesión de ensayos.",
+      "hint": "Pensar ambas variables sobre la misma sucesión de ensayos.",
       "cards": [
+        {
+          "text": "Es consecuencia de la falta de memoria",
+          "correct": false,
+          "explanation": "La geométrica la tiene, pero esta igualdad sale directamente de describir los eventos."
+        },
         {
           "text": "$X$ e $Y$ son independientes",
           "correct": false,
-          "explanation": "La igualdad no requiere ni usa independencia."
+          "explanation": "La igualdad no usa independencia; de hecho, en la misma sucesión $X$ e $Y$ son dependientes."
         },
         {
           "text": "$X$ e $Y$ tienen la misma distribución",
           "correct": false,
-          "explanation": "Sólo coinciden esas dos probabilidades."
+          "explanation": "Sólo coinciden esas dos probabilidades; $X$ toma valores en $\\{0,\\dots,n\\}$ e $Y$ en $\\mathbb{N}$."
         },
         {
-          "text": "La geométrica tiene falta de memoria",
-          "correct": false,
-          "explanation": "Es cierto, pero no se usa aquí."
-        },
-        {
-          "text": "Ambos eventos son \"los primeros $n$ ensayos son fracasos\"",
+          "text": "Con la misma sucesión de ensayos, ambos eventos son \"los primeros $n$ ensayos fracasan\"",
           "correct": true,
-          "explanation": "Con una sucesión de Bernoulli, $X$ cuenta éxitos en los primeros $n$ e $Y$ marca el primero."
+          "explanation": "Si $X$ cuenta éxitos en los primeros $n$ ensayos e $Y$ marca el primer éxito, $\\{X = 0\\} = \\{Y > n\\}$ como eventos, no sólo en probabilidad."
         }
       ]
     }

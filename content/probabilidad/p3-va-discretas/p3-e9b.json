@@ -1,6 +1,6 @@
 {
   "id": "p3-e9b",
-  "version": 1,
+  "version": 3,
   "subject": "probabilidad",
   "topic": "p3-va-discretas",
   "title": "Ej. 9(b) · Fuentes radiactivas: Bayes",
@@ -8,86 +8,142 @@
   "difficulty": 2,
   "steps": [
     {
-      "id": "pmf",
-      "kind": "compute",
-      "prompt": "¿Cuánto vale $P(N = 4 \\mid F_i)$?",
-      "hint": "$P(N = k) = e^{-\\lambda}\\lambda^k / k!$.",
+      "id": "obj",
+      "kind": "setup",
+      "prompt": "¿Qué probabilidades se piden?",
+      "hint": "Se observó la emisión; la incógnita es la fuente.",
       "cards": [
         {
-          "text": "$\\tfrac{e^{-2}2^4}{24} \\approx 0{,}090$, $\\tfrac{e^{-3}3^4}{24} \\approx 0{,}168$, $\\tfrac{e^{-4}4^4}{24} \\approx 0{,}195$",
+          "text": "$P(F_i \\mid N = 4)$ para $i = 1, 2, 3$",
           "correct": true,
-          "explanation": "Función de probabilidad puntual de Poisson en $k = 4$."
+          "explanation": "Probabilidad de cada fuente a la luz de la observación (posterior)."
         },
         {
-          "text": "$e^{-2}, e^{-3}, e^{-4}$",
+          "text": "$P(F_i) = \\tfrac13$",
           "correct": false,
-          "explanation": "Es $P(N = 0)$."
+          "explanation": "Es la probabilidad antes de observar (prior)."
         },
         {
-          "text": "$\\tfrac{e^{-4}2^4}{24}$, $\\tfrac{e^{-4}3^4}{24}$, $\\tfrac{e^{-4}4^4}{24}$",
+          "text": "$P(F_i \\cap \\{N = 4\\})$",
           "correct": false,
-          "explanation": "Usa $k$ en lugar de $\\lambda$ en la exponencial."
+          "explanation": "Falta dividir por $P(N = 4)$."
         },
         {
-          "text": "$\\tfrac{2^4}{24}$, $\\tfrac{3^4}{24}$, $\\tfrac{4^4}{24}$",
+          "text": "$P(N = 4 \\mid F_i)$",
           "correct": false,
-          "explanation": "Falta el factor $e^{-\\lambda}$."
+          "explanation": "Es la probabilidad de la observación dada la fuente (verosimilitud), no al revés."
+        }
+      ]
+    },
+    {
+      "id": "pmf",
+      "kind": "property",
+      "prompt": "Sea $N$ la cantidad de partículas emitidas. ¿Cuánto vale $P(N = 4 \\mid F_i)$?",
+      "hint": "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$.",
+      "cards": [
+        {
+          "text": "$\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{4!}$",
+          "correct": true,
+          "explanation": "Dada la fuente, $N \\sim \\mathcal P(\\lambda_i)$; se evalúa en $k = 4$."
+        },
+        {
+          "text": "$\\dfrac{\\lambda_i^4}{4!}$",
+          "correct": false,
+          "explanation": "Falta el factor $e^{-\\lambda_i}$, sin el cual las probabilidades no suman 1."
+        },
+        {
+          "text": "$\\dfrac{e^{-4}\\lambda_i^4}{4!}$",
+          "correct": false,
+          "explanation": "En la exponencial va el parámetro $\\lambda_i$, no el valor observado."
+        },
+        {
+          "text": "$e^{-\\lambda_i}$",
+          "correct": false,
+          "explanation": "Es $P(N = 0 \\mid F_i)$."
         }
       ]
     },
     {
       "id": "bayes",
       "kind": "setup",
-      "prompt": "¿Cómo se calcula $P(F_i \\mid N = 4)$?",
-      "hint": "Fórmula de Bayes con prior uniforme.",
+      "prompt": "¿Cómo se escribe $P(F_i \\mid N = 4)$?",
+      "hint": "Fórmula de Bayes con la partición $F_1, F_2, F_3$.",
       "cards": [
         {
-          "text": "$\\dfrac{P(N=4\\mid F_i)}{\\sum_j P(N = 4 \\mid F_j)}$",
+          "text": "$\\dfrac{P(N=4\\mid F_i)\\,\\tfrac13}{\\sum_j P(N = 4 \\mid F_j)\\,\\tfrac13}$",
           "correct": true,
-          "explanation": "Los $\\tfrac13$ del prior se cancelan."
+          "explanation": "Numerador: $P(F_i \\cap \\{N = 4\\})$. Denominador: $P(N = 4)$ por probabilidad total."
         },
         {
-          "text": "$P(N=4\\mid F_i)$",
+          "text": "$P(N=4\\mid F_i)\\,\\tfrac13$",
           "correct": false,
-          "explanation": "No está normalizado: no suman 1."
+          "explanation": "Es $P(F_i \\cap \\{N=4\\})$: falta normalizar por $P(N = 4)$."
+        },
+        {
+          "text": "$\\dfrac{P(N = 4 \\mid F_i)}{\\tfrac13}$",
+          "correct": false,
+          "explanation": "Divide por el prior; puede dar más que 1."
         },
         {
           "text": "$\\dfrac{\\lambda_i}{\\lambda_1+\\lambda_2+\\lambda_3}$",
           "correct": false,
-          "explanation": "No usa la observación $N = 4$."
-        },
-        {
-          "text": "$\\tfrac13 P(N = 4\\mid F_i)$",
-          "correct": false,
-          "explanation": "Es $P(F_i \\cap \\{N=4\\})$."
+          "explanation": "No usa que se observaron 4 partículas."
         }
       ]
     },
     {
-      "id": "res",
-      "kind": "compute",
-      "prompt": "Resultado:",
-      "hint": "Normalizar $0{,}0902$, $0{,}1680$, $0{,}1954$.",
+      "id": "simp",
+      "kind": "property",
+      "prompt": "¿Qué se simplifica en ese cociente?",
+      "hint": "Factores comunes a todos los términos.",
       "cards": [
         {
-          "text": "$\\approx 0{,}199$, $0{,}370$, $0{,}431$",
-          "correct": true,
-          "explanation": "Cada valor dividido por $0{,}4536$."
+          "text": "Nada",
+          "correct": false,
+          "explanation": "$\\tfrac13$ y $4!$ son comunes a todos los términos."
         },
+        {
+          "text": "Sólo el $\\tfrac13$",
+          "correct": false,
+          "explanation": "El $4!$ también es común a todos los términos."
+        },
+        {
+          "text": "Los $e^{-\\lambda_j}$",
+          "correct": false,
+          "explanation": "Son distintos para cada fuente: no se cancelan."
+        },
+        {
+          "text": "El $\\tfrac13$ y el $4!$: queda $\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{\\sum_j e^{-\\lambda_j}\\lambda_j^4}$",
+          "correct": true,
+          "explanation": "Aparecen en el numerador y en cada término del denominador."
+        }
+      ]
+    },
+    {
+      "id": "armar",
+      "kind": "compute",
+      "prompt": "Con $e^{-2}2^4 \\approx 2{,}17$, $e^{-3}3^4 \\approx 4{,}03$, $e^{-4}4^4 \\approx 4{,}69$ (suma $\\approx 10{,}89$), ¿cuánto valen las probabilidades?",
+      "hint": "Dividir cada valor por la suma.",
+      "cards": [
         {
           "text": "$\\tfrac29$, $\\tfrac39$, $\\tfrac49$",
           "correct": false,
-          "explanation": "Proporcional a $\\lambda_i$, sin usar la observación."
+          "explanation": "Es proporcional a $\\lambda_i$: no usa la observación $N = 4$."
         },
         {
           "text": "$\\tfrac13$, $\\tfrac13$, $\\tfrac13$",
           "correct": false,
-          "explanation": "Ignora la evidencia."
+          "explanation": "Son las probabilidades antes de observar."
         },
         {
-          "text": "$\\approx 0{,}090$, $0{,}168$, $0{,}195$",
+          "text": "$\\approx 2{,}17$, $4{,}03$, $4{,}69$",
           "correct": false,
-          "explanation": "Son las verosimilitudes sin normalizar."
+          "explanation": "Son los valores sin normalizar: no son probabilidades."
+        },
+        {
+          "text": "$\\approx 0{,}20$, $0{,}37$, $0{,}43$",
+          "correct": true,
+          "explanation": "$2{,}17/10{,}89$, $4{,}03/10{,}89$ y $4{,}69/10{,}89$; suman 1."
         }
       ]
     }

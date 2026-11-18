@@ -1,6 +1,6 @@
 {
   "id": "p3-e2",
-  "version": 1,
+  "version": 3,
   "subject": "probabilidad",
   "topic": "p3-va-discretas",
   "title": "Ej. 2 · Jurado de 12",
@@ -11,83 +11,167 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Respecto de qué evento conviene condicionar?",
-      "hint": "La \"decisión correcta\" depende de la verdad.",
+      "hint": "Qué voto es \"correcto\" depende de si el acusado es culpable o no.",
       "cards": [
         {
           "text": "El voto del primer jurado",
           "correct": false,
-          "explanation": "No determina la probabilidad de voto de los demás."
+          "explanation": "Los votos son independientes dado el estado del acusado; el primer voto no informa sobre los otros una vez fijado ese estado."
         },
         {
           "text": "$G$ = {el acusado es culpable}, con $P(G) = \\alpha$",
           "correct": true,
-          "explanation": "Dado $G$, votar culpable es correcto (prob. $\\theta$); dado $G^c$, es incorrecto (prob. $1-\\theta$)."
+          "explanation": "Una vez fijado si es culpable, cada jurado vota culpable con una probabilidad conocida y los votos son independientes. $G$ y $G^c$ forman una partición."
         },
         {
-          "text": "La cantidad de votos culpables",
+          "text": "$V$ = cantidad de votos culpables",
           "correct": false,
-          "explanation": "Es la variable a estudiar, no la partición útil."
+          "explanation": "Es la variable que se quiere estudiar; su distribución depende de $G$, así que primero hay que condicionar en $G$."
         },
         {
           "text": "No hace falta condicionar",
           "correct": false,
-          "explanation": "La probabilidad de votar culpable depende de si es culpable."
+          "explanation": "La probabilidad de votar culpable es $\\theta$ o $1-\\theta$ según el caso: sin condicionar no hay una probabilidad única por jurado."
+        }
+      ]
+    },
+    {
+      "id": "pc",
+      "kind": "property",
+      "prompt": "Si el acusado es culpable, ¿con qué probabilidad un jurado vota culpable?",
+      "hint": "Si es culpable, la decisión correcta es votar culpable.",
+      "cards": [
+        {
+          "text": "$\\alpha\\theta$",
+          "correct": false,
+          "explanation": "Ya se está suponiendo que es culpable; no se vuelve a multiplicar por $\\alpha$."
+        },
+        {
+          "text": "$1 - \\theta$",
+          "correct": false,
+          "explanation": "Es la probabilidad de equivocarse: votar inocente siendo culpable."
+        },
+        {
+          "text": "$\\theta$",
+          "correct": true,
+          "explanation": "Votar culpable es la decisión correcta, que se toma con probabilidad $\\theta$."
+        },
+        {
+          "text": "$\\alpha$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que el acusado sea culpable, no del voto."
+        }
+      ]
+    },
+    {
+      "id": "pi",
+      "kind": "property",
+      "prompt": "Si el acusado es inocente, ¿con qué probabilidad un jurado vota culpable?",
+      "hint": "Si es inocente, votar culpable es un error.",
+      "cards": [
+        {
+          "text": "$1 - \\alpha$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que el acusado sea inocente."
+        },
+        {
+          "text": "$\\theta$",
+          "correct": false,
+          "explanation": "Con probabilidad $\\theta$ el jurado acierta, y acertar aquí es votar inocente."
+        },
+        {
+          "text": "$1 - \\theta$",
+          "correct": true,
+          "explanation": "Votar culpable a un inocente es la decisión incorrecta, de probabilidad $1 - \\theta$."
+        },
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "Los jurados se equivocan con probabilidad $1 - \\theta$, que puede ser positiva."
         }
       ]
     },
     {
       "id": "dist",
       "kind": "distribution",
-      "prompt": "Sea $V$ = cantidad de votos culpables. ¿Qué distribución tiene $V$ condicionada?",
-      "hint": "Votos independientes dado el estado del acusado.",
+      "prompt": "¿Qué distribución tiene $V$ (votos culpables) en cada caso?",
+      "hint": "Dado el estado del acusado, 12 votos independientes con la misma probabilidad.",
       "cards": [
+        {
+          "text": "$V \\sim \\mathrm{Bi}(12, \\alpha\\theta)$",
+          "correct": false,
+          "explanation": "Sin condicionar, los votos no son independientes (todos dependen del estado del acusado), así que $V$ no es binomial."
+        },
         {
           "text": "$V \\mid G \\sim \\mathrm{Bi}(8, \\theta)$",
           "correct": false,
-          "explanation": "Votan 12 jurados; 8 es el umbral."
-        },
-        {
-          "text": "$V \\sim \\mathrm{Bi}(12, \\theta)$ siempre",
-          "correct": false,
-          "explanation": "Si es inocente, votar culpable es el error, de probabilidad $1-\\theta$."
+          "explanation": "Votan 12 jurados; 8 es el umbral de condena, no la cantidad de ensayos."
         },
         {
           "text": "$V \\mid G \\sim \\mathrm{Bi}(12, \\theta)$ y $V \\mid G^c \\sim \\mathrm{Bi}(12, 1-\\theta)$",
           "correct": true,
-          "explanation": "En cada caso son 12 ensayos independientes con probabilidad de votar culpable fija."
+          "explanation": "En cada caso, $V$ cuenta \"éxitos\" (votos culpables) en 12 ensayos independientes con probabilidad fija."
         },
         {
-          "text": "$V \\sim \\mathrm{Bi}(12, \\alpha\\theta)$",
+          "text": "$V \\sim \\mathrm{Bi}(12, \\theta)$ en ambos casos",
           "correct": false,
-          "explanation": "Los votos no son independientes sin condicionar: comparten el estado del acusado."
+          "explanation": "Si es inocente, votar culpable tiene probabilidad $1 - \\theta$."
         }
       ]
     },
     {
-      "id": "res",
+      "id": "cond",
       "kind": "compute",
-      "prompt": "Resultado:",
-      "hint": "Probabilidad total sobre $G, G^c$.",
+      "prompt": "¿Cuánto vale $P(V \\ge 8 \\mid G)$?",
+      "hint": "$\\{V \\ge 8\\}$ es la unión disjunta de $\\{V = k\\}$ para $k = 8, \\dots, 12$.",
+      "cards": [
+        {
+          "text": "$\\theta^8$",
+          "correct": false,
+          "explanation": "Pide que 8 jurados fijos voten culpable e ignora los otros 4 y las combinaciones."
+        },
+        {
+          "text": "$\\sum_{k=0}^{8} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
+          "correct": false,
+          "explanation": "Suma $k \\le 8$: es $P(V \\le 8)$."
+        },
+        {
+          "text": "$\\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
+          "correct": true,
+          "explanation": "Suma de la función de probabilidad binomial $\\mathrm{Bi}(12,\\theta)$ en $k = 8, \\dots, 12$."
+        },
+        {
+          "text": "$\\binom{12}{8}\\theta^8(1-\\theta)^4$",
+          "correct": false,
+          "explanation": "Es sólo exactamente 8 votos; \"al menos 8\" incluye 9, 10, 11 y 12."
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "kind": "setup",
+      "prompt": "¿Cómo se combina para obtener la probabilidad de condena?",
+      "hint": "Probabilidad total con la partición $G$, $G^c$.",
       "cards": [
         {
           "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
           "correct": false,
-          "explanation": "Falta la condena de un inocente."
+          "explanation": "Es $P(\\text{condena} \\cap G)$: falta el término de $G^c$."
         },
         {
           "text": "$\\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
           "correct": false,
-          "explanation": "Ignora que el acusado puede ser inocente."
+          "explanation": "Es sólo la probabilidad de condena si es culpable: falta la condena de un inocente y ponderar por $\\alpha$."
+        },
+        {
+          "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k} + (1-\\alpha) \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
+          "correct": false,
+          "explanation": "En el caso inocente usa la misma probabilidad $\\theta$ de votar culpable; debe ser $1-\\theta$."
         },
         {
           "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k} + (1-\\alpha) \\sum_{k=8}^{12} \\binom{12}{k} (1-\\theta)^k \\theta^{12-k}$",
           "correct": true,
-          "explanation": "Se pondera la probabilidad de al menos 8 votos culpables en cada escenario."
-        },
-        {
-          "text": "$\\alpha \\binom{12}{8}\\theta^8(1-\\theta)^4 + (1-\\alpha)\\binom{12}{8}(1-\\theta)^8\\theta^4$",
-          "correct": false,
-          "explanation": "Sólo cuenta exactamente 8 votos."
+          "explanation": "$P(V \\ge 8) = P(V \\ge 8 \\mid G)\\,P(G) + P(V \\ge 8 \\mid G^c)\\,P(G^c)$; en el segundo término la probabilidad de voto culpable es $1-\\theta$."
         }
       ]
     }

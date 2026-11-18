@@ -1,6 +1,6 @@
 {
   "id": "p3-e8",
-  "version": 1,
+  "version": 3,
   "subject": "probabilidad",
   "topic": "p3-va-discretas",
   "title": "Ej. 8 · Inspección de lotes",
@@ -8,86 +8,170 @@
   "difficulty": 2,
   "steps": [
     {
+      "id": "part",
+      "kind": "setup",
+      "prompt": "¿Qué partición conviene usar?",
+      "hint": "La probabilidad de aceptar depende de cuántas defectuosas tiene el lote.",
+      "cards": [
+        {
+          "text": "El resultado de la primera componente inspeccionada",
+          "correct": false,
+          "explanation": "Dentro de cada lote sirve, pero primero hay que saber cuántas defectuosas tiene."
+        },
+        {
+          "text": "$L_4$ = {el lote tiene 4 defectuosas} ($0{,}3$) y $L_1$ = {tiene 1} ($0{,}7$)",
+          "correct": true,
+          "explanation": "Son los dos tipos de lote, disjuntos y que cubren todos los casos; dado el tipo, el lote se conoce."
+        },
+        {
+          "text": "Aceptado / rechazado",
+          "correct": false,
+          "explanation": "Es lo que se quiere calcular, no una partición de partida."
+        },
+        {
+          "text": "No hace falta condicionar",
+          "correct": false,
+          "explanation": "Sin saber el tipo de lote no se conoce cuántas defectuosas hay."
+        }
+      ]
+    },
+    {
       "id": "dist",
       "kind": "distribution",
-      "prompt": "Dado un lote con $d$ defectuosas, ¿qué distribución tiene la cantidad de defectuosas en la muestra?",
-      "hint": "Extracción sin reposición de una población finita.",
+      "prompt": "Dado el tipo de lote, ¿cómo se distribuye la cantidad de defectuosas entre las 3 inspeccionadas?",
+      "hint": "Se eligen 3 de 10 sin reposición.",
       "cards": [
         {
-          "text": "$\\mathrm{Bi}(3, d/10)$",
+          "text": "Poisson",
           "correct": false,
-          "explanation": "Supone reposición."
+          "explanation": "No hay un número grande de ensayos con probabilidad chica; la población es de 10."
         },
         {
-          "text": "Hipergeométrica: $P(0) = \\binom{10-d}{3} / \\binom{10}{3}$",
+          "text": "Geométrica",
+          "correct": false,
+          "explanation": "No se espera hasta el primer éxito; se inspeccionan 3 fijas."
+        },
+        {
+          "text": "Binomial $\\mathrm{Bi}(3, d/10)$",
+          "correct": false,
+          "explanation": "Supondría reposición: al no reponer, las extracciones no son independientes."
+        },
+        {
+          "text": "Hipergeométrica",
           "correct": true,
-          "explanation": "Se eligen 3 de 10 sin reposición."
-        },
-        {
-          "text": "$\\mathcal{P}(3d/10)$",
-          "correct": false,
-          "explanation": "Aproximación sin justificación con población de 10."
-        },
-        {
-          "text": "$\\mathcal{G}(d/10)$",
-          "correct": false,
-          "explanation": "No es un tiempo de espera."
+          "explanation": "Extracción sin reposición de una población finita (10 componentes) con una cantidad fija de defectuosas."
         }
       ]
     },
     {
-      "id": "acept",
+      "id": "a4",
       "kind": "compute",
-      "prompt": "¿Cuál es la probabilidad de aceptar en cada tipo de lote?",
-      "hint": "$\\binom{10}{3} = 120$.",
+      "prompt": "¿Cuál es $P(\\text{aceptar} \\mid L_4)$?",
+      "hint": "Las 3 deben salir de las 6 buenas. $\\binom63 = 20$, $\\binom{10}3 = 120$.",
       "cards": [
         {
-          "text": "$d = 4$: $\\tfrac{1}{6}$; $d=1$: $\\tfrac{9}{10}$",
+          "text": "$\\left(\\tfrac{6}{10}\\right)^3$",
           "correct": false,
-          "explanation": "Para $d=1$ hay que evitar la defectuosa en las 3 extracciones."
+          "explanation": "Corresponde a extraer con reposición."
         },
         {
-          "text": "$d = 4$: $\\tfrac{4}{10}$; $d = 1$: $\\tfrac{1}{10}$",
+          "text": "$\\dfrac{\\binom43}{\\binom{10}3}$",
           "correct": false,
-          "explanation": "Es la proporción de defectuosas, no la de aceptar."
+          "explanation": "Es la probabilidad de que las 3 sean defectuosas."
         },
         {
-          "text": "$d = 4$: $0{,}6^3$; $d = 1$: $0{,}9^3$",
-          "correct": false,
-          "explanation": "Con reposición."
-        },
-        {
-          "text": "$d = 4$: $\\tfrac{20}{120} = \\tfrac16$; $d = 1$: $\\tfrac{84}{120} = \\tfrac{7}{10}$",
+          "text": "$\\dfrac{\\binom63}{\\binom{10}3} = \\dfrac{20}{120} = \\dfrac16$",
           "correct": true,
-          "explanation": "$\\binom63 = 20$, $\\binom93 = 84$."
+          "explanation": "Casos favorables: elegir las 3 entre las 6 buenas; casos posibles: elegir 3 entre 10."
+        },
+        {
+          "text": "$\\dfrac{6}{10}$",
+          "correct": false,
+          "explanation": "Sólo mira la primera componente."
         }
       ]
     },
     {
-      "id": "res",
+      "id": "a1",
       "kind": "compute",
-      "prompt": "Proporción de lotes rechazados:",
-      "hint": "Probabilidad total y complemento.",
+      "prompt": "¿Cuál es $P(\\text{aceptar} \\mid L_1)$?",
+      "hint": "$\\binom93 = 84$. También: ¿con qué probabilidad la defectuosa queda fuera de la muestra?",
       "cards": [
+        {
+          "text": "$\\dfrac{1}{10}$",
+          "correct": false,
+          "explanation": "Es la proporción de defectuosas en el lote."
+        },
+        {
+          "text": "$\\dfrac{9}{10}$",
+          "correct": false,
+          "explanation": "Sólo mira la primera componente."
+        },
+        {
+          "text": "$\\dfrac{\\binom93}{\\binom{10}3} = \\dfrac{84}{120} = \\dfrac{7}{10}$",
+          "correct": true,
+          "explanation": "Elegir las 3 entre las 9 buenas. Equivalente: la defectuosa está entre las 3 elegidas con probabilidad $\\tfrac3{10}$, así que queda fuera con $\\tfrac7{10}$."
+        },
+        {
+          "text": "$\\left(\\tfrac{9}{10}\\right)^3$",
+          "correct": false,
+          "explanation": "Corresponde a extraer con reposición."
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "kind": "compute",
+      "prompt": "¿Cuál es $P(\\text{aceptar})$?",
+      "hint": "Probabilidad total con $L_4$ y $L_1$.",
+      "cards": [
+        {
+          "text": "$0{,}3 \\cdot \\tfrac16$",
+          "correct": false,
+          "explanation": "Es $P(\\text{aceptar} \\cap L_4)$: falta el término de $L_1$."
+        },
+        {
+          "text": "$\\tfrac12\\left(\\tfrac16 + \\tfrac7{10}\\right)$",
+          "correct": false,
+          "explanation": "Pondera los tipos de lote por igual; los pesos son $0{,}3$ y $0{,}7$."
+        },
+        {
+          "text": "$0{,}3 \\cdot \\tfrac16 + 0{,}7 \\cdot \\tfrac7{10} = 0{,}05 + 0{,}49 = 0{,}54$",
+          "correct": true,
+          "explanation": "$P(A) = P(A \\mid L_4)P(L_4) + P(A\\mid L_1)P(L_1)$."
+        },
+        {
+          "text": "$\\tfrac16 \\cdot \\tfrac{7}{10}$",
+          "correct": false,
+          "explanation": "Multiplica las condicionales en lugar de promediarlas con los pesos."
+        }
+      ]
+    },
+    {
+      "id": "rech",
+      "kind": "interpret",
+      "prompt": "¿Qué proporción de lotes se rechaza?",
+      "hint": "Rechazar es el complemento de aceptar.",
+      "cards": [
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Supone que se rechazan exactamente los lotes con 4 defectuosas, pero esos se aceptan con probabilidad $\\tfrac16$ y los de una defectuosa se rechazan con $\\tfrac{3}{10}$."
+        },
+        {
+          "text": "$1 - 0{,}54 = 0{,}46$",
+          "correct": true,
+          "explanation": "Cada lote se acepta o se rechaza."
+        },
         {
           "text": "$0{,}54$",
           "correct": false,
           "explanation": "Es la proporción de aceptados."
         },
         {
-          "text": "$0{,}3$",
+          "text": "$0{,}3 \\cdot \\tfrac56 = 0{,}25$",
           "correct": false,
-          "explanation": "Supone que se rechazan exactamente los lotes con 4 defectuosas."
-        },
-        {
-          "text": "$1 - (0{,}3 \\cdot \\tfrac16 + 0{,}7 \\cdot 0{,}7) = 0{,}46$",
-          "correct": true,
-          "explanation": "Se acepta con prob. $0{,}54$."
-        },
-        {
-          "text": "$0{,}3 \\cdot \\tfrac56 + 0{,}7 \\cdot 0{,}7$",
-          "correct": false,
-          "explanation": "Para los lotes con una defectuosa usa aceptar en vez de rechazar."
+          "explanation": "Sólo cuenta los rechazos de lotes con 4 defectuosas."
         }
       ]
     }
