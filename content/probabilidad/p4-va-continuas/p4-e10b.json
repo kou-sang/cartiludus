@@ -11,7 +11,9 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Qué partición conviene?",
-      "hint": "Si se ordeña o no a Belinda, y lo que da.",
+      "hints": [
+        "Si se ordeña o no a Belinda, y lo que da."
+      ],
       "cards": [
         {
           "text": "$\\{X \\ge 6\\}$, $\\{X < 6, \\text{Belinda da 5}\\}$, $\\{X < 6, \\text{Belinda da 0}\\}$",
@@ -39,7 +41,9 @@
       "id": "casos",
       "kind": "compute",
       "prompt": "¿Qué aporta cada caso?",
-      "hint": "Con $X<6$ y Belinda da 5: total $>8 \\iff X > 3$.",
+      "hints": [
+        "Con $X<6$ y Belinda da 5: total $>8 \\iff X > 3$."
+      ],
       "cards": [
         {
           "text": "$0{,}2\\,P(X > 3)$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$P(X > t) = e^{-0{,}2t}$.",
+      "hints": [
+        "$P(X > t) = e^{-0{,}2t}$."
+      ],
       "cards": [
         {
           "text": "$e^{-1{,}6} + 0{,}2(e^{-0{,}6} - e^{-1{,}2}) \\approx 0{,}251$",

@@ -1,0 +1,105 @@
+{
+  "id": "p1-ej6",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Ascensor y pisos distintos",
+  "source": "Práctica 1 · Ejercicio 6",
+  "statement": "Un ascensor que lleva a cinco personas puede parar en cualquiera de los siete pisos. ¿Cuál es la probabilidad de que todos se bajen en pisos distintos? Asumir que los ocupantes actúan independientemente y que cada piso es igualmente probable para cada pasajero.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "prompt": "¿Qué espacio muestral describe dónde se baja cada pasajero?",
+      "hints": [
+        "Registrar el piso de cada uno de los 5 pasajeros.",
+        "Cada pasajero tiene 7 opciones, independientemente."
+      ],
+      "cards": [
+        {
+          "text": "$\\{1,\\dots,7\\}^5$, equiprobable: $7^5$ resultados",
+          "correct": true,
+          "explanation": "Independencia y uniformidad hacen equiprobables las 5-uplas de pisos."
+        },
+        {
+          "text": "Multiconjuntos de pisos, equiprobables",
+          "correct": false,
+          "explanation": "Con pasajeros distinguibles no son equiprobables."
+        },
+        {
+          "text": "$\\binom{7}{5}$ subconjuntos de pisos",
+          "correct": false,
+          "explanation": "Excluye los casos con pasajeros en el mismo piso, que son posibles."
+        },
+        {
+          "text": "$5^7$ resultados",
+          "correct": false,
+          "explanation": "Son 5 pasajeros eligiendo entre 7 pisos, no al revés."
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "kind": "compute",
+      "prompt": "¿En cuántos resultados los 5 se bajan en pisos distintos?",
+      "hints": [
+        "El primer pasajero tiene 7 opciones; el segundo, las que quedan…",
+        "Variaciones sin repetición."
+      ],
+      "cards": [
+        {
+          "text": "$7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 = 2520$",
+          "correct": true,
+          "explanation": "Cada pasajero evita los pisos de los anteriores."
+        },
+        {
+          "text": "$5!$",
+          "correct": false,
+          "explanation": "Ordena pasajeros sin elegir los pisos."
+        },
+        {
+          "text": "$\\binom75 = 21$",
+          "correct": false,
+          "explanation": "Elige los pisos pero no asigna a cada pasajero el suyo."
+        },
+        {
+          "text": "$7!$",
+          "correct": false,
+          "explanation": "Asigna pisos a 7 personas; son 5."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Con $7^5 = 16807$, ¿cuál es la probabilidad?",
+      "hints": [
+        "Favorables sobre posibles.",
+        "$\\tfrac{2520}{16807}$ se simplifica dividiendo por 7."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{2520}{16807} = \\tfrac{360}{2401} \\approx 0{,}15$",
+          "correct": true,
+          "explanation": "Cociente de casos en un espacio equiprobable."
+        },
+        {
+          "text": "$\\tfrac{21}{16807}$",
+          "correct": false,
+          "explanation": "Cuenta favorables sin orden y posibles con orden."
+        },
+        {
+          "text": "$\\left(\\tfrac67\\right)^4 \\approx 0{,}54$",
+          "correct": false,
+          "explanation": "Sólo pide que cada pasajero se baje en un piso distinto del primero."
+        },
+        {
+          "text": "$\\tfrac{2520}{5^7}$",
+          "correct": false,
+          "explanation": "El denominador no cuenta los resultados posibles."
+        }
+      ]
+    }
+  ]
+}

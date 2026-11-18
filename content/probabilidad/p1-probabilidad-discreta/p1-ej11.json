@@ -1,0 +1,205 @@
+{
+  "id": "p1-ej11",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Múltiplos al azar",
+  "source": "Práctica 1 · Ejercicio 11",
+  "statement": "(a) Elegimos un número al azar equiprobablemente en $\\Omega = \\{1, \\dots, 10^3\\}$. Calcular la probabilidad de que dicho número sea múltiplo de 3, 5, 15.\n(b) Para cada valor de $k$, realizar el item anterior para $\\Omega_k = \\{1, \\dots, 10^k\\}$. Estudiar el comportamiento cuando $k \\to \\infty$.\n(c) Si consideramos $\\Omega = \\mathbb N$, y definimos $A_{n,k} = \\{b \\in \\mathbb N : b = n \\cdot m + k \\text{ para algún } m\\}$, probar que $\\lim_{N \\to \\infty} \\dfrac{|A_{n,k} \\cap \\{1, \\dots, N\\}|}{N} = \\dfrac1n$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "cuenta",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cuántos múltiplos de $d$ hay en $\\{1, \\dots, M\\}$?",
+      "hints": [
+        "Los múltiplos son $d, 2d, 3d, \\dots$ mientras no pasen de $M$.",
+        "El mayor $j$ con $jd \\le M$."
+      ],
+      "cards": [
+        {
+          "text": "$\\left\\lfloor \\tfrac Md \\right\\rfloor$ (parte entera)",
+          "correct": true,
+          "explanation": "$jd \\le M \\iff j \\le \\tfrac Md$."
+        },
+        {
+          "text": "$\\left\\lfloor \\tfrac Md \\right\\rfloor + 1$",
+          "correct": false,
+          "explanation": "Cuenta también el 0, que no está en el conjunto."
+        },
+        {
+          "text": "$\\tfrac Md$",
+          "correct": false,
+          "explanation": "No siempre es entero."
+        },
+        {
+          "text": "$M - d$",
+          "correct": false,
+          "explanation": "No cuenta múltiplos."
+        }
+      ]
+    },
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "En $\\{1, \\dots, 1000\\}$, ¿cuáles son las probabilidades de ser múltiplo de 3, de 5 y de 15?",
+      "hints": [
+        "$\\lfloor 1000/3 \\rfloor = 333$.",
+        "$\\lfloor 1000/15 \\rfloor = 66$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{333}{1000}$, $\\tfrac{200}{1000} = \\tfrac15$ y $\\tfrac{66}{1000}$",
+          "correct": true,
+          "explanation": "Cantidad de múltiplos sobre 1000."
+        },
+        {
+          "text": "$\\tfrac{334}{1000}$, $\\tfrac{200}{1000}$ y $\\tfrac{67}{1000}$",
+          "correct": false,
+          "explanation": "Redondea hacia arriba la cantidad de múltiplos."
+        },
+        {
+          "text": "$\\tfrac{333}{1000}$, $\\tfrac{200}{1000}$ y $\\tfrac{333}{1000}\\cdot\\tfrac{200}{1000}$",
+          "correct": false,
+          "explanation": "Para 15 hay que contar sus múltiplos; el producto sólo coincidiría si el cociente fuera exacto."
+        },
+        {
+          "text": "$\\tfrac13$, $\\tfrac15$ y $\\tfrac1{15}$",
+          "correct": false,
+          "explanation": "1000 no es múltiplo de 3 ni de 15: los valores exactos son algo menores."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "En $\\Omega_k = \\{1, \\dots, 10^k\\}$, ¿qué pasa con esas probabilidades cuando $k \\to \\infty$?",
+      "hints": [
+        "La probabilidad es $\\lfloor 10^k/d \\rfloor / 10^k$.",
+        "$\\tfrac Md - 1 < \\lfloor \\tfrac Md \\rfloor \\le \\tfrac Md$.",
+        "Dividir por $10^k$ y tomar límite."
+      ],
+      "cards": [
+        {
+          "text": "Tienden a 0",
+          "correct": false,
+          "explanation": "La cantidad de múltiplos crece proporcionalmente a $10^k$."
+        },
+        {
+          "text": "Tienden a $\\tfrac13$, $\\tfrac15$ y $\\tfrac1{15}$",
+          "correct": true,
+          "explanation": "$\\tfrac1d - \\tfrac{1}{10^k} < \\tfrac{\\lfloor 10^k/d \\rfloor}{10^k} \\le \\tfrac1d$: por el sándwich, el límite es $\\tfrac1d$."
+        },
+        {
+          "text": "Se mantienen iguales a los de $k = 3$",
+          "correct": false,
+          "explanation": "Para 3 y 15 cambian con $k$: por ejemplo $\\tfrac3{10}$, $\\tfrac{33}{100}$, $\\tfrac{333}{1000}$…"
+        },
+        {
+          "text": "Tienden a $\\tfrac13$, $\\tfrac15$ y $\\tfrac13 \\cdot \\tfrac15 \\cdot \\tfrac{1}{15}$",
+          "correct": false,
+          "explanation": "El límite para 15 se obtiene igual que para los otros."
+        }
+      ]
+    },
+    {
+      "id": "c1",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "¿Qué números forman $A_{n,k}$?",
+      "hints": [
+        "Los $b$ de la forma $nm + k$.",
+        "Los que dejan resto $k$ al dividir por $n$ (si $0 \\le k < n$): uno de cada $n$ consecutivos."
+      ],
+      "cards": [
+        {
+          "text": "Los múltiplos de $k$",
+          "correct": false,
+          "explanation": "El paso de la progresión es $n$, no $k$."
+        },
+        {
+          "text": "Los múltiplos de $nk$",
+          "correct": false,
+          "explanation": "No: el elemento $k + n$ no tiene por qué ser múltiplo de $nk$."
+        },
+        {
+          "text": "Un conjunto finito",
+          "correct": false,
+          "explanation": "Hay uno por cada valor de $m$: es infinito."
+        },
+        {
+          "text": "Una progresión aritmética de paso $n$: $k, k + n, k + 2n, \\dots$ (los naturales de esa forma)",
+          "correct": true,
+          "explanation": "Entre $n$ naturales consecutivos hay exactamente uno de $A_{n,k}$."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "¿Qué cota sirve para $|A_{n,k} \\cap \\{1, \\dots, N\\}|$?",
+      "hints": [
+        "Partir $\\{1, \\dots, N\\}$ en bloques de $n$ consecutivos.",
+        "Hay $\\lfloor N/n \\rfloor$ bloques completos y un resto incompleto."
+      ],
+      "cards": [
+        {
+          "text": "Es exactamente $\\tfrac Nn$",
+          "correct": false,
+          "explanation": "$\\tfrac Nn$ puede no ser entero; sólo vale aproximadamente."
+        },
+        {
+          "text": "Está entre 0 y $N$",
+          "correct": false,
+          "explanation": "Es cierto pero no alcanza para calcular el límite."
+        },
+        {
+          "text": "Es $\\tfrac Nk$",
+          "correct": false,
+          "explanation": "El paso de la progresión es $n$."
+        },
+        {
+          "text": "Está entre $\\tfrac Nn - 1$ y $\\tfrac Nn + 1$",
+          "correct": true,
+          "explanation": "Cada bloque completo de $n$ números aporta exactamente un elemento, y el bloque incompleto aporta a lo sumo uno."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Cómo se concluye el límite?",
+      "hints": [
+        "Dividir la cota por $N$.",
+        "Teorema del sándwich."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac1n - \\tfrac1N \\le \\tfrac{|A_{n,k} \\cap \\{1..N\\}|}{N} \\le \\tfrac1n + \\tfrac1N$, y ambas cotas tienden a $\\tfrac1n$",
+          "correct": true,
+          "explanation": "Por el teorema del sándwich el cociente tiende a $\\tfrac1n$."
+        },
+        {
+          "text": "Por la ley de los grandes números",
+          "correct": false,
+          "explanation": "No hay variables aleatorias independientes en juego: es un límite de sucesiones."
+        },
+        {
+          "text": "Porque $P(A_{n,k}) = \\tfrac1n$ en $\\mathbb N$ equiprobable",
+          "correct": false,
+          "explanation": "No existe una probabilidad uniforme sobre $\\mathbb N$."
+        },
+        {
+          "text": "Tomando $N = n$",
+          "correct": false,
+          "explanation": "Un caso particular no prueba un límite."
+        }
+      ]
+    }
+  ]
+}

@@ -11,7 +11,9 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Qué partición conviene usar?",
-      "hint": "La probabilidad de aceptar depende de cuántas defectuosas tiene el lote.",
+      "hints": [
+        "La probabilidad de aceptar depende de cuántas defectuosas tiene el lote."
+      ],
       "cards": [
         {
           "text": "El resultado de la primera componente inspeccionada",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Dado el tipo de lote, ¿cómo se distribuye la cantidad de defectuosas entre las 3 inspeccionadas?",
-      "hint": "Se eligen 3 de 10 sin reposición.",
+      "hints": [
+        "Se eligen 3 de 10 sin reposición."
+      ],
       "cards": [
         {
           "text": "Poisson",
@@ -67,7 +71,9 @@
       "id": "a4",
       "kind": "compute",
       "prompt": "¿Cuál es $P(\\text{aceptar} \\mid L_4)$?",
-      "hint": "Las 3 deben salir de las 6 buenas. $\\binom63 = 20$, $\\binom{10}3 = 120$.",
+      "hints": [
+        "Las 3 deben salir de las 6 buenas. $\\binom63 = 20$, $\\binom{10}3 = 120$."
+      ],
       "cards": [
         {
           "text": "$\\left(\\tfrac{6}{10}\\right)^3$",
@@ -95,7 +101,9 @@
       "id": "a1",
       "kind": "compute",
       "prompt": "¿Cuál es $P(\\text{aceptar} \\mid L_1)$?",
-      "hint": "$\\binom93 = 84$. También: ¿con qué probabilidad la defectuosa queda fuera de la muestra?",
+      "hints": [
+        "$\\binom93 = 84$. También: ¿con qué probabilidad la defectuosa queda fuera de la muestra?"
+      ],
       "cards": [
         {
           "text": "$\\dfrac{1}{10}$",
@@ -123,7 +131,9 @@
       "id": "total",
       "kind": "compute",
       "prompt": "¿Cuál es $P(\\text{aceptar})$?",
-      "hint": "Probabilidad total con $L_4$ y $L_1$.",
+      "hints": [
+        "Probabilidad total con $L_4$ y $L_1$."
+      ],
       "cards": [
         {
           "text": "$0{,}3 \\cdot \\tfrac16$",
@@ -151,7 +161,9 @@
       "id": "rech",
       "kind": "interpret",
       "prompt": "¿Qué proporción de lotes se rechaza?",
-      "hint": "Rechazar es el complemento de aceptar.",
+      "hints": [
+        "Rechazar es el complemento de aceptar."
+      ],
       "cards": [
         {
           "text": "$0{,}3$",

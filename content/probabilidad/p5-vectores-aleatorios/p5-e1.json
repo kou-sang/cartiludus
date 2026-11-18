@@ -11,7 +11,9 @@
       "id": "ev",
       "kind": "setup",
       "prompt": "¿A qué equivale $\\{Y = 0\\}$?",
-      "hint": "Un producto se anula si algún factor se anula.",
+      "hints": [
+        "Un producto se anula si algún factor se anula."
+      ],
       "cards": [
         {
           "text": "$\\bigcap_{i=1}^3 \\{X_i = 0\\}$",
@@ -39,7 +41,9 @@
       "id": "p0",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(X_i = 0)$?",
-      "hint": "$\\mathrm{Bi}(4, \\tfrac13)$: ningún éxito en 4 ensayos.",
+      "hints": [
+        "$\\mathrm{Bi}(4, \\tfrac13)$: ningún éxito en 4 ensayos."
+      ],
       "cards": [
         {
           "text": "$1 - \\left(\\tfrac13\\right)^4$",
@@ -67,7 +71,9 @@
       "id": "compl",
       "kind": "property",
       "prompt": "¿Qué conviene usar para calcular la probabilidad de la unión?",
-      "hint": "Complemento de la unión e independencia.",
+      "hints": [
+        "Complemento de la unión e independencia."
+      ],
       "cards": [
         {
           "text": "$P(Y=0) = P(X_1 = 0)$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$P(X_i \\ge 1) = 1 - \\tfrac{16}{81}$.",
+      "hints": [
+        "$P(X_i \\ge 1) = 1 - \\tfrac{16}{81}$."
+      ],
       "cards": [
         {
           "text": "$3 \\cdot \\tfrac{16}{81} \\approx 0{,}593$",

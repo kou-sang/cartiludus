@@ -1,0 +1,302 @@
+{
+  "id": "p1-ej9",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Grafo aleatorio sobre K4",
+  "source": "Práctica 1 · Ejercicio 9",
+  "statement": "Sea $K_4$ el grafo completo de cuatro vértices (cada par de vértices está conectado por una arista). Supongamos que con probabilidad $p$ decidimos dejar una arista y con $1-p$ sacarla, de manera independiente.\n(a) ¿Cuál es la probabilidad de que, dado un vértice, este quede aislado?\n(b) ¿Cuál es la probabilidad de que, dados dos vértices, estos queden conectados por un camino?\n(c) ¿Cuál es la probabilidad de que el grafo resultante sea conexo? (Es decir, que se pueden recorrer todos los vértices caminando por aristas.)",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "aristas",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cuántas aristas tiene $K_4$ y cuántas tocan a un vértice dado?",
+      "hints": [
+        "Cada par de vértices define una arista: $\\binom42$.",
+        "Un vértice está unido a cada uno de los otros 3."
+      ],
+      "cards": [
+        {
+          "text": "6 aristas; 4 por vértice",
+          "correct": false,
+          "explanation": "Un vértice no tiene arista consigo mismo."
+        },
+        {
+          "text": "12 aristas; 3 por vértice",
+          "correct": false,
+          "explanation": "Cuenta cada arista dos veces (una por extremo)."
+        },
+        {
+          "text": "4 aristas; 2 por vértice",
+          "correct": false,
+          "explanation": "Corresponde a un ciclo, no al grafo completo."
+        },
+        {
+          "text": "6 aristas; 3 tocan a cada vértice",
+          "correct": true,
+          "explanation": "$\\binom42 = 6$; cada vértice tiene grado 3."
+        }
+      ]
+    },
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuál es la probabilidad de que un vértice dado quede aislado?",
+      "hints": [
+        "Aislado: se sacan todas sus aristas.",
+        "Las aristas se sacan de manera independiente, cada una con probabilidad $1 - p$."
+      ],
+      "cards": [
+        {
+          "text": "$(1-p)^6$",
+          "correct": false,
+          "explanation": "Pide sacar todas las aristas del grafo."
+        },
+        {
+          "text": "$(1-p)^3$",
+          "correct": true,
+          "explanation": "Sus 3 aristas tienen que sacarse, independientemente."
+        },
+        {
+          "text": "$3(1-p)$",
+          "correct": false,
+          "explanation": "No es una probabilidad: puede superar 1."
+        },
+        {
+          "text": "$1 - p^3$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que no queden las 3 aristas, pero alcanza con que quede una para no estar aislado."
+        }
+      ]
+    },
+    {
+      "id": "b1",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Sean $u, v$ los vértices dados y $w, x$ los otros dos. ¿Por qué evento conviene condicionar primero?",
+      "hints": [
+        "Si la arista $uv$ queda, ya están conectados.",
+        "Partición: $\\{uv \\text{ queda}\\}$ y $\\{uv \\text{ se saca}\\}$."
+      ],
+      "cards": [
+        {
+          "text": "El grado de $w$",
+          "correct": false,
+          "explanation": "No determina por sí solo si $u$ y $v$ se conectan."
+        },
+        {
+          "text": "La cantidad total de aristas",
+          "correct": false,
+          "explanation": "Es posible pero mucho más largo: hay que revisar caso por caso."
+        },
+        {
+          "text": "La arista $uv$: $P(\\text{conectados}) = p \\cdot 1 + (1 - p) \\cdot P(\\text{conectados} \\mid uv \\text{ se saca})$",
+          "correct": true,
+          "explanation": "Con la arista directa la conexión es segura; si no está, hay que conectar pasando por $w$ o $x$."
+        },
+        {
+          "text": "No hace falta condicionar: es $p$",
+          "correct": false,
+          "explanation": "$u$ y $v$ pueden conectarse por un camino aunque falte la arista directa."
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Sin la arista $uv$, condicionar ahora en la arista $wx$. Si $wx$ queda, ¿cuándo están conectados $u$ y $v$?",
+      "hints": [
+        "Con $wx$, los vértices $w$ y $x$ forman un bloque conectado.",
+        "$u$ llega al bloque si queda $uw$ o $ux$; lo mismo $v$.",
+        "$P(uw \\text{ o } ux) = 1 - (1-p)^2$."
+      ],
+      "cards": [
+        {
+          "text": "$p^4$",
+          "correct": false,
+          "explanation": "Exige las cuatro aristas, pero alcanza con una de cada lado."
+        },
+        {
+          "text": "$p^2$",
+          "correct": false,
+          "explanation": "Exige un par fijo de aristas, pero $u$ puede llegar por $w$ o por $x$."
+        },
+        {
+          "text": "Si $u$ y $v$ se unen al bloque $\\{w, x\\}$: probabilidad $\\left(1 - (1-p)^2\\right)^2$",
+          "correct": true,
+          "explanation": "$u$ llega al bloque con probabilidad $1-(1-p)^2$, $v$ también, y usan aristas distintas: son independientes."
+        },
+        {
+          "text": "$1 - (1-p)^2$",
+          "correct": false,
+          "explanation": "Sólo asegura que $u$ llegue al bloque; falta $v$."
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Sin $uv$ y sin $wx$, ¿cuándo están conectados $u$ y $v$?",
+      "hints": [
+        "Sólo quedan caminos de largo 2: $u{-}w{-}v$ o $u{-}x{-}v$.",
+        "Complemento: ninguno de los dos caminos está completo.",
+        "Cada camino de largo 2 está con probabilidad $p^2$, y no comparten aristas."
+      ],
+      "cards": [
+        {
+          "text": "$p^2$",
+          "correct": false,
+          "explanation": "Considera un solo camino."
+        },
+        {
+          "text": "$\\left(1 - (1-p)^2\\right)^2$",
+          "correct": false,
+          "explanation": "Sin la arista $wx$, llegar a $w$ o a $x$ no alcanza: hay que pasar por el mismo vértice."
+        },
+        {
+          "text": "Si está $u{-}w{-}v$ o $u{-}x{-}v$: probabilidad $1 - (1 - p^2)^2$",
+          "correct": true,
+          "explanation": "Los dos caminos usan aristas disjuntas, así que son independientes; se usa el complemento."
+        },
+        {
+          "text": "$2p^2$",
+          "correct": false,
+          "explanation": "Suma las probabilidades de dos caminos que pueden estar a la vez."
+        }
+      ]
+    },
+    {
+      "id": "b4",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cómo queda la probabilidad de que $u$ y $v$ estén conectados?",
+      "hints": [
+        "Probabilidad total: primero sobre $uv$, después sobre $wx$."
+      ],
+      "cards": [
+        {
+          "text": "$p + (1-p)\\left[p\\left(1 - (1-p)^2\\right)^2 + (1-p)\\left(1 - (1-p^2)^2\\right)\\right]$",
+          "correct": true,
+          "explanation": "Desarrollado: $p + 2p^2 - 7p^4 + 7p^5 - 2p^6$."
+        },
+        {
+          "text": "$1 - (1-p)^3$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que $u$ no quede aislado."
+        },
+        {
+          "text": "$p\\left(1 - (1-p)^2\\right)^2 + (1-p)\\left(1 - (1-p^2)^2\\right)$",
+          "correct": false,
+          "explanation": "Omite el caso en que la arista $uv$ está."
+        },
+        {
+          "text": "$p + (1-p)\\left(1 - (1-p^2)^2\\right)$",
+          "correct": false,
+          "explanation": "Omite los caminos de largo 3, que pasan por la arista $wx$."
+        }
+      ]
+    },
+    {
+      "id": "c1",
+      "kind": "setup",
+      "item": "(c)",
+      "prompt": "¿Cuántas aristas necesita como mínimo un grafo conexo de 4 vértices?",
+      "hints": [
+        "Un árbol de $n$ vértices tiene $n - 1$ aristas.",
+        "Con menos, algún vértice queda desconectado."
+      ],
+      "cards": [
+        {
+          "text": "2",
+          "correct": false,
+          "explanation": "Con 2 aristas quedan al menos 2 componentes."
+        },
+        {
+          "text": "4",
+          "correct": false,
+          "explanation": "Un camino $1{-}2{-}3{-}4$ ya es conexo con menos."
+        },
+        {
+          "text": "3: con 0, 1 o 2 aristas nunca es conexo",
+          "correct": true,
+          "explanation": "Un grafo conexo de 4 vértices contiene un árbol generador, que tiene 3 aristas."
+        },
+        {
+          "text": "6",
+          "correct": false,
+          "explanation": "Es la cantidad máxima, no la mínima."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuántos subgrafos conexos hay con 3, 4, 5 y 6 aristas?",
+      "hints": [
+        "Con 3 aristas: de los $\\binom63 = 20$, los únicos no conexos son los triángulos (dejan un vértice aislado).",
+        "Con 4 aristas: para dejar un vértice aislado, las 4 aristas tendrían que estar entre los otros 3, que sólo tienen 3.",
+        "Con 5 o 6 aristas, siempre es conexo."
+      ],
+      "cards": [
+        {
+          "text": "20, 15, 6 y 1",
+          "correct": false,
+          "explanation": "Cuenta como conexos a los 4 triángulos, que dejan un vértice aislado."
+        },
+        {
+          "text": "16, 11, 6 y 1",
+          "correct": false,
+          "explanation": "Descarta grafos de 4 aristas que sí son conexos."
+        },
+        {
+          "text": "4, 15, 6 y 1",
+          "correct": false,
+          "explanation": "Con 3 aristas cuenta los triángulos en lugar de los árboles."
+        },
+        {
+          "text": "16, 15, 6 y 1",
+          "correct": true,
+          "explanation": "$20 - 4$ triángulos; $\\binom64 = 15$; $\\binom65 = 6$; 1."
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuál es la probabilidad de que el grafo sea conexo?",
+      "hints": [
+        "Un grafo con $j$ aristas tiene probabilidad $p^j(1-p)^{6-j}$.",
+        "Sumar sobre los grafos conexos, agrupando por cantidad de aristas."
+      ],
+      "cards": [
+        {
+          "text": "$1 - 4(1-p)^3$",
+          "correct": false,
+          "explanation": "Resta los casos con un vértice aislado, pero hay grafos no conexos sin vértices aislados y casos contados dos veces."
+        },
+        {
+          "text": "$p^3$",
+          "correct": false,
+          "explanation": "Pide 3 aristas fijas e ignora las otras."
+        },
+        {
+          "text": "$16p^3 + 15p^4 + 6p^5 + p^6$",
+          "correct": false,
+          "explanation": "Falta exigir que las aristas restantes no estén."
+        },
+        {
+          "text": "$16p^3(1-p)^3 + 15p^4(1-p)^2 + 6p^5(1-p) + p^6$",
+          "correct": true,
+          "explanation": "Cada subgrafo conexo con $j$ aristas aporta $p^j(1-p)^{6-j}$."
+        }
+      ]
+    }
+  ]
+}

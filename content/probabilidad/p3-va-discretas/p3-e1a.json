@@ -11,7 +11,9 @@
       "id": "va",
       "kind": "identify",
       "prompt": "¿Qué variable aleatoria conviene definir?",
-      "hint": "Los eventos del enunciado hablan de cuántos aciertos hay en total.",
+      "hints": [
+        "Los eventos del enunciado hablan de cuántos aciertos hay en total."
+      ],
       "cards": [
         {
           "text": "$X$ = resultado del tiro 10",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "¿Qué distribución tiene $X$?",
-      "hint": "Cada tiro es un ensayo con dos resultados; los tiros son independientes y tienen la misma probabilidad.",
+      "hints": [
+        "Cada tiro es un ensayo con dos resultados; los tiros son independientes y tienen la misma probabilidad."
+      ],
       "cards": [
         {
           "text": "$X \\sim \\mathcal{G}(\\tfrac15)$",
@@ -67,7 +71,9 @@
       "id": "pmf",
       "kind": "property",
       "prompt": "¿Cuánto vale $P(X = k)$ para $k = 0, \\dots, 10$?",
-      "hint": "¿De cuántas maneras se eligen los tiros acertados? ¿Cuánto vale cada secuencia?",
+      "hints": [
+        "¿De cuántas maneras se eligen los tiros acertados? ¿Cuánto vale cada secuencia?"
+      ],
       "cards": [
         {
           "text": "$\\left(\\tfrac15\\right)^k\\left(\\tfrac45\\right)^{10-k}$",
@@ -95,7 +101,9 @@
       "id": "compl",
       "kind": "setup",
       "prompt": "Calcular $P(X \\ge 2)$ directamente requiere sumar 9 términos ($k = 2, \\dots, 10$). ¿Cómo se escribe usando el complemento?",
-      "hint": "$\\{X \\ge 2\\}^c = \\{X \\le 1\\}$.",
+      "hints": [
+        "$\\{X \\ge 2\\}^c = \\{X \\le 1\\}$."
+      ],
       "cards": [
         {
           "text": "$P(X \\ge 2) = 1 - P(X \\le 2)$",
@@ -123,7 +131,9 @@
       "id": "p0",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(X = 0)$?",
-      "hint": "Que no haya ningún acierto: los 10 tiros fallan.",
+      "hints": [
+        "Que no haya ningún acierto: los 10 tiros fallan."
+      ],
       "cards": [
         {
           "text": "$10 \\cdot \\tfrac45$",
@@ -151,7 +161,9 @@
       "id": "p1",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(X = 1)$?",
-      "hint": "Elegir cuál de los 10 tiros es el acierto.",
+      "hints": [
+        "Elegir cuál de los 10 tiros es el acierto."
+      ],
       "cards": [
         {
           "text": "$10 \\cdot \\left(\\tfrac15\\right)^{9} \\cdot \\tfrac45$",
@@ -179,7 +191,9 @@
       "id": "armar",
       "kind": "compute",
       "prompt": "Con $\\left(\\tfrac45\\right)^{10} \\approx 0{,}1074$ y $10 \\cdot \\tfrac15 \\cdot \\left(\\tfrac45\\right)^{9} \\approx 0{,}2684$, ¿cuánto vale $P(X \\ge 2)$?",
-      "hint": "Reemplazar en la expresión del complemento.",
+      "hints": [
+        "Reemplazar en la expresión del complemento."
+      ],
       "cards": [
         {
           "text": "$1 - 0{,}1074 - 0{,}2684 \\approx 0{,}624$",

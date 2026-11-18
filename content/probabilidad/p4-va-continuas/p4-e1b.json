@@ -11,7 +11,9 @@
       "id": "k",
       "kind": "compute",
       "prompt": "Primero, ¿cuánto vale $k$?",
-      "hint": "Una densidad integra 1: $k\\int_0^{10} x\\,dx = 1$.",
+      "hints": [
+        "Una densidad integra 1: $k\\int_0^{10} x\\,dx = 1$."
+      ],
       "cards": [
         {
           "text": "$k = 50$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "¿Cuál es $F_D(x)$ para $0 \\le x \\le 10$?",
-      "hint": "$F_D(x) = \\int_0^x \\tfrac{t}{50}\\,dt$.",
+      "hints": [
+        "$F_D(x) = \\int_0^x \\tfrac{t}{50}\\,dt$."
+      ],
       "cards": [
         {
           "text": "$F_D(x) = \\tfrac{x^2}{100}$",
@@ -67,7 +71,9 @@
       "id": "plan",
       "kind": "setup",
       "prompt": "¿Cómo se calcula $P(4 < D < 6)$?",
-      "hint": "Usar la acumulada.",
+      "hints": [
+        "Usar la acumulada."
+      ],
       "cards": [
         {
           "text": "$F_D(6) - F_D(4)$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$F_D(x) = \\tfrac{x^2}{100}$.",
+      "hints": [
+        "$F_D(x) = \\tfrac{x^2}{100}$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac{36}{100}$",

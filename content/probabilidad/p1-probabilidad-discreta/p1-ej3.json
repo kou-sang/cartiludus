@@ -1,0 +1,231 @@
+{
+  "id": "p1-ej3",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Tablero 3×3 sin subtablero negro",
+  "source": "Práctica 1 · Ejercicio 3",
+  "statement": "Se tiene un tablero de $3 \\times 3$ y se pinta cada casilla de $1 \\times 1$ independientemente de blanco o negro, con igual probabilidad. ¿Cuál es la probabilidad de que, al terminar de pintar, no haya un subtablero de $2 \\times 2$ pintado de negro?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "modelo",
+      "kind": "setup",
+      "prompt": "¿Cuál es el modelo?",
+      "hints": [
+        "Cada casilla tiene dos colores posibles.",
+        "Las 9 casillas se pintan de manera independiente y con igual probabilidad."
+      ],
+      "cards": [
+        {
+          "text": "$\\Omega = \\{0,\\dots,9\\}$ (cantidad de negras), equiprobable",
+          "correct": false,
+          "explanation": "Esos valores no son equiprobables y además se pierde la posición de las casillas."
+        },
+        {
+          "text": "$\\Omega = \\{B,N\\}^9$ equiprobable: $2^9 = 512$ coloreos",
+          "correct": true,
+          "explanation": "Cada coloreo tiene probabilidad $(\\tfrac12)^9$."
+        },
+        {
+          "text": "$2 \\cdot 9$ coloreos",
+          "correct": false,
+          "explanation": "Suma las opciones en lugar de multiplicarlas."
+        },
+        {
+          "text": "$9!$ coloreos",
+          "correct": false,
+          "explanation": "Cuenta ordenamientos de casillas; aquí cada casilla se colorea."
+        }
+      ]
+    },
+    {
+      "id": "compl",
+      "kind": "setup",
+      "prompt": "Sea $E_k$ = {el $k$-ésimo subtablero $2 \\times 2$ es negro}, $k = 1, \\dots, 4$. ¿Cómo se escribe lo pedido?",
+      "hints": [
+        "Hay 4 subtableros de $2 \\times 2$ (uno por cada esquina).",
+        "\"No hay subtablero negro\" es el complemento de \"alguno es negro\"."
+      ],
+      "cards": [
+        {
+          "text": "$P(E_1^c)^4$",
+          "correct": false,
+          "explanation": "Supondría que los $E_k$ son independientes, y comparten casillas."
+        },
+        {
+          "text": "$1 - P(E_1 \\cap E_2 \\cap E_3 \\cap E_4)$",
+          "correct": false,
+          "explanation": "El complemento de \"todos negros\" no es \"ninguno negro\"."
+        },
+        {
+          "text": "$1 - 4 P(E_1)$",
+          "correct": false,
+          "explanation": "Supone que los $E_k$ son disjuntos, y pueden ocurrir a la vez."
+        },
+        {
+          "text": "$1 - P(E_1 \\cup E_2 \\cup E_3 \\cup E_4)$",
+          "correct": true,
+          "explanation": "Se calcula la probabilidad de que haya al menos un subtablero negro y se toma el complemento."
+        }
+      ]
+    },
+    {
+      "id": "ie",
+      "kind": "property",
+      "prompt": "¿Cómo se calcula la probabilidad de esa unión?",
+      "hints": [
+        "Los eventos se superponen: dos subtableros comparten casillas.",
+        "Inclusión–exclusión: simples − dobles + triples − cuádruple."
+      ],
+      "cards": [
+        {
+          "text": "$1 - \\prod_k (1 - P(E_k))$",
+          "correct": false,
+          "explanation": "Supone independencia entre los $E_k$."
+        },
+        {
+          "text": "Inclusión–exclusión: $\\sum P(E_k) - \\sum_{k<l} P(E_k E_l) + \\sum P(E_k E_l E_j) - P(E_1E_2E_3E_4)$",
+          "correct": true,
+          "explanation": "Corrige los coloreos contados más de una vez por pertenecer a varios $E_k$."
+        },
+        {
+          "text": "$\\max_k P(E_k)$",
+          "correct": false,
+          "explanation": "Es sólo una cota inferior."
+        },
+        {
+          "text": "$\\sum_k P(E_k)$",
+          "correct": false,
+          "explanation": "Cuenta varias veces los coloreos con más de un subtablero negro."
+        }
+      ]
+    },
+    {
+      "id": "simples",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\sum_k P(E_k)$?",
+      "hints": [
+        "Un subtablero negro fija el color de 4 casillas.",
+        "$P(E_k) = (\\tfrac12)^4$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{1}{16}$",
+          "correct": false,
+          "explanation": "Cuenta un solo subtablero."
+        },
+        {
+          "text": "$4 \\cdot \\tfrac{1}{16} = \\tfrac{128}{512}$",
+          "correct": true,
+          "explanation": "Cuatro subtableros, cada uno con 4 casillas negras fijas."
+        },
+        {
+          "text": "$4 \\cdot \\tfrac{1}{512}$",
+          "correct": false,
+          "explanation": "Fija las 9 casillas, pero sólo hacen falta las del subtablero."
+        },
+        {
+          "text": "$4 \\cdot \\tfrac14$",
+          "correct": false,
+          "explanation": "Usa $(\\tfrac12)^2$: un subtablero tiene 4 casillas, no 2."
+        }
+      ]
+    },
+    {
+      "id": "dobles",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\sum_{k<l} P(E_k \\cap E_l)$?",
+      "hints": [
+        "$E_k \\cap E_l$ fija como negras todas las casillas de ambos subtableros.",
+        "Dos subtableros vecinos cubren 6 casillas; dos opuestos en diagonal cubren 7.",
+        "Hay 4 pares vecinos y 2 pares diagonales."
+      ],
+      "cards": [
+        {
+          "text": "$4 \\cdot \\tfrac1{64} + 2 \\cdot \\tfrac1{128} = \\tfrac{40}{512}$",
+          "correct": true,
+          "explanation": "Vecinos: $(\\tfrac12)^6$; diagonales: $(\\tfrac12)^7$."
+        },
+        {
+          "text": "$6 \\cdot \\tfrac{1}{256}$",
+          "correct": false,
+          "explanation": "Supone que todo par de subtableros cubre 8 casillas."
+        },
+        {
+          "text": "$\\binom42 \\cdot \\left(\\tfrac1{16}\\right)^2$",
+          "correct": false,
+          "explanation": "Multiplica como si fueran independientes; las casillas compartidas se cuentan dos veces."
+        },
+        {
+          "text": "$6 \\cdot \\tfrac{1}{64}$",
+          "correct": false,
+          "explanation": "Los pares en diagonal cubren más casillas que los vecinos."
+        }
+      ]
+    },
+    {
+      "id": "triples",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $\\sum P(E_kE_lE_j)$ y $P(E_1E_2E_3E_4)$?",
+      "hints": [
+        "Tres subtableros cubren todo el tablero menos una esquina.",
+        "Los cuatro cubren las 9 casillas."
+      ],
+      "cards": [
+        {
+          "text": "$4 \\cdot \\left(\\tfrac1{16}\\right)^3$ y $\\left(\\tfrac1{16}\\right)^4$",
+          "correct": false,
+          "explanation": "Multiplica como si fueran independientes."
+        },
+        {
+          "text": "$4 \\cdot \\tfrac1{256} = \\tfrac{8}{512}$ y $\\tfrac{1}{512}$",
+          "correct": true,
+          "explanation": "Cada terna cubre 8 casillas; las cuatro cubren 9."
+        },
+        {
+          "text": "$\\tfrac1{256}$ y $\\tfrac1{512}$",
+          "correct": false,
+          "explanation": "Hay 4 ternas posibles, no una."
+        },
+        {
+          "text": "$4 \\cdot \\tfrac1{512}$ y $\\tfrac1{512}$",
+          "correct": false,
+          "explanation": "Una terna no cubre las 9 casillas."
+        }
+      ]
+    },
+    {
+      "id": "armar",
+      "kind": "compute",
+      "prompt": "Con los términos anteriores (en quinientos doceavos: 128, 40, 8 y 1), ¿cuál es la probabilidad pedida?",
+      "hints": [
+        "Primero armar la unión con los signos alternados.",
+        "$P(\\bigcup E_k) = \\tfrac{128 - 40 + 8 - 1}{512}$.",
+        "Después tomar el complemento."
+      ],
+      "cards": [
+        {
+          "text": "$1 - \\tfrac{128}{512} = \\tfrac34$",
+          "correct": false,
+          "explanation": "Se queda sólo con el primer término de inclusión–exclusión."
+        },
+        {
+          "text": "$1 - \\tfrac{95}{512} = \\tfrac{417}{512} \\approx 0{,}81$",
+          "correct": true,
+          "explanation": "$128 - 40 + 8 - 1 = 95$ coloreos tienen algún subtablero negro."
+        },
+        {
+          "text": "$\\tfrac{95}{512}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que haya algún subtablero negro."
+        },
+        {
+          "text": "$1 - \\tfrac{177}{512}$",
+          "correct": false,
+          "explanation": "Suma todos los términos sin alternar los signos."
+        }
+      ]
+    }
+  ]
+}

@@ -11,7 +11,9 @@
       "id": "conv",
       "kind": "setup",
       "prompt": "¿Cómo se escribe $P(H+M = n)$?",
-      "hint": "Convolución discreta.",
+      "hints": [
+        "Convolución discreta."
+      ],
       "cards": [
         {
           "text": "$P(H = n) + P(M = n)$",
@@ -39,7 +41,9 @@
       "id": "bin",
       "kind": "compute",
       "prompt": "Evaluar la suma:",
-      "hint": "Multiplicar y dividir por $n!$ y usar el binomio de Newton.",
+      "hints": [
+        "Multiplicar y dividir por $n!$ y usar el binomio de Newton."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1^n+\\lambda_2^n)}{n!}$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "distribution",
       "prompt": "Distribución:",
-      "hint": "Reconocer la función de probabilidad.",
+      "hints": [
+        "Reconocer la función de probabilidad."
+      ],
       "cards": [
         {
           "text": "$H + M \\sim \\mathcal{P}\\left(\\tfrac{\\lambda_1+\\lambda_2}{2}\\right)$",

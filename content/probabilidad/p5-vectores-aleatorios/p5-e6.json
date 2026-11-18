@@ -11,7 +11,9 @@
       "id": "k",
       "kind": "compute",
       "prompt": "Valor de $k$:",
-      "hint": "$\\int_0^1 \\int_0^y (3y + x)\\,dx\\,dy$.",
+      "hints": [
+        "$\\int_0^1 \\int_0^y (3y + x)\\,dx\\,dy$."
+      ],
       "cards": [
         {
           "text": "$k = \\tfrac{1}{2}$",
@@ -39,7 +41,9 @@
       "id": "fy",
       "kind": "compute",
       "prompt": "Marginal $f_Y$:",
-      "hint": "Integrar en $x \\in [0, y]$.",
+      "hints": [
+        "Integrar en $x \\in [0, y]$."
+      ],
       "cards": [
         {
           "text": "$f_Y(y) = 3y^2\\,\\mathbb 1_{[0,1]}(y)$",
@@ -67,7 +71,9 @@
       "id": "fx",
       "kind": "compute",
       "prompt": "Marginal $f_X$:",
-      "hint": "Integrar en $y \\in [x, 1]$.",
+      "hints": [
+        "Integrar en $y \\in [x, 1]$."
+      ],
       "cards": [
         {
           "text": "$f_X(x) = 3x^2$",
@@ -95,7 +101,9 @@
       "id": "p",
       "kind": "compute",
       "prompt": "$P\\left(X < \\tfrac Y3\\right)$:",
-      "hint": "$\\int_0^1\\int_0^{y/3} \\tfrac67(3y + x)\\,dx\\,dy$.",
+      "hints": [
+        "$\\int_0^1\\int_0^{y/3} \\tfrac67(3y + x)\\,dx\\,dy$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac16$",
@@ -124,7 +132,9 @@
       "id": "cero",
       "kind": "property",
       "prompt": "$P\\left(X^2 - Y^2 = \\tfrac13\\right)$:",
-      "hint": "En el soporte, $X \\le Y$.",
+      "hints": [
+        "En el soporte, $X \\le Y$."
+      ],
       "cards": [
         {
           "text": "No se puede calcular",

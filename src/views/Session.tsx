@@ -96,7 +96,7 @@ function Runner({ problems, config, user, onAgain }: { problems: Problem[]; conf
       gs.map((g, i) => {
         if (i !== current) return g;
         const st = g.steps[g.stepIndex]!;
-        return !isStepDone(st) && (st.wrong.length > 0 || st.hintUsed) ? reduce(problems[i]!, g, { type: 'timeout' }) : g;
+        return !isStepDone(st) && (st.wrong.length > 0 || st.hintsShown > 0) ? reduce(problems[i]!, g, { type: 'timeout' }) : g;
       }),
     );
     setEnded(true);
@@ -177,6 +177,23 @@ function SessionBar({ problems, games, current }: { problems: Problem[]; games: 
 
 // ---------- Problema ----------
 
+/** Enunciado original: cada línea es un párrafo; las que empiezan con "(a)", "i)", etc. se muestran como ítems. */
+function Statement({ text }: { text: string }) {
+  const lines = text.split('\n').filter((l) => l.trim() !== '');
+  return (
+    <div className="space-y-1.5 leading-relaxed">
+      {lines.map((line, i) => {
+        const item = /^\s*(\([a-z]\)|[ivx]+\))\s/.test(line);
+        return (
+          <p key={i} className={item ? 'pl-5' : undefined}>
+            <Tex>{line.trim()}</Tex>
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
 function ProblemPlayer({
   problem,
   game,
@@ -194,51 +211,72 @@ function ProblemPlayer({
   onAdvance: () => void;
   advanceLabel: string;
 }) {
-  const step = problem.steps[game.stepIndex]!;
-  const st = game.steps[game.stepIndex]!;
-  const done = isStepDone(st);
+  const current = game.stepIndex;
+  const [viewing, setViewing] = useState(current);
+  const [showStatement, setShowStatement] = useState(true);
+  const reviewing = viewing !== current;
+  const step = problem.steps[viewing]!;
+  const st = game.steps[viewing]!;
+  const curSt = game.steps[current]!;
+  const curDone = isStepDone(curSt);
   const finished = isFinished(problem, game);
-  const order = orders[game.stepIndex]!;
-  const limit = effectiveStepLimit(config, step.timeLimitSec);
-  const score = game.steps.reduce((acc, s, i) => acc + (i <= game.stepIndex ? stepResult(s).score : 0), 0);
+  const order = orders[viewing]!;
+  const limit = effectiveStepLimit(config, problem.steps[current]!.timeLimitSec);
+  const score = game.steps.reduce((acc, s, i) => acc + (i <= current ? stepResult(s).score : 0), 0);
   const [deadline, setDeadline] = useState(() => (limit ? Date.now() + limit * 1000 : null));
 
-  // Nuevo paso → nuevo plazo.
+  // Nuevo paso → nuevo plazo y se vuelve a mirar el paso actual.
   useEffect(() => {
     setDeadline(limit ? Date.now() + limit * 1000 : null);
-  }, [game.stepIndex, limit]);
+    setViewing(current);
+  }, [current, limit]);
 
-  // Atajos: 1–4 elige carta, P pista, Enter siguiente.
+  const goTo = (i: number) => {
+    if (i >= 0 && i <= current) setViewing(i);
+  };
+
+  // Atajos: 1–4 elige carta, P pista, Enter siguiente, ← → recorre pasos.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'ArrowLeft') return goTo(viewing - 1);
+      if (e.key === 'ArrowRight') return goTo(viewing + 1);
+      if (reviewing) return;
       const n = Number(e.key);
       if (n >= 1 && n <= order.length) dispatch({ type: 'pick', card: order[n - 1]! });
       else if (e.key === 'p' || e.key === 'P') dispatch({ type: 'hint' });
-      else if (e.key === 'Enter' && done) finished ? onAdvance() : dispatch({ type: 'next' });
+      else if (e.key === 'Enter' && curDone) finished ? onAdvance() : dispatch({ type: 'next' });
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [order, done, finished, dispatch, onAdvance]);
+  });
+
+  const stepDone = isStepDone(st);
 
   return (
     <div className="space-y-6">
       <section className="anim-in rounded-lg border border-[var(--line)] bg-[var(--paper-2)] p-4">
-        <h2 className="mb-2 text-lg font-semibold">
-          <Tex>{problem.title}</Tex>
-        </h2>
-        <p className="leading-relaxed">
-          <Tex>{problem.statement}</Tex>
-        </p>
+        <div className="mb-2 flex items-start justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold">
+              <Tex>{problem.title}</Tex>
+            </h2>
+            {problem.source && <p className="text-xs text-[var(--muted)]">{problem.source}</p>}
+          </div>
+          <button type="button" className="shrink-0 text-xs underline" onClick={() => setShowStatement((v) => !v)}>
+            {showStatement ? 'Ocultar enunciado' : 'Ver enunciado'}
+          </button>
+        </div>
+        {showStatement && <Statement text={problem.statement} />}
       </section>
 
-      <div className="flex items-center justify-between gap-4 text-sm">
-        <ol className="flex gap-1.5" aria-label="Pasos">
+      <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
+        <ol className="flex flex-wrap gap-1.5" aria-label="Pasos">
           {problem.steps.map((s, i) => {
             const x = game.steps[i]!;
             const r = stepResult(x);
             const color = !isStepDone(x)
-              ? i === game.stepIndex
+              ? i === current
                 ? 'bg-[var(--ink)]'
                 : 'bg-[var(--line)]'
               : r.firstTry
@@ -246,70 +284,124 @@ function ProblemPlayer({
                 : r.solved
                   ? 'bg-[var(--muted)]'
                   : 'bg-[var(--accent)]';
-            return <li key={s.id} className={`h-2 w-8 rounded-full transition-colors duration-300 ${color}`} title={`Paso ${i + 1}`} />;
+            const reachable = i <= current;
+            return (
+              <li key={s.id}>
+                <button
+                  type="button"
+                  disabled={!reachable}
+                  onClick={() => goTo(i)}
+                  title={reachable ? `Ver paso ${i + 1}` : `Paso ${i + 1}`}
+                  aria-current={i === viewing ? 'step' : undefined}
+                  className={`block h-2 w-7 rounded-full transition-all duration-300 disabled:cursor-default ${color} ${
+                    i === viewing ? 'ring-2 ring-[var(--ink)] ring-offset-2 ring-offset-[var(--paper)]' : ''
+                  }`}
+                />
+              </li>
+            );
           })}
         </ol>
-        <span className="tabular-nums text-[var(--muted)]">
-          Paso {game.stepIndex + 1}/{problem.steps.length} ·{' '}
-          <span key={score} className="anim-pop inline-block">
-            Puntaje {fmt(score)}
+        <span className="flex items-center gap-3">
+          {deadline !== null && <Countdown deadline={deadline} stopped={curDone} onExpire={() => dispatch({ type: 'timeout' })} label="Tiempo del paso" />}
+          <span className="tabular-nums text-[var(--muted)]">
+            Paso {current + 1}/{problem.steps.length} ·{' '}
+            <span key={score} className="anim-pop inline-block">
+              Puntaje {fmt(score)}
+            </span>
           </span>
         </span>
       </div>
 
-      <section key={game.stepIndex} className="anim-in space-y-4">
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-base font-medium leading-relaxed">
-            <Tex>{step.prompt}</Tex>
-          </h3>
-          {deadline !== null && <Countdown deadline={deadline} stopped={done} onExpire={() => dispatch({ type: 'timeout' })} label="Tiempo del paso" />}
+      {reviewing && (
+        <div className="anim-reveal flex flex-wrap items-center justify-between gap-3 rounded-md border border-dashed border-[var(--ink)] px-3 py-2 text-sm">
+          <span>
+            Revisando el paso {viewing + 1}. El paso actual es el {current + 1}
+            {deadline !== null && !curDone ? ' y su reloj sigue corriendo' : ''}.
+          </span>
+          <span className="flex gap-3">
+            <button type="button" className="underline disabled:opacity-40" disabled={viewing === 0} onClick={() => goTo(viewing - 1)}>
+              ← Anterior
+            </button>
+            <button type="button" className="font-medium underline" onClick={() => setViewing(current)}>
+              Volver al paso actual
+            </button>
+          </span>
         </div>
+      )}
+
+      <section key={viewing} className="anim-in space-y-4">
+        <h3 className="text-base font-medium leading-relaxed">
+          {step.item && <span className="mr-2 rounded bg-[var(--ink)] px-1.5 py-0.5 text-xs text-[var(--paper)]">Ítem {step.item}</span>}
+          <Tex>{step.prompt}</Tex>
+        </h3>
 
         <div className="grid gap-3 sm:grid-cols-2">
           {order.map((cardIndex, pos) => {
             const card = step.cards[cardIndex]!;
             const wrongPicked = st.wrong.includes(cardIndex);
             const rightPicked = st.solvedWith === cardIndex;
+            // Se revela la correcta sólo al resolver el paso o al agotarse su tiempo, nunca por errar.
+            const state: CardState = wrongPicked ? 'wrong' : rightPicked ? 'right' : stepDone ? (card.correct ? 'revealed-right' : 'revealed') : 'idle';
             return (
               <CardView
                 key={cardIndex}
                 n={pos + 1}
-                delay={pos * 60}
+                delay={reviewing ? 0 : pos * 60}
                 text={card.text}
                 explanation={card.explanation}
                 correct={card.correct}
-                state={wrongPicked ? 'wrong' : rightPicked ? 'right' : done ? (card.correct ? 'revealed-right' : 'revealed') : 'idle'}
-                disabled={done || wrongPicked}
+                state={state}
+                disabled={reviewing || stepDone || wrongPicked}
                 onPick={() => dispatch({ type: 'pick', card: cardIndex })}
               />
             );
           })}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          {!done && (
-            <Button variant="ghost" onClick={() => dispatch({ type: 'hint' })} disabled={st.hintUsed} title="Usar la pista: el acierto vale 0 (tecla P)">
-              {st.hintUsed ? 'Pista usada' : 'Pista'}
-            </Button>
-          )}
-          {done && !finished && (
-            <Button onClick={() => dispatch({ type: 'next' })} title="Enter">
-              Siguiente paso
-            </Button>
-          )}
-          {finished && (
-            <Button onClick={onAdvance} title="Enter">
-              {advanceLabel}
-            </Button>
-          )}
-          <StepVerdict state={st} />
-        </div>
+        {st.hintsShown > 0 && (
+          <ol className="space-y-2">
+            {step.hints.slice(0, st.hintsShown).map((h, i) => (
+              <li key={i} className="anim-reveal rounded-md border border-dashed border-[var(--line)] px-3 py-2 text-sm">
+                <span className="font-medium">Pista {i + 1}: </span>
+                <Tex>{h}</Tex>
+              </li>
+            ))}
+          </ol>
+        )}
 
-        {st.hintUsed && (
-          <p className="anim-reveal rounded-md border border-dashed border-[var(--line)] px-3 py-2 text-sm">
-            <span className="font-medium">Pista: </span>
-            <Tex>{step.hint}</Tex>
-          </p>
+        {!reviewing && (
+          <div className="flex flex-wrap items-center gap-3">
+            {!stepDone && (
+              <Button
+                variant="ghost"
+                onClick={() => dispatch({ type: 'hint' })}
+                disabled={st.hintsShown >= step.hints.length}
+                title="Pedir una pista: el acierto pasa a valer 0 (tecla P)"
+              >
+                {st.hintsShown >= step.hints.length
+                  ? 'Sin más pistas'
+                  : st.hintsShown === 0
+                    ? `Pedir pista (${step.hints.length})`
+                    : `Otra pista (${st.hintsShown}/${step.hints.length})`}
+              </Button>
+            )}
+            {stepDone && !finished && (
+              <Button onClick={() => dispatch({ type: 'next' })} title="Enter">
+                Siguiente paso
+              </Button>
+            )}
+            {finished && (
+              <Button onClick={onAdvance} title="Enter">
+                {advanceLabel}
+              </Button>
+            )}
+            {current > 0 && (
+              <button type="button" className="text-sm underline" onClick={() => goTo(current - 1)} title="Flecha izquierda">
+                ← Revisar pasos anteriores
+              </button>
+            )}
+            <StepVerdict state={st} />
+          </div>
         )}
       </section>
     </div>
@@ -370,7 +462,7 @@ function StepVerdict({ state }: { state: GameState['steps'][number] }) {
       </span>
     ) : null;
   const r = stepResult(state);
-  const label = state.timedOut ? 'Tiempo agotado' : r.firstTry ? '¡A la primera!' : state.hintUsed && state.wrong.length === 0 ? 'Con pista' : 'Resuelto';
+  const label = state.timedOut ? 'Tiempo agotado' : r.firstTry ? '¡A la primera!' : state.hintsShown > 0 && state.wrong.length === 0 ? 'Con pista' : 'Resuelto';
   return (
     <span className={`anim-pop text-sm font-medium ${r.score > 0 ? 'text-[var(--ok)]' : r.score < 0 ? 'text-[var(--accent)]' : 'text-[var(--muted)]'}`}>
       {label} · {fmt(r.score)}

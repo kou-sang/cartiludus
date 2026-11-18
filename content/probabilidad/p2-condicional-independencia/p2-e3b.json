@@ -11,7 +11,9 @@
       "id": "fp",
       "kind": "property",
       "prompt": "¿Cuánto vale $P(A \\mid E^c)$ (falso positivo) en función de $p$?",
-      "hint": "Complemento de la especificidad.",
+      "hints": [
+        "Complemento de la especificidad."
+      ],
       "cards": [
         {
           "text": "$1 - 0{,}005$",
@@ -39,7 +41,9 @@
       "id": "ec",
       "kind": "setup",
       "prompt": "Plantear la ecuación:",
-      "hint": "Bayes en función de $p$.",
+      "hints": [
+        "Bayes en función de $p$."
+      ],
       "cards": [
         {
           "text": "$p = 0{,}95$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Valor de $p$:",
-      "hint": "Despejar: $0{,}00025\\,p = 0{,}94525\\,(1-p)$.",
+      "hints": [
+        "Despejar: $0{,}00025\\,p = 0{,}94525\\,(1-p)$."
+      ],
       "cards": [
         {
           "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
@@ -95,7 +101,9 @@
       "id": "int",
       "kind": "interpret",
       "prompt": "¿Qué muestra el resultado?",
-      "hint": "Comparar la tasa de falsos positivos con la prevalencia.",
+      "hints": [
+        "Comparar la tasa de falsos positivos con la prevalencia."
+      ],
       "cards": [
         {
           "text": "La prevalencia no influye",

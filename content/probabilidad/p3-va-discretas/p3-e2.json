@@ -11,7 +11,9 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Respecto de qué evento conviene condicionar?",
-      "hint": "Qué voto es \"correcto\" depende de si el acusado es culpable o no.",
+      "hints": [
+        "Qué voto es \"correcto\" depende de si el acusado es culpable o no."
+      ],
       "cards": [
         {
           "text": "El voto del primer jurado",
@@ -39,7 +41,9 @@
       "id": "pc",
       "kind": "property",
       "prompt": "Si el acusado es culpable, ¿con qué probabilidad un jurado vota culpable?",
-      "hint": "Si es culpable, la decisión correcta es votar culpable.",
+      "hints": [
+        "Si es culpable, la decisión correcta es votar culpable."
+      ],
       "cards": [
         {
           "text": "$\\alpha\\theta$",
@@ -67,7 +71,9 @@
       "id": "pi",
       "kind": "property",
       "prompt": "Si el acusado es inocente, ¿con qué probabilidad un jurado vota culpable?",
-      "hint": "Si es inocente, votar culpable es un error.",
+      "hints": [
+        "Si es inocente, votar culpable es un error."
+      ],
       "cards": [
         {
           "text": "$1 - \\alpha$",
@@ -95,7 +101,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "¿Qué distribución tiene $V$ (votos culpables) en cada caso?",
-      "hint": "Dado el estado del acusado, 12 votos independientes con la misma probabilidad.",
+      "hints": [
+        "Dado el estado del acusado, 12 votos independientes con la misma probabilidad."
+      ],
       "cards": [
         {
           "text": "$V \\sim \\mathrm{Bi}(12, \\alpha\\theta)$",
@@ -123,7 +131,9 @@
       "id": "cond",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(V \\ge 8 \\mid G)$?",
-      "hint": "$\\{V \\ge 8\\}$ es la unión disjunta de $\\{V = k\\}$ para $k = 8, \\dots, 12$.",
+      "hints": [
+        "$\\{V \\ge 8\\}$ es la unión disjunta de $\\{V = k\\}$ para $k = 8, \\dots, 12$."
+      ],
       "cards": [
         {
           "text": "$\\theta^8$",
@@ -151,7 +161,9 @@
       "id": "total",
       "kind": "setup",
       "prompt": "¿Cómo se combina para obtener la probabilidad de condena?",
-      "hint": "Probabilidad total con la partición $G$, $G^c$.",
+      "hints": [
+        "Probabilidad total con la partición $G$, $G^c$."
+      ],
       "cards": [
         {
           "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",

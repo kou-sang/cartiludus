@@ -11,7 +11,9 @@
       "id": "evx",
       "kind": "property",
       "prompt": "¿Qué significa el evento $\\{X = 0\\}$?",
-      "hint": "$X$ cuenta éxitos en $n$ ensayos.",
+      "hints": [
+        "$X$ cuenta éxitos en $n$ ensayos."
+      ],
       "cards": [
         {
           "text": "Hay exactamente un fracaso",
@@ -39,7 +41,9 @@
       "id": "px0",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(X = 0)$?",
-      "hint": "Todos fracasan, de forma independiente.",
+      "hints": [
+        "Todos fracasan, de forma independiente."
+      ],
       "cards": [
         {
           "text": "$(1-p)^n$",
@@ -67,7 +71,9 @@
       "id": "evy",
       "kind": "property",
       "prompt": "¿Qué significa $\\{Y > n\\}$?",
-      "hint": "$Y$ es el número de ensayo del primer éxito.",
+      "hints": [
+        "$Y$ es el número de ensayo del primer éxito."
+      ],
       "cards": [
         {
           "text": "El ensayo $n$ es un éxito",
@@ -95,7 +101,9 @@
       "id": "py",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(Y > n)$?",
-      "hint": "Usar la descripción anterior, o sumar la serie geométrica.",
+      "hints": [
+        "Usar la descripción anterior, o sumar la serie geométrica."
+      ],
       "cards": [
         {
           "text": "$(1-p)^{n+1}$",
@@ -123,7 +131,9 @@
       "id": "interp",
       "kind": "interpret",
       "prompt": "¿Cuál es la interpretación de la igualdad?",
-      "hint": "Pensar ambas variables sobre la misma sucesión de ensayos.",
+      "hints": [
+        "Pensar ambas variables sobre la misma sucesión de ensayos."
+      ],
       "cards": [
         {
           "text": "Es consecuencia de la falta de memoria",

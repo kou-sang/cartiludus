@@ -61,7 +61,7 @@ export function App() {
       <footer className="mt-12 text-xs text-[var(--muted)]">
         v{__APP_VERSION__}
         {ready && !user && ' · sin sesión: el progreso no se guarda'}
-        {playing && ' · atajos: 1–4 cartas, P pista, Enter siguiente'}
+        {playing && ' · atajos: 1–4 cartas, P pista, Enter siguiente, ← → revisar pasos'}
       </footer>
     </div>
   );

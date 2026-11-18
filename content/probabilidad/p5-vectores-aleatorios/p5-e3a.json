@@ -11,7 +11,9 @@
       "id": "cond",
       "kind": "setup",
       "prompt": "¿Cómo se calcula $P(H = h, M = m)$?",
-      "hint": "$\\{H = h, M = m\\} = \\{N = h+m, H = h\\}$.",
+      "hints": [
+        "$\\{H = h, M = m\\} = \\{N = h+m, H = h\\}$."
+      ],
       "cards": [
         {
           "text": "$P(N = h+m)\\,p^h(1-p)^m$",
@@ -39,7 +41,9 @@
       "id": "fact",
       "kind": "compute",
       "prompt": "Simplificar:",
-      "hint": "$e^{-\\lambda} = e^{-\\lambda p} e^{-\\lambda(1-p)}$ y $\\lambda^{h+m} = \\lambda^h\\lambda^m$.",
+      "hints": [
+        "$e^{-\\lambda} = e^{-\\lambda p} e^{-\\lambda(1-p)}$ y $\\lambda^{h+m} = \\lambda^h\\lambda^m$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{e^{-\\lambda p}(\\lambda p)^h}{h!} \\cdot \\dfrac{e^{-\\lambda(1-p)}(\\lambda(1-p))^m}{m!}$",
@@ -67,7 +71,9 @@
       "id": "concl",
       "kind": "property",
       "prompt": "¿Qué se concluye?",
-      "hint": "Una conjunta que factoriza.",
+      "hints": [
+        "Una conjunta que factoriza."
+      ],
       "cards": [
         {
           "text": "$H$ y $M$ son dependientes porque $H + M = N$",

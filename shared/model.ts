@@ -43,9 +43,11 @@ export const Step = z
   .object({
     id: Slug,
     kind: StepKind,
+    /** Ítem del enunciado al que responde el paso, p. ej. "(b)" o "(a) ii". */
+    item: z.string().trim().min(1).max(24).optional(),
     prompt: Text,
-    /** Obligatoria. Usarla hace que el acierto valga 0. */
-    hint: Text,
+    /** Pistas progresivas (1 a 3), de la idea general al planteo. Usar cualquiera hace que el acierto valga 0. */
+    hints: z.array(Text).min(1).max(3),
     /** Segundos para responder; sin valor = sin límite. Agotado = paso fallado + revelar. */
     timeLimitSec: z.number().int().positive().max(600).optional(),
     cards: z.array(Card).length(4, 'cada paso lleva exactamente 4 cartas'),
@@ -72,6 +74,9 @@ export const Problem = z
     subject: Slug,
     topic: Slug,
     title: Text,
+    /** Origen, p. ej. "Práctica 1 · Ejercicio 2". */
+    source: z.string().trim().min(1).max(80).optional(),
+    /** Texto original completo (con todos los ítems). Los saltos de línea separan párrafos e ítems. */
     statement: Text,
     difficulty: z.number().int().min(1).max(5).optional(),
     steps: z.array(Step).min(1),

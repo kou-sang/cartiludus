@@ -1,0 +1,204 @@
+{
+  "id": "p1-ej4",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Bolillas en urnas: indistinguibles y distinguibles",
+  "source": "Práctica 1 · Ejercicio 4",
+  "statement": "Se colocan 4 bolillas indistinguibles en 4 urnas numeradas. Calcular la probabilidad de que la primer urna contenga\n(a) exactamente una bolilla.\n(b) exactamente dos bolillas.\n(c) al menos una bolilla.\nResolver nuevamente el problema para el caso en que las bolillas sean distinguibles.\n(Bolillas indistinguibles en urnas numeradas: estadística de Bose–Einstein; bolillas distinguibles: estadística de Maxwell–Boltzmann.)",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "be",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "Bolillas indistinguibles (Bose–Einstein): ¿qué resultados son equiprobables y cuántos hay?",
+      "hints": [
+        "Sólo se distingue cuántas bolillas hay en cada urna.",
+        "Contar soluciones de $x_1 + x_2 + x_3 + x_4 = 4$ con $x_i \\ge 0$.",
+        "\"Estrellas y barras\": $\\binom{4 + 4 - 1}{4}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom44 = 1$",
+          "correct": false,
+          "explanation": "Hay muchas maneras de repartir las bolillas."
+        },
+        {
+          "text": "Las configuraciones $(x_1, \\dots, x_4)$ con suma 4: $\\binom{7}{4} = 35$",
+          "correct": true,
+          "explanation": "En el modelo de Bose–Einstein cada configuración de ocupación es equiprobable; se cuentan con estrellas y barras."
+        },
+        {
+          "text": "$4^4 = 256$",
+          "correct": false,
+          "explanation": "Cuenta a qué urna va cada bolilla, lo que supone bolillas distinguibles."
+        },
+        {
+          "text": "$4! = 24$",
+          "correct": false,
+          "explanation": "Supone una bolilla por urna."
+        }
+      ]
+    },
+    {
+      "id": "be-a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿En cuántas configuraciones la primera urna tiene exactamente una bolilla?",
+      "hints": [
+        "Fijar $x_1 = 1$.",
+        "Las 3 bolillas restantes se reparten en las otras 3 urnas: $\\binom{3+3-1}{3}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom31 = 3$",
+          "correct": false,
+          "explanation": "Cuenta otra cosa: no reparte las bolillas que quedan."
+        },
+        {
+          "text": "$\\binom53 = 10$: probabilidad $\\tfrac{10}{35} = \\tfrac27$",
+          "correct": true,
+          "explanation": "Quedan 3 bolillas indistinguibles en 3 urnas."
+        },
+        {
+          "text": "$\\binom63 = 20$",
+          "correct": false,
+          "explanation": "Reparte en 4 urnas, incluyendo otra vez la primera."
+        },
+        {
+          "text": "$4 \\cdot 3^3 = 108$",
+          "correct": false,
+          "explanation": "Es el conteo con bolillas distinguibles."
+        }
+      ]
+    },
+    {
+      "id": "be-bc",
+      "kind": "compute",
+      "item": "(b), (c)",
+      "prompt": "¿Cuáles son las probabilidades de (b) exactamente dos y (c) al menos una bolilla en la primera urna?",
+      "hints": [
+        "(b): fijar $x_1 = 2$ y repartir 2 bolillas en 3 urnas: $\\binom{4}{2}$.",
+        "(c): complemento, $x_1 = 0$: repartir 4 bolillas en 3 urnas: $\\binom{6}{4}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{10}{35}$ y $\\tfrac47$",
+          "correct": false,
+          "explanation": "En (b) repite el conteo de (a)."
+        },
+        {
+          "text": "$\\tfrac{6}{35}$ y $1 - \\tfrac{15}{35} = \\tfrac47$",
+          "correct": true,
+          "explanation": "$\\binom42 = 6$; y $\\binom64 = 15$ configuraciones dejan vacía la primera urna."
+        },
+        {
+          "text": "$\\tfrac{6}{35}$ y $\\tfrac{15}{35}$",
+          "correct": false,
+          "explanation": "En (c) da la probabilidad de que la primera urna quede vacía."
+        },
+        {
+          "text": "$\\tfrac{27}{128}$ y $\\tfrac{175}{256}$",
+          "correct": false,
+          "explanation": "Son los valores con bolillas distinguibles."
+        }
+      ]
+    },
+    {
+      "id": "mb",
+      "kind": "setup",
+      "item": "distinguibles",
+      "prompt": "Bolillas distinguibles (Maxwell–Boltzmann): ¿qué espacio conviene?",
+      "hints": [
+        "Cada bolilla elige su urna.",
+        "Registrar la urna de cada una de las 4 bolillas."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom74 = 35$ configuraciones equiprobables",
+          "correct": false,
+          "explanation": "Con bolillas distinguibles las configuraciones no son equiprobables."
+        },
+        {
+          "text": "$\\binom{16}{4}$",
+          "correct": false,
+          "explanation": "No corresponde a ninguna descripción del experimento."
+        },
+        {
+          "text": "$4! = 24$",
+          "correct": false,
+          "explanation": "Supone una bolilla por urna."
+        },
+        {
+          "text": "$\\{1,2,3,4\\}^4$ (urna de cada bolilla), equiprobable: $4^4 = 256$",
+          "correct": true,
+          "explanation": "Cada bolilla va a una urna al azar, independientemente."
+        }
+      ]
+    },
+    {
+      "id": "mb-abc",
+      "kind": "compute",
+      "item": "distinguibles",
+      "prompt": "Con bolillas distinguibles, ¿cuánto valen las probabilidades de (a), (b) y (c)?",
+      "hints": [
+        "La cantidad de bolillas en la primera urna es binomial: cada bolilla cae allí con probabilidad $\\tfrac14$.",
+        "$P(\\text{exactamente } j) = \\binom4j \\left(\\tfrac14\\right)^j\\left(\\tfrac34\\right)^{4-j}$.",
+        "(c): complemento, $\\left(\\tfrac34\\right)^4 = \\tfrac{81}{256}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac27$, $\\tfrac6{35}$ y $\\tfrac47$",
+          "correct": false,
+          "explanation": "Son los valores de Bose–Einstein."
+        },
+        {
+          "text": "$\\tfrac{27}{64}$, $\\tfrac{27}{128}$ y $\\tfrac{175}{256}$",
+          "correct": true,
+          "explanation": "$4 \\cdot \\tfrac14 \\cdot \\tfrac{27}{64}$; $6 \\cdot \\tfrac1{16} \\cdot \\tfrac9{16}$; $1 - \\tfrac{81}{256}$."
+        },
+        {
+          "text": "$\\tfrac{1}{4}$, $\\tfrac1{16}$ y $\\tfrac34$",
+          "correct": false,
+          "explanation": "Mira una sola bolilla, o sólo algunas, en lugar de las cuatro."
+        },
+        {
+          "text": "$\\tfrac{27}{256}$, $\\tfrac{27}{128}$ y $\\tfrac{175}{256}$",
+          "correct": false,
+          "explanation": "En (a) falta elegir cuál de las 4 bolillas cae en la primera urna."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "kind": "interpret",
+      "prompt": "¿Por qué difieren los dos modelos?",
+      "hints": [
+        "Contar de cuántas maneras aparece una misma configuración cuando las bolillas tienen nombre."
+      ],
+      "cards": [
+        {
+          "text": "No difieren",
+          "correct": false,
+          "explanation": "Los valores de los ítems son distintos en cada modelo."
+        },
+        {
+          "text": "Porque hay más bolillas en un caso",
+          "correct": false,
+          "explanation": "En ambos hay 4 bolillas y 4 urnas."
+        },
+        {
+          "text": "Con bolillas distinguibles las configuraciones no son equiprobables: $(4,0,0,0)$ ocurre de 1 manera y $(1,1,1,1)$ de $4! = 24$",
+          "correct": true,
+          "explanation": "Cambiar qué se considera igual cambia qué es equiprobable, y con eso las probabilidades."
+        },
+        {
+          "text": "Uno de los dos cálculos tiene un error",
+          "correct": false,
+          "explanation": "Ambos son correctos: son modelos distintos."
+        }
+      ]
+    }
+  ]
+}

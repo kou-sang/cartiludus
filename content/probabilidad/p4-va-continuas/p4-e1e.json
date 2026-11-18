@@ -11,7 +11,9 @@
       "id": "p",
       "kind": "compute",
       "prompt": "¿Cuánto vale $p = P(4 < D < 6)$?",
-      "hint": "Con $f_D(x) = \\tfrac{x}{50}$: $F_D(x) = \\tfrac{x^2}{100}$.",
+      "hints": [
+        "Con $f_D(x) = \\tfrac{x}{50}$: $F_D(x) = \\tfrac{x^2}{100}$."
+      ],
       "cards": [
         {
           "text": "$p = \\tfrac{6 - 4}{50}$",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Con $n$ árboles, sea $N_n$ la cantidad con diámetro en $(4,6)$. Distribución:",
-      "hint": "Ensayos independientes.",
+      "hints": [
+        "Ensayos independientes."
+      ],
       "cards": [
         {
           "text": "$N_n \\sim \\mathrm{Bi}(n, \\tfrac45)$",
@@ -67,7 +71,9 @@
       "id": "ineq",
       "kind": "setup",
       "prompt": "Condición sobre $n$:",
-      "hint": "Complemento de \"ninguno\".",
+      "hints": [
+        "Complemento de \"ninguno\"."
+      ],
       "cards": [
         {
           "text": "$1 - \\left(\\tfrac45\\right)^n \\ge 0{,}99$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Menor $n$:",
-      "hint": "$n \\ge \\dfrac{\\ln(0{,}01)}{\\ln(0{,}8)} \\approx 20{,}6$.",
+      "hints": [
+        "$n \\ge \\dfrac{\\ln(0{,}01)}{\\ln(0{,}8)} \\approx 20{,}6$."
+      ],
       "cards": [
         {
           "text": "$n = 3$",

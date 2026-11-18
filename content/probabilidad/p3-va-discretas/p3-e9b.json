@@ -11,7 +11,9 @@
       "id": "obj",
       "kind": "setup",
       "prompt": "¿Qué probabilidades se piden?",
-      "hint": "Se observó la emisión; la incógnita es la fuente.",
+      "hints": [
+        "Se observó la emisión; la incógnita es la fuente."
+      ],
       "cards": [
         {
           "text": "$P(F_i \\mid N = 4)$ para $i = 1, 2, 3$",
@@ -39,7 +41,9 @@
       "id": "pmf",
       "kind": "property",
       "prompt": "Sea $N$ la cantidad de partículas emitidas. ¿Cuánto vale $P(N = 4 \\mid F_i)$?",
-      "hint": "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$.",
+      "hints": [
+        "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{4!}$",
@@ -67,7 +71,9 @@
       "id": "bayes",
       "kind": "setup",
       "prompt": "¿Cómo se escribe $P(F_i \\mid N = 4)$?",
-      "hint": "Fórmula de Bayes con la partición $F_1, F_2, F_3$.",
+      "hints": [
+        "Fórmula de Bayes con la partición $F_1, F_2, F_3$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{P(N=4\\mid F_i)\\,\\tfrac13}{\\sum_j P(N = 4 \\mid F_j)\\,\\tfrac13}$",
@@ -95,7 +101,9 @@
       "id": "simp",
       "kind": "property",
       "prompt": "¿Qué se simplifica en ese cociente?",
-      "hint": "Factores comunes a todos los términos.",
+      "hints": [
+        "Factores comunes a todos los términos."
+      ],
       "cards": [
         {
           "text": "Nada",
@@ -123,7 +131,9 @@
       "id": "armar",
       "kind": "compute",
       "prompt": "Con $e^{-2}2^4 \\approx 2{,}17$, $e^{-3}3^4 \\approx 4{,}03$, $e^{-4}4^4 \\approx 4{,}69$ (suma $\\approx 10{,}89$), ¿cuánto valen las probabilidades?",
-      "hint": "Dividir cada valor por la suma.",
+      "hints": [
+        "Dividir cada valor por la suma."
+      ],
       "cards": [
         {
           "text": "$\\tfrac29$, $\\tfrac39$, $\\tfrac49$",

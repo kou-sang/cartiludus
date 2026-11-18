@@ -11,7 +11,9 @@
       "id": "pmf",
       "kind": "property",
       "prompt": "Sea $N$ la cantidad de partículas emitidas. ¿Cuánto vale $P(N = 4 \\mid F_i)$?",
-      "hint": "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$.",
+      "hints": [
+        "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{\\lambda_i^4}{4!}$",
@@ -39,7 +41,9 @@
       "id": "comp",
       "kind": "setup",
       "prompt": "¿Qué alcanza con comparar entre las tres fuentes?",
-      "hint": "El $4!$ es el mismo para las tres.",
+      "hints": [
+        "El $4!$ es el mismo para las tres."
+      ],
       "cards": [
         {
           "text": "Las medias $\\lambda_i$",
@@ -67,7 +71,9 @@
       "id": "max",
       "kind": "property",
       "prompt": "¿Dónde alcanza su máximo $g(\\lambda) = e^{-\\lambda}\\lambda^4$ para $\\lambda > 0$?",
-      "hint": "Derivar: $g^{\\prime}(\\lambda) = e^{-\\lambda}\\lambda^3(4 - \\lambda)$.",
+      "hints": [
+        "Derivar: $g^{\\prime}(\\lambda) = e^{-\\lambda}\\lambda^3(4 - \\lambda)$."
+      ],
       "cards": [
         {
           "text": "En $\\lambda = 4$: $g$ crece en $(0, 4)$ y decrece después",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "interpret",
       "prompt": "¿Qué fuente tiene mayor probabilidad de emitir 4 partículas?",
-      "hint": "$2 < 3 < 4$ están en la zona donde $g$ crece.",
+      "hints": [
+        "$2 < 3 < 4$ están en la zona donde $g$ crece."
+      ],
       "cards": [
         {
           "text": "$F_1$",

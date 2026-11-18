@@ -11,7 +11,9 @@
       "id": "mezcla",
       "kind": "setup",
       "prompt": "¿Cómo se escribe $P(D \\ge t)$?",
-      "hint": "Probabilidad total según el tipo de pila.",
+      "hints": [
+        "Probabilidad total según el tipo de pila."
+      ],
       "cards": [
         {
           "text": "$P(N_0 \\ge t)\\,P(N_1 \\ge t)$",
@@ -39,7 +41,9 @@
       "id": "z",
       "kind": "compute",
       "prompt": "¿Qué valores de $P(N_1 \\ge 47)$ y $P(N_1 \\ge 60)$ se obtienen?",
-      "hint": "$P(N_0 \\ge 47) = P(Z \\ge -1{,}2) \\approx 0{,}8849$ y $P(N_0 \\ge 60) = P(Z \\ge 1{,}4) \\approx 0{,}0808$.",
+      "hints": [
+        "$P(N_0 \\ge 47) = P(Z \\ge -1{,}2) \\approx 0{,}8849$ y $P(N_0 \\ge 60) = P(Z \\ge 1{,}4) \\approx 0{,}0808$."
+      ],
       "cards": [
         {
           "text": "$\\approx 0{,}2074$ y $\\approx 0{,}0009$",
@@ -68,7 +72,9 @@
       "id": "sist",
       "kind": "compute",
       "prompt": "Resolver para $\\mu_1, \\sigma_1$:",
-      "hint": "Con la tabla normal: $\\tfrac{47 - \\mu_1}{\\sigma_1} \\approx -0{,}5$ y $\\tfrac{60-\\mu_1}{\\sigma_1} \\approx 2{,}75$.",
+      "hints": [
+        "Con la tabla normal: $\\tfrac{47 - \\mu_1}{\\sigma_1} \\approx -0{,}5$ y $\\tfrac{60-\\mu_1}{\\sigma_1} \\approx 2{,}75$."
+      ],
       "cards": [
         {
           "text": "$\\mu_1 = 49$, $\\sigma_1^2 = 4$",
@@ -96,7 +102,9 @@
       "id": "bayes",
       "kind": "setup",
       "prompt": "Plantear la probabilidad pedida:",
-      "hint": "Bayes.",
+      "hints": [
+        "Bayes."
+      ],
       "cards": [
         {
           "text": "$P(N_1 > 51)$",
@@ -124,7 +132,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$P(N_1 > 51) = P(Z > 0{,}5) \\approx 0{,}3085$ y $P(N_0 > 51) = P(Z > -0{,}4) \\approx 0{,}6554$.",
+      "hints": [
+        "$P(N_1 > 51) = P(Z > 0{,}5) \\approx 0{,}3085$ y $P(N_0 > 51) = P(Z > -0{,}4) \\approx 0{,}6554$."
+      ],
       "cards": [
         {
           "text": "$0{,}3$",

@@ -11,7 +11,9 @@
       "id": "k",
       "kind": "compute",
       "prompt": "Primero, ¿cuánto vale $k$?",
-      "hint": "Una densidad integra 1: $k\\int_0^{10} x\\,dx = 1$.",
+      "hints": [
+        "Una densidad integra 1: $k\\int_0^{10} x\\,dx = 1$."
+      ],
       "cards": [
         {
           "text": "$k = \\tfrac{1}{100}$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "¿Cuál es $F_D(x)$ para $0 \\le x \\le 10$?",
-      "hint": "$F_D(x) = \\int_0^x \\tfrac{t}{50}\\,dt$.",
+      "hints": [
+        "$F_D(x) = \\int_0^x \\tfrac{t}{50}\\,dt$."
+      ],
       "cards": [
         {
           "text": "$F_D(x) = \\tfrac{x^2}{50}$",
@@ -67,7 +71,9 @@
       "id": "cond",
       "kind": "setup",
       "prompt": "Plantear la probabilidad condicional:",
-      "hint": "$\\{4 < D < 6\\} \\cap \\{D > 5\\}$.",
+      "hints": [
+        "$\\{4 < D < 6\\} \\cap \\{D > 5\\}$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{P(5 < D < 6)}{P(D > 5)}$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$P(5<D<6) = F_D(6) - F_D(5)$ y $P(D > 5) = 1 - F_D(5)$.",
+      "hints": [
+        "$P(5<D<6) = F_D(6) - F_D(5)$ y $P(D > 5) = 1 - F_D(5)$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{11/100}{75/100} = \\tfrac{11}{75} \\approx 0{,}147$",

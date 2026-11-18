@@ -11,7 +11,9 @@
       "id": "p",
       "kind": "compute",
       "prompt": "$p = P(X > 6)$:",
-      "hint": "Cola de la exponencial: $P(X > t) = e^{-\\lambda t}$.",
+      "hints": [
+        "Cola de la exponencial: $P(X > t) = e^{-\\lambda t}$."
+      ],
       "cards": [
         {
           "text": "$e^{-30}$",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Cantidad de días (de la semana hábil) con más de 6 litros:",
-      "hint": "Días independientes.",
+      "hints": [
+        "Días independientes."
+      ],
       "cards": [
         {
           "text": "$\\mathcal{P}(5e^{-1{,}2})$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$\\binom52 p^2(1-p)^3$.",
+      "hints": [
+        "$\\binom52 p^2(1-p)^3$."
+      ],
       "cards": [
         {
           "text": "$21\\,e^{-2{,}4}(1 - e^{-1{,}2})^5 \\approx 0{,}317$",

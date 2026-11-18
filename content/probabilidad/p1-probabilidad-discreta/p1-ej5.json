@@ -1,0 +1,136 @@
+{
+  "id": "p1-ej5",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Cabinas consecutivas",
+  "source": "Práctica 1 · Ejercicio 5",
+  "statement": "En la vuelta al mundo del Parque de la Costa hay 15 cabinas. El día de mantenimiento, se eligen 3 al azar para hacerles una inspección. ¿Cuál es la probabilidad de que las 3 elegidas sean consecutivas?",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "prompt": "¿Qué espacio muestral conviene?",
+      "hints": [
+        "El orden en que se eligen no importa.",
+        "Se eligen 3 cabinas distintas."
+      ],
+      "cards": [
+        {
+          "text": "Subconjuntos de 3 cabinas, equiprobables: $\\binom{15}{3} = 455$",
+          "correct": true,
+          "explanation": "Elegir al azar 3 cabinas hace equiprobables los subconjuntos de tamaño 3."
+        },
+        {
+          "text": "Ternas con repetición: $15^3$",
+          "correct": false,
+          "explanation": "Permite elegir la misma cabina dos veces."
+        },
+        {
+          "text": "$3! = 6$",
+          "correct": false,
+          "explanation": "Ordena 3 cabinas, pero no las elige."
+        },
+        {
+          "text": "$\\{1, \\dots, 13\\}$",
+          "correct": false,
+          "explanation": "No describe qué cabinas se eligieron."
+        }
+      ]
+    },
+    {
+      "id": "geom",
+      "kind": "property",
+      "prompt": "¿Cómo están dispuestas las cabinas?",
+      "hints": [
+        "Pensar en la forma de una vuelta al mundo.",
+        "¿La cabina 15 tiene vecina a la 1?"
+      ],
+      "cards": [
+        {
+          "text": "Da lo mismo la disposición",
+          "correct": false,
+          "explanation": "Qué cabinas son vecinas depende de la disposición."
+        },
+        {
+          "text": "Sólo importa la paridad del número de cabina",
+          "correct": false,
+          "explanation": "El enunciado no habla de paridad."
+        },
+        {
+          "text": "En una fila: la 15 no es vecina de la 1",
+          "correct": false,
+          "explanation": "Una vuelta al mundo no es una fila."
+        },
+        {
+          "text": "En un círculo: la cabina 15 es vecina de la 1",
+          "correct": true,
+          "explanation": "La rueda es circular; los bloques que pasan por 15–1 también son consecutivos."
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "kind": "compute",
+      "prompt": "¿Cuántos bloques de 3 cabinas consecutivas hay?",
+      "hints": [
+        "Cada bloque queda determinado por su primera cabina.",
+        "En un círculo, cualquier cabina puede ser la primera."
+      ],
+      "cards": [
+        {
+          "text": "45",
+          "correct": false,
+          "explanation": "Cuenta cada bloque varias veces."
+        },
+        {
+          "text": "15",
+          "correct": true,
+          "explanation": "Una por cada cabina inicial, incluyendo $\\{14,15,1\\}$ y $\\{15,1,2\\}$."
+        },
+        {
+          "text": "5",
+          "correct": false,
+          "explanation": "Corta la rueda en 5 bloques disjuntos, pero los bloques pueden superponerse."
+        },
+        {
+          "text": "13",
+          "correct": false,
+          "explanation": "Cuenta bloques en una fila, sin los que pasan de la 15 a la 1."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Probabilidad:",
+      "hints": [
+        "Favorables sobre posibles.",
+        "$\\tfrac{15}{455}$ se simplifica dividiendo por 5."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{15}{15^3}$",
+          "correct": false,
+          "explanation": "El denominador cuenta ternas con repetición."
+        },
+        {
+          "text": "$\\tfrac{15}{455} = \\tfrac{3}{91}$",
+          "correct": true,
+          "explanation": "Cociente de casos en un espacio equiprobable."
+        },
+        {
+          "text": "$\\tfrac{3}{15}$",
+          "correct": false,
+          "explanation": "No corresponde a ningún conteo del espacio muestral."
+        },
+        {
+          "text": "$\\tfrac{13}{455} = \\tfrac{1}{35}$",
+          "correct": false,
+          "explanation": "Usa los bloques de una fila."
+        }
+      ]
+    }
+  ]
+}

@@ -32,7 +32,8 @@ function latexFields(p: Problem): Array<[string, string]> {
     ['statement', p.statement],
   ];
   p.steps.forEach((s, i) => {
-    out.push([`steps[${i}].prompt`, s.prompt], [`steps[${i}].hint`, s.hint]);
+    out.push([`steps[${i}].prompt`, s.prompt]);
+    s.hints.forEach((h, j) => out.push([`steps[${i}].hints[${j}]`, h]));
     s.cards.forEach((c, j) => {
       out.push([`steps[${i}].cards[${j}].text`, c.text], [`steps[${i}].cards[${j}].explanation`, c.explanation]);
     });

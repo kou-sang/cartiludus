@@ -11,7 +11,9 @@
       "id": "max",
       "kind": "property",
       "prompt": "¿Cómo se escribe $F_M(x) = P(M \\le x)$?",
-      "hint": "$\\{\\max \\le x\\}$: los tres saltos son $\\le x$.",
+      "hints": [
+        "$\\{\\max \\le x\\}$: los tres saltos son $\\le x$."
+      ],
       "cards": [
         {
           "text": "$F_M(x) = 1 - (1-F_A)(1-F_B)(1-F_C)$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "Acumuladas en $[7, 9]$:",
-      "hint": "Integrar cada densidad desde 7.",
+      "hints": [
+        "Integrar cada densidad desde 7."
+      ],
       "cards": [
         {
           "text": "$F_A = \\tfrac{x}{9}$",
@@ -67,7 +71,9 @@
       "id": "eval",
       "kind": "compute",
       "prompt": "Valores en $x = 8{,}2$:",
-      "hint": "$x - 7 = 1{,}2$ y $9 - x = 0{,}8$.",
+      "hints": [
+        "$x - 7 = 1{,}2$ y $9 - x = 0{,}8$."
+      ],
       "cards": [
         {
           "text": "$F_A = 0{,}6$, $F_B = 0{,}84$, $F_C = 0{,}6$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "$P(M > 8{,}2)$:",
-      "hint": "$1 - F_M(8{,}2)$.",
+      "hints": [
+        "$1 - F_M(8{,}2)$."
+      ],
       "cards": [
         {
           "text": "$0{,}18144$",

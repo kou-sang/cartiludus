@@ -11,7 +11,9 @@
       "id": "va",
       "kind": "identify",
       "prompt": "¿Qué variable aleatoria conviene definir?",
-      "hint": "Los eventos del enunciado hablan de cuántos aciertos hay en total.",
+      "hints": [
+        "Los eventos del enunciado hablan de cuántos aciertos hay en total."
+      ],
       "cards": [
         {
           "text": "$X$ = cantidad de aciertos en los 10 tiros",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "¿Qué distribución tiene $X$?",
-      "hint": "Cada tiro es un ensayo con dos resultados; los tiros son independientes y tienen la misma probabilidad.",
+      "hints": [
+        "Cada tiro es un ensayo con dos resultados; los tiros son independientes y tienen la misma probabilidad."
+      ],
       "cards": [
         {
           "text": "$X \\sim \\mathcal{P}(2)$",
@@ -67,7 +71,9 @@
       "id": "obj",
       "kind": "setup",
       "prompt": "¿Qué probabilidad se pide?",
-      "hint": "\"Sabiendo que\" indica el evento condicionante.",
+      "hints": [
+        "\"Sabiendo que\" indica el evento condicionante."
+      ],
       "cards": [
         {
           "text": "$P(X \\ge 1 \\mid X \\ge 2)$",
@@ -95,7 +101,9 @@
       "id": "inter",
       "kind": "property",
       "prompt": "Por definición $P(A \\mid B) = \\dfrac{P(A \\cap B)}{P(B)}$. ¿A qué es igual $\\{X \\ge 2\\} \\cap \\{X \\ge 1\\}$?",
-      "hint": "¿Uno de los eventos está contenido en el otro?",
+      "hints": [
+        "¿Uno de los eventos está contenido en el otro?"
+      ],
       "cards": [
         {
           "text": "$\\{X = 1\\}$",
@@ -123,7 +131,9 @@
       "id": "form",
       "kind": "setup",
       "prompt": "Entonces, ¿cómo queda $P(X \\ge 2 \\mid X \\ge 1)$?",
-      "hint": "Reemplazar la intersección en la definición.",
+      "hints": [
+        "Reemplazar la intersección en la definición."
+      ],
       "cards": [
         {
           "text": "$P(X \\ge 2) - P(X \\ge 1)$",
@@ -151,7 +161,9 @@
       "id": "num",
       "kind": "setup",
       "prompt": "¿Cómo conviene calcular el numerador $P(X \\ge 2)$?",
-      "hint": "$\\{X \\ge 2\\}^c = \\{X = 0\\} \\cup \\{X = 1\\}$.",
+      "hints": [
+        "$\\{X \\ge 2\\}^c = \\{X = 0\\} \\cup \\{X = 1\\}$."
+      ],
       "cards": [
         {
           "text": "$1 - P(X = 0) - P(X = 1)$",
@@ -179,7 +191,9 @@
       "id": "den",
       "kind": "setup",
       "prompt": "¿Y el denominador $P(X \\ge 1)$?",
-      "hint": "$\\{X \\ge 1\\}^c = \\{X = 0\\}$.",
+      "hints": [
+        "$\\{X \\ge 1\\}^c = \\{X = 0\\}$."
+      ],
       "cards": [
         {
           "text": "$1 - P(X = 1)$",
@@ -207,7 +221,9 @@
       "id": "terms",
       "kind": "compute",
       "prompt": "Con $X \\sim \\mathrm{Bi}(10, \\tfrac15)$, ¿cuánto valen $P(X = 0)$ y $P(X = 1)$?",
-      "hint": "$P(X = k) = \\binom{10}{k}(\\tfrac15)^k(\\tfrac45)^{10-k}$.",
+      "hints": [
+        "$P(X = k) = \\binom{10}{k}(\\tfrac15)^k(\\tfrac45)^{10-k}$."
+      ],
       "cards": [
         {
           "text": "$\\left(\\tfrac15\\right)^{10}$ y $10 \\cdot \\tfrac15 \\left(\\tfrac45\\right)^9$",
@@ -235,7 +251,9 @@
       "id": "armar",
       "kind": "compute",
       "prompt": "Con $P(X=0) \\approx 0{,}1074$ y $P(X=1) \\approx 0{,}2684$, ¿cuánto vale $P(X \\ge 2 \\mid X \\ge 1)$?",
-      "hint": "Numerador $1 - 0{,}1074 - 0{,}2684$; denominador $1 - 0{,}1074$.",
+      "hints": [
+        "Numerador $1 - 0{,}1074 - 0{,}2684$; denominador $1 - 0{,}1074$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{0{,}2684}{0{,}8926} \\approx 0{,}30$",

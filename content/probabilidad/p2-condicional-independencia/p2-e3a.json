@@ -11,7 +11,9 @@
       "id": "obj",
       "kind": "setup",
       "prompt": "¿Qué cantidad se pide?",
-      "hint": "Se observa el resultado del test.",
+      "hints": [
+        "Se observa el resultado del test."
+      ],
       "cards": [
         {
           "text": "$P(E^c \\mid A^c)$",
@@ -39,7 +41,9 @@
       "id": "pa",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(A)$?",
-      "hint": "Probabilidad total con la partición $E, E^c$.",
+      "hints": [
+        "Probabilidad total con la partición $E, E^c$."
+      ],
       "cards": [
         {
           "text": "$0{,}95 \\cdot 0{,}005 + 0{,}95 \\cdot 0{,}995$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "interpret",
       "prompt": "Resultado:",
-      "hint": "Bayes.",
+      "hints": [
+        "Bayes."
+      ],
       "cards": [
         {
           "text": "$\\approx 0{,}5$",

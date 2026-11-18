@@ -11,7 +11,9 @@
       "id": "suma",
       "kind": "distribution",
       "prompt": "¿Qué distribución tiene el total $H + M$?",
-      "hint": "Suma de Poisson independientes (convolución).",
+      "hints": [
+        "Suma de Poisson independientes (convolución)."
+      ],
       "cards": [
         {
           "text": "$H + M \\sim \\mathrm{Bi}(2, \\tfrac49)$",
@@ -39,7 +41,9 @@
       "id": "cond",
       "kind": "setup",
       "prompt": "Plantear:",
-      "hint": "$\\{H = 1, M = 1\\} \\subseteq \\{H + M = 2\\}$.",
+      "hints": [
+        "$\\{H = 1, M = 1\\} \\subseteq \\{H + M = 2\\}$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{P(H=1) + P(M=1)}{P(H+M=2)}$",
@@ -67,7 +71,9 @@
       "id": "simp",
       "kind": "distribution",
       "prompt": "Al simplificar, ¿qué distribución tiene $H$ dado $H + M = 2$?",
-      "hint": "Cancelar $e^{-4{,}5}$ y los factoriales.",
+      "hints": [
+        "Cancelar $e^{-4{,}5}$ y los factoriales."
+      ],
       "cards": [
         {
           "text": "$\\mathrm{Bi}\\left(2, \\tfrac{2}{4{,}5}\\right) = \\mathrm{Bi}(2, \\tfrac49)$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$\\binom21 \\tfrac49 \\cdot \\tfrac59$.",
+      "hints": [
+        "$\\binom21 \\tfrac49 \\cdot \\tfrac59$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac12$",

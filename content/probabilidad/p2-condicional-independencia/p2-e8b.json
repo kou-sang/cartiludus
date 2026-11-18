@@ -11,7 +11,9 @@
       "id": "seq",
       "kind": "setup",
       "prompt": "¿Cuánto vale la probabilidad de que el torneo termine exactamente en el partido $k \\ge 2$ con una secuencia dada de ganadores?",
-      "hint": "Cada partido es una moneda equilibrada.",
+      "hints": [
+        "Cada partido es una moneda equilibrada."
+      ],
       "cards": [
         {
           "text": "$\\left(\\tfrac12\\right)^k$",
@@ -39,7 +41,9 @@
       "id": "c",
       "kind": "compute",
       "prompt": "¿Cuándo gana c y con qué probabilidad?",
-      "hint": "c gana en los partidos $3, 6, 9, \\dots$.",
+      "hints": [
+        "c gana en los partidos $3, 6, 9, \\dots$."
+      ],
       "cards": [
         {
           "text": "$\\sum_{j \\ge 1} (\\tfrac12)^{3j} = \\tfrac17$",
@@ -67,7 +71,9 @@
       "id": "ab",
       "kind": "compute",
       "prompt": "¿Con qué probabilidad gana a (y b)?",
-      "hint": "Simetría entre a y b.",
+      "hints": [
+        "Simetría entre a y b."
+      ],
       "cards": [
         {
           "text": "$\\tfrac{5}{14}$ cada uno",
@@ -95,7 +101,9 @@
       "id": "concl",
       "kind": "interpret",
       "prompt": "¿Conviene jugar el primer partido?",
-      "hint": "Comparar $\\tfrac{5}{14}$ con $\\tfrac27 = \\tfrac4{14}$.",
+      "hints": [
+        "Comparar $\\tfrac{5}{14}$ con $\\tfrac27 = \\tfrac4{14}$."
+      ],
       "cards": [
         {
           "text": "Sí: $\\tfrac{5}{14} > \\tfrac{4}{14}$",

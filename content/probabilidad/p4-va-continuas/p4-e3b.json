@@ -11,7 +11,9 @@
       "id": "rango",
       "kind": "property",
       "prompt": "¿Qué valores toma $Y$ y cómo es $g(x) = \\tfrac{x}{x+1}$ en $[0,1]$?",
-      "hint": "$g(0)$, $g(1)$ y $g^{\\prime}(x)$.",
+      "hints": [
+        "$g(0)$, $g(1)$ y $g^{\\prime}(x)$."
+      ],
       "cards": [
         {
           "text": "$Y \\in [0, 1]$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "$F_Y(y)$ para $0 \\le y \\le \\tfrac12$:",
-      "hint": "$\\tfrac{x}{x+1} \\le y \\iff x \\le \\tfrac{y}{1-y}$.",
+      "hints": [
+        "$\\tfrac{x}{x+1} \\le y \\iff x \\le \\tfrac{y}{1-y}$."
+      ],
       "cards": [
         {
           "text": "$F_Y(y) = \\dfrac{y}{1-y}$",
@@ -67,7 +71,9 @@
       "id": "dens",
       "kind": "compute",
       "prompt": "Densidad:",
-      "hint": "Derivar $F_Y$.",
+      "hints": [
+        "Derivar $F_Y$."
+      ],
       "cards": [
         {
           "text": "$f_Y(y) = \\dfrac{1}{(1-y)^2}\\,\\mathbb{1}_{(0, 1/2)}(y)$",

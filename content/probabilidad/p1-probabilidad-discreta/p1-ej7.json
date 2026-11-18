@@ -1,0 +1,136 @@
+{
+  "id": "p1-ej7",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "El mono y BORGES",
+  "source": "Práctica 1 · Ejercicio 7",
+  "statement": "Un mono en una máquina de escribir tipea cada una de las 26 teclas del alfabeto una sola vez, en un orden aleatorio. ¿Cuál es la probabilidad de que la palabra BORGES aparezca en algún lugar de la secuencia de letras?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "prompt": "¿Qué espacio muestral describe lo que tipea el mono?",
+      "hints": [
+        "Cada letra aparece exactamente una vez.",
+        "Es un orden de las 26 letras."
+      ],
+      "cards": [
+        {
+          "text": "$6!$",
+          "correct": false,
+          "explanation": "Ordena sólo las letras de BORGES."
+        },
+        {
+          "text": "$26^{26}$ sucesiones",
+          "correct": false,
+          "explanation": "Permite repetir letras, pero cada tecla se tipea una sola vez."
+        },
+        {
+          "text": "$\\binom{26}{6}$",
+          "correct": false,
+          "explanation": "Elige 6 letras, pero el mono tipea las 26."
+        },
+        {
+          "text": "Permutaciones de las 26 letras, equiprobables: $26!$",
+          "correct": true,
+          "explanation": "\"Orden aleatorio\" significa que todas las permutaciones tienen la misma probabilidad."
+        }
+      ]
+    },
+    {
+      "id": "letras",
+      "kind": "property",
+      "prompt": "¿Qué tienen de particular las letras de BORGES?",
+      "hints": [
+        "Revisar si alguna letra se repite.",
+        "Si no se repiten, la palabra puede aparecer a lo sumo una vez."
+      ],
+      "cards": [
+        {
+          "text": "Pueden aparecer en cualquier orden",
+          "correct": false,
+          "explanation": "Tiene que aparecer la palabra BORGES, en ese orden y seguida."
+        },
+        {
+          "text": "Pueden aparecer separadas",
+          "correct": false,
+          "explanation": "Que \"aparezca la palabra\" exige letras consecutivas."
+        },
+        {
+          "text": "Tiene letras repetidas",
+          "correct": false,
+          "explanation": "B, O, R, G, E, S son todas distintas."
+        },
+        {
+          "text": "Son 6 letras distintas: la palabra aparece como un bloque de 6 letras seguidas, en ese orden, a lo sumo una vez",
+          "correct": true,
+          "explanation": "Como cada letra aparece una sola vez en la secuencia, no puede haber dos apariciones."
+        }
+      ]
+    },
+    {
+      "id": "bloque",
+      "kind": "compute",
+      "prompt": "¿Cuántas permutaciones contienen BORGES?",
+      "hints": [
+        "Pegar BORGES como un solo símbolo.",
+        "Quedan ese bloque más las otras 20 letras: 21 símbolos para ordenar."
+      ],
+      "cards": [
+        {
+          "text": "$21! \\cdot 6!$",
+          "correct": false,
+          "explanation": "Permite reordenar el bloque, pero la palabra fija el orden de sus letras."
+        },
+        {
+          "text": "$20!$",
+          "correct": false,
+          "explanation": "Olvida contar el bloque como un símbolo más."
+        },
+        {
+          "text": "$21!$",
+          "correct": true,
+          "explanation": "Cada orden de los 21 símbolos (el bloque y las 20 letras restantes) da una permutación con BORGES, y viceversa."
+        },
+        {
+          "text": "$21$",
+          "correct": false,
+          "explanation": "Cuenta sólo las posiciones del bloque, sin ordenar las otras letras."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Probabilidad:",
+      "hints": [
+        "$\\tfrac{21!}{26!}$: simplificar el cociente de factoriales.",
+        "$\\tfrac{26!}{21!} = 26 \\cdot 25 \\cdot 24 \\cdot 23 \\cdot 22$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{21 \\cdot 6!}{26!}$",
+          "correct": false,
+          "explanation": "No ordena las demás letras."
+        },
+        {
+          "text": "$\\dfrac{21!}{26!} = \\dfrac{1}{26 \\cdot 25 \\cdot 24 \\cdot 23 \\cdot 22} \\approx 1{,}3 \\cdot 10^{-7}$",
+          "correct": true,
+          "explanation": "Favorables sobre posibles."
+        },
+        {
+          "text": "$\\dfrac{6!}{26!}$",
+          "correct": false,
+          "explanation": "No corresponde a ningún conteo de permutaciones con BORGES."
+        },
+        {
+          "text": "$\\dfrac{1}{26^6}$",
+          "correct": false,
+          "explanation": "Corresponde a tipear 6 letras con repetición y que salga BORGES."
+        }
+      ]
+    }
+  ]
+}

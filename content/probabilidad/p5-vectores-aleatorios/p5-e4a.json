@@ -11,7 +11,9 @@
       "id": "conj",
       "kind": "compute",
       "prompt": "Densidad conjunta:",
-      "hint": "Uniforme: constante igual a 1/área.",
+      "hints": [
+        "Uniforme: constante igual a 1/área."
+      ],
       "cards": [
         {
           "text": "$\\tfrac{1}{72}$",
@@ -39,7 +41,9 @@
       "id": "fy",
       "kind": "compute",
       "prompt": "Marginal de $Y$ ($0 \\le y \\le 4$):",
-      "hint": "El corte horizontal a altura $y$ va de $-6 + \\tfrac34 y$ a $6 - \\tfrac34 y$.",
+      "hints": [
+        "El corte horizontal a altura $y$ va de $-6 + \\tfrac34 y$ a $6 - \\tfrac34 y$."
+      ],
       "cards": [
         {
           "text": "$f_Y(y) = \\dfrac{6 + \\tfrac32 y}{36}$",
@@ -67,7 +71,9 @@
       "id": "fx",
       "kind": "compute",
       "prompt": "Marginal de $X$:",
-      "hint": "Para $3 < |x| < 6$ el lado oblicuo es $y = \\tfrac43(6 - |x|)$.",
+      "hints": [
+        "Para $3 < |x| < 6$ el lado oblicuo es $y = \\tfrac43(6 - |x|)$."
+      ],
       "cards": [
         {
           "text": "$f_X(x) = \\tfrac{1}{12}$ en $[-6, 6]$",

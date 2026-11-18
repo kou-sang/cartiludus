@@ -11,7 +11,9 @@
       "id": "grupos",
       "kind": "compute",
       "prompt": "¿Cuáles son las tasas de cura por grupo?",
-      "hint": "Dividir curados por tratados en cada celda.",
+      "hints": [
+        "Dividir curados por tratados en cada celda."
+      ],
       "cards": [
         {
           "text": "A: $\\tfrac{1}{20}$ vs $\\tfrac{1}{10}$; B: $\\tfrac12$ vs $\\tfrac{19}{20}$",
@@ -39,7 +41,9 @@
       "id": "ptotal",
       "kind": "property",
       "prompt": "¿Qué identidad relaciona la tasa global con las de cada grupo?",
-      "hint": "Probabilidad total condicionada a la droga.",
+      "hints": [
+        "Probabilidad total condicionada a la droga."
+      ],
       "cards": [
         {
           "text": "$P(C \\mid D_i) = \\tfrac12\\left(P(C\\mid D_i, A) + P(C \\mid D_i, B)\\right)$",
@@ -67,7 +71,9 @@
       "id": "pesos",
       "kind": "interpret",
       "prompt": "¿Qué explica la inversión?",
-      "hint": "Comparar $P(A\\mid D_1)$ con $P(A\\mid D_2)$.",
+      "hints": [
+        "Comparar $P(A\\mid D_1)$ con $P(A\\mid D_2)$."
+      ],
       "cards": [
         {
           "text": "La droga 1 se dio casi toda al grupo A (difícil de curar) y la droga 2 casi toda al B",
@@ -95,7 +101,9 @@
       "id": "concl",
       "kind": "interpret",
       "prompt": "¿Qué comparación es la adecuada?",
-      "hint": "El grupo influye en la cura y en qué droga se asignó.",
+      "hints": [
+        "El grupo influye en la cura y en qué droga se asignó."
+      ],
       "cards": [
         {
           "text": "La comparación agregada: la droga 2 es mejor",

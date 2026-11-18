@@ -11,7 +11,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "$F_Y(y)$ para $y \\ge 0$:",
-      "hint": "$-\\tfrac1\\lambda\\ln(1-X) \\le y \\iff X \\le 1 - e^{-\\lambda y}$.",
+      "hints": [
+        "$-\\tfrac1\\lambda\\ln(1-X) \\le y \\iff X \\le 1 - e^{-\\lambda y}$."
+      ],
       "cards": [
         {
           "text": "$F_Y(y) = 1 - e^{\\lambda y}$",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Distribución de $Y$:",
-      "hint": "Reconocer la acumulada.",
+      "hints": [
+        "Reconocer la acumulada."
+      ],
       "cards": [
         {
           "text": "$Y \\sim \\mathcal{E}(1/\\lambda)$",
@@ -67,7 +71,9 @@
       "id": "uso",
       "kind": "interpret",
       "prompt": "¿Para qué sirve este resultado?",
-      "hint": "Método de la transformada inversa.",
+      "hints": [
+        "Método de la transformada inversa."
+      ],
       "cards": [
         {
           "text": "Probar la falta de memoria de la uniforme",

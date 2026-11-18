@@ -11,7 +11,9 @@
       "id": "max",
       "kind": "property",
       "prompt": "¿Cómo se escribe $F_M(x)$?",
-      "hint": "$\\{\\max \\le x\\} = \\bigcap \\{\\cdot \\le x\\}$.",
+      "hints": [
+        "$\\{\\max \\le x\\} = \\bigcap \\{\\cdot \\le x\\}$."
+      ],
       "cards": [
         {
           "text": "$F_M(x) = F_A(x)F_B(x)F_C(x)$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "Acumuladas en $[7, 9]$:",
-      "hint": "Integrar cada densidad desde 7.",
+      "hints": [
+        "Integrar cada densidad desde 7."
+      ],
       "cards": [
         {
           "text": "$F_B = \\tfrac{(9-x)^2}4$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado en $[7, 9]$:",
-      "hint": "$1 - \\tfrac{(9-x)^2}{4} = \\tfrac{(x-7)(11-x)}{4}$.",
+      "hints": [
+        "$1 - \\tfrac{(9-x)^2}{4} = \\tfrac{(x-7)(11-x)}{4}$."
+      ],
       "cards": [
         {
           "text": "$F_M(x) = \\dfrac{(x-7)^4(11-x)}{32}$, $f_M(x) = \\dfrac{(x-7)^3(51 - 5x)}{32}$",

@@ -11,7 +11,9 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Qué partición conviene usar?",
-      "hint": "El dado decide el sentido del traspaso.",
+      "hints": [
+        "El dado decide el sentido del traspaso."
+      ],
       "cards": [
         {
           "text": "$D$ y $D^c$ con $P(D) = \\tfrac12$",
@@ -39,7 +41,9 @@
       "id": "cond",
       "kind": "compute",
       "prompt": "¿Cuánto valen $P(RR \\mid D)$ y $P(RR \\mid D^c)$?",
-      "hint": "Después del traspaso, la urna receptora tiene una bolilla roja más.",
+      "hints": [
+        "Después del traspaso, la urna receptora tiene una bolilla roja más."
+      ],
       "cards": [
         {
           "text": "$\\tfrac58 \\cdot \\tfrac13$ y $\\tfrac13 \\cdot \\tfrac58$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Probabilidad total:",
-      "hint": "$P(RR) = P(RR\\mid D)P(D) + P(RR\\mid D^c)P(D^c)$.",
+      "hints": [
+        "$P(RR) = P(RR\\mid D)P(D) + P(RR\\mid D^c)P(D^c)$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac{5}{16} \\cdot \\tfrac29$",

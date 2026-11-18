@@ -1,0 +1,401 @@
+{
+  "id": "p1-ej2",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Bolillero: extracciones con y sin reposición",
+  "source": "Práctica 1 · Ejercicio 2",
+  "statement": "Un bolillero contiene $N$ bolillas numeradas desde la 1 hasta la $N$. Se extraen sucesivamente y sin reposición $n$ bolillas, con $1 \\le n \\le N$. Sean $m$ y $k$ números naturales tales que $1 \\le m \\le N$ y $1 \\le k \\le n$. Hallar la probabilidad de que\n(a) se extraiga la bolilla $m$ en la $k$-ésima extracción.\n(b) se extraiga la bolilla $m$.\n(c) el máximo número obtenido sea $\\le m$.\n(d) el máximo número obtenido sea $m$.\n(e) dados $a, b \\in \\mathbb N$, $n \\le a < b \\le N$, el máximo número obtenido está entre $a$ y $b$ inclusive.\n(f) los números de las bolillas extraídas en el orden en que fueron extraídas constituyan una sucesión estrictamente creciente.\nResolver nuevamente los items anteriores para el caso en que las extracciones se realizan con reposición.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "Sin reposición: ¿qué espacio muestral conviene?",
+      "hints": [
+        "Registrar qué bolilla sale en cada extracción, en orden.",
+        "Las $n$ bolillas extraídas son distintas."
+      ],
+      "cards": [
+        {
+          "text": "$n!$ resultados",
+          "correct": false,
+          "explanation": "Sólo ordena las bolillas, sin elegir cuáles salen."
+        },
+        {
+          "text": "$N^n$ sucesiones",
+          "correct": false,
+          "explanation": "Permite repetir bolillas, que sin reposición es imposible."
+        },
+        {
+          "text": "Subconjuntos de $n$ bolillas: $\\binom Nn$, y alcanza para todos los ítems",
+          "correct": false,
+          "explanation": "Sirve para algunos ítems, pero pierde el orden de extracción, que (a) y (f) necesitan."
+        },
+        {
+          "text": "Sucesiones ordenadas de $n$ bolillas distintas: $N(N-1)\\cdots(N-n+1)$ resultados equiprobables",
+          "correct": true,
+          "explanation": "Variaciones sin repetición; por simetría de la extracción al azar, todas tienen la misma probabilidad."
+        }
+      ]
+    },
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuál es la probabilidad de que en la extracción $k$ salga la bolilla $m$?",
+      "hints": [
+        "¿Hay algo que distinga la extracción $k$ de la primera?",
+        "Por simetría, cada extracción tiene la misma distribución que la primera.",
+        "Contando: fijar la bolilla $m$ en la posición $k$ y completar las otras $n-1$ posiciones con las $N-1$ bolillas restantes."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{1}{N-k+1}$",
+          "correct": false,
+          "explanation": "Es la probabilidad condicional de sacar $m$ dado que no salió en las primeras $k-1$; falta multiplicar por esa probabilidad."
+        },
+        {
+          "text": "$\\tfrac{k}{N}$",
+          "correct": false,
+          "explanation": "Mezcla con la probabilidad de que $m$ salga en alguna de las primeras $k$."
+        },
+        {
+          "text": "$\\tfrac{1}{N}$",
+          "correct": true,
+          "explanation": "Fijando $m$ en el lugar $k$ quedan $(N-1)\\cdots(N-n+1)$ maneras; el cociente con el total es $\\tfrac1N$. No depende de $k$."
+        },
+        {
+          "text": "$\\tfrac{n}{N}$",
+          "correct": false,
+          "explanation": "No fija la extracción $k$: corresponde a otro evento."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuál es la probabilidad de que se extraiga la bolilla $m$ (en alguna extracción)?",
+      "hints": [
+        "Escribir el evento como unión según en qué extracción sale $m$.",
+        "Esos eventos son disjuntos: $m$ sale a lo sumo una vez.",
+        "Usar el resultado anterior para cada extracción."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{n}{N}$",
+          "correct": true,
+          "explanation": "Unión disjunta de \"$m$ en la extracción $k$\", $k = 1, \\dots, n$, cada uno con probabilidad $\\tfrac1N$."
+        },
+        {
+          "text": "$\\tfrac{1}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de obtener un subconjunto particular."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{N-1}{N}\\right)^n$",
+          "correct": false,
+          "explanation": "Trata las extracciones como si fueran con reposición."
+        },
+        {
+          "text": "$\\tfrac{1}{N}$",
+          "correct": false,
+          "explanation": "Considera una sola extracción."
+        }
+      ]
+    },
+    {
+      "id": "sub",
+      "kind": "setup",
+      "item": "(c)",
+      "prompt": "Para (c), (d) y (e) sólo importa qué bolillas salieron. ¿Qué espacio conviene usar?",
+      "hints": [
+        "El máximo no depende del orden de extracción.",
+        "Al olvidar el orden, cada subconjunto proviene de la misma cantidad de sucesiones."
+      ],
+      "cards": [
+        {
+          "text": "Subconjuntos de $n$ bolillas, equiprobables: $\\binom Nn$",
+          "correct": true,
+          "explanation": "Cada subconjunto corresponde a $n!$ sucesiones ordenadas, así que siguen siendo equiprobables."
+        },
+        {
+          "text": "Subconjuntos de cualquier tamaño: $2^N$",
+          "correct": false,
+          "explanation": "Siempre se extraen exactamente $n$ bolillas."
+        },
+        {
+          "text": "Sucesiones con repetición",
+          "correct": false,
+          "explanation": "Sin reposición no hay repeticiones."
+        },
+        {
+          "text": "El valor del máximo, equiprobable en $\\{n, \\dots, N\\}$",
+          "correct": false,
+          "explanation": "Esos valores no son equiprobables: un máximo grande es más probable."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuál es la probabilidad de que el máximo sea $\\le m$?",
+      "hints": [
+        "\"Máximo $\\le m$\" significa que todas las bolillas extraídas son $\\le m$.",
+        "Contar subconjuntos de $n$ bolillas elegidas entre $\\{1, \\dots, m\\}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\binom{m-1}{n-1}}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Fija además que $m$ esté entre las extraídas: es otro evento."
+        },
+        {
+          "text": "$\\dfrac{\\binom mn}{\\binom Nn}$ (vale 0 si $m < n$)",
+          "correct": true,
+          "explanation": "Todas las bolillas deben salir de las $m$ primeras."
+        },
+        {
+          "text": "$\\left(\\tfrac mN\\right)^n$",
+          "correct": false,
+          "explanation": "Corresponde a extracciones con reposición."
+        },
+        {
+          "text": "$\\tfrac{m}{N}$",
+          "correct": false,
+          "explanation": "Mira sólo una bolilla."
+        }
+      ]
+    },
+    {
+      "id": "d",
+      "kind": "setup",
+      "item": "(d)",
+      "prompt": "¿Cómo se obtiene la probabilidad de que el máximo sea exactamente $m$?",
+      "hints": [
+        "$\\{\\max = m\\} = \\{\\max \\le m\\} - \\{\\max \\le m-1\\}$.",
+        "Alternativa: $m$ tiene que estar y las otras $n-1$ salen de $\\{1, \\dots, m-1\\}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\binom mn}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Permite que el máximo sea menor que $m$."
+        },
+        {
+          "text": "$\\tfrac{1}{N}$",
+          "correct": false,
+          "explanation": "No tiene en cuenta que las demás bolillas deben ser menores."
+        },
+        {
+          "text": "$\\dfrac{\\binom{m}{n-1}}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Permite elegir otra vez la bolilla $m$ entre las restantes, o bolillas que no son menores."
+        },
+        {
+          "text": "$\\dfrac{\\binom{m-1}{n-1}}{\\binom Nn}$",
+          "correct": true,
+          "explanation": "Elegir las otras $n-1$ bolillas entre las $m-1$ menores. Coincide con $\\tfrac{\\binom mn - \\binom{m-1}n}{\\binom Nn}$."
+        }
+      ]
+    },
+    {
+      "id": "e",
+      "kind": "setup",
+      "item": "(e)",
+      "prompt": "¿Cuál es la probabilidad de que el máximo esté entre $a$ y $b$ inclusive?",
+      "hints": [
+        "$\\{a \\le \\max \\le b\\} = \\{\\max \\le b\\} - \\{\\max \\le a-1\\}$.",
+        "Usar la fórmula de (c) con $b$ y con $a - 1$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\binom{b-a+1}{n}}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Exige que todas las bolillas estén entre $a$ y $b$, no sólo el máximo."
+        },
+        {
+          "text": "$\\dfrac{\\binom bn - \\binom an}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Saca también el caso $\\max = a$, que sí está en el intervalo."
+        },
+        {
+          "text": "$\\dfrac{\\binom bn - \\binom{a-1}n}{\\binom Nn}$",
+          "correct": true,
+          "explanation": "Diferencia de dos eventos encajados: $\\{\\max \\le a-1\\} \\subseteq \\{\\max \\le b\\}$."
+        },
+        {
+          "text": "$\\tfrac{b-a+1}{N}$",
+          "correct": false,
+          "explanation": "Trata el máximo como si fuera uniforme."
+        }
+      ]
+    },
+    {
+      "id": "f",
+      "kind": "compute",
+      "item": "(f)",
+      "prompt": "¿Cuál es la probabilidad de que las bolillas salgan en orden estrictamente creciente?",
+      "hints": [
+        "Fijado el conjunto de bolillas que salen, ¿en cuántos órdenes pueden salir?",
+        "Sólo uno de esos órdenes es creciente."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{1}{2}$",
+          "correct": false,
+          "explanation": "Sólo valdría con $n = 2$."
+        },
+        {
+          "text": "$\\dfrac{\\binom Nn}{N^n}$",
+          "correct": false,
+          "explanation": "Corresponde a extracciones con reposición."
+        },
+        {
+          "text": "$\\tfrac{1}{n!}$",
+          "correct": true,
+          "explanation": "Cada subconjunto aparece en $n!$ órdenes equiprobables y exactamente uno es creciente."
+        },
+        {
+          "text": "$\\tfrac{1}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de un subconjunto particular."
+        }
+      ]
+    },
+    {
+      "id": "omegar",
+      "kind": "setup",
+      "item": "con rep.",
+      "prompt": "Con reposición: ¿qué espacio muestral conviene?",
+      "hints": [
+        "Ahora cada extracción vuelve a tener las $N$ bolillas.",
+        "Pueden repetirse bolillas."
+      ],
+      "cards": [
+        {
+          "text": "$\\{1, \\dots, N\\}^n$, equiprobable: $N^n$ resultados",
+          "correct": true,
+          "explanation": "Cada extracción es independiente y uniforme en $\\{1,\\dots,N\\}$."
+        },
+        {
+          "text": "Multiconjuntos de tamaño $n$, equiprobables",
+          "correct": false,
+          "explanation": "No son equiprobables: $\\{1,2\\}$ surge de dos sucesiones y $\\{1,1\\}$ de una."
+        },
+        {
+          "text": "$\\binom Nn$ subconjuntos",
+          "correct": false,
+          "explanation": "Excluye repeticiones y pierde el orden."
+        },
+        {
+          "text": "$N(N-1)\\cdots(N-n+1)$ sucesiones",
+          "correct": false,
+          "explanation": "Excluye las repeticiones, que con reposición son posibles."
+        }
+      ]
+    },
+    {
+      "id": "abr",
+      "kind": "compute",
+      "item": "con rep.",
+      "prompt": "Con reposición, ¿cuánto valen (a) $P(\\text{la bolilla } m \\text{ sale en la extracción } k)$ y (b) $P(\\text{sale la bolilla } m)$?",
+      "hints": [
+        "(a): la extracción $k$ es uniforme en $\\{1,\\dots,N\\}$.",
+        "(b): conviene el complemento: $m$ no sale en ninguna extracción.",
+        "Las extracciones son independientes: $P(\\text{nunca } m) = \\left(\\tfrac{N-1}{N}\\right)^n$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac1N$ y $\\tfrac nN$",
+          "correct": false,
+          "explanation": "En (b) suma $n$ eventos que ya no son disjuntos: $m$ puede salir varias veces."
+        },
+        {
+          "text": "$\\tfrac1N$ y $\\left(\\tfrac{N-1}{N}\\right)^n$",
+          "correct": false,
+          "explanation": "En (b) da la probabilidad de que $m$ no salga."
+        },
+        {
+          "text": "$\\tfrac{1}{N-k+1}$ y $1 - \\left(\\tfrac{N-1}{N}\\right)^n$",
+          "correct": false,
+          "explanation": "En (a) razona como si las bolillas no se repusieran."
+        },
+        {
+          "text": "$\\tfrac1N$ y $1 - \\left(\\tfrac{N-1}{N}\\right)^n$",
+          "correct": true,
+          "explanation": "La extracción $k$ es uniforme. Para (b), el complemento son $n$ extracciones independientes que evitan $m$."
+        }
+      ]
+    },
+    {
+      "id": "cdr",
+      "kind": "compute",
+      "item": "con rep.",
+      "prompt": "Con reposición, ¿cuánto valen (c) $P(\\max \\le m)$ y (d) $P(\\max = m)$?",
+      "hints": [
+        "$\\max \\le m$ si cada una de las $n$ extracciones es $\\le m$.",
+        "Las extracciones son independientes.",
+        "$\\{\\max = m\\} = \\{\\max \\le m\\} - \\{\\max \\le m-1\\}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\binom mn}{\\binom Nn}$ y $\\dfrac{\\binom{m-1}{n-1}}{\\binom Nn}$",
+          "correct": false,
+          "explanation": "Son las fórmulas sin reposición."
+        },
+        {
+          "text": "$\\left(\\tfrac mN\\right)^n$ y $\\left(\\tfrac mN\\right)^n - \\left(\\tfrac{m-1}N\\right)^n$",
+          "correct": true,
+          "explanation": "Cada extracción es $\\le m$ con probabilidad $\\tfrac mN$, independientemente; luego diferencia de eventos encajados."
+        },
+        {
+          "text": "$\\left(\\tfrac mN\\right)^n$ y $\\left(\\tfrac{m-1}N\\right)^n$",
+          "correct": false,
+          "explanation": "En (d) da la probabilidad de $\\max \\le m-1$."
+        },
+        {
+          "text": "$\\left(\\tfrac mN\\right)^n$ y $\\tfrac1N$",
+          "correct": false,
+          "explanation": "En (d) olvida que las demás extracciones deben ser $\\le m$."
+        }
+      ]
+    },
+    {
+      "id": "efr",
+      "kind": "compute",
+      "item": "con rep.",
+      "prompt": "Con reposición, ¿cuánto valen (e) $P(a \\le \\max \\le b)$ y (f) $P(\\text{orden estrictamente creciente})$?",
+      "hints": [
+        "(e): diferencia $\\{\\max \\le b\\} - \\{\\max \\le a - 1\\}$.",
+        "(f): un orden estrictamente creciente no repite bolillas. ¿Cuántas sucesiones crecientes hay?",
+        "(f): cada subconjunto de $n$ bolillas da exactamente una sucesión creciente."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac{b-a+1}{N}\\right)^n$ y $\\dfrac{\\binom Nn}{N^n}$",
+          "correct": false,
+          "explanation": "En (e) exige que todas las extracciones estén entre $a$ y $b$."
+        },
+        {
+          "text": "$\\left(\\tfrac bN\\right)^n - \\left(\\tfrac{a-1}N\\right)^n$ y $\\dfrac{\\binom Nn}{N^n}$",
+          "correct": true,
+          "explanation": "En (f) hay tantas sucesiones crecientes como subconjuntos de $n$ bolillas, sobre $N^n$ sucesiones equiprobables."
+        },
+        {
+          "text": "$\\left(\\tfrac bN\\right)^n - \\left(\\tfrac{a}N\\right)^n$ y $\\dfrac{\\binom Nn}{N^n}$",
+          "correct": false,
+          "explanation": "En (e) deja afuera el caso $\\max = a$."
+        },
+        {
+          "text": "$\\left(\\tfrac bN\\right)^n - \\left(\\tfrac{a-1}N\\right)^n$ y $\\tfrac{1}{n!}$",
+          "correct": false,
+          "explanation": "En (f) usa el argumento sin reposición, pero ahora hay sucesiones con repeticiones que nunca son crecientes."
+        }
+      ]
+    }
+  ]
+}

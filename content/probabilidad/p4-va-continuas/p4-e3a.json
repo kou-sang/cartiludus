@@ -11,7 +11,9 @@
       "id": "pos",
       "kind": "setup",
       "prompt": "Para $c > 0$, ¿cómo se escribe $F_Y(y)$?",
-      "hint": "Despejar $X$; dividir por $c > 0$ no invierte la desigualdad.",
+      "hints": [
+        "Despejar $X$; dividir por $c > 0$ no invierte la desigualdad."
+      ],
       "cards": [
         {
           "text": "$F_Y(y) = 1 - F_X\\left(\\tfrac{y-d}{c}\\right)$",
@@ -39,7 +41,9 @@
       "id": "neg",
       "kind": "setup",
       "prompt": "Para $c < 0$, ¿cómo se escribe $F_Y(y)$?",
-      "hint": "Dividir por $c < 0$ invierte la desigualdad.",
+      "hints": [
+        "Dividir por $c < 0$ invierte la desigualdad."
+      ],
       "cards": [
         {
           "text": "$F_Y(y) = -F_X\\left(\\tfrac{y-d}{c}\\right)$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "distribution",
       "prompt": "Distribución de $Y$:",
-      "hint": "Derivar y mirar el rango.",
+      "hints": [
+        "Derivar y mirar el rango."
+      ],
       "cards": [
         {
           "text": "$Y \\sim \\mathcal{U}[d, c+d]$ con densidad $c$",

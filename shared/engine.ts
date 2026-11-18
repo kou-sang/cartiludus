@@ -15,7 +15,8 @@ export interface StepState {
   wrong: number[];
   /** Índice de la carta correcta elegida, si se acertó. */
   solvedWith: number | null;
-  hintUsed: boolean;
+  /** Cantidad de pistas mostradas (0 = ninguna). */
+  hintsShown: number;
   timedOut: boolean;
 }
 
@@ -38,7 +39,7 @@ export function newGame(problem: Problem, now: number): GameState {
     problemId: problem.id,
     problemVersion: problem.version,
     stepIndex: 0,
-    steps: problem.steps.map(() => ({ wrong: [], solvedWith: null, hintUsed: false, timedOut: false })),
+    steps: problem.steps.map(() => ({ wrong: [], solvedWith: null, hintsShown: 0, timedOut: false })),
     startedAt: now,
   };
 }
@@ -62,7 +63,7 @@ export function reduce(problem: Problem, state: GameState, action: GameAction): 
       return replace(card.correct ? { ...current, solvedWith: action.card } : { ...current, wrong: [...current.wrong, action.card] });
     }
     case 'hint':
-      return isStepDone(current) || current.hintUsed ? state : replace({ ...current, hintUsed: true });
+      return isStepDone(current) || current.hintsShown >= step.hints.length ? state : replace({ ...current, hintsShown: current.hintsShown + 1 });
     case 'timeout':
       return isStepDone(current) ? state : replace({ ...current, timedOut: true });
     case 'next':
@@ -78,7 +79,7 @@ export interface StepResult {
 
 export function stepResult(s: StepState): StepResult {
   const solved = s.solvedWith !== null && !s.timedOut;
-  const firstTry = solved && s.wrong.length === 0 && !s.hintUsed;
+  const firstTry = solved && s.wrong.length === 0 && s.hintsShown === 0;
   const raw = (firstTry ? 1 : 0) - s.wrong.length - (s.timedOut ? 1 : 0);
   return { score: Math.max(STEP_FLOOR, raw), firstTry, solved };
 }
@@ -110,7 +111,7 @@ export function summarize(problem: Problem, state: GameState): GameSummary {
     summary.steps += 1;
     summary.score += r.score;
     summary.firstTry += r.firstTry ? 1 : 0;
-    summary.hintsUsed += s.hintUsed ? 1 : 0;
+    summary.hintsUsed += s.hintsShown > 0 ? 1 : 0;
     summary.timeouts += s.timedOut ? 1 : 0;
     const cat = CATEGORY_OF_KIND[step.kind];
     const acc = (summary.byCategory[cat] ??= { steps: 0, firstTry: 0, score: 0 });

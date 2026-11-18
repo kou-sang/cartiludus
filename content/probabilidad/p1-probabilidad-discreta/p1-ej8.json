@@ -1,0 +1,266 @@
+{
+  "id": "p1-ej8",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Muestras sin repetidos y cumpleaños",
+  "source": "Práctica 1 · Ejercicio 8",
+  "statement": "Se toma una muestra al azar con reposición de tamaño $r$ de una población de $n$ elementos.\n(a) Calcular la probabilidad de que en la muestra obtenida no haya elementos repetidos.\n(b) Se elige un grupo de $r$ personas al azar y se les pregunta su fecha de cumpleaños. Si bien los años no son todos iguales en longitud, y se sabe que los porcentajes de nacimientos no son constantes a través del año, como una primera aproximación podemos suponer que una elección al azar de personas es equivalente a realizar una selección al azar de las fechas de nacimientos y además considerar que el año tiene 365 días. Bajo estas hipótesis, calcular la probabilidad de que entre las $r$ personas elegidas al azar todas tengan distintas fechas de cumpleaños.\n(c) Calcular la probabilidad de que al distribuir $n$ bolillas distintas en $n$ urnas numeradas se encuentren todas las urnas ocupadas.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Cuántas muestras ordenadas con reposición de tamaño $r$ hay?",
+      "hints": [
+        "Cada extracción tiene $n$ resultados posibles.",
+        "Son $r$ extracciones independientes."
+      ],
+      "cards": [
+        {
+          "text": "$n^r$, equiprobables",
+          "correct": true,
+          "explanation": "Cada una de las $r$ extracciones elige uno de los $n$ elementos."
+        },
+        {
+          "text": "$\\binom nr$",
+          "correct": false,
+          "explanation": "Cuenta subconjuntos: sin reposición y sin orden."
+        },
+        {
+          "text": "$r^n$",
+          "correct": false,
+          "explanation": "Invierte la base y el exponente."
+        },
+        {
+          "text": "$\\binom{n+r-1}{r}$",
+          "correct": false,
+          "explanation": "Cuenta multiconjuntos, que no son equiprobables."
+        }
+      ]
+    },
+    {
+      "id": "fav",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuántas muestras no tienen repetidos?",
+      "hints": [
+        "La primera extracción tiene $n$ opciones, la segunda $n - 1$…",
+        "Si $r > n$, no hay ninguna."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom nr$",
+          "correct": false,
+          "explanation": "Falta el orden: cada subconjunto da $r!$ muestras ordenadas."
+        },
+        {
+          "text": "$n(n-1)\\cdots(n-r+1)$",
+          "correct": true,
+          "explanation": "Cada extracción evita los elementos ya obtenidos."
+        },
+        {
+          "text": "$(n-1)^r$",
+          "correct": false,
+          "explanation": "Evita un elemento fijo, no las repeticiones."
+        },
+        {
+          "text": "$n^r - n$",
+          "correct": false,
+          "explanation": "Sólo descarta las muestras con todos los elementos iguales."
+        }
+      ]
+    },
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuál es la probabilidad de que no haya repetidos?",
+      "hints": [
+        "Favorables sobre posibles.",
+        "Escribirlo como producto de factores $1 - \\tfrac in$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{n(n-1)\\cdots(n-r+1)}{n^r} = \\prod_{i=0}^{r-1}\\left(1 - \\tfrac in\\right)$",
+          "correct": true,
+          "explanation": "Cociente de los dos conteos."
+        },
+        {
+          "text": "$\\dfrac{r!}{n^r}$",
+          "correct": false,
+          "explanation": "No elige qué elementos forman la muestra."
+        },
+        {
+          "text": "$\\dfrac{\\binom nr}{n^r}$",
+          "correct": false,
+          "explanation": "Mezcla un conteo sin orden con uno con orden."
+        },
+        {
+          "text": "$\\left(1 - \\tfrac1n\\right)^{r}$",
+          "correct": false,
+          "explanation": "Cada extracción sólo evitaría un elemento fijo."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "¿Cómo se lleva el problema de los cumpleaños a (a)?",
+      "hints": [
+        "¿Qué juega el papel de la población? ¿Y de la muestra?",
+        "Cada persona \"extrae\" una fecha."
+      ],
+      "cards": [
+        {
+          "text": "Muestra de 365 días sin reposición",
+          "correct": false,
+          "explanation": "Sin reposición nunca habría coincidencias."
+        },
+        {
+          "text": "Población: los $n = 365$ días; muestra de tamaño $r$ con reposición (una fecha por persona)",
+          "correct": true,
+          "explanation": "Elegir personas al azar equivale a elegir fechas al azar, y dos personas pueden coincidir."
+        },
+        {
+          "text": "$n = 366$",
+          "correct": false,
+          "explanation": "El enunciado fija años de 365 días."
+        },
+        {
+          "text": "Población: las $r$ personas; muestra de tamaño 365",
+          "correct": false,
+          "explanation": "Invierte población y muestra."
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuál es la probabilidad de que las $r$ fechas sean distintas?",
+      "hints": [
+        "Reemplazar en (a)."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac{364}{365}\\right)^{\\binom r2}$",
+          "correct": false,
+          "explanation": "Supone independencia entre pares: es una aproximación, no el valor exacto."
+        },
+        {
+          "text": "$1 - \\tfrac{r}{365}$",
+          "correct": false,
+          "explanation": "No resulta de contar casos."
+        },
+        {
+          "text": "$\\prod_{i=0}^{r-1}\\left(1 - \\tfrac{i}{365}\\right) = \\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r}$",
+          "correct": true,
+          "explanation": "Es la fórmula de (a) con $n = 365$."
+        },
+        {
+          "text": "$\\left(\\tfrac{364}{365}\\right)^{r}$",
+          "correct": false,
+          "explanation": "Sólo evita coincidir con una fecha fija."
+        }
+      ]
+    },
+    {
+      "id": "b3",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "Para $r = 23$ ese producto vale $\\approx 0{,}493$. ¿Qué se concluye?",
+      "hints": [
+        "Pasar al complemento: al menos dos coinciden."
+      ],
+      "cards": [
+        {
+          "text": "La probabilidad de que al menos dos compartan cumpleaños es $\\approx 0{,}507$: mayor que $\\tfrac12$",
+          "correct": true,
+          "explanation": "$1 - 0{,}493$. Parece mucho porque hay $\\binom{23}{2} = 253$ pares de personas que pueden coincidir."
+        },
+        {
+          "text": "Al menos una coincidencia tiene probabilidad $0{,}493$",
+          "correct": false,
+          "explanation": "Ese valor es el de que no haya coincidencias."
+        },
+        {
+          "text": "Hacen falta más de 180 personas para superar $\\tfrac12$",
+          "correct": false,
+          "explanation": "Las coincidencias dependen de los pares, que crecen como $r^2$."
+        },
+        {
+          "text": "Al menos una coincidencia tiene probabilidad $\\approx 0{,}063$",
+          "correct": false,
+          "explanation": "Es $\\tfrac{23}{365}$: no tiene en cuenta los pares."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "setup",
+      "item": "(c)",
+      "prompt": "Para (c): $n$ bolillas distintas, cada una a una urna al azar. ¿A qué equivale \"todas las urnas ocupadas\"?",
+      "hints": [
+        "Hay tantas bolillas como urnas.",
+        "Si una urna recibe dos bolillas, ¿qué pasa con las demás?"
+      ],
+      "cards": [
+        {
+          "text": "A que no haya dos bolillas en la misma urna: es (a) con $r = n$",
+          "correct": true,
+          "explanation": "Con $n$ bolillas y $n$ urnas, todas ocupadas significa exactamente una por urna; la urna de cada bolilla es una muestra con reposición de tamaño $n$."
+        },
+        {
+          "text": "A que la primera urna esté ocupada",
+          "correct": false,
+          "explanation": "Es sólo una de las $n$ condiciones."
+        },
+        {
+          "text": "A que ninguna urna tenga más de dos bolillas",
+          "correct": false,
+          "explanation": "Con dos en una urna, alguna otra queda vacía."
+        },
+        {
+          "text": "A que haya al menos una bolilla",
+          "correct": false,
+          "explanation": "Eso siempre ocurre."
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuál es la probabilidad? ¿Cuánto da con $n = 6$?",
+      "hints": [
+        "Reemplazar $r = n$ en (a).",
+        "$6! = 720$ y $6^6 = 46656$."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(1 - \\tfrac1n\\right)^n$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que una urna dada quede vacía."
+        },
+        {
+          "text": "$\\dfrac{n!}{\\binom{2n-1}{n}}$",
+          "correct": false,
+          "explanation": "Usa el conteo de bolillas indistinguibles."
+        },
+        {
+          "text": "$\\dfrac{n!}{n^n}$; con $n = 6$, $\\tfrac{720}{46656} \\approx 0{,}015$",
+          "correct": true,
+          "explanation": "$n(n-1)\\cdots 1 = n!$ casos favorables."
+        },
+        {
+          "text": "$\\dfrac{1}{n^n}$",
+          "correct": false,
+          "explanation": "Toma un solo caso favorable."
+        }
+      ]
+    }
+  ]
+}

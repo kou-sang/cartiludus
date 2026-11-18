@@ -11,7 +11,9 @@
       "id": "va",
       "kind": "identify",
       "prompt": "Si se compran $n$ paquetes, ¿qué variable conviene?",
-      "hint": "Cada figurita es un ensayo: es Messi o no.",
+      "hints": [
+        "Cada figurita es un ensayo: es Messi o no."
+      ],
       "cards": [
         {
           "text": "$X$ = cantidad de paquetes comprados",
@@ -39,7 +41,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "¿Qué distribución tiene $X$?",
-      "hint": "$5n$ figuritas independientes, cada una es Messi con la misma probabilidad.",
+      "hints": [
+        "$5n$ figuritas independientes, cada una es Messi con la misma probabilidad."
+      ],
       "cards": [
         {
           "text": "$X \\sim \\mathrm{Bi}(n, \\tfrac{5}{638})$",
@@ -67,7 +71,9 @@
       "id": "compl",
       "kind": "setup",
       "prompt": "¿Cómo se escribe $P(X \\ge 1)$?",
-      "hint": "Complemento: ninguna de las $5n$ figuritas es de Messi.",
+      "hints": [
+        "Complemento: ninguna de las $5n$ figuritas es de Messi."
+      ],
       "cards": [
         {
           "text": "$\\left(\\tfrac{637}{638}\\right)^{5n}$",
@@ -95,7 +101,9 @@
       "id": "log",
       "kind": "setup",
       "prompt": "Se pide $1 - \\left(\\tfrac{637}{638}\\right)^{5n} \\ge 0{,}9$, es decir $\\left(\\tfrac{637}{638}\\right)^{5n} \\le 0{,}1$. Al tomar logaritmo, ¿qué queda?",
-      "hint": "$\\ln\\left(\\tfrac{637}{638}\\right) < 0$: dividir por un número negativo invierte la desigualdad.",
+      "hints": [
+        "$\\ln\\left(\\tfrac{637}{638}\\right) < 0$: dividir por un número negativo invierte la desigualdad."
+      ],
       "cards": [
         {
           "text": "$5n \\le \\dfrac{\\ln 0{,}1}{\\ln(637/638)}$",
@@ -123,7 +131,9 @@
       "id": "n",
       "kind": "compute",
       "prompt": "Con $\\dfrac{\\ln 0{,}1}{\\ln(637/638)} \\approx 1467{,}9$, ¿cuántos paquetes hacen falta como mínimo?",
-      "hint": "$5n \\ge 1467{,}9$ y $n$ es entero.",
+      "hints": [
+        "$5n \\ge 1467{,}9$ y $n$ es entero."
+      ],
       "cards": [
         {
           "text": "$n = 115$",

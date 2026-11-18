@@ -11,7 +11,9 @@
       "id": "va",
       "kind": "distribution",
       "prompt": "Modelo para la espera de Felipe:",
-      "hint": "Medir el tiempo en minutos desde las 10.",
+      "hints": [
+        "Medir el tiempo en minutos desde las 10."
+      ],
       "cards": [
         {
           "text": "$T \\sim \\mathcal{N}(15, 30)$",
@@ -39,7 +41,9 @@
       "id": "acum",
       "kind": "compute",
       "prompt": "¿Cuál es $F_T(t)$ para $0 \\le t \\le 30$?",
-      "hint": "Uniforme: proporcional a la longitud.",
+      "hints": [
+        "Uniforme: proporcional a la longitud."
+      ],
       "cards": [
         {
           "text": "$F_T(t) = \\tfrac{t}{30}$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "$P(T > 10)$:",
-      "hint": "$1 - F_T(10)$.",
+      "hints": [
+        "$1 - F_T(10)$."
+      ],
       "cards": [
         {
           "text": "$1 - \\tfrac{10}{30} = \\tfrac23$",

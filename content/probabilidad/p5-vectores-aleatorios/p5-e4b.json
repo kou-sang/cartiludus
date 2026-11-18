@@ -11,7 +11,9 @@
       "id": "crit",
       "kind": "property",
       "prompt": "¿Qué criterio sirve para refutar independencia?",
-      "hint": "Comparar la conjunta con el producto de marginales.",
+      "hints": [
+        "Comparar la conjunta con el producto de marginales."
+      ],
       "cards": [
         {
           "text": "Si $E[XY] = E[X]E[Y]$ son independientes",
@@ -39,7 +41,9 @@
       "id": "ej",
       "kind": "compute",
       "prompt": "Contraejemplo:",
-      "hint": "Mirar cerca de la esquina $(5{,}5;\\ 3{,}5)$.",
+      "hints": [
+        "Mirar cerca de la esquina $(5{,}5;\\ 3{,}5)$."
+      ],
       "cards": [
         {
           "text": "En $(7, 1)$: $f = 0$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "interpret",
       "prompt": "Conclusión:",
-      "hint": "Soporte y producto de marginales.",
+      "hints": [
+        "Soporte y producto de marginales."
+      ],
       "cards": [
         {
           "text": "Son independientes por simetría",

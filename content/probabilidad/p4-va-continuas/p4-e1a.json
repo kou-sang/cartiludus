@@ -11,7 +11,9 @@
       "id": "cond",
       "kind": "property",
       "prompt": "¿Qué condiciones debe cumplir una densidad?",
-      "hint": "Propiedades que definen una densidad.",
+      "hints": [
+        "Propiedades que definen una densidad."
+      ],
       "cards": [
         {
           "text": "$f_D(10) = 1$",
@@ -39,7 +41,9 @@
       "id": "signo",
       "kind": "property",
       "prompt": "¿Qué signo debe tener $k$?",
-      "hint": "En $(0, 10)$, $x > 0$.",
+      "hints": [
+        "En $(0, 10)$, $x > 0$."
+      ],
       "cards": [
         {
           "text": "$k = 0$",
@@ -67,7 +71,9 @@
       "id": "int",
       "kind": "compute",
       "prompt": "¿Cuánto vale $\\int_{-\\infty}^{\\infty} f_D$ en función de $k$?",
-      "hint": "Fuera de $(0,10)$ la densidad es 0.",
+      "hints": [
+        "Fuera de $(0,10)$ la densidad es 0."
+      ],
       "cards": [
         {
           "text": "$100k$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Valor de $k$:",
-      "hint": "$50k = 1$.",
+      "hints": [
+        "$50k = 1$."
+      ],
       "cards": [
         {
           "text": "$k = \\tfrac{1}{100}$",

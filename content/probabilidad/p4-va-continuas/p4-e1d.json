@@ -11,7 +11,9 @@
       "id": "p",
       "kind": "compute",
       "prompt": "¿Cuánto vale $p = P(4 < D < 6)$?",
-      "hint": "Con $f_D(x) = \\tfrac{x}{50}$: $F_D(x) = \\tfrac{x^2}{100}$.",
+      "hints": [
+        "Con $f_D(x) = \\tfrac{x}{50}$: $F_D(x) = \\tfrac{x^2}{100}$."
+      ],
       "cards": [
         {
           "text": "$p = \\tfrac{36}{100}$",
@@ -39,7 +41,9 @@
       "id": "va",
       "kind": "identify",
       "prompt": "Variable:",
-      "hint": "Contar árboles.",
+      "hints": [
+        "Contar árboles."
+      ],
       "cards": [
         {
           "text": "$N$ = diámetro del segundo árbol",
@@ -67,7 +71,9 @@
       "id": "dist",
       "kind": "distribution",
       "prompt": "Distribución:",
-      "hint": "Árboles independientes, cada uno \"éxito\" con probabilidad $p$.",
+      "hints": [
+        "Árboles independientes, cada uno \"éxito\" con probabilidad $p$."
+      ],
       "cards": [
         {
           "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac15)$",
@@ -95,7 +101,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "$P(N = 2)$:",
-      "hint": "$\\binom32 p^2 (1-p)$.",
+      "hints": [
+        "$\\binom32 p^2 (1-p)$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac{1}{25} \\cdot \\tfrac45$",

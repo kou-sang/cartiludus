@@ -11,7 +11,9 @@
       "id": "part",
       "kind": "setup",
       "prompt": "¿Qué partición conviene usar?",
-      "hint": "El dado decide el sentido del traspaso.",
+      "hints": [
+        "El dado decide el sentido del traspaso."
+      ],
       "cards": [
         {
           "text": "$D$ y $D^c$ con $P(D) = \\tfrac12$",
@@ -39,7 +41,9 @@
       "id": "rr",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(RR)$ (ambas rojas)?",
-      "hint": "Traspasar una roja agrega una roja a la urna receptora.",
+      "hints": [
+        "Traspasar una roja agrega una roja a la urna receptora."
+      ],
       "cards": [
         {
           "text": "$\\tfrac12\\left(\\tfrac58\\cdot\\tfrac24 + \\tfrac13\\cdot\\tfrac69\\right)$",
@@ -67,7 +71,9 @@
       "id": "bb",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(BB)$ (ambas blancas)?",
-      "hint": "Traspasar una blanca agrega una blanca a la urna receptora.",
+      "hints": [
+        "Traspasar una blanca agrega una blanca a la urna receptora."
+      ],
       "cards": [
         {
           "text": "$1 - \\tfrac{109}{432}$",
@@ -95,7 +101,9 @@
       "id": "cond",
       "kind": "setup",
       "prompt": "¿Cómo se escribe $P(BB \\mid \\text{mismo color})$?",
-      "hint": "$\\{\\text{mismo color}\\} = BB \\cup RR$.",
+      "hints": [
+        "$\\{\\text{mismo color}\\} = BB \\cup RR$."
+      ],
       "cards": [
         {
           "text": "$\\dfrac{P(BB)}{1 - P(RR)}$",
@@ -123,7 +131,9 @@
       "id": "res",
       "kind": "interpret",
       "prompt": "Resultado y conclusión:",
-      "hint": "Llevar a denominador común: $\\tfrac{109}{432} = \\tfrac{654}{2592}$.",
+      "hints": [
+        "Llevar a denominador común: $\\tfrac{109}{432} = \\tfrac{654}{2592}$."
+      ],
       "cards": [
         {
           "text": "$\\approx 0{,}464$: es más probable que sean rojas",

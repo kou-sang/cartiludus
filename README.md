@@ -18,7 +18,7 @@ npm run deploy               # build + wrangler deploy
 
 ```
 content/<materia>/meta.json          { id, name, order?, topics: [{ id, name, order? }] }
-content/<materia>/<tema>/<id>.json   Problem (ver shared/model.ts)
+content/<materia>/<tema>/<id>.json   Problem (ver shared/model.ts): un ejercicio completo, con el enunciado original y sus pasos
 ```
 
 `npm run build:content` valida todo y emite `public/content/index.json` + `public/content/<materia>/<tema>.json`. Se ejecuta antes de `dev` y `build`; si hay errores no escribe nada y sale con código 1.
@@ -50,7 +50,7 @@ Puntaje por paso (`shared/engine.ts`):
 | Acierto tardío o con pista | 0 (más las incorrectas) |
 | Tiempo del paso agotado | −1 extra; el paso queda fallado y se revela la respuesta |
 
-Piso de −3 por paso. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente.
+Piso de −3 por paso. Al errar no se muestra la correcta. Pistas progresivas (hasta 3 por paso); usar cualquiera hace que el acierto valga 0. Durante el problema se pueden revisar los pasos ya respondidos. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente, `←` `→` revisar pasos.
 
 Con sesión iniciada, cada partida se guarda en una transacción: `pq_sessions/{uid}/items/{id}` (la partida, con sus problemas) y `pq_users/{uid}` (totales, `byCategory`, `byTopic` y `review`). `/historial` muestra estadísticas por práctica y por categoría, y las partidas de a 10.
 

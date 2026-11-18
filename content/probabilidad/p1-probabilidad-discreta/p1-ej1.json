@@ -1,0 +1,303 @@
+{
+  "id": "p1-ej1",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Dos tiradas de un dado",
+  "source": "Práctica 1 · Ejercicio 1",
+  "statement": "Se arroja dos veces un dado equilibrado.\n(a) Exhibir un espacio muestral que describa dicho experimento.\n(b) Sean $A$, $B$ y $C$ los eventos $A$ = {La suma de los resultados es par}, $B$ = {La suma de los resultados es 8}, $C$ = {Ambos resultados son distintos}. Calcular las probabilidades de $A$, $B$, $C$, $A \\cap C$, $A \\cup C$, $A - B$ y $A - C$.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "omega",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Qué espacio muestral describe el experimento?",
+      "hints": [
+        "Un resultado tiene que registrar todo lo que pasó: las dos tiradas.",
+        "Importa el orden: salir 1 y después 2 no es lo mismo que salir 2 y después 1.",
+        "Pensar en pares (primera tirada, segunda tirada)."
+      ],
+      "cards": [
+        {
+          "text": "$\\Omega = \\{\\{i,j\\} : 1 \\le i, j \\le 6\\}$",
+          "correct": false,
+          "explanation": "Conjuntos sin orden: identifica resultados que en el experimento son distintos."
+        },
+        {
+          "text": "$\\Omega = \\{1,\\dots,6\\}^2 = \\{(i,j) : 1 \\le i, j \\le 6\\}$",
+          "correct": true,
+          "explanation": "Cada resultado es un par ordenado (primera tirada, segunda tirada): describe completamente el experimento."
+        },
+        {
+          "text": "$\\Omega = \\{1,\\dots,6\\}$",
+          "correct": false,
+          "explanation": "Describe una sola tirada."
+        },
+        {
+          "text": "$\\Omega = \\{2, 3, \\dots, 12\\}$",
+          "correct": false,
+          "explanation": "Registra sólo la suma: se pierde información (por ejemplo, no permite saber si los resultados son distintos)."
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuántos elementos tiene $\\Omega$?",
+      "hints": [
+        "Cada coordenada del par toma 6 valores.",
+        "Principio de multiplicación."
+      ],
+      "cards": [
+        {
+          "text": "$36$",
+          "correct": true,
+          "explanation": "$6 \\cdot 6 = 36$ pares ordenados."
+        },
+        {
+          "text": "$30$",
+          "correct": false,
+          "explanation": "Deja afuera los pares con los dos resultados iguales, que también son posibles."
+        },
+        {
+          "text": "$12$",
+          "correct": false,
+          "explanation": "Suma las opciones de cada tirada en lugar de multiplicarlas."
+        },
+        {
+          "text": "$21$",
+          "correct": false,
+          "explanation": "Cuenta pares sin orden (incluyendo repetidos), no pares ordenados."
+        }
+      ]
+    },
+    {
+      "id": "equi",
+      "kind": "property",
+      "prompt": "¿Qué probabilidad tiene cada par $(i, j)$?",
+      "hints": [
+        "El dado es equilibrado y las tiradas no se influyen.",
+        "Multiplicar la probabilidad de cada tirada: $P(\\{(i,j)\\}) = P(\\text{1ra} = i)\\,P(\\text{2da} = j)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{1}{6}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de una sola tirada; con este valor las probabilidades de los 36 pares sumarían más que 1."
+        },
+        {
+          "text": "$\\tfrac{1}{21}$",
+          "correct": false,
+          "explanation": "Supone equiprobables los pares sin orden, que no lo son: $\\{1,2\\}$ ocurre de dos maneras y $\\{1,1\\}$ de una."
+        },
+        {
+          "text": "$\\tfrac{1}{36}$: el espacio es equiprobable y $P(E) = \\tfrac{\\#E}{36}$",
+          "correct": true,
+          "explanation": "Cada tirada vale $\\tfrac16$ y son independientes: $\\tfrac16 \\cdot \\tfrac16$. Por eso alcanza con contar casos."
+        },
+        {
+          "text": "$\\tfrac{i+j}{252}$",
+          "correct": false,
+          "explanation": "Suma 1, pero favorece sumas grandes sin ningún motivo: el dado es equilibrado."
+        }
+      ]
+    },
+    {
+      "id": "pa",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuántos pares tienen suma par?",
+      "hints": [
+        "¿Cuándo es par una suma de dos enteros?",
+        "La suma es par si los dos son pares o los dos son impares.",
+        "Hay 3 pares y 3 impares en $\\{1,\\dots,6\\}$."
+      ],
+      "cards": [
+        {
+          "text": "$9$",
+          "correct": false,
+          "explanation": "Cuenta sólo uno de los dos casos (ambos pares o ambos impares)."
+        },
+        {
+          "text": "$6$",
+          "correct": false,
+          "explanation": "Cuenta sumas posibles distintas, no pares ordenados."
+        },
+        {
+          "text": "$12$",
+          "correct": false,
+          "explanation": "No corresponde a ningún conteo correcto de pares con suma par."
+        },
+        {
+          "text": "$3 \\cdot 3 + 3 \\cdot 3 = 18$, así que $P(A) = \\tfrac12$",
+          "correct": true,
+          "explanation": "Ambos pares: $3 \\cdot 3$; ambos impares: $3 \\cdot 3$."
+        }
+      ]
+    },
+    {
+      "id": "pb",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuántos pares suman 8?",
+      "hints": [
+        "Listar: si la primera tirada es $i$, la segunda tiene que ser $8 - i$.",
+        "$8 - i$ tiene que estar entre 1 y 6."
+      ],
+      "cards": [
+        {
+          "text": "5: $(2,6), (3,5), (4,4), (5,3), (6,2)$; $P(B) = \\tfrac{5}{36}$",
+          "correct": true,
+          "explanation": "$i$ puede valer de 2 a 6."
+        },
+        {
+          "text": "3",
+          "correct": false,
+          "explanation": "Cuenta pares sin orden: $(2,6)$ y $(6,2)$ son resultados distintos."
+        },
+        {
+          "text": "4",
+          "correct": false,
+          "explanation": "Olvida el par con ambas tiradas iguales."
+        },
+        {
+          "text": "6",
+          "correct": false,
+          "explanation": "Incluye un par imposible: alguna tirada quedaría fuera de 1 a 6."
+        }
+      ]
+    },
+    {
+      "id": "pc",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(C)$, con $C$ = {resultados distintos}?",
+      "hints": [
+        "Puede ser más fácil contar el complemento.",
+        "$C^c$ = {ambos resultados iguales}: $(1,1), \\dots, (6,6)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{35}{36}$",
+          "correct": false,
+          "explanation": "Resta un solo par igual, pero hay más."
+        },
+        {
+          "text": "$1 - \\tfrac{6}{36} = \\tfrac56$",
+          "correct": true,
+          "explanation": "Hay 6 pares con resultados iguales; el resto son distintos."
+        },
+        {
+          "text": "$\\tfrac{6}{36}$",
+          "correct": false,
+          "explanation": "Es la probabilidad del complemento."
+        },
+        {
+          "text": "$\\tfrac{15}{36}$",
+          "correct": false,
+          "explanation": "Cuenta pares sin orden de valores distintos; en $\\Omega$ cada uno aparece dos veces."
+        }
+      ]
+    },
+    {
+      "id": "ac",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(A \\cap C)$ (suma par y resultados distintos)?",
+      "hints": [
+        "Partir de $A$ y sacar lo que no está en $C$.",
+        "Los pares iguales $(i,i)$, ¿tienen suma par?",
+        "$\\#(A \\cap C) = \\#A - \\#\\{\\text{pares iguales}\\}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac12 \\cdot \\tfrac56 = \\tfrac{5}{12}$",
+          "correct": false,
+          "explanation": "Multiplica como si $A$ y $C$ fueran independientes; hay que contar la intersección."
+        },
+        {
+          "text": "$\\tfrac{18 - 6}{36} = \\tfrac13$",
+          "correct": true,
+          "explanation": "Los 6 pares iguales tienen suma $2i$, par: están todos en $A$. Se restan de los 18."
+        },
+        {
+          "text": "$\\tfrac{30}{36}$",
+          "correct": false,
+          "explanation": "Es $P(C)$: no exige que la suma sea par."
+        },
+        {
+          "text": "$\\tfrac{18}{36}$",
+          "correct": false,
+          "explanation": "No quita de $A$ los pares con resultados iguales."
+        }
+      ]
+    },
+    {
+      "id": "auc",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(A \\cup C)$?",
+      "hints": [
+        "$P(A \\cup C) = P(A) + P(C) - P(A \\cap C)$.",
+        "O bien: ¿qué pares quedan fuera de $A \\cup C$? Están en $C^c$ y en $A^c$."
+      ],
+      "cards": [
+        {
+          "text": "$1$",
+          "correct": true,
+          "explanation": "$\\tfrac12 + \\tfrac56 - \\tfrac13 = 1$. Directamente: todo par fuera de $C$ tiene resultados iguales y suma par, así que está en $A$: $A \\cup C = \\Omega$."
+        },
+        {
+          "text": "$\\tfrac56$",
+          "correct": false,
+          "explanation": "Olvida los pares de $A$ que no están en $C$."
+        },
+        {
+          "text": "$\\tfrac{11}{12}$",
+          "correct": false,
+          "explanation": "Usa una intersección calculada como si los eventos fueran independientes."
+        },
+        {
+          "text": "$\\tfrac43$",
+          "correct": false,
+          "explanation": "Suma las probabilidades sin restar la intersección; una probabilidad nunca supera 1."
+        }
+      ]
+    },
+    {
+      "id": "dif",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto valen $P(A - B)$ y $P(A - C)$?",
+      "hints": [
+        "$A - B = A \\cap B^c$. ¿Está $B$ contenido en $A$?",
+        "8 es par: $B \\subseteq A$, así que $P(A - B) = P(A) - P(B)$.",
+        "$A - C = A \\cap C^c$: suma par y resultados iguales."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{13}{36}$ y $\\tfrac16$",
+          "correct": true,
+          "explanation": "$\\tfrac{18 - 5}{36}$; y $A \\cap C^c$ son los 6 pares iguales."
+        },
+        {
+          "text": "$\\tfrac{23}{36}$ y $\\tfrac16$",
+          "correct": false,
+          "explanation": "En el primero suma la probabilidad de $B$ en lugar de restarla."
+        },
+        {
+          "text": "$\\tfrac{13}{36}$ y $\\tfrac13$",
+          "correct": false,
+          "explanation": "El segundo valor corresponde a $A \\cap C$, no a $A \\cap C^c$."
+        },
+        {
+          "text": "$\\tfrac{18}{36}$ y $\\tfrac16$",
+          "correct": false,
+          "explanation": "En el primero no saca de $A$ los pares de $B$."
+        }
+      ]
+    }
+  ]
+}

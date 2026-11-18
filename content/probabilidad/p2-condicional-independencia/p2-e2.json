@@ -11,7 +11,9 @@
       "id": "prior",
       "kind": "setup",
       "prompt": "¿Cuánto valen $P(U_1), P(U_2), P(U_3)$?",
-      "hint": "$p + p + 2p = 1$.",
+      "hints": [
+        "$p + p + 2p = 1$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac13, \\tfrac13, \\tfrac23$",
@@ -39,7 +41,9 @@
       "id": "lik",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(BB \\mid U_i)$?",
-      "hint": "Con reposición, las extracciones son independientes dada la urna.",
+      "hints": [
+        "Con reposición, las extracciones son independientes dada la urna."
+      ],
       "cards": [
         {
           "text": "$1,\\ \\tfrac34,\\ \\tfrac12$",
@@ -67,7 +71,9 @@
       "id": "bayes",
       "kind": "compute",
       "prompt": "¿Cuánto vale $P(U_1 \\mid BB)$?",
-      "hint": "Fórmula de Bayes.",
+      "hints": [
+        "Fórmula de Bayes."
+      ],
       "cards": [
         {
           "text": "$\\tfrac14$",

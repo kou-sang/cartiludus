@@ -11,7 +11,9 @@
       "id": "va",
       "kind": "distribution",
       "prompt": "Modelo para la espera de Felipe:",
-      "hint": "Medir el tiempo en minutos desde las 10.",
+      "hints": [
+        "Medir el tiempo en minutos desde las 10."
+      ],
       "cards": [
         {
           "text": "$T \\sim \\mathcal{U}[10, 30]$",
@@ -39,7 +41,9 @@
       "id": "cond",
       "kind": "setup",
       "prompt": "Plantear:",
-      "hint": "\"Otros 10 minutos\" se cuentan desde las 10:15.",
+      "hints": [
+        "\"Otros 10 minutos\" se cuentan desde las 10:15."
+      ],
       "cards": [
         {
           "text": "$P(T \\ge 10)$",
@@ -67,7 +71,9 @@
       "id": "res",
       "kind": "compute",
       "prompt": "Resultado:",
-      "hint": "$\\dfrac{P(T \\ge 25)}{P(T > 15)}$.",
+      "hints": [
+        "$\\dfrac{P(T \\ge 25)}{P(T > 15)}$."
+      ],
       "cards": [
         {
           "text": "$\\tfrac23$",
@@ -95,7 +101,9 @@
       "id": "int",
       "kind": "property",
       "prompt": "Sin información previa, $P(T > 10) = \\tfrac23$. ¿Qué muestra compararlo con $\\tfrac13$?",
-      "hint": "Falta de memoria.",
+      "hints": [
+        "Falta de memoria."
+      ],
       "cards": [
         {
           "text": "La uniforme no tiene falta de memoria",

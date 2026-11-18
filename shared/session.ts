@@ -18,7 +18,7 @@ export interface SessionConfig {
   mode: Mode;
 }
 
-export const COUNT_OPTIONS = [3, 5, 10, 15] as const;
+export const COUNT_OPTIONS = [1, 2, 3, 5, 10] as const;
 export const STEP_LIMIT_OPTIONS: StepLimit[] = ['contenido', 'ninguno', 30, 60, 120];
 export const TOTAL_OPTIONS: Array<number | null> = [null, 5, 10, 20, 30];
 export const MAX_PROBLEMS = 20;
@@ -26,7 +26,7 @@ export const MAX_PROBLEMS = 20;
 export const DEFAULT_CONFIG = (subject: string, topics: string[]): SessionConfig => ({
   subject,
   topics,
-  count: 5,
+  count: 3,
   stepLimit: 'contenido',
   totalMin: null,
   mode: 'nueva',
@@ -60,7 +60,7 @@ export function configFromQuery(subject: string, search: string): SessionConfig 
   return {
     subject,
     topics: (q.get('temas') ?? '').split(',').filter(Boolean),
-    count: Number.isInteger(n) && n >= 1 && n <= MAX_PROBLEMS ? n : 5,
+    count: Number.isInteger(n) && n >= 1 && n <= MAX_PROBLEMS ? n : 3,
     stepLimit: paso === 'ninguno' ? 'ninguno' : paso && /^\d+$/.test(paso) && Number(paso) >= 5 ? Number(paso) : 'contenido',
     totalMin: Number.isInteger(total) && total > 0 && total <= 180 ? total : null,
     mode: q.get('modo') === 'repaso' ? 'repaso' : 'nueva',
