@@ -1,0 +1,96 @@
+{
+  "id": "p4-e9c",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 9(c) · Pilas: ¿es fallada?",
+  "statement": "Una fábrica produce pilas cuya duración (en horas) tiene distribución $\\mathcal N(53, 25)$. Por un desperfecto, una proporción $0{,}7$ tiene esa duración y el resto está fallada, con duración $\\mathcal N(\\mu_1, \\sigma_1^2)$ de parámetros desconocidos. Sea $D$ la duración de una pila extraída al azar. Si una pila extraída al azar dura más de 51 horas, ¿cuál es la probabilidad de que sea fallada? (Dato: $\\mu_1 = 49$, $\\sigma_1^2 = 16$.)",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "bayes",
+      "kind": "setup",
+      "prompt": "Plantear:",
+      "hint": "Bayes.",
+      "cards": [
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Ignora la observación."
+        },
+        {
+          "text": "$\\dfrac{P(N_1 > 51)}{P(N_0 > 51)}$",
+          "correct": false,
+          "explanation": "Cociente de verosimilitudes, no la posterior."
+        },
+        {
+          "text": "$\\dfrac{0{,}3\\,P(N_1 > 51)}{0{,}3\\,P(N_1 > 51) + 0{,}7\\,P(N_0 > 51)}$",
+          "correct": true,
+          "explanation": "$P(\\text{fallada} \\mid D > 51)$."
+        },
+        {
+          "text": "$P(N_1 > 51)$",
+          "correct": false,
+          "explanation": "Es $P(D > 51 \\mid \\text{fallada})$."
+        }
+      ]
+    },
+    {
+      "id": "z",
+      "kind": "compute",
+      "prompt": "Probabilidades normales:",
+      "hint": "Estandarizar: $\\tfrac{51-49}{4}$ y $\\tfrac{51-53}{5}$.",
+      "cards": [
+        {
+          "text": "$P(Z > 0{,}5) \\approx 0{,}6915$",
+          "correct": false,
+          "explanation": "Es $P(Z < 0{,}5)$."
+        },
+        {
+          "text": "$P(Z > 2)$ y $P(Z > -2)$",
+          "correct": false,
+          "explanation": "Falta dividir por el desvío."
+        },
+        {
+          "text": "$P(Z > 0{,}125)$ y $P(Z > -0{,}08)$",
+          "correct": false,
+          "explanation": "Divide por la varianza en lugar del desvío."
+        },
+        {
+          "text": "$P(N_1 > 51) = P(Z > 0{,}5) \\approx 0{,}3085$; $P(N_0 > 51) = P(Z > -0{,}4) \\approx 0{,}6554$",
+          "correct": true,
+          "explanation": "Estandarización con $\\sigma_1 = 4$, $\\sigma_0 = 5$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$\\tfrac{0{,}3 \\cdot 0{,}3085}{0{,}3 \\cdot 0{,}3085 + 0{,}7 \\cdot 0{,}6554}$.",
+      "cards": [
+        {
+          "text": "$\\approx 0{,}309$",
+          "correct": false,
+          "explanation": "Es $P(N_1 > 51)$."
+        },
+        {
+          "text": "$\\approx 0{,}471$",
+          "correct": false,
+          "explanation": "Cociente de verosimilitudes."
+        },
+        {
+          "text": "$\\approx 0{,}168$",
+          "correct": true,
+          "explanation": "$0{,}0926 / 0{,}5514$."
+        },
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Prior."
+        }
+      ],
+      "timeLimitSec": 240
+    }
+  ]
+}

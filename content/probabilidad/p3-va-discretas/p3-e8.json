@@ -1,0 +1,95 @@
+{
+  "id": "p3-e8",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 8 · Inspección de lotes",
+  "statement": "Un comprador adquiere componentes en lotes de 10. Inspecciona 3 componentes elegidas al azar del lote y lo acepta si ninguna está fallada. El 30% de los lotes tiene 4 componentes defectuosas y el 70% sólo una. Encontrar la proporción de lotes que rechazará el comprador.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Dado un lote con $d$ defectuosas, ¿qué distribución tiene la cantidad de defectuosas en la muestra?",
+      "hint": "Extracción sin reposición de una población finita.",
+      "cards": [
+        {
+          "text": "$\\mathrm{Bi}(3, d/10)$",
+          "correct": false,
+          "explanation": "Supone reposición."
+        },
+        {
+          "text": "Hipergeométrica: $P(0) = \\binom{10-d}{3} / \\binom{10}{3}$",
+          "correct": true,
+          "explanation": "Se eligen 3 de 10 sin reposición."
+        },
+        {
+          "text": "$\\mathcal{P}(3d/10)$",
+          "correct": false,
+          "explanation": "Aproximación sin justificación con población de 10."
+        },
+        {
+          "text": "$\\mathcal{G}(d/10)$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        }
+      ]
+    },
+    {
+      "id": "acept",
+      "kind": "compute",
+      "prompt": "¿Cuál es la probabilidad de aceptar en cada tipo de lote?",
+      "hint": "$\\binom{10}{3} = 120$.",
+      "cards": [
+        {
+          "text": "$d = 4$: $\\tfrac{1}{6}$; $d=1$: $\\tfrac{9}{10}$",
+          "correct": false,
+          "explanation": "Para $d=1$ hay que evitar la defectuosa en las 3 extracciones."
+        },
+        {
+          "text": "$d = 4$: $\\tfrac{4}{10}$; $d = 1$: $\\tfrac{1}{10}$",
+          "correct": false,
+          "explanation": "Es la proporción de defectuosas, no la de aceptar."
+        },
+        {
+          "text": "$d = 4$: $0{,}6^3$; $d = 1$: $0{,}9^3$",
+          "correct": false,
+          "explanation": "Con reposición."
+        },
+        {
+          "text": "$d = 4$: $\\tfrac{20}{120} = \\tfrac16$; $d = 1$: $\\tfrac{84}{120} = \\tfrac{7}{10}$",
+          "correct": true,
+          "explanation": "$\\binom63 = 20$, $\\binom93 = 84$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Proporción de lotes rechazados:",
+      "hint": "Probabilidad total y complemento.",
+      "cards": [
+        {
+          "text": "$0{,}54$",
+          "correct": false,
+          "explanation": "Es la proporción de aceptados."
+        },
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Supone que se rechazan exactamente los lotes con 4 defectuosas."
+        },
+        {
+          "text": "$1 - (0{,}3 \\cdot \\tfrac16 + 0{,}7 \\cdot 0{,}7) = 0{,}46$",
+          "correct": true,
+          "explanation": "Se acepta con prob. $0{,}54$."
+        },
+        {
+          "text": "$0{,}3 \\cdot \\tfrac56 + 0{,}7 \\cdot 0{,}7$",
+          "correct": false,
+          "explanation": "Para los lotes con una defectuosa usa aceptar en vez de rechazar."
+        }
+      ]
+    }
+  ]
+}

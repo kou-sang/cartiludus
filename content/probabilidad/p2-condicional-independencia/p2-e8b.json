@@ -1,0 +1,123 @@
+{
+  "id": "p2-e8b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Ej. 8(b) · Metegol: probabilidad de ganar",
+  "statement": "Tres jugadores a, b y c juegan un torneo de metegol: el ganador de un partido juega el siguiente contra el que estaba afuera, y gana el torneo quien logre dos victorias consecutivas. En cada partido ambos tienen la misma probabilidad de ganar. Comienzan jugando a y b. Calcular la probabilidad de ganar el campeonato para cada jugador. ¿Conviene jugar el primer partido?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "seq",
+      "kind": "setup",
+      "prompt": "¿Cuánto vale la probabilidad de que el torneo termine exactamente en el partido $k \\ge 2$ con una secuencia dada de ganadores?",
+      "hint": "Cada partido es una moneda equilibrada.",
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac12\\right)^k$",
+          "correct": true,
+          "explanation": "La secuencia de $k$ ganadores queda determinada; cada partido aporta $\\tfrac12$."
+        },
+        {
+          "text": "$\\tfrac{1}{2k}$",
+          "correct": false,
+          "explanation": "No corresponde a partidos independientes."
+        },
+        {
+          "text": "$\\left(\\tfrac13\\right)^k$",
+          "correct": false,
+          "explanation": "Cada partido tiene dos resultados, no tres."
+        },
+        {
+          "text": "$\\left(\\tfrac12\\right)^{k-1}$",
+          "correct": false,
+          "explanation": "Es la probabilidad sumada sobre los dos posibles ganadores del primer partido."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "compute",
+      "prompt": "¿Cuándo gana c y con qué probabilidad?",
+      "hint": "c gana en los partidos $3, 6, 9, \\dots$.",
+      "cards": [
+        {
+          "text": "$\\sum_{j \\ge 1} (\\tfrac12)^{3j} = \\tfrac17$",
+          "correct": false,
+          "explanation": "Falta multiplicar por los dos ganadores posibles del primer partido."
+        },
+        {
+          "text": "$2\\sum_{j\\ge1} (\\tfrac12)^{3j} = \\tfrac27$",
+          "correct": true,
+          "explanation": "Hay dos secuencias (según quién ganó el primero) para cada $k = 3j$."
+        },
+        {
+          "text": "$\\tfrac14$",
+          "correct": false,
+          "explanation": "Sólo cuenta el partido 3."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Supone simetría entre los tres, pero c empieza afuera."
+        }
+      ]
+    },
+    {
+      "id": "ab",
+      "kind": "compute",
+      "prompt": "¿Con qué probabilidad gana a (y b)?",
+      "hint": "Simetría entre a y b.",
+      "cards": [
+        {
+          "text": "$\\tfrac{5}{14}$ cada uno",
+          "correct": true,
+          "explanation": "$\\tfrac{1 - 2/7}{2}$, por simetría entre a y b."
+        },
+        {
+          "text": "$\\tfrac13$ cada uno",
+          "correct": false,
+          "explanation": "Inconsistente con $P(c) = \\tfrac27$."
+        },
+        {
+          "text": "$\\tfrac{3}{7}$ cada uno",
+          "correct": false,
+          "explanation": "Suma más de 1 junto con $\\tfrac27$."
+        },
+        {
+          "text": "$\\tfrac{4}{7}$ y $\\tfrac17$",
+          "correct": false,
+          "explanation": "Asigna a a todo el caso en que gana el primer partido."
+        }
+      ]
+    },
+    {
+      "id": "concl",
+      "kind": "interpret",
+      "prompt": "¿Conviene jugar el primer partido?",
+      "hint": "Comparar $\\tfrac{5}{14}$ con $\\tfrac27 = \\tfrac4{14}$.",
+      "cards": [
+        {
+          "text": "Sí: $\\tfrac{5}{14} > \\tfrac{4}{14}$",
+          "correct": true,
+          "explanation": "Los que juegan el primer partido tienen ventaja."
+        },
+        {
+          "text": "Da lo mismo",
+          "correct": false,
+          "explanation": "Las probabilidades difieren."
+        },
+        {
+          "text": "No: c tiene ventaja por descansar",
+          "correct": false,
+          "explanation": "Su probabilidad es menor."
+        },
+        {
+          "text": "Depende de quién gane el primer partido",
+          "correct": false,
+          "explanation": "La pregunta es antes de jugar; se compara la probabilidad total."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "p1-e1b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Ej. 1(b) · Dos dados: probabilidades de eventos",
+  "statement": "Se arroja dos veces un dado equilibrado. Sean $A$ = {la suma es par}, $B$ = {la suma es 8}, $C$ = {ambos resultados son distintos}. Calcular $P(A)$, $P(B)$, $P(C)$, $P(A \\cap C)$, $P(A \\cup C)$, $P(A - B)$ y $P(A - C)$.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "pa",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(A)$?",
+      "hint": "La suma es par si ambos son pares o ambos impares.",
+      "cards": [
+        {
+          "text": "$\\tfrac12$",
+          "correct": true,
+          "explanation": "$3\\cdot3 + 3\\cdot3 = 18$ casos favorables de 36."
+        },
+        {
+          "text": "$\\tfrac14$",
+          "correct": false,
+          "explanation": "Sólo considera ambos pares; faltan los casos con ambos impares."
+        },
+        {
+          "text": "$\\tfrac{1}{3}$",
+          "correct": false,
+          "explanation": "No corresponde a ningún conteo válido de pares con suma par."
+        },
+        {
+          "text": "$\\tfrac{6}{11}$",
+          "correct": false,
+          "explanation": "Cuenta sumas pares entre $\\{2,\\dots,12\\}$ como si fueran equiprobables."
+        }
+      ]
+    },
+    {
+      "id": "pbc",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $P(B)$ y $P(C)$?",
+      "hint": "$B$: listar pares con suma 8. $C$: complemento de \"iguales\".",
+      "cards": [
+        {
+          "text": "$P(B) = \\tfrac{3}{36}$, $P(C) = \\tfrac56$",
+          "correct": false,
+          "explanation": "Cuenta pares no ordenados en $B$."
+        },
+        {
+          "text": "$P(B) = \\tfrac{5}{36}$, $P(C) = \\tfrac56$",
+          "correct": true,
+          "explanation": "$B = \\{(2,6),(3,5),(4,4),(5,3),(6,2)\\}$; $C^c$ son las 6 diagonales."
+        },
+        {
+          "text": "$P(B) = \\tfrac{5}{36}$, $P(C) = \\tfrac{15}{36}$",
+          "correct": false,
+          "explanation": "$15$ es la cantidad de pares no ordenados distintos, no ordenados."
+        },
+        {
+          "text": "$P(B) = \\tfrac{1}{11}$, $P(C) = \\tfrac56$",
+          "correct": false,
+          "explanation": "Trata las 11 sumas posibles como equiprobables."
+        }
+      ]
+    },
+    {
+      "id": "pac",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $P(A \\cap C)$ y $P(A \\cup C)$?",
+      "hint": "$A \\cap C = A - (\\text{pares iguales})$. Para la unión: ¿qué pasa con $C^c$?",
+      "cards": [
+        {
+          "text": "$\\tfrac12$ y $\\tfrac56$",
+          "correct": false,
+          "explanation": "Toma $A \\cap C = A$, olvidando quitar los pares iguales."
+        },
+        {
+          "text": "$\\tfrac13$ y $\\tfrac43$",
+          "correct": false,
+          "explanation": "Suma $P(A)+P(C)$ sin restar la intersección; además una probabilidad no supera 1."
+        },
+        {
+          "text": "$\\tfrac13$ y $1$",
+          "correct": true,
+          "explanation": "$A \\cap C$: $18 - 6 = 12$ casos. Como $C^c \\subseteq A$ (iguales $\\Rightarrow$ suma par), $A \\cup C = \\Omega$."
+        },
+        {
+          "text": "$\\tfrac{5}{12}$ y $\\tfrac{11}{12}$",
+          "correct": false,
+          "explanation": "Supone $A$ y $C$ independientes: $P(A)P(C)$ no es $P(A\\cap C)$ aquí."
+        }
+      ]
+    },
+    {
+      "id": "dif",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $P(A - B)$ y $P(A - C)$?",
+      "hint": "$B \\subseteq A$ y $A - C = A \\cap C^c$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{1}{2}$ y $\\tfrac16$",
+          "correct": false,
+          "explanation": "Ignora que $B \\subseteq A$: hay que quitar los 5 pares con suma 8."
+        },
+        {
+          "text": "$\\tfrac{13}{36}$ y $\\tfrac16$",
+          "correct": true,
+          "explanation": "$P(A) - P(B) = \\tfrac{18-5}{36}$; $A \\cap C^c$ son los 6 pares iguales."
+        },
+        {
+          "text": "$\\tfrac{23}{36}$ y $\\tfrac16$",
+          "correct": false,
+          "explanation": "Suma $P(B)$ en lugar de restarla."
+        },
+        {
+          "text": "$\\tfrac{13}{36}$ y $\\tfrac13$",
+          "correct": false,
+          "explanation": "$\\tfrac13$ es $P(A \\cap C)$, no $P(A - C)$."
+        }
+      ]
+    }
+  ]
+}

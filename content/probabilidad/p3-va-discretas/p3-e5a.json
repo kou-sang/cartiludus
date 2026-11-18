@@ -1,0 +1,95 @@
+{
+  "id": "p3-e5a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 5(a) · Binomial y geométrica",
+  "statement": "Sean $X \\sim \\mathrm{Bi}(n, p)$ e $Y \\sim \\mathcal{G}(p)$. Demostrar que $P(X = 0) = P(Y > n)$.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "px0",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(X = 0)$?",
+      "hint": "Ningún éxito en $n$ ensayos.",
+      "cards": [
+        {
+          "text": "$1 - p^n$",
+          "correct": false,
+          "explanation": "Complemento de todos éxitos, no de ningún éxito."
+        },
+        {
+          "text": "$n(1-p)^{n-1}p$",
+          "correct": false,
+          "explanation": "Es $P(X = 1)$."
+        },
+        {
+          "text": "$p^n$",
+          "correct": false,
+          "explanation": "Es la probabilidad de $n$ éxitos."
+        },
+        {
+          "text": "$(1-p)^n$",
+          "correct": true,
+          "explanation": "$\\binom n0 p^0 (1-p)^n$."
+        }
+      ]
+    },
+    {
+      "id": "py",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(Y > n)$?",
+      "hint": "$Y$ = número de ensayo del primer éxito.",
+      "cards": [
+        {
+          "text": "$(1-p)^n$",
+          "correct": true,
+          "explanation": "$Y > n \\iff$ los primeros $n$ ensayos son fracasos."
+        },
+        {
+          "text": "$(1-p)^{n+1}$",
+          "correct": false,
+          "explanation": "Es $P(Y > n+1)$."
+        },
+        {
+          "text": "$1 - (1-p)^n$",
+          "correct": false,
+          "explanation": "Es $P(Y \\le n)$."
+        },
+        {
+          "text": "$(1-p)^{n-1}p$",
+          "correct": false,
+          "explanation": "Es $P(Y = n)$."
+        }
+      ]
+    },
+    {
+      "id": "interp",
+      "kind": "property",
+      "prompt": "¿Cuál es la interpretación de la igualdad?",
+      "hint": "Acoplar ambas variables a la misma sucesión de ensayos.",
+      "cards": [
+        {
+          "text": "$X$ e $Y$ son independientes",
+          "correct": false,
+          "explanation": "La igualdad no requiere ni usa independencia."
+        },
+        {
+          "text": "$X$ e $Y$ tienen la misma distribución",
+          "correct": false,
+          "explanation": "Sólo coinciden esas dos probabilidades."
+        },
+        {
+          "text": "La geométrica tiene falta de memoria",
+          "correct": false,
+          "explanation": "Es cierto, pero no se usa aquí."
+        },
+        {
+          "text": "Ambos eventos son \"los primeros $n$ ensayos son fracasos\"",
+          "correct": true,
+          "explanation": "Con una sucesión de Bernoulli, $X$ cuenta éxitos en los primeros $n$ e $Y$ marca el primero."
+        }
+      ]
+    }
+  ]
+}

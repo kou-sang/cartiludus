@@ -1,0 +1,67 @@
+{
+  "id": "p4-e1e",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 1(e) · ¿Cuántos árboles muestrear?",
+  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. ¿Cuántos árboles habría que muestrear para que la probabilidad de encontrar al menos uno con diámetro entre 4 y 6 sea no menor a $0{,}99$? (Dato: $P(4 < D < 6) = \\tfrac15$.)",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "ineq",
+      "kind": "setup",
+      "prompt": "Condición sobre $n$:",
+      "hint": "Complemento de \"ninguno\".",
+      "cards": [
+        {
+          "text": "$\\tfrac n5 \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Cota lineal sin justificación."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac15\\right)^n \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Usa $p$ en lugar de $1-p$."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac45\\right)^n \\ge 0{,}99$",
+          "correct": true,
+          "explanation": "$P(\\text{al menos uno}) = 1 - P(\\text{ninguno})$."
+        },
+        {
+          "text": "$\\left(\\tfrac15\\right)^n \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que todos estén en $(4,6)$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Menor $n$:",
+      "hint": "$n \\ge \\ln(0{,}01)/\\ln(0{,}8) \\approx 20{,}6$.",
+      "cards": [
+        {
+          "text": "$n = 5$",
+          "correct": false,
+          "explanation": "Viene de $\\tfrac n5 \\ge 0{,}99$."
+        },
+        {
+          "text": "$n = 20$",
+          "correct": false,
+          "explanation": "$1 - 0{,}8^{20} \\approx 0{,}9885 < 0{,}99$."
+        },
+        {
+          "text": "$n = 21$",
+          "correct": true,
+          "explanation": "Primer entero que cumple la desigualdad."
+        },
+        {
+          "text": "$n = 3$",
+          "correct": false,
+          "explanation": "Viene de $1 - 0{,}2^n \\ge 0{,}99$."
+        }
+      ]
+    }
+  ]
+}

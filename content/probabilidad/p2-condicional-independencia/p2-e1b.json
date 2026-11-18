@@ -1,0 +1,95 @@
+{
+  "id": "p2-e1b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Ej. 1(b) · Dos urnas: mismo color",
+  "statement": "Urna A: 5 bolillas rojas y 3 blancas. Urna B: 1 roja y 2 blancas. Se arroja un dado; si sale 3 ó 6 se extrae una bolilla de A, se la coloca en B y luego se extrae una bolilla de B. En caso contrario el procedimiento es a la inversa (de B a A y luego se extrae de A). ¿Cuál es la probabilidad de que ambas bolillas sean blancas si ambas son del mismo color? Si ambas bolillas son del mismo color, ¿es más probable que sean rojas? (Dato: $P(RR) = \\tfrac{109}{432}$.)",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "bb",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(BB)$?",
+      "hint": "Mismo esquema que (a): traspasar una blanca agrega una blanca.",
+      "cards": [
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac38 \\cdot \\tfrac23 + \\tfrac23 \\cdot \\tfrac23 \\cdot \\tfrac38$",
+          "correct": false,
+          "explanation": "Ignora la bolilla traspasada."
+        },
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac38 \\cdot \\tfrac34 + \\tfrac23 \\cdot \\tfrac23 \\cdot \\tfrac49 = \\tfrac{755}{2592}$",
+          "correct": true,
+          "explanation": "A→B: B queda 1R 3B. B→A: A queda 5R 4B."
+        },
+        {
+          "text": "$1 - \\tfrac{109}{432}$",
+          "correct": false,
+          "explanation": "El complemento de $RR$ incluye también los casos de colores distintos."
+        },
+        {
+          "text": "$\\tfrac12 \\cdot \\tfrac38 \\cdot \\tfrac34 + \\tfrac12 \\cdot \\tfrac23 \\cdot \\tfrac49$",
+          "correct": false,
+          "explanation": "Pondera mal los resultados del dado."
+        }
+      ]
+    },
+    {
+      "id": "cond",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(BB \\mid \\text{mismo color})$?",
+      "hint": "Definición de probabilidad condicional; $BB \\subseteq$ mismo color.",
+      "cards": [
+        {
+          "text": "$P(BB) \\cdot P(\\text{mismo color})$",
+          "correct": false,
+          "explanation": "Confunde condicional con intersección bajo independencia."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{P(BB) + P(RR)}$",
+          "correct": true,
+          "explanation": "$\\{\\text{mismo color}\\} = BB \\cup RR$, unión disjunta."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{1 - P(RR)}$",
+          "correct": false,
+          "explanation": "Condiciona en \"no ambas rojas\", que no es el evento dado."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{P(RR)}$",
+          "correct": false,
+          "explanation": "El denominador debe ser la probabilidad del evento condicionante."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "prompt": "Resultado y conclusión:",
+      "hint": "$\\tfrac{109}{432} = \\tfrac{654}{2592}$.",
+      "cards": [
+        {
+          "text": "$\\tfrac12$: son igualmente probables",
+          "correct": false,
+          "explanation": "Las urnas tienen composiciones distintas."
+        },
+        {
+          "text": "$\\tfrac{755}{1409} \\approx 0{,}536$: es más probable que sean blancas",
+          "correct": true,
+          "explanation": "$P(BB) > P(RR)$, así que dado el mismo color predominan las blancas."
+        },
+        {
+          "text": "$\\approx 0{,}464$: es más probable que sean rojas",
+          "correct": false,
+          "explanation": "Es $P(RR \\mid \\text{mismo color})$."
+        },
+        {
+          "text": "$\\tfrac{755}{2592}$: es más probable que sean rojas",
+          "correct": false,
+          "explanation": "Falta dividir por $P(\\text{mismo color})$."
+        }
+      ]
+    }
+  ]
+}

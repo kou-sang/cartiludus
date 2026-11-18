@@ -1,0 +1,95 @@
+{
+  "id": "p3-e9a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 9(a) · Fuentes radiactivas: ¿cuál emite más?",
+  "statement": "Tres fuentes radiactivas $F_1, F_2, F_3$ emiten por hora una cantidad de partículas con distribución $\\mathcal{P}(\\lambda_i)$, con $\\lambda_1 = 2$, $\\lambda_2 = 3$, $\\lambda_3 = 4$. Se elige una fuente al azar (equiprobable) y se observa que emite 4 partículas en una hora. ¿Cuál fuente tiene mayor probabilidad de emitir esa cantidad de partículas?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "pmf",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(N = 4 \\mid F_i)$?",
+      "hint": "$P(N = k) = e^{-\\lambda}\\lambda^k / k!$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{2^4}{24}$, $\\tfrac{3^4}{24}$, $\\tfrac{4^4}{24}$",
+          "correct": false,
+          "explanation": "Falta el factor $e^{-\\lambda}$."
+        },
+        {
+          "text": "$e^{-2}, e^{-3}, e^{-4}$",
+          "correct": false,
+          "explanation": "Es $P(N = 0)$."
+        },
+        {
+          "text": "$\\tfrac{e^{-2}2^4}{24} \\approx 0{,}090$, $\\tfrac{e^{-3}3^4}{24} \\approx 0{,}168$, $\\tfrac{e^{-4}4^4}{24} \\approx 0{,}195$",
+          "correct": true,
+          "explanation": "Función de probabilidad puntual de Poisson en $k = 4$."
+        },
+        {
+          "text": "$\\tfrac{e^{-4}2^4}{24}$, $\\tfrac{e^{-4}3^4}{24}$, $\\tfrac{e^{-4}4^4}{24}$",
+          "correct": false,
+          "explanation": "Usa $k$ en lugar de $\\lambda$ en la exponencial."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "prompt": "Conclusión:",
+      "hint": "Comparar los tres valores.",
+      "cards": [
+        {
+          "text": "Las tres por igual",
+          "correct": false,
+          "explanation": "Distintos $\\lambda$ dan probabilidades distintas."
+        },
+        {
+          "text": "$F_1$",
+          "correct": false,
+          "explanation": "Tiene la menor de las tres."
+        },
+        {
+          "text": "$F_2$",
+          "correct": false,
+          "explanation": "Su probabilidad es menor que la de $F_3$."
+        },
+        {
+          "text": "$F_3$",
+          "correct": true,
+          "explanation": "$0{,}195 > 0{,}168 > 0{,}090$."
+        }
+      ]
+    },
+    {
+      "id": "por",
+      "kind": "property",
+      "prompt": "¿Por qué $\\lambda = 4$ maximiza $P(N=4)$?",
+      "hint": "Derivar $\\lambda \\mapsto e^{-\\lambda}\\lambda^4$.",
+      "cards": [
+        {
+          "text": "$\\lambda \\mapsto e^{-\\lambda}\\lambda^k$ alcanza su máximo en $\\lambda = k$",
+          "correct": true,
+          "explanation": "La derivada $e^{-\\lambda}\\lambda^{k-1}(k - \\lambda)$ se anula en $\\lambda = k$."
+        },
+        {
+          "text": "Porque 4 es la fuente elegida con mayor probabilidad",
+          "correct": false,
+          "explanation": "Las fuentes son equiprobables."
+        },
+        {
+          "text": "La probabilidad crece siempre con $\\lambda$",
+          "correct": false,
+          "explanation": "Para $\\lambda > 4$ decrece."
+        },
+        {
+          "text": "La moda de $\\mathcal P(\\lambda)$ es siempre $\\lambda$",
+          "correct": false,
+          "explanation": "La moda es $[\\lambda]$; el argumento es sobre $\\lambda$ con $k$ fijo."
+        }
+      ]
+    }
+  ]
+}

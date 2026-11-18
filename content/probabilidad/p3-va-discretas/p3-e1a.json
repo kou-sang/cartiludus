@@ -1,0 +1,124 @@
+{
+  "id": "p3-e1a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 1(a) · Tiro al blanco: al menos dos aciertos",
+  "statement": "La probabilidad de acertar al blanco en un juego es $\\tfrac15$. Se tiran 10 tiros de manera independiente. Hallar la probabilidad de que se produzcan al menos dos aciertos.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "identify",
+      "prompt": "¿Qué variable aleatoria conviene definir?",
+      "hint": "La pregunta es sobre cuántos aciertos hay.",
+      "cards": [
+        {
+          "text": "$X$ = resultado del tiro 10",
+          "correct": false,
+          "explanation": "Describe un solo tiro."
+        },
+        {
+          "text": "$X$ = cantidad de aciertos en los 10 tiros",
+          "correct": true,
+          "explanation": "Los eventos pedidos se expresan como $\\{X \\ge 2\\}$ y $\\{X \\ge 1\\}$."
+        },
+        {
+          "text": "$X$ = número de tiro del primer acierto",
+          "correct": false,
+          "explanation": "Es una geométrica (truncada); no describe \"al menos dos aciertos\"."
+        },
+        {
+          "text": "$X$ = cantidad de fallos hasta el segundo acierto",
+          "correct": false,
+          "explanation": "Es binomial negativa y no tiene tope de 10 tiros."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene $X$?",
+      "hint": "Ensayos independientes con igual probabilidad de éxito.",
+      "cards": [
+        {
+          "text": "$X \\sim \\mathcal{G}(\\tfrac15)$",
+          "correct": false,
+          "explanation": "La geométrica cuenta ensayos hasta el primer éxito."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(10, \\tfrac15)$",
+          "correct": true,
+          "explanation": "10 ensayos Bernoulli independientes con $p = \\tfrac15$."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(10, \\tfrac45)$",
+          "correct": false,
+          "explanation": "Ese parámetro corresponde a contar fallos."
+        },
+        {
+          "text": "$X \\sim \\mathcal{P}(2)$",
+          "correct": false,
+          "explanation": "Es sólo una aproximación; la distribución exacta es binomial."
+        }
+      ]
+    },
+    {
+      "id": "compl",
+      "kind": "setup",
+      "prompt": "¿Cómo conviene escribir $P(X \\ge 2)$?",
+      "hint": "Complemento.",
+      "cards": [
+        {
+          "text": "$1 - P(X = 0)$",
+          "correct": false,
+          "explanation": "Es $P(X \\ge 1)$."
+        },
+        {
+          "text": "$P(X = 2)$",
+          "correct": false,
+          "explanation": "Sólo exactamente dos."
+        },
+        {
+          "text": "$1 - P(X=0) - P(X=1)$",
+          "correct": true,
+          "explanation": "Dos términos en lugar de nueve."
+        },
+        {
+          "text": "$1 - P(X \\le 2)$",
+          "correct": false,
+          "explanation": "Es $P(X \\ge 3)$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$P(X = k) = \\binom{10}{k} (\\tfrac15)^k (\\tfrac45)^{10-k}$.",
+      "cards": [
+        {
+          "text": "$\\binom{10}{2} (0{,}2)^2 (0{,}8)^8 \\approx 0{,}302$",
+          "correct": false,
+          "explanation": "Es $P(X = 2)$."
+        },
+        {
+          "text": "$1 - (0{,}8)^{10} \\approx 0{,}893$",
+          "correct": false,
+          "explanation": "Es $P(X \\ge 1)$."
+        },
+        {
+          "text": "$1 - (0{,}8)^{10} - 0{,}2 \\cdot (0{,}8)^9 \\approx 0{,}866$",
+          "correct": false,
+          "explanation": "Falta el factor $\\binom{10}{1} = 10$."
+        },
+        {
+          "text": "$1 - (0{,}8)^{10} - 10 \\cdot 0{,}2 \\cdot (0{,}8)^9 \\approx 0{,}624$",
+          "correct": true,
+          "explanation": "$1 - 0{,}1074 - 0{,}2684$."
+        }
+      ],
+      "timeLimitSec": 180
+    }
+  ]
+}

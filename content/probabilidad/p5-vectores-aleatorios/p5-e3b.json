@@ -1,0 +1,95 @@
+{
+  "id": "p5-e3b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Ej. 3(b) · Banco: suma de Poisson",
+  "statement": "Supongamos que el número de hombres $H \\sim \\mathcal P(\\lambda_1)$ y de mujeres $M \\sim \\mathcal P(\\lambda_2)$ que ingresan al banco por día son independientes. ¿Cuál es la distribución del total $H + M$?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "conv",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(H+M = n)$?",
+      "hint": "Convolución discreta.",
+      "cards": [
+        {
+          "text": "$P(H = n) + P(M = n)$",
+          "correct": false,
+          "explanation": "No es la probabilidad de la suma."
+        },
+        {
+          "text": "$\\sum_{k=0}^n P(H = k)P(M = n-k)$",
+          "correct": true,
+          "explanation": "Partición según el valor de $H$ e independencia."
+        },
+        {
+          "text": "$P(H = n)P(M = n)$",
+          "correct": false,
+          "explanation": "Pide $H = M = n$."
+        },
+        {
+          "text": "$\\sum_{k=0}^\\infty P(H = k)P(M = k)$",
+          "correct": false,
+          "explanation": "Es $P(H = M)$."
+        }
+      ]
+    },
+    {
+      "id": "bin",
+      "kind": "compute",
+      "prompt": "Evaluar la suma:",
+      "hint": "Multiplicar y dividir por $n!$ y usar el binomio de Newton.",
+      "cards": [
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1^n+\\lambda_2^n)}{n!}$",
+          "correct": false,
+          "explanation": "$(a+b)^n \\neq a^n + b^n$."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda_1\\lambda_2}(\\lambda_1\\lambda_2)^n}{n!}$",
+          "correct": false,
+          "explanation": "Producto en lugar de suma de parámetros."
+        },
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{2^n\\,n!}$",
+          "correct": false,
+          "explanation": "Factor espurio."
+        },
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}}{n!}\\sum_k \\binom nk \\lambda_1^k\\lambda_2^{n-k} = \\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{n!}$",
+          "correct": true,
+          "explanation": "Binomio de Newton."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "distribution",
+      "prompt": "Distribución:",
+      "hint": "Reconocer la función de probabilidad.",
+      "cards": [
+        {
+          "text": "$H + M \\sim \\mathcal{P}\\left(\\tfrac{\\lambda_1+\\lambda_2}{2}\\right)$",
+          "correct": false,
+          "explanation": "Promedia en lugar de sumar."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(\\lambda_1\\lambda_2)$",
+          "correct": false,
+          "explanation": "Los parámetros se suman."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(\\lambda_1 + \\lambda_2)$",
+          "correct": true,
+          "explanation": "Suma de Poisson independientes."
+        },
+        {
+          "text": "$H + M \\sim \\mathrm{Bi}(2, \\cdot)$",
+          "correct": false,
+          "explanation": "No hay tope."
+        }
+      ]
+    }
+  ]
+}

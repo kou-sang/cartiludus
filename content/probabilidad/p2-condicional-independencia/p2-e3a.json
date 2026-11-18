@@ -1,0 +1,95 @@
+{
+  "id": "p2-e3a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Ej. 3(a) · Test diagnóstico: valor predictivo",
+  "statement": "Sean $E$ = {la persona está enferma} y $A$ = {el análisis da positivo}. $P(A \\mid E)$ es la sensibilidad y $P(A^c \\mid E^c)$ la especificidad del test. Si $P(A\\mid E) = P(A^c \\mid E^c) = 0{,}95$ y $P(E) = 0{,}005$, ¿cuál es la probabilidad de que una persona con análisis positivo esté realmente enferma?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "obj",
+      "kind": "setup",
+      "prompt": "¿Qué cantidad se pide?",
+      "hint": "Se observa el resultado del test.",
+      "cards": [
+        {
+          "text": "$P(E^c \\mid A^c)$",
+          "correct": false,
+          "explanation": "Se refiere a resultados negativos."
+        },
+        {
+          "text": "$P(A \\mid E)$",
+          "correct": false,
+          "explanation": "Es la sensibilidad, dato del problema."
+        },
+        {
+          "text": "$P(A \\cap E)$",
+          "correct": false,
+          "explanation": "Falta condicionar al positivo."
+        },
+        {
+          "text": "$P(E \\mid A)$",
+          "correct": true,
+          "explanation": "Probabilidad de enfermedad dado un positivo."
+        }
+      ]
+    },
+    {
+      "id": "pa",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(A)$?",
+      "hint": "Probabilidad total con la partición $E, E^c$.",
+      "cards": [
+        {
+          "text": "$0{,}95 \\cdot 0{,}005 + 0{,}95 \\cdot 0{,}995$",
+          "correct": false,
+          "explanation": "Usa $P(A\\mid E^c) = 0{,}95$ en lugar de $0{,}05$."
+        },
+        {
+          "text": "$0{,}95$",
+          "correct": false,
+          "explanation": "Es la sensibilidad."
+        },
+        {
+          "text": "$0{,}95 \\cdot 0{,}005$",
+          "correct": false,
+          "explanation": "Sólo es $P(A \\cap E)$; faltan los falsos positivos."
+        },
+        {
+          "text": "$0{,}95 \\cdot 0{,}005 + 0{,}05 \\cdot 0{,}995 = 0{,}0545$",
+          "correct": true,
+          "explanation": "$P(A \\mid E^c) = 1 - 0{,}95$ (falsos positivos)."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "prompt": "Resultado:",
+      "hint": "Bayes.",
+      "cards": [
+        {
+          "text": "$\\approx 0{,}5$",
+          "correct": false,
+          "explanation": "No hay simetría que lo justifique."
+        },
+        {
+          "text": "$\\tfrac{0{,}00475}{0{,}0545} \\approx 0{,}087$: la mayoría de los positivos son falsos",
+          "correct": true,
+          "explanation": "Con baja prevalencia los falsos positivos superan a los verdaderos."
+        },
+        {
+          "text": "$0{,}005$",
+          "correct": false,
+          "explanation": "Es la prevalencia: ignora el resultado del test."
+        },
+        {
+          "text": "$0{,}95$",
+          "correct": false,
+          "explanation": "Confunde $P(E\\mid A)$ con $P(A \\mid E)$."
+        }
+      ]
+    }
+  ]
+}

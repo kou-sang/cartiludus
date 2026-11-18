@@ -1,0 +1,67 @@
+{
+  "id": "p4-e9b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 9(b) · Pilas: densidad de la mezcla",
+  "statement": "Una fábrica produce pilas cuya duración (en horas) tiene distribución $\\mathcal N(53, 25)$. Por un desperfecto, una proporción $0{,}7$ tiene esa duración y el resto está fallada, con duración $\\mathcal N(\\mu_1, \\sigma_1^2)$ de parámetros desconocidos. Sea $D$ la duración de una pila extraída al azar. Calcular la función de densidad de $D$. (Dato: $\\mu_1 = 49$, $\\sigma_1^2 = 16$.)",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "mezcla",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(D \\ge t)$?",
+      "hint": "Probabilidad total según el tipo de pila.",
+      "cards": [
+        {
+          "text": "$P(0{,}7 N_0 + 0{,}3 N_1 \\ge t)$",
+          "correct": false,
+          "explanation": "Confunde mezcla con combinación lineal de variables."
+        },
+        {
+          "text": "$0{,}7\\,P(N_0 \\ge t) + 0{,}3\\,P(N_1 \\ge t)$ con $N_0 \\sim \\mathcal N(53,25)$, $N_1 \\sim \\mathcal N(\\mu_1,\\sigma_1^2)$",
+          "correct": true,
+          "explanation": "Mezcla de dos normales con pesos $0{,}7$ y $0{,}3$."
+        },
+        {
+          "text": "$P(\\mathcal N(0{,}7\\cdot 53 + 0{,}3\\mu_1, \\cdot) \\ge t)$",
+          "correct": false,
+          "explanation": "Una mezcla de normales no es normal."
+        },
+        {
+          "text": "$P(N_0 \\ge t)\\,P(N_1 \\ge t)$",
+          "correct": false,
+          "explanation": "No hay producto."
+        }
+      ]
+    },
+    {
+      "id": "dens",
+      "kind": "compute",
+      "prompt": "Densidad de $D$:",
+      "hint": "Derivar $F_D = 0{,}7 F_{N_0} + 0{,}3 F_{N_1}$.",
+      "cards": [
+        {
+          "text": "Densidad de una normal de media $51{,}8$",
+          "correct": false,
+          "explanation": "Una mezcla no es normal; $51{,}8 = 0{,}7\\cdot53 + 0{,}3\\cdot49$ es sólo su media."
+        },
+        {
+          "text": "$f_D(x) = \\dfrac{0{,}7}{5\\sqrt{2\\pi}} e^{-\\frac{(x-53)^2}{50}} + \\dfrac{0{,}3}{4\\sqrt{2\\pi}} e^{-\\frac{(x-49)^2}{32}}$",
+          "correct": true,
+          "explanation": "Combinación convexa de las dos densidades normales."
+        },
+        {
+          "text": "Producto de las dos densidades",
+          "correct": false,
+          "explanation": "No integra 1 ni corresponde a la mezcla."
+        },
+        {
+          "text": "$f_D(x) = \\dfrac{0{,}7}{25\\sqrt{2\\pi}} e^{-\\frac{(x-53)^2}{50}} + \\dfrac{0{,}3}{16\\sqrt{2\\pi}} e^{-\\frac{(x-49)^2}{32}}$",
+          "correct": false,
+          "explanation": "Usa $\\sigma^2$ en lugar de $\\sigma$ en la constante."
+        }
+      ]
+    }
+  ]
+}

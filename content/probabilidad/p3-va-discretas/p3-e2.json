@@ -1,0 +1,95 @@
+{
+  "id": "p3-e2",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 2 · Jurado de 12",
+  "statement": "Un acusado será condenado si al menos 8 de los 12 jurados lo votan culpable. El acusado es culpable con probabilidad $\\alpha$ y cada jurado decide su voto de manera independiente, con probabilidad $\\theta$ de tomar la decisión correcta. ¿Cuál es la probabilidad de que el acusado sea condenado?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "part",
+      "kind": "setup",
+      "prompt": "¿Respecto de qué evento conviene condicionar?",
+      "hint": "La \"decisión correcta\" depende de la verdad.",
+      "cards": [
+        {
+          "text": "El voto del primer jurado",
+          "correct": false,
+          "explanation": "No determina la probabilidad de voto de los demás."
+        },
+        {
+          "text": "$G$ = {el acusado es culpable}, con $P(G) = \\alpha$",
+          "correct": true,
+          "explanation": "Dado $G$, votar culpable es correcto (prob. $\\theta$); dado $G^c$, es incorrecto (prob. $1-\\theta$)."
+        },
+        {
+          "text": "La cantidad de votos culpables",
+          "correct": false,
+          "explanation": "Es la variable a estudiar, no la partición útil."
+        },
+        {
+          "text": "No hace falta condicionar",
+          "correct": false,
+          "explanation": "La probabilidad de votar culpable depende de si es culpable."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Sea $V$ = cantidad de votos culpables. ¿Qué distribución tiene $V$ condicionada?",
+      "hint": "Votos independientes dado el estado del acusado.",
+      "cards": [
+        {
+          "text": "$V \\mid G \\sim \\mathrm{Bi}(8, \\theta)$",
+          "correct": false,
+          "explanation": "Votan 12 jurados; 8 es el umbral."
+        },
+        {
+          "text": "$V \\sim \\mathrm{Bi}(12, \\theta)$ siempre",
+          "correct": false,
+          "explanation": "Si es inocente, votar culpable es el error, de probabilidad $1-\\theta$."
+        },
+        {
+          "text": "$V \\mid G \\sim \\mathrm{Bi}(12, \\theta)$ y $V \\mid G^c \\sim \\mathrm{Bi}(12, 1-\\theta)$",
+          "correct": true,
+          "explanation": "En cada caso son 12 ensayos independientes con probabilidad de votar culpable fija."
+        },
+        {
+          "text": "$V \\sim \\mathrm{Bi}(12, \\alpha\\theta)$",
+          "correct": false,
+          "explanation": "Los votos no son independientes sin condicionar: comparten el estado del acusado."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "Probabilidad total sobre $G, G^c$.",
+      "cards": [
+        {
+          "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
+          "correct": false,
+          "explanation": "Falta la condena de un inocente."
+        },
+        {
+          "text": "$\\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k}$",
+          "correct": false,
+          "explanation": "Ignora que el acusado puede ser inocente."
+        },
+        {
+          "text": "$\\alpha \\sum_{k=8}^{12} \\binom{12}{k} \\theta^k (1-\\theta)^{12-k} + (1-\\alpha) \\sum_{k=8}^{12} \\binom{12}{k} (1-\\theta)^k \\theta^{12-k}$",
+          "correct": true,
+          "explanation": "Se pondera la probabilidad de al menos 8 votos culpables en cada escenario."
+        },
+        {
+          "text": "$\\alpha \\binom{12}{8}\\theta^8(1-\\theta)^4 + (1-\\alpha)\\binom{12}{8}(1-\\theta)^8\\theta^4$",
+          "correct": false,
+          "explanation": "Sólo cuenta exactamente 8 votos."
+        }
+      ]
+    }
+  ]
+}

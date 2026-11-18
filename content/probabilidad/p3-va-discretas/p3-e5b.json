@@ -1,0 +1,124 @@
+{
+  "id": "p3-e5b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 5(b) · La figurita de Messi",
+  "statement": "El álbum del mundial tiene 638 figuritas y una sola es de Messi. Cada paquete trae 5 figuritas, cada una puede ser cualquiera con igual probabilidad. Hallar la cantidad de paquetes que es necesario comprar para que la probabilidad de tener al menos una figurita de Messi sea mayor o igual a $\\tfrac{9}{10}$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "identify",
+      "prompt": "Con $n$ paquetes, ¿qué variable conviene?",
+      "hint": "Cada figurita es un ensayo.",
+      "cards": [
+        {
+          "text": "$X$ = cantidad de paquetes comprados",
+          "correct": false,
+          "explanation": "Es la incógnita $n$, que se elige; no es aleatoria."
+        },
+        {
+          "text": "$X$ = cantidad de figuritas distintas",
+          "correct": false,
+          "explanation": "No interviene."
+        },
+        {
+          "text": "$X$ = cantidad de figuritas repetidas",
+          "correct": false,
+          "explanation": "No se relaciona con obtener la de Messi."
+        },
+        {
+          "text": "$X$ = cantidad de figuritas de Messi entre las $5n$",
+          "correct": true,
+          "explanation": "Se pide $P(X \\ge 1) \\ge 0{,}9$."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Distribución:",
+      "hint": "Ensayos independientes.",
+      "cards": [
+        {
+          "text": "$X \\sim \\mathrm{Bi}(n, \\tfrac{5}{638})$",
+          "correct": false,
+          "explanation": "Aproxima la probabilidad por paquete; no es exacta."
+        },
+        {
+          "text": "$X \\sim \\mathcal{G}(\\tfrac{1}{638})$",
+          "correct": false,
+          "explanation": "La geométrica describe el tiempo de espera, no el conteo."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(5n, \\tfrac{1}{638})$",
+          "correct": true,
+          "explanation": "$5n$ figuritas independientes, cada una es Messi con prob. $\\tfrac1{638}$."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(638, \\tfrac{1}{5n})$",
+          "correct": false,
+          "explanation": "Invierte los parámetros."
+        }
+      ]
+    },
+    {
+      "id": "ineq",
+      "kind": "setup",
+      "prompt": "Condición sobre $n$:",
+      "hint": "Usar (a): $P(X = 0) = (1-p)^{5n}$.",
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac{637}{638}\\right)^{5n} \\ge 0{,}9$",
+          "correct": false,
+          "explanation": "Pide que no salga Messi con alta probabilidad."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{1}{638}\\right)^{5n} \\ge 0{,}9$",
+          "correct": false,
+          "explanation": "Usa la probabilidad de éxito en lugar de la de fracaso."
+        },
+        {
+          "text": "$\\tfrac{5n}{638} \\ge 0{,}9$",
+          "correct": false,
+          "explanation": "Cota lineal: ignora las repeticiones."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{637}{638}\\right)^{5n} \\ge 0{,}9$",
+          "correct": true,
+          "explanation": "$P(X \\ge 1) = 1 - P(X = 0)$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Menor $n$:",
+      "hint": "$5n \\ge \\dfrac{\\ln 0{,}1}{\\ln(637/638)} \\approx 1467{,}8$.",
+      "cards": [
+        {
+          "text": "$n = 115$",
+          "correct": false,
+          "explanation": "Viene de $\\tfrac{5n}{638} \\ge 0{,}9$."
+        },
+        {
+          "text": "$n = 294$",
+          "correct": true,
+          "explanation": "$5n \\ge 1468$, es decir $n \\ge 293{,}6$."
+        },
+        {
+          "text": "$n = 89$",
+          "correct": false,
+          "explanation": "Corresponde a $P(X \\ge 1) \\ge \\tfrac12$, no a $0{,}9$."
+        },
+        {
+          "text": "$n = 1468$",
+          "correct": false,
+          "explanation": "Es la cantidad de figuritas, no de paquetes."
+        }
+      ],
+      "timeLimitSec": 180
+    }
+  ]
+}

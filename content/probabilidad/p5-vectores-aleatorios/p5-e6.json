@@ -1,0 +1,152 @@
+{
+  "id": "p5-e6",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Ej. 6 · Densidad en un triángulo",
+  "statement": "Sea $(X, Y)$ con densidad $f_{XY}(x,y) = k(3y + x)$ si $0 \\le x \\le y \\le 1$ y 0 en otro caso. Hallar $k$, $f_X$, $f_Y$, $P\\left(X < \\tfrac{Y}{3}\\right)$ y $P\\left(X^2 - Y^2 = \\tfrac13\\right)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "k",
+      "kind": "compute",
+      "prompt": "Valor de $k$:",
+      "hint": "$\\int_0^1 \\int_0^y (3y + x)\\,dx\\,dy$.",
+      "cards": [
+        {
+          "text": "$k = \\tfrac{1}{2}$",
+          "correct": false,
+          "explanation": "Integra en $[0,1]^2$: $\\int\\int (3y+x) = 2$."
+        },
+        {
+          "text": "$k = \\tfrac67$",
+          "correct": true,
+          "explanation": "La integral interior es $3y^2 + \\tfrac{y^2}2 = \\tfrac72 y^2$; luego $\\tfrac76 k = 1$."
+        },
+        {
+          "text": "$k = \\tfrac{7}{6}$",
+          "correct": false,
+          "explanation": "Invierte la ecuación."
+        },
+        {
+          "text": "$k = \\tfrac{3}{5}$",
+          "correct": false,
+          "explanation": "Error en la integral interior."
+        }
+      ]
+    },
+    {
+      "id": "fy",
+      "kind": "compute",
+      "prompt": "Marginal $f_Y$:",
+      "hint": "Integrar en $x \\in [0, y]$.",
+      "cards": [
+        {
+          "text": "$f_Y(y) = 3y^2\\,\\mathbb 1_{[0,1]}(y)$",
+          "correct": true,
+          "explanation": "$\\tfrac67 \\cdot \\tfrac72 y^2$."
+        },
+        {
+          "text": "$f_Y(y) = \\tfrac67\\left(3y + \\tfrac12\\right)$",
+          "correct": false,
+          "explanation": "Integra en $x \\in [0,1]$."
+        },
+        {
+          "text": "$f_Y(y) = 2y$",
+          "correct": false,
+          "explanation": "Corresponde a la uniforme en el triángulo."
+        },
+        {
+          "text": "$f_Y(y) = \\tfrac72 y^2$",
+          "correct": false,
+          "explanation": "Falta multiplicar por $k$."
+        }
+      ]
+    },
+    {
+      "id": "fx",
+      "kind": "compute",
+      "prompt": "Marginal $f_X$:",
+      "hint": "Integrar en $y \\in [x, 1]$.",
+      "cards": [
+        {
+          "text": "$f_X(x) = 3x^2$",
+          "correct": false,
+          "explanation": "Copia la marginal de $Y$."
+        },
+        {
+          "text": "$f_X(x) = \\tfrac67\\left(\\tfrac32 x^2 + x^2\\right)$",
+          "correct": false,
+          "explanation": "Integra en $y \\in [0,x]$."
+        },
+        {
+          "text": "$f_X(x) = \\tfrac{1}{7}(9 + 6x - 15x^2)\\,\\mathbb 1_{[0,1]}(x)$",
+          "correct": true,
+          "explanation": "$\\tfrac67\\left[\\tfrac32(1-x^2) + x(1-x)\\right]$."
+        },
+        {
+          "text": "$f_X(x) = \\tfrac67\\left(\\tfrac32 + x\\right)$",
+          "correct": false,
+          "explanation": "Integra en $y\\in[0,1]$."
+        }
+      ]
+    },
+    {
+      "id": "p",
+      "kind": "compute",
+      "prompt": "$P\\left(X < \\tfrac Y3\\right)$:",
+      "hint": "$\\int_0^1\\int_0^{y/3} \\tfrac67(3y + x)\\,dx\\,dy$.",
+      "cards": [
+        {
+          "text": "$\\tfrac16$",
+          "correct": false,
+          "explanation": "Área del triángulo $\\{x < y/3\\}$ sin la densidad."
+        },
+        {
+          "text": "$\\tfrac{19}{54}$",
+          "correct": false,
+          "explanation": "Falta el factor $k$."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Supone proporcionalidad con la longitud."
+        },
+        {
+          "text": "$\\tfrac{19}{63} \\approx 0{,}302$",
+          "correct": true,
+          "explanation": "La interior da $y^2 + \\tfrac{y^2}{18} = \\tfrac{19}{18}y^2$; luego $\\tfrac67 \\cdot \\tfrac{19}{54}$."
+        }
+      ],
+      "timeLimitSec": 240
+    },
+    {
+      "id": "cero",
+      "kind": "property",
+      "prompt": "$P\\left(X^2 - Y^2 = \\tfrac13\\right)$:",
+      "hint": "En el soporte, $X \\le Y$.",
+      "cards": [
+        {
+          "text": "No se puede calcular",
+          "correct": false,
+          "explanation": "Vale 0 por dos razones."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Confunde el valor con la probabilidad."
+        },
+        {
+          "text": "$0$",
+          "correct": true,
+          "explanation": "Es una curva (medida de Lebesgue nula) y además $X^2 - Y^2 \\le 0$ en el soporte."
+        },
+        {
+          "text": "$f_{XY}$ evaluada en la curva",
+          "correct": false,
+          "explanation": "Una densidad no da probabilidades puntuales."
+        }
+      ]
+    }
+  ]
+}

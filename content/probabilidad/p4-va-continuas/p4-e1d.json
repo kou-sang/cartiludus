@@ -1,0 +1,95 @@
+{
+  "id": "p4-e1d",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 1(d) · Tres árboles",
+  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. En un área hay 3 árboles de esa especie. Calcular la probabilidad de que exactamente 2 de ellos tengan diámetro entre 4 y 6 decímetros. (Dato: $P(4 < D < 6) = \\tfrac15$.)",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "identify",
+      "prompt": "Variable:",
+      "hint": "Contar árboles.",
+      "cards": [
+        {
+          "text": "$N$ = diámetro promedio de los 3",
+          "correct": false,
+          "explanation": "No describe el evento pedido."
+        },
+        {
+          "text": "$N$ = cantidad de árboles hasta el primero en $(4,6)$",
+          "correct": false,
+          "explanation": "Tiempo de espera, no conteo."
+        },
+        {
+          "text": "$N$ = diámetro del segundo árbol",
+          "correct": false,
+          "explanation": "Un solo árbol."
+        },
+        {
+          "text": "$N$ = cantidad de árboles (de 3) con diámetro en $(4,6)$",
+          "correct": true,
+          "explanation": "Se pide $P(N = 2)$."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Distribución:",
+      "hint": "Árboles independientes.",
+      "cards": [
+        {
+          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac45)$",
+          "correct": false,
+          "explanation": "Ese parámetro cuenta los que no están en $(4,6)$."
+        },
+        {
+          "text": "$N \\sim \\mathcal{G}(\\tfrac15)$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        },
+        {
+          "text": "Hipergeométrica",
+          "correct": false,
+          "explanation": "No hay población finita de la que se extraiga sin reposición."
+        },
+        {
+          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac15)$",
+          "correct": true,
+          "explanation": "3 ensayos independientes con éxito de prob. $\\tfrac15$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "$P(N = 2)$:",
+      "hint": "$\\binom32 p^2 (1-p)$.",
+      "cards": [
+        {
+          "text": "$3 \\cdot \\tfrac1{25} \\cdot \\tfrac45 = \\tfrac{12}{125} = 0{,}096$",
+          "correct": true,
+          "explanation": "Fórmula binomial."
+        },
+        {
+          "text": "$\\tfrac{1}{25}$",
+          "correct": false,
+          "explanation": "Ignora al tercer árbol."
+        },
+        {
+          "text": "$\\tfrac{1}{25} \\cdot \\tfrac45$",
+          "correct": false,
+          "explanation": "Falta el $\\binom32$."
+        },
+        {
+          "text": "$3 \\cdot \\tfrac{16}{25} \\cdot \\tfrac15$",
+          "correct": false,
+          "explanation": "Intercambia $p$ y $1-p$."
+        }
+      ]
+    }
+  ]
+}

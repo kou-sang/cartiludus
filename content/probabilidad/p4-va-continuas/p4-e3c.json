@@ -1,0 +1,95 @@
+{
+  "id": "p4-e3c",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 3(c) · Transformación logarítmica",
+  "statement": "Sea $X \\sim \\mathcal{U}[0, 1]$. Hallar las funciones de distribución y de densidad de $Y = -\\tfrac1\\lambda \\ln(1 - X)$, con $\\lambda > 0$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "acum",
+      "kind": "compute",
+      "prompt": "$F_Y(y)$ para $y \\ge 0$:",
+      "hint": "$-\\tfrac1\\lambda\\ln(1-X) \\le y \\iff X \\le 1 - e^{-\\lambda y}$.",
+      "cards": [
+        {
+          "text": "$F_Y(y) = 1 - e^{\\lambda y}$",
+          "correct": false,
+          "explanation": "Signo del exponente incorrecto: no es una acumulada."
+        },
+        {
+          "text": "$F_Y(y) = e^{-\\lambda y}$",
+          "correct": false,
+          "explanation": "Es $P(Y > y)$."
+        },
+        {
+          "text": "$F_Y(y) = 1 - e^{-\\lambda y}$",
+          "correct": true,
+          "explanation": "La transformación es creciente; se aplica $F_X$ a la inversa."
+        },
+        {
+          "text": "$F_Y(y) = \\lambda y$",
+          "correct": false,
+          "explanation": "Supone uniforme."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Distribución de $Y$:",
+      "hint": "Reconocer la acumulada.",
+      "cards": [
+        {
+          "text": "$Y \\sim \\mathcal{E}(1/\\lambda)$",
+          "correct": false,
+          "explanation": "La acumulada es $1 - e^{-\\lambda y}$: parámetro $\\lambda$."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{U}[0, \\lambda]$",
+          "correct": false,
+          "explanation": "No es uniforme."
+        },
+        {
+          "text": "$Y \\sim \\Gamma(2, \\lambda)$",
+          "correct": false,
+          "explanation": "No es suma de exponenciales."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{E}(\\lambda)$, $f_Y(y) = \\lambda e^{-\\lambda y}\\mathbb{1}_{(0,\\infty)}(y)$",
+          "correct": true,
+          "explanation": "Exponencial de parámetro $\\lambda$."
+        }
+      ]
+    },
+    {
+      "id": "uso",
+      "kind": "interpret",
+      "prompt": "¿Para qué sirve este resultado?",
+      "hint": "Método de la transformada inversa.",
+      "cards": [
+        {
+          "text": "Probar la falta de memoria de la uniforme",
+          "correct": false,
+          "explanation": "La uniforme no la tiene."
+        },
+        {
+          "text": "Simular exponenciales a partir de uniformes",
+          "correct": true,
+          "explanation": "$Y = F^{-1}(X)$ con $F(y) = 1 - e^{-\\lambda y}$."
+        },
+        {
+          "text": "Mostrar que toda variable continua es exponencial",
+          "correct": false,
+          "explanation": "Sólo esta transformación da exponencial."
+        },
+        {
+          "text": "Calcular la esperanza de una uniforme",
+          "correct": false,
+          "explanation": "No se relaciona."
+        }
+      ]
+    }
+  ]
+}

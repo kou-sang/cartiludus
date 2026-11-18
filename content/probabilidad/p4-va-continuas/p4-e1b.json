@@ -1,0 +1,67 @@
+{
+  "id": "p4-e1b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 1(b) · Diámetro entre 4 y 6",
+  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. ¿Cuál es la probabilidad de que el diámetro de un árbol elegido al azar mida entre 4 y 6 decímetros? Dato: $k = \\tfrac1{50}$, así que $F_D(x) = \\tfrac{x^2}{100}$ en $[0, 10]$.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "plan",
+      "kind": "setup",
+      "prompt": "¿Cómo se calcula $P(4 < D < 6)$?",
+      "hint": "Distribución acumulada.",
+      "cards": [
+        {
+          "text": "$F_D(6) \\cdot F_D(4)$",
+          "correct": false,
+          "explanation": "No hay producto en esta probabilidad."
+        },
+        {
+          "text": "$F_D(6) - F_D(4)$",
+          "correct": true,
+          "explanation": "Integral de la densidad entre 4 y 6."
+        },
+        {
+          "text": "$f_D(6) - f_D(4)$",
+          "correct": false,
+          "explanation": "Diferencia de densidades, no de probabilidades."
+        },
+        {
+          "text": "$\\int_4^6 F_D(x)\\,dx$",
+          "correct": false,
+          "explanation": "Integra la acumulada en lugar de la densidad."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$F_D(x) = x^2/100$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{36 - 16}{100} = \\tfrac15$",
+          "correct": true,
+          "explanation": "Diferencia de la acumulada."
+        },
+        {
+          "text": "$\\tfrac{16}{100}$",
+          "correct": false,
+          "explanation": "Es $P(D < 4)$."
+        },
+        {
+          "text": "$\\tfrac{36-16}{50} = \\tfrac25$",
+          "correct": false,
+          "explanation": "Usa $F_D(x) = x^2/50$: olvida el $\\tfrac12$ de $\\int x\\,dx$."
+        },
+        {
+          "text": "$\\tfrac{36}{100}$",
+          "correct": false,
+          "explanation": "Es $P(D < 6)$."
+        }
+      ]
+    }
+  ]
+}

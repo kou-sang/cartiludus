@@ -1,0 +1,123 @@
+{
+  "id": "p1-e3",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Ej. 3 · Tablero 3×3 sin subtablero negro",
+  "statement": "Se tiene un tablero de $3 \\times 3$ y se pinta cada casilla independientemente de blanco o negro, con igual probabilidad. ¿Cuál es la probabilidad de que no haya un subtablero de $2 \\times 2$ pintado de negro?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "modelo",
+      "kind": "setup",
+      "prompt": "¿Cuál es el modelo?",
+      "hint": "Cada casilla es una elección binaria independiente.",
+      "cards": [
+        {
+          "text": "$\\#\\Omega = 2 \\cdot 9$",
+          "correct": false,
+          "explanation": "Suma las opciones en lugar de multiplicarlas."
+        },
+        {
+          "text": "$\\#\\Omega = 9!$",
+          "correct": false,
+          "explanation": "Cuenta permutaciones; aquí cada casilla se colorea, no se ordena."
+        },
+        {
+          "text": "$\\Omega = \\{B,N\\}^9$ equiprobable, $\\#\\Omega = 512$",
+          "correct": true,
+          "explanation": "$2^9$ coloreos, cada uno con probabilidad $2^{-9}$."
+        },
+        {
+          "text": "$\\Omega = \\{0,\\dots,9\\}$ (cantidad de negras), equiprobable",
+          "correct": false,
+          "explanation": "La cantidad de negras es binomial, no uniforme; además pierde la posición."
+        }
+      ]
+    },
+    {
+      "id": "ie",
+      "kind": "setup",
+      "prompt": "Sea $E_k$ el evento \"el $k$-ésimo subtablero $2\\times2$ es negro\". ¿Cómo se calcula $P(\\bigcup E_k)$?",
+      "hint": "Hay 4 subtableros y se superponen.",
+      "cards": [
+        {
+          "text": "$P(E_1)^4$",
+          "correct": false,
+          "explanation": "Es la probabilidad de la intersección bajo independencia, no de la unión."
+        },
+        {
+          "text": "$4 \\cdot P(E_1)$",
+          "correct": false,
+          "explanation": "Trata los eventos como disjuntos; sobrecuenta coloreos con dos subtableros negros."
+        },
+        {
+          "text": "Inclusión-exclusión sobre los 4 subtableros",
+          "correct": true,
+          "explanation": "Los $E_k$ no son disjuntos: comparten casillas, así que hay que corregir intersecciones."
+        },
+        {
+          "text": "$1 - (1 - \\tfrac1{16})^4$",
+          "correct": false,
+          "explanation": "Supone independencia entre los $E_k$, pero comparten casillas."
+        }
+      ]
+    },
+    {
+      "id": "inter",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\sum_{k<l} P(E_k \\cap E_l)$?",
+      "hint": "Dos subtableros adyacentes cubren 6 casillas; dos opuestos en diagonal, 7.",
+      "cards": [
+        {
+          "text": "$\\tfrac{4}{64} + \\tfrac{2}{128}$",
+          "correct": true,
+          "explanation": "4 pares adyacentes ($2^{-6}$ cada uno) y 2 pares diagonales ($2^{-7}$ cada uno)."
+        },
+        {
+          "text": "$\\binom42 \\cdot \\tfrac{1}{16^2}$",
+          "correct": false,
+          "explanation": "Usa independencia, pero las casillas compartidas se cuentan una sola vez."
+        },
+        {
+          "text": "$6 \\cdot \\tfrac{1}{256}$",
+          "correct": false,
+          "explanation": "Asume que todo par cubre 8 casillas."
+        },
+        {
+          "text": "$6 \\cdot \\tfrac{1}{64}$",
+          "correct": false,
+          "explanation": "Los pares diagonales cubren 7 casillas, no 6."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado final:",
+      "hint": "Triples: 4 casos, cada uno cubre 8 casillas; los cuatro: 9 casillas.",
+      "cards": [
+        {
+          "text": "$(\\tfrac{15}{16})^4 \\approx 0{,}772$",
+          "correct": false,
+          "explanation": "Supone independencia entre subtableros."
+        },
+        {
+          "text": "$\\tfrac{3}{4}$",
+          "correct": false,
+          "explanation": "Es $1 - 4 \\cdot \\tfrac1{16}$: falta corregir las intersecciones."
+        },
+        {
+          "text": "$\\tfrac{417}{512} \\approx 0{,}814$",
+          "correct": true,
+          "explanation": "$P(\\bigcup E_k) = \\tfrac{4}{16} - (\\tfrac{4}{64}+\\tfrac{2}{128}) + \\tfrac{4}{256} - \\tfrac{1}{512} = \\tfrac{95}{512}$; se toma el complemento."
+        },
+        {
+          "text": "$\\tfrac{95}{512}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que haya algún subtablero negro, no de que no haya."
+        }
+      ]
+    }
+  ]
+}

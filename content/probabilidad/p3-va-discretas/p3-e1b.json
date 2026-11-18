@@ -1,0 +1,123 @@
+{
+  "id": "p3-e1b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 1(b) · Tiro al blanco: condicional",
+  "statement": "La probabilidad de acertar al blanco en un juego es $\\tfrac15$. Se tiran 10 tiros de manera independiente. Hallar la probabilidad de que se produzcan al menos dos aciertos, sabiendo que se produjo al menos uno.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "identify",
+      "prompt": "¿Qué variable aleatoria conviene definir?",
+      "hint": "La pregunta es sobre cuántos aciertos hay.",
+      "cards": [
+        {
+          "text": "$X$ = cantidad de aciertos en los 10 tiros",
+          "correct": true,
+          "explanation": "Los eventos pedidos se expresan como $\\{X \\ge 2\\}$ y $\\{X \\ge 1\\}$."
+        },
+        {
+          "text": "$X$ = resultado del tiro 10",
+          "correct": false,
+          "explanation": "Describe un solo tiro."
+        },
+        {
+          "text": "$X$ = cantidad de fallos hasta el segundo acierto",
+          "correct": false,
+          "explanation": "Es binomial negativa y no tiene tope de 10 tiros."
+        },
+        {
+          "text": "$X$ = número de tiro del primer acierto",
+          "correct": false,
+          "explanation": "Es una geométrica (truncada); no describe \"al menos dos aciertos\"."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene $X$?",
+      "hint": "Ensayos independientes con igual probabilidad de éxito.",
+      "cards": [
+        {
+          "text": "$X \\sim \\mathcal{P}(2)$",
+          "correct": false,
+          "explanation": "Es sólo una aproximación; la distribución exacta es binomial."
+        },
+        {
+          "text": "$X \\sim \\mathcal{G}(\\tfrac15)$",
+          "correct": false,
+          "explanation": "La geométrica cuenta ensayos hasta el primer éxito."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(10, \\tfrac15)$",
+          "correct": true,
+          "explanation": "10 ensayos Bernoulli independientes con $p = \\tfrac15$."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(10, \\tfrac45)$",
+          "correct": false,
+          "explanation": "Ese parámetro corresponde a contar fallos."
+        }
+      ]
+    },
+    {
+      "id": "cond",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(X\\ge2 \\mid X \\ge 1)$?",
+      "hint": "$\\{X \\ge 2\\} \\subseteq \\{X\\ge 1\\}$.",
+      "cards": [
+        {
+          "text": "$P(X \\ge 2) \\cdot P(X \\ge 1)$",
+          "correct": false,
+          "explanation": "No hay independencia; además la intersección no es un producto."
+        },
+        {
+          "text": "$\\dfrac{P(X \\ge 2)}{P(X \\ge 1)}$",
+          "correct": true,
+          "explanation": "La intersección es $\\{X \\ge 2\\}$."
+        },
+        {
+          "text": "$\\dfrac{P(X \\ge 1)}{P(X \\ge 2)}$",
+          "correct": false,
+          "explanation": "Invierte numerador y denominador; daría un valor mayor que 1."
+        },
+        {
+          "text": "$P(X \\ge 1)$ (falta de memoria)",
+          "correct": false,
+          "explanation": "La binomial no tiene falta de memoria."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$P(X \\ge 2) \\approx 0{,}6242$ y $P(X \\ge 1) = 1 - 0{,}8^{10} \\approx 0{,}8926$.",
+      "cards": [
+        {
+          "text": "$\\approx 0{,}557$",
+          "correct": false,
+          "explanation": "Multiplica en lugar de dividir."
+        },
+        {
+          "text": "$\\approx 0{,}624$",
+          "correct": false,
+          "explanation": "No condiciona."
+        },
+        {
+          "text": "$\\approx 0{,}893$",
+          "correct": false,
+          "explanation": "Es $P(X \\ge 1)$."
+        },
+        {
+          "text": "$\\approx 0{,}699$",
+          "correct": true,
+          "explanation": "$0{,}6242 / 0{,}8926$."
+        }
+      ]
+    }
+  ]
+}

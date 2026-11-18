@@ -27,7 +27,7 @@ Reglas del validador:
 
 - `id` del problema = nombre del archivo; `subject` y `topic` deben coincidir con las carpetas y con un `meta.json`.
 - `version` entera ≥ 1 (incrementar al cambiar el problema).
-- Cada paso: `hint` obligatorio, exactamente 4 cartas, ≥ 1 correcta, 4 explicaciones no vacías, textos únicos (sin distinguir mayúsculas ni espacios).
+- Cada paso: `hint` obligatorio, exactamente 4 cartas, ≥ 1 correcta, 4 explicaciones no vacías, textos únicos (ignorando espacios; distingue mayúsculas, p. ej. `F_D` ≠ `f_D`).
 - Todo `$...$` / `$$...$$` compila con KaTeX en modo estricto. `\$` = dólar literal.
 
 `kind` → categoría de resumen: `identify` → Identificar VA; `distribution`, `parameters` → Distribución; `property` → Propiedad; `setup`, `compute`, `interpret` → Cálculo.

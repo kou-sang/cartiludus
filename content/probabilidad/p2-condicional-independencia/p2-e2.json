@@ -1,0 +1,95 @@
+{
+  "id": "p2-e2",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Ej. 2 · Tres urnas y dos blancas",
+  "statement": "Tres urnas con 20 bolillas cada una: la primera tiene 20 blancas, la segunda 15 y la tercera 10; el resto son negras. Se elige una urna y se extraen de ella con reposición dos bolillas. La probabilidad de elegir la primera urna es la misma que la de elegir la segunda, y la de elegir la tercera es igual a su suma. Calcular la probabilidad de haber seleccionado la primera urna sabiendo que las dos bolillas extraídas son blancas.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "prior",
+      "kind": "setup",
+      "prompt": "¿Cuánto valen $P(U_1), P(U_2), P(U_3)$?",
+      "hint": "$p + p + 2p = 1$.",
+      "cards": [
+        {
+          "text": "$\\tfrac13, \\tfrac13, \\tfrac23$",
+          "correct": false,
+          "explanation": "Suman más de 1."
+        },
+        {
+          "text": "$\\tfrac14, \\tfrac14, \\tfrac12$",
+          "correct": true,
+          "explanation": "$P(U_3) = P(U_1) + P(U_2)$ y suman 1."
+        },
+        {
+          "text": "$\\tfrac16, \\tfrac16, \\tfrac23$",
+          "correct": false,
+          "explanation": "$P(U_3)$ sería el doble de la suma."
+        },
+        {
+          "text": "$\\tfrac13, \\tfrac13, \\tfrac13$",
+          "correct": false,
+          "explanation": "No respeta $P(U_3) = P(U_1) + P(U_2)$."
+        }
+      ]
+    },
+    {
+      "id": "lik",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(BB \\mid U_i)$?",
+      "hint": "Con reposición, las extracciones son independientes dada la urna.",
+      "cards": [
+        {
+          "text": "$1,\\ \\tfrac34,\\ \\tfrac12$",
+          "correct": false,
+          "explanation": "Es la probabilidad de una sola blanca."
+        },
+        {
+          "text": "$1,\\ \\tfrac{9}{16},\\ \\tfrac14$",
+          "correct": true,
+          "explanation": "$(20/20)^2$, $(15/20)^2$, $(10/20)^2$."
+        },
+        {
+          "text": "$1,\\ \\tfrac{9}{16},\\ \\tfrac12$",
+          "correct": false,
+          "explanation": "En la tercera falta elevar al cuadrado."
+        },
+        {
+          "text": "$1,\\ \\tfrac{15}{20}\\cdot\\tfrac{14}{19},\\ \\tfrac{10}{20}\\cdot\\tfrac{9}{19}$",
+          "correct": false,
+          "explanation": "Corresponde a extracción sin reposición."
+        }
+      ]
+    },
+    {
+      "id": "bayes",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(U_1 \\mid BB)$?",
+      "hint": "Fórmula de Bayes.",
+      "cards": [
+        {
+          "text": "$\\tfrac14$",
+          "correct": false,
+          "explanation": "Es la probabilidad a priori: ignora la evidencia."
+        },
+        {
+          "text": "$\\dfrac{1}{1 + 9/16 + 1/4} = \\tfrac{16}{29}$",
+          "correct": false,
+          "explanation": "Usa probabilidades a priori iguales."
+        },
+        {
+          "text": "$\\dfrac{1/4}{33/64} = \\tfrac{16}{33} \\approx 0{,}485$",
+          "correct": true,
+          "explanation": "$P(BB) = \\tfrac14 + \\tfrac14\\cdot\\tfrac9{16} + \\tfrac12\\cdot\\tfrac14 = \\tfrac{33}{64}$."
+        },
+        {
+          "text": "$\\tfrac{33}{64}$",
+          "correct": false,
+          "explanation": "Es $P(BB)$, no la condicional pedida."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "p5-e1",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Ej. 1 · Producto de binomiales",
+  "statement": "Sean $X_1, X_2, X_3$ v.a.i.i.d. $\\mathrm{Bi}(4, \\tfrac13)$ y sea $Y = X_1 X_2 X_3$. Calcular $P(Y = 0)$.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "ev",
+      "kind": "setup",
+      "prompt": "¿A qué equivale $\\{Y = 0\\}$?",
+      "hint": "Un producto se anula si algún factor se anula.",
+      "cards": [
+        {
+          "text": "$\\bigcap_{i=1}^3 \\{X_i = 0\\}$",
+          "correct": false,
+          "explanation": "Pide que las tres sean 0: es un subconjunto estricto."
+        },
+        {
+          "text": "$\\{X_1 + X_2 + X_3 = 0\\}$",
+          "correct": false,
+          "explanation": "Equivale a la intersección anterior."
+        },
+        {
+          "text": "$\\bigcup_{i=1}^3 \\{X_i = 0\\}$",
+          "correct": true,
+          "explanation": "Basta que una de las tres sea 0."
+        },
+        {
+          "text": "$\\{X_1 = 0\\}$",
+          "correct": false,
+          "explanation": "Ignora $X_2$ y $X_3$."
+        }
+      ]
+    },
+    {
+      "id": "compl",
+      "kind": "property",
+      "prompt": "¿Qué propiedad conviene usar?",
+      "hint": "Complemento de la unión.",
+      "cards": [
+        {
+          "text": "$P(Y=0) = P(X_1 = 0)^{1/3}$",
+          "correct": false,
+          "explanation": "Sin fundamento."
+        },
+        {
+          "text": "$P(Y = 0) = 1 - \\prod_{i} P(X_i \\ge 1)$ por independencia",
+          "correct": true,
+          "explanation": "$\\{Y \\ne 0\\} = \\bigcap \\{X_i \\ge 1\\}$ y los eventos son independientes."
+        },
+        {
+          "text": "$P(Y = 0) = \\prod_i P(X_i = 0)$",
+          "correct": false,
+          "explanation": "Es la probabilidad de la intersección."
+        },
+        {
+          "text": "$P(Y=0) = \\sum_i P(X_i = 0)$",
+          "correct": false,
+          "explanation": "Los eventos no son disjuntos."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$P(X_i = 0) = (\\tfrac23)^4 = \\tfrac{16}{81}$.",
+      "cards": [
+        {
+          "text": "$1 - \\left(\\tfrac{16}{81}\\right)^3$",
+          "correct": false,
+          "explanation": "Mezcla complemento con intersección."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac{65}{81}\\right)^3 \\approx 0{,}483$",
+          "correct": true,
+          "explanation": "$P(X_i \\ge 1) = \\tfrac{65}{81}$."
+        },
+        {
+          "text": "$3 \\cdot \\tfrac{16}{81} \\approx 0{,}593$",
+          "correct": false,
+          "explanation": "Suma sin restar intersecciones."
+        },
+        {
+          "text": "$\\left(\\tfrac{16}{81}\\right)^3 \\approx 0{,}008$",
+          "correct": false,
+          "explanation": "Probabilidad de que las tres sean 0."
+        }
+      ]
+    }
+  ]
+}

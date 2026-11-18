@@ -28,9 +28,13 @@ describe('Problem', () => {
     const cards = [card('a', true), card('b'), card('c'), { text: 'd', correct: false, explanation: '  ' }];
     expect(Problem.safeParse(problem([step({ cards })])).success).toBe(false);
   });
-  it('rechaza textos repetidos (ignora mayúsculas y espacios)', () => {
-    const cards = [card('Binomial', true), card(' binomial '), card('c'), card('d')];
+  it('rechaza textos repetidos (ignora espacios)', () => {
+    const cards = [card('$a  +  b$', true), card(' $a + b$ '), card('c'), card('d')];
     expect(Problem.safeParse(problem([step({ cards })])).success).toBe(false);
+  });
+  it('distingue mayúsculas (F_D vs f_D son textos distintos)', () => {
+    const cards = [card('$F_D(6)$', true), card('$f_D(6)$'), card('c'), card('d')];
+    expect(Problem.safeParse(problem([step({ cards })])).success).toBe(true);
   });
   it('exige hint y version', () => {
     const { hint: _h, ...noHint } = step();

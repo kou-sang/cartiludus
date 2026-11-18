@@ -1,0 +1,95 @@
+{
+  "id": "p3-e9b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Ej. 9(b) · Fuentes radiactivas: Bayes",
+  "statement": "Tres fuentes radiactivas $F_1, F_2, F_3$ emiten por hora una cantidad de partículas con distribución $\\mathcal{P}(\\lambda_i)$, con $\\lambda_1 = 2$, $\\lambda_2 = 3$, $\\lambda_3 = 4$. Se elige una fuente al azar (equiprobable) y se observa que emite 4 partículas en una hora. Encontrar la probabilidad de que haya elegido la fuente $F_i$, para cada $1 \\le i \\le 3$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "pmf",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(N = 4 \\mid F_i)$?",
+      "hint": "$P(N = k) = e^{-\\lambda}\\lambda^k / k!$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{e^{-2}2^4}{24} \\approx 0{,}090$, $\\tfrac{e^{-3}3^4}{24} \\approx 0{,}168$, $\\tfrac{e^{-4}4^4}{24} \\approx 0{,}195$",
+          "correct": true,
+          "explanation": "Función de probabilidad puntual de Poisson en $k = 4$."
+        },
+        {
+          "text": "$e^{-2}, e^{-3}, e^{-4}$",
+          "correct": false,
+          "explanation": "Es $P(N = 0)$."
+        },
+        {
+          "text": "$\\tfrac{e^{-4}2^4}{24}$, $\\tfrac{e^{-4}3^4}{24}$, $\\tfrac{e^{-4}4^4}{24}$",
+          "correct": false,
+          "explanation": "Usa $k$ en lugar de $\\lambda$ en la exponencial."
+        },
+        {
+          "text": "$\\tfrac{2^4}{24}$, $\\tfrac{3^4}{24}$, $\\tfrac{4^4}{24}$",
+          "correct": false,
+          "explanation": "Falta el factor $e^{-\\lambda}$."
+        }
+      ]
+    },
+    {
+      "id": "bayes",
+      "kind": "setup",
+      "prompt": "¿Cómo se calcula $P(F_i \\mid N = 4)$?",
+      "hint": "Fórmula de Bayes con prior uniforme.",
+      "cards": [
+        {
+          "text": "$\\dfrac{P(N=4\\mid F_i)}{\\sum_j P(N = 4 \\mid F_j)}$",
+          "correct": true,
+          "explanation": "Los $\\tfrac13$ del prior se cancelan."
+        },
+        {
+          "text": "$P(N=4\\mid F_i)$",
+          "correct": false,
+          "explanation": "No está normalizado: no suman 1."
+        },
+        {
+          "text": "$\\dfrac{\\lambda_i}{\\lambda_1+\\lambda_2+\\lambda_3}$",
+          "correct": false,
+          "explanation": "No usa la observación $N = 4$."
+        },
+        {
+          "text": "$\\tfrac13 P(N = 4\\mid F_i)$",
+          "correct": false,
+          "explanation": "Es $P(F_i \\cap \\{N=4\\})$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "Normalizar $0{,}0902$, $0{,}1680$, $0{,}1954$.",
+      "cards": [
+        {
+          "text": "$\\approx 0{,}199$, $0{,}370$, $0{,}431$",
+          "correct": true,
+          "explanation": "Cada valor dividido por $0{,}4536$."
+        },
+        {
+          "text": "$\\tfrac29$, $\\tfrac39$, $\\tfrac49$",
+          "correct": false,
+          "explanation": "Proporcional a $\\lambda_i$, sin usar la observación."
+        },
+        {
+          "text": "$\\tfrac13$, $\\tfrac13$, $\\tfrac13$",
+          "correct": false,
+          "explanation": "Ignora la evidencia."
+        },
+        {
+          "text": "$\\approx 0{,}090$, $0{,}168$, $0{,}195$",
+          "correct": false,
+          "explanation": "Son las verosimilitudes sin normalizar."
+        }
+      ]
+    }
+  ]
+}

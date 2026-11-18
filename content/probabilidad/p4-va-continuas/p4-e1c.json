@@ -1,0 +1,67 @@
+{
+  "id": "p4-e1c",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 1(c) · Diámetro: condicional",
+  "statement": "El diámetro $D$ (en decímetros) del tronco de cierta especie de árboles es una variable aleatoria con densidad $f_D(x) = k\\,x\\,\\mathbb{1}_{(0,10)}(x)$. ¿Cómo se modifica la probabilidad de que el diámetro esté entre 4 y 6 si se sabe que mide más de 5 decímetros? Dato: $k = \\tfrac1{50}$, así que $F_D(x) = \\tfrac{x^2}{100}$ en $[0, 10]$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "cond",
+      "kind": "setup",
+      "prompt": "Plantear la probabilidad condicional:",
+      "hint": "$\\{4 < D < 6\\} \\cap \\{D > 5\\}$.",
+      "cards": [
+        {
+          "text": "$\\dfrac{P(4 < D < 6)}{P(D > 5)}$",
+          "correct": false,
+          "explanation": "No interseca con el evento condicionante."
+        },
+        {
+          "text": "$P(4 < D < 6) \\cdot P(D > 5)$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{P(5 < D < 6)}{P(D > 5)}$",
+          "correct": true,
+          "explanation": "La intersección es $\\{5 < D < 6\\}$."
+        },
+        {
+          "text": "$P(D < 1)$ (falta de memoria)",
+          "correct": false,
+          "explanation": "Sólo la exponencial tiene falta de memoria."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$P(5<D<6) = \\tfrac{11}{100}$, $P(D > 5) = \\tfrac{75}{100}$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{11}{100}$",
+          "correct": false,
+          "explanation": "No divide por $P(D>5)$."
+        },
+        {
+          "text": "$\\tfrac{11}{75} \\approx 0{,}147$",
+          "correct": true,
+          "explanation": "Cociente de las dos probabilidades."
+        },
+        {
+          "text": "$\\tfrac{20}{75}$",
+          "correct": false,
+          "explanation": "Usa $P(4<D<6)$ en el numerador."
+        },
+        {
+          "text": "$\\tfrac{11}{25}$",
+          "correct": false,
+          "explanation": "Divide por $P(D \\le 5)$."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "p4-e2a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 2(a) · Colectivo: esperar más de 10 minutos",
+  "statement": "El colectivo que toma Felipe llega a la parada en algún momento entre las 10 y las 10:30 con distribución uniforme. Felipe llega a la parada a las 10. ¿Cuál es la probabilidad de que tenga que esperar más de 10 minutos?",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "distribution",
+      "prompt": "Modelo:",
+      "hint": "Medir el tiempo en minutos desde las 10.",
+      "cards": [
+        {
+          "text": "$T \\sim \\mathcal{N}(15, 30)$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme; además una normal toma valores fuera de $[0, 30]$."
+        },
+        {
+          "text": "$T \\sim \\mathcal{E}(\\tfrac1{30})$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme."
+        },
+        {
+          "text": "$T \\sim \\mathcal{U}[0, 30]$ (espera de Felipe)",
+          "correct": true,
+          "explanation": "La espera coincide con el momento de llegada del colectivo."
+        },
+        {
+          "text": "$T \\sim \\mathcal{U}[10, 30]$",
+          "correct": false,
+          "explanation": "El intervalo es de 10:00 a 10:30, es decir $[0, 30]$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "$P(T > 10)$:",
+      "hint": "Longitud favorable sobre longitud total.",
+      "cards": [
+        {
+          "text": "$\\tfrac{20}{30} = \\tfrac23$",
+          "correct": true,
+          "explanation": "Uniforme: proporcional a la longitud."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Es $P(T \\le 10)$."
+        },
+        {
+          "text": "$e^{-1/3}$",
+          "correct": false,
+          "explanation": "Usa una exponencial."
+        },
+        {
+          "text": "$\\tfrac{10}{30}$",
+          "correct": false,
+          "explanation": "Es $P(T < 10)$."
+        }
+      ]
+    }
+  ]
+}

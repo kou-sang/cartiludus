@@ -1,0 +1,95 @@
+{
+  "id": "p2-e3b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Ej. 3(b) · Test diagnóstico: precisión requerida",
+  "statement": "Sean $E$ = {la persona está enferma} y $A$ = {el análisis da positivo}. $P(A \\mid E)$ es la sensibilidad y $P(A^c \\mid E^c)$ la especificidad del test. Supongamos $P(A\\mid E) = P(A^c\\mid E^c) = p$ y $P(E) = 0{,}005$. ¿Para qué valor de $p$ es $P(E \\mid A) = 0{,}95$?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "ec",
+      "kind": "setup",
+      "prompt": "Plantear la ecuación:",
+      "hint": "Bayes en función de $p$.",
+      "cards": [
+        {
+          "text": "$0{,}005\\,p = 0{,}95$",
+          "correct": false,
+          "explanation": "Olvida normalizar por $P(A)$."
+        },
+        {
+          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,p} = 0{,}95$",
+          "correct": false,
+          "explanation": "La tasa de falsos positivos es $1 - p$, no $p$."
+        },
+        {
+          "text": "$p = 0{,}95$",
+          "correct": false,
+          "explanation": "Confunde $P(A\\mid E)$ con $P(E\\mid A)$."
+        },
+        {
+          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,(1-p)} = 0{,}95$",
+          "correct": true,
+          "explanation": "Sensibilidad $p$ y tasa de falsos positivos $1-p$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Valor de $p$:",
+      "hint": "Despejar: $0{,}00025\\,p = 0{,}94525\\,(1-p)$.",
+      "cards": [
+        {
+          "text": "No existe tal $p$",
+          "correct": false,
+          "explanation": "La función es continua y creciente en $p$ y tiende a 1; existe solución."
+        },
+        {
+          "text": "$p = 0{,}95$",
+          "correct": false,
+          "explanation": "Sólo daría $P(E\\mid A) \\approx 0{,}087$, como en (a)."
+        },
+        {
+          "text": "$p \\approx 0{,}995$",
+          "correct": false,
+          "explanation": "Daría $P(E\\mid A) \\approx 0{,}5$."
+        },
+        {
+          "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
+          "correct": true,
+          "explanation": "Despeje lineal de la ecuación anterior."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "kind": "interpret",
+      "prompt": "¿Qué muestra el resultado?",
+      "hint": "Comparar el error permitido con la prevalencia.",
+      "cards": [
+        {
+          "text": "Con prevalencia baja se necesita una tasa de falsos positivos del orden de 0,03 %",
+          "correct": true,
+          "explanation": "$1 - p \\approx 2{,}6 \\cdot 10^{-4}$, mucho menor que $P(E) = 0{,}005$."
+        },
+        {
+          "text": "La prevalencia no influye",
+          "correct": false,
+          "explanation": "Interviene directamente en Bayes."
+        },
+        {
+          "text": "Cualquier test con precisión mayor a 0,9 alcanza",
+          "correct": false,
+          "explanation": "El ítem (a) muestra que 0,95 da sólo 0,087."
+        },
+        {
+          "text": "Basta aumentar la sensibilidad dejando fija la especificidad",
+          "correct": false,
+          "explanation": "Lo que domina son los falsos positivos sobre $E^c$."
+        }
+      ]
+    }
+  ]
+}

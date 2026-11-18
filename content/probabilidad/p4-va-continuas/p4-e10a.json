@@ -1,0 +1,95 @@
+{
+  "id": "p4-e10a",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 10(a) · Aurora: dos días de la semana",
+  "statement": "La cantidad de leche (litros) que da Aurora en un día es $X \\sim \\mathcal{E}(0{,}2)$. Belinda da 5 litros el 20% de las veces que es ordeñada y el resto no da nada. Don Zoilo ordeña a Belinda solamente los días en que Aurora da menos de 6 litros. ¿Cuál es la probabilidad de que Aurora dé más de 6 litros en exactamente dos días de la próxima semana? Los fines de semana no se ordeña.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "p",
+      "kind": "compute",
+      "prompt": "$p = P(X > 6)$:",
+      "hint": "Cola de la exponencial: $P(X > t) = e^{-\\lambda t}$.",
+      "cards": [
+        {
+          "text": "$e^{-30}$",
+          "correct": false,
+          "explanation": "Usa $t/\\lambda$ en vez de $\\lambda t$."
+        },
+        {
+          "text": "$1 - e^{-1{,}2}$",
+          "correct": false,
+          "explanation": "Es $P(X \\le 6)$."
+        },
+        {
+          "text": "$e^{-1{,}2} \\approx 0{,}301$",
+          "correct": true,
+          "explanation": "$\\lambda t = 0{,}2 \\cdot 6$."
+        },
+        {
+          "text": "$0{,}2 e^{-1{,}2}$",
+          "correct": false,
+          "explanation": "Es la densidad en 6."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Cantidad de días (de la semana hábil) con más de 6 litros:",
+      "hint": "Días independientes.",
+      "cards": [
+        {
+          "text": "$\\mathcal{P}(5e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "Aproximación innecesaria con $n = 5$."
+        },
+        {
+          "text": "$\\mathcal{G}(e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        },
+        {
+          "text": "$\\mathrm{Bi}(5, e^{-1{,}2})$",
+          "correct": true,
+          "explanation": "5 días hábiles, cada uno con probabilidad $p$."
+        },
+        {
+          "text": "$\\mathrm{Bi}(7, e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "Los fines de semana no se ordeña."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$\\binom52 p^2(1-p)^3$.",
+      "cards": [
+        {
+          "text": "$21\\,e^{-2{,}4}(1 - e^{-1{,}2})^5 \\approx 0{,}317$",
+          "correct": false,
+          "explanation": "Usa 7 días."
+        },
+        {
+          "text": "$10\\,e^{-2{,}4}(1 - e^{-1{,}2})^3 \\approx 0{,}310$",
+          "correct": true,
+          "explanation": "Binomial en $k = 2$."
+        },
+        {
+          "text": "$10\\,(1-e^{-1{,}2})^2 e^{-3{,}6}$",
+          "correct": false,
+          "explanation": "Intercambia $p$ y $1-p$."
+        },
+        {
+          "text": "$e^{-2{,}4} \\approx 0{,}091$",
+          "correct": false,
+          "explanation": "Falta el resto de los factores."
+        }
+      ]
+    }
+  ]
+}

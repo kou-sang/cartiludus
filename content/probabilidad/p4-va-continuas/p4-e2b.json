@@ -1,0 +1,95 @@
+{
+  "id": "p4-e2b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Ej. 2(b) · Colectivo: sigue sin llegar",
+  "statement": "El colectivo que toma Felipe llega a la parada en algún momento entre las 10 y las 10:30 con distribución uniforme. Felipe llega a la parada a las 10. Si el colectivo no llegó a las 10:15, hallar la probabilidad de que Felipe tenga que esperar por lo menos otros 10 minutos.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "cond",
+      "kind": "setup",
+      "prompt": "Plantear:",
+      "hint": "Con $T \\sim \\mathcal{U}[0,30]$.",
+      "cards": [
+        {
+          "text": "$P(T \\ge 25)$",
+          "correct": false,
+          "explanation": "No condiciona."
+        },
+        {
+          "text": "$P(T \\ge 25 \\mid T > 15)$",
+          "correct": true,
+          "explanation": "\"Otros 10 minutos\" desde las 10:15."
+        },
+        {
+          "text": "$P(T \\ge 10)$",
+          "correct": false,
+          "explanation": "Usa falta de memoria, que la uniforme no tiene."
+        },
+        {
+          "text": "$P(T \\ge 10 \\mid T > 15)$",
+          "correct": false,
+          "explanation": "Ese evento ya ocurrió: daría 1."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "Dado $T > 15$, $T \\sim \\mathcal{U}(15, 30]$.",
+      "cards": [
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Sin justificación."
+        },
+        {
+          "text": "$\\tfrac23$",
+          "correct": false,
+          "explanation": "Es la respuesta de (a): la uniforme no tiene falta de memoria."
+        },
+        {
+          "text": "$\\tfrac16$",
+          "correct": false,
+          "explanation": "No divide por $P(T > 15)$."
+        },
+        {
+          "text": "$\\tfrac{5/30}{15/30} = \\tfrac13$",
+          "correct": true,
+          "explanation": "Quedan 5 de 15 minutos favorables."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "kind": "property",
+      "prompt": "¿Qué muestra comparar con (a)?",
+      "hint": "Comparar $\\tfrac13$ con $\\tfrac23$.",
+      "cards": [
+        {
+          "text": "La uniforme tiene falta de memoria",
+          "correct": false,
+          "explanation": "Si la tuviera, ambas respuestas coincidirían."
+        },
+        {
+          "text": "La uniforme no tiene falta de memoria",
+          "correct": true,
+          "explanation": "Haber esperado cambia la probabilidad de seguir esperando."
+        },
+        {
+          "text": "La espera es independiente de lo ya esperado",
+          "correct": false,
+          "explanation": "Contradice el cálculo."
+        },
+        {
+          "text": "Las dos preguntas son equivalentes",
+          "correct": false,
+          "explanation": "Dan valores distintos."
+        }
+      ]
+    }
+  ]
+}

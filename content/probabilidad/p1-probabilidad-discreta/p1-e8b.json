@@ -1,0 +1,95 @@
+{
+  "id": "p1-e8b",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p1-probabilidad-discreta",
+  "title": "Ej. 8(b) · Problema del cumpleaños",
+  "statement": "Se eligen $r$ personas al azar. Suponiendo que el año tiene 365 días y que las fechas de nacimiento son una selección al azar con reposición, calcular la probabilidad de que todas tengan distintas fechas de cumpleaños.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "modelo",
+      "kind": "setup",
+      "prompt": "¿Con qué caso del ítem (a) se identifica?",
+      "hint": "Población = días del año.",
+      "cards": [
+        {
+          "text": "$n = 365$ y muestra de tamaño $r$ con reposición",
+          "correct": true,
+          "explanation": "Cada persona \"extrae\" un día al azar, con reposición."
+        },
+        {
+          "text": "$n = r$ y muestra de tamaño 365",
+          "correct": false,
+          "explanation": "Invierte población y muestra."
+        },
+        {
+          "text": "$n = 366$",
+          "correct": false,
+          "explanation": "El enunciado fija años de 365 días."
+        },
+        {
+          "text": "Muestra sin reposición de 365 días",
+          "correct": false,
+          "explanation": "Sin reposición nunca habría coincidencias."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Probabilidad de que no haya coincidencias:",
+      "hint": "Aplicar el ítem (a).",
+      "cards": [
+        {
+          "text": "$1 - \\tfrac{r}{365}$",
+          "correct": false,
+          "explanation": "Aproximación lineal sin justificación."
+        },
+        {
+          "text": "$\\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r}$",
+          "correct": true,
+          "explanation": "Es el resultado de (a) con $n = 365$."
+        },
+        {
+          "text": "$\\left(\\tfrac{364}{365}\\right)^{\\binom r2}$",
+          "correct": false,
+          "explanation": "Aproximación que supone independencia entre pares; no es exacta."
+        },
+        {
+          "text": "$\\left(\\tfrac{364}{365}\\right)^{r}$",
+          "correct": false,
+          "explanation": "Sólo evita coincidir con un día fijo."
+        }
+      ]
+    },
+    {
+      "id": "num",
+      "kind": "interpret",
+      "prompt": "Para $r = 23$, ¿cómo es la probabilidad de que haya al menos una coincidencia?",
+      "hint": "Complemento del resultado anterior; para $r = 23$ el producto vale $\\approx 0{,}493$.",
+      "cards": [
+        {
+          "text": "Exactamente $\\tfrac{23}{365}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que alguien cumpla un día fijo (aprox.); no mide coincidencias entre pares."
+        },
+        {
+          "text": "Mayor que $\\tfrac12$ ($\\approx 0{,}507$)",
+          "correct": true,
+          "explanation": "$1 - 0{,}493 \\approx 0{,}507$."
+        },
+        {
+          "text": "Igual a 1",
+          "correct": false,
+          "explanation": "Sólo es segura con $r \\ge 366$."
+        },
+        {
+          "text": "Menor que $0{,}1$",
+          "correct": false,
+          "explanation": "Subestima: hay $\\binom{23}{2} = 253$ pares que pueden coincidir."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "p5-e3c",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Ej. 3(c) · Banco: un hombre y una mujer",
+  "statement": "El número de hombres y de mujeres que ingresan por día a un banco son independientes con distribución $\\mathcal{P}(2)$ y $\\mathcal{P}(2{,}5)$. Sabiendo que en un día ingresaron sólo dos personas, calcular la probabilidad de que hayan sido un hombre y una mujer.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "cond",
+      "kind": "setup",
+      "prompt": "Plantear:",
+      "hint": "$\\{H = 1, M = 1\\} \\subseteq \\{H + M = 2\\}$.",
+      "cards": [
+        {
+          "text": "$\\dfrac{P(H=1)}{P(H+M=2)}$",
+          "correct": false,
+          "explanation": "Falta $M = 1$."
+        },
+        {
+          "text": "$\\dfrac{P(H=1)P(M=1)}{P(H+M = 2)}$ con $H+M \\sim \\mathcal P(4{,}5)$",
+          "correct": true,
+          "explanation": "Independencia y el ítem (b)."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Supone los tres casos (2H, 1-1, 2M) con pesos arbitrarios."
+        },
+        {
+          "text": "$P(H=1)P(M=1)$",
+          "correct": false,
+          "explanation": "Falta condicionar."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene $H$ dado $H + M = 2$?",
+      "hint": "Simplificar el cociente de Poisson.",
+      "cards": [
+        {
+          "text": "Uniforme en $\\{0, 1, 2\\}$",
+          "correct": false,
+          "explanation": "No hay razón para equiprobabilidad."
+        },
+        {
+          "text": "$\\mathrm{Bi}\\left(2, \\tfrac{2}{4{,}5}\\right) = \\mathrm{Bi}(2, \\tfrac49)$",
+          "correct": true,
+          "explanation": "En general $H \\mid H+M = n \\sim \\mathrm{Bi}(n, \\tfrac{\\lambda_1}{\\lambda_1+\\lambda_2})$."
+        },
+        {
+          "text": "$\\mathrm{Bi}(2, \\tfrac12)$",
+          "correct": false,
+          "explanation": "Las tasas no son iguales."
+        },
+        {
+          "text": "$\\mathcal P(2)$",
+          "correct": false,
+          "explanation": "Ignora la condición."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hint": "$\\binom21 \\tfrac49 \\cdot \\tfrac59$.",
+      "cards": [
+        {
+          "text": "$\\tfrac{40}{81} \\approx 0{,}494$",
+          "correct": true,
+          "explanation": "Binomial en $k = 1$."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Uniforme en los tres casos."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Supone $p = \\tfrac12$ y olvida el factor 2."
+        },
+        {
+          "text": "$\\tfrac{20}{81}$",
+          "correct": false,
+          "explanation": "Falta el factor 2."
+        }
+      ]
+    }
+  ]
+}
