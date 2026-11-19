@@ -1,0 +1,138 @@
+{
+  "id": "p3-ej10",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Valor más probable",
+  "source": "Práctica 3 · Ejercicio 10",
+  "statement": "Dada $X$ una variable aleatoria discreta y $x_0 \\in R_X$ decimos que $x_0$ es un valor más probable para $X$ si $p_X(x_0) = \\sup_{x \\in R_X} p_X(x)$.\n(a) Probar que toda variable aleatoria discreta admite al menos un valor más probable.\n(b) Verificar que $[(n+1)p]$ es un valor más probable para la distribución binomial de parámetros $n$ y $p$.\n(c) Verificar que $[\\lambda]$ es un valor más probable para la distribución de Poisson de parámetro $\\lambda$. Comparar con el primer ítem del ejercicio anterior.\nSugerencia: para resolver los últimos dos ítems puede ser útil estudiar los cocientes $\\tfrac{p_X(k)}{p_X(k-1)}$ con $k \\in \\mathbb N$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "a",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Por qué el supremo se alcanza?",
+      "hints": [
+        "Las probabilidades puntuales suman 1.",
+        "¿Cuántos valores pueden tener probabilidad mayor que $\\varepsilon > 0$?"
+      ],
+      "cards": [
+        {
+          "text": "Porque $R_X$ es finito",
+          "correct": false,
+          "explanation": "Puede ser infinito (por ejemplo, Poisson)."
+        },
+        {
+          "text": "Porque toda sucesión tiene máximo",
+          "correct": false,
+          "explanation": "Por ejemplo $1 - \\tfrac1n$ no lo alcanza."
+        },
+        {
+          "text": "Si $s$ es el supremo ($s > 0$), sólo finitos valores tienen $p_X(x) > \\tfrac s2$, y el máximo de un conjunto finito se alcanza",
+          "correct": true,
+          "explanation": "A lo sumo $\\tfrac2s$ valores superan $\\tfrac s2$; el supremo sobre todos coincide con el máximo sobre esos finitos."
+        },
+        {
+          "text": "Porque las probabilidades son menores que 1",
+          "correct": false,
+          "explanation": "No alcanza para garantizar un máximo."
+        }
+      ]
+    },
+    {
+      "id": "cb",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Para $X \\sim \\mathrm{Bi}(n, p)$, ¿cuánto vale $\\tfrac{p_X(k)}{p_X(k-1)}$?",
+      "hints": [
+        "Simplificar $\\tfrac{\\binom nk}{\\binom n{k-1}} = \\tfrac{n-k+1}{k}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{(n-k+1)\\,p}{k\\,(1-p)}$",
+          "correct": true,
+          "explanation": "Cociente de combinatorios y una potencia más de $p$ y una menos de $1-p$."
+        },
+        {
+          "text": "$\\dfrac{k\\,p}{(n-k+1)(1-p)}$",
+          "correct": false,
+          "explanation": "El cociente de combinatorios está invertido."
+        },
+        {
+          "text": "$\\dfrac{p}{1-p}$",
+          "correct": false,
+          "explanation": "Falta el cociente de los combinatorios."
+        },
+        {
+          "text": "$\\dfrac{n\\,p}{k}$",
+          "correct": false,
+          "explanation": "No resulta de simplificar."
+        }
+      ]
+    },
+    {
+      "id": "mb",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Cuándo ese cociente es $\\ge 1$ y qué se concluye?",
+      "hints": [
+        "$(n-k+1)p \\ge k(1-p) \\iff k \\le (n+1)p$."
+      ],
+      "cards": [
+        {
+          "text": "Siempre: la función es creciente",
+          "correct": false,
+          "explanation": "Para $k$ grande el cociente es menor que 1."
+        },
+        {
+          "text": "Si $k \\le (n+1)p$: la función crece hasta $[(n+1)p]$ y después decrece, así que $[(n+1)p]$ es un valor más probable",
+          "correct": true,
+          "explanation": "Mientras el cociente es $\\ge 1$ la probabilidad no baja."
+        },
+        {
+          "text": "Si $k \\le np$: el valor más probable es $[np]$",
+          "correct": false,
+          "explanation": "Revisar el despeje: aparece $n + 1$."
+        },
+        {
+          "text": "Nunca: la función es decreciente",
+          "correct": false,
+          "explanation": "Para $k$ chico el cociente puede ser mayor que 1."
+        }
+      ]
+    },
+    {
+      "id": "mp",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "Para $\\mathcal P(\\lambda)$, $\\tfrac{p_X(k)}{p_X(k-1)} = \\tfrac{\\lambda}{k}$. ¿Qué se concluye y cómo se compara con el ejercicio 9(a)?",
+      "hints": [
+        "El cociente es $\\ge 1$ mientras $k \\le \\lambda$.",
+        "En 9(a) el valor $k$ estaba fijo y variaba $\\lambda$."
+      ],
+      "cards": [
+        {
+          "text": "El valor más probable es 0",
+          "correct": false,
+          "explanation": "Sólo si $\\lambda < 1$."
+        },
+        {
+          "text": "El valor más probable es $[\\lambda]$; en 9(a), con $k$ fijo, la probabilidad era máxima en $\\lambda = k$",
+          "correct": true,
+          "explanation": "Son dos preguntas distintas: variar $k$ con $\\lambda$ fijo, o variar $\\lambda$ con $k$ fijo."
+        },
+        {
+          "text": "No hay relación con 9(a)",
+          "correct": false,
+          "explanation": "Ambos estudian el máximo de la misma expresión, en distintas variables."
+        },
+        {
+          "text": "El valor más probable es $\\lambda$ siempre",
+          "correct": false,
+          "explanation": "$\\lambda$ puede no ser entero."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "id": "p3-ej4",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Extracciones sin reposición y límites",
+  "source": "Práctica 3 · Ejercicio 4",
+  "statement": "De un bolillero que contiene $B$ bolillas blancas y $N$ negras se realizan extracciones (sin reposición) al azar:\n(a) Calcular la función de probabilidad puntual de $Y_{B,N}$, la cantidad de extracciones que fueron necesarias hasta obtener la primer bolilla blanca.\n(b) Calcular la función de probabilidad puntual de $X_{B,N}$, la cantidad de bolillas blancas obtenidas, luego de haber realizado $n$ extracciones sin reposición.\nProbar que si $B$ y $N$ tienden a infinito de modo que $\\tfrac{B}{B+N} \\to p$ entonces\n(c) $p_{Y_{B,N}}(k) \\to p_Y(k)$ con $Y \\sim \\mathcal G(p)$.\n(d) $p_{X_{B,N}}(k) \\to p_X(k)$, donde $X \\sim \\mathrm{Bi}(n, p)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "ya",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(Y_{B,N} = k)$?",
+      "hints": [
+        "Las primeras $k-1$ son negras y la $k$-ésima es blanca.",
+        "Regla del producto: en cada extracción hay una bolilla menos."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\binom{N}{k-1}}{\\binom{B+N}{k}}$",
+          "correct": false,
+          "explanation": "No ubica la blanca en el lugar $k$."
+        },
+        {
+          "text": "$\\left(\\dfrac{N}{B+N}\\right)^{k-1}\\dfrac{B}{B+N}$",
+          "correct": false,
+          "explanation": "Corresponde a extraer con reposición."
+        },
+        {
+          "text": "$\\dfrac{B}{B+N}$",
+          "correct": false,
+          "explanation": "Es sólo la primera extracción."
+        },
+        {
+          "text": "$\\dfrac{N}{B+N} \\cdot \\dfrac{N-1}{B+N-1} \\cdots \\dfrac{N-k+2}{B+N-k+2} \\cdot \\dfrac{B}{B+N-k+1}$",
+          "correct": true,
+          "explanation": "Producto de condicionales, para $k = 1, \\dots, N+1$."
+        }
+      ]
+    },
+    {
+      "id": "xb",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "¿Qué distribución tiene $X_{B,N}$?",
+      "hints": [
+        "Se eligen $n$ bolillas sin reposición.",
+        "Contar subconjuntos con $k$ blancas y $n-k$ negras."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathrm{Bi}\\left(n, \\tfrac{B}{B+N}\\right)$",
+          "correct": false,
+          "explanation": "Supone reposición."
+        },
+        {
+          "text": "$\\dfrac{\\binom Bk}{\\binom{B+N}{n}}$",
+          "correct": false,
+          "explanation": "Falta elegir las negras."
+        },
+        {
+          "text": "Hipergeométrica: $\\dfrac{\\binom Bk \\binom{N}{n-k}}{\\binom{B+N}{n}}$",
+          "correct": true,
+          "explanation": "Casos favorables sobre subconjuntos posibles."
+        },
+        {
+          "text": "$\\mathcal G\\left(\\tfrac{B}{B+N}\\right)$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        }
+      ]
+    },
+    {
+      "id": "lc",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "(c) Con $k$ fijo y $B, N \\to \\infty$, ¿a qué tiende cada factor $\\tfrac{N-j}{B+N-j}$ y $\\tfrac{B}{B+N-k+1}$?",
+      "hints": [
+        "$j$ y $k$ son fijos: restarlos no cambia el límite.",
+        "$\\tfrac{N}{B+N} \\to 1 - p$."
+      ],
+      "cards": [
+        {
+          "text": "A $1 - p$ y a $p$: el producto tiende a $(1-p)^{k-1}p$",
+          "correct": true,
+          "explanation": "Hay $k-1$ factores de la forma $\\tfrac{N-j}{B+N-j}$; el producto de límites es el límite del producto."
+        },
+        {
+          "text": "A $1$ y a $p$",
+          "correct": false,
+          "explanation": "Los factores con $N$ no tienden a 1."
+        },
+        {
+          "text": "A $1-p$ y a $1 - p$",
+          "correct": false,
+          "explanation": "El último factor es una proporción de blancas."
+        },
+        {
+          "text": "Ninguno converge",
+          "correct": false,
+          "explanation": "Todos son cocientes que convergen."
+        }
+      ]
+    },
+    {
+      "id": "ld",
+      "kind": "property",
+      "item": "(d)",
+      "prompt": "(d) Reescribiendo $\\tfrac{\\binom Bk \\binom{N}{n-k}}{\\binom{B+N}{n}} = \\binom nk \\dfrac{B(B-1)\\cdots(B-k+1)\\cdot N\\cdots(N-n+k+1)}{(B+N)\\cdots(B+N-n+1)}$, ¿a qué tiende?",
+      "hints": [
+        "Hay $n$ factores arriba y $n$ abajo; agruparlos de a pares.",
+        "Los $k$ pares con $B$ tienden a $p$ y los $n - k$ con $N$ a $1 - p$."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom nk p^k (1-p)^{n-k}$",
+          "correct": true,
+          "explanation": "Con muchas bolillas, sacar sin reposición se parece a sacar con reposición."
+        },
+        {
+          "text": "$e^{-np}\\tfrac{(np)^k}{k!}$",
+          "correct": false,
+          "explanation": "Es la aproximación de Poisson, que requiere otro régimen."
+        },
+        {
+          "text": "$p^k(1-p)^{n-k}$",
+          "correct": false,
+          "explanation": "Se pierde el factor combinatorio, que no depende de $B, N$."
+        },
+        {
+          "text": "$\\binom nk$",
+          "correct": false,
+          "explanation": "Los cocientes no tienden a 1."
+        }
+      ]
+    }
+  ]
+}

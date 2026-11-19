@@ -1,0 +1,264 @@
+{
+  "id": "p3-ej9",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Fuentes radiactivas",
+  "source": "Práctica 3 · Ejercicio 9",
+  "statement": "Se tienen 3 fuentes radiactivas $F_1$, $F_2$ y $F_3$. El número de partículas que emite cada fuente por hora es una variable con distribución $\\mathcal P(\\lambda_i)$, siendo $\\lambda_1 = 2$, $\\lambda_2 = 3$ y $\\lambda_3 = 4$. Un investigador elige una fuente al azar -de manera equiprobable- y observa que ésta emite 4 partículas en una hora.\n(a) ¿Cuál fuente tiene mayor probabilidad de emitir esa cantidad de partículas?\n(b) Encontrar la probabilidad de que haya elegido la fuente $F_i$, para cada $1 \\le i \\le 3$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "pmf",
+      "kind": "property",
+      "prompt": "Sea $N$ la cantidad de partículas emitidas. ¿Cuánto vale $P(N = 4 \\mid F_i)$?",
+      "hints": [
+        "Función de probabilidad de $\\mathcal P(\\lambda)$: $P(N = k) = e^{-\\lambda}\\lambda^k/k!$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\lambda_i^4}{4!}$",
+          "correct": false,
+          "explanation": "Falta el factor $e^{-\\lambda_i}$, sin el cual las probabilidades no suman 1."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{4!}$",
+          "correct": true,
+          "explanation": "Dada la fuente, $N \\sim \\mathcal P(\\lambda_i)$; se evalúa en $k = 4$."
+        },
+        {
+          "text": "$e^{-\\lambda_i}$",
+          "correct": false,
+          "explanation": "Es $P(N = 0 \\mid F_i)$."
+        },
+        {
+          "text": "$\\dfrac{e^{-4}\\lambda_i^4}{4!}$",
+          "correct": false,
+          "explanation": "En la exponencial va el parámetro $\\lambda_i$, no el valor observado."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "comp",
+      "kind": "setup",
+      "prompt": "¿Qué alcanza con comparar entre las tres fuentes?",
+      "hints": [
+        "El $4!$ es el mismo para las tres.",
+        "¿Qué factor es igual en las tres probabilidades?"
+      ],
+      "cards": [
+        {
+          "text": "Sólo $e^{-\\lambda}$",
+          "correct": false,
+          "explanation": "Ignora el factor $\\lambda^4$, que crece con $\\lambda$."
+        },
+        {
+          "text": "Sólo $\\lambda^4$",
+          "correct": false,
+          "explanation": "$e^{-\\lambda}$ también depende de $\\lambda$ y disminuye cuando $\\lambda$ crece: no se puede descartar."
+        },
+        {
+          "text": "Las medias $\\lambda_i$",
+          "correct": false,
+          "explanation": "Una media más alta no implica mayor probabilidad en un valor dado."
+        },
+        {
+          "text": "$g(\\lambda) = e^{-\\lambda}\\lambda^4$ en $\\lambda = 2, 3, 4$",
+          "correct": true,
+          "explanation": "Dividir las tres probabilidades por la misma constante $4!$ no cambia cuál es mayor."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "max",
+      "kind": "property",
+      "prompt": "¿Dónde alcanza su máximo $g(\\lambda) = e^{-\\lambda}\\lambda^4$ para $\\lambda > 0$?",
+      "hints": [
+        "Derivar: $g^{\\prime}(\\lambda) = e^{-\\lambda}\\lambda^3(4 - \\lambda)$.",
+        "Estudiar el signo de la derivada."
+      ],
+      "cards": [
+        {
+          "text": "En $\\lambda = 0$",
+          "correct": false,
+          "explanation": "$g(0) = 0$, que es el mínimo."
+        },
+        {
+          "text": "En $\\lambda = 2$",
+          "correct": false,
+          "explanation": "En $\\lambda = 2$ la derivada es positiva: $g$ todavía crece."
+        },
+        {
+          "text": "En $\\lambda = 4$: $g$ crece en $(0, 4)$ y decrece después",
+          "correct": true,
+          "explanation": "$g^{\\prime} > 0$ si $\\lambda < 4$ y $g^{\\prime} < 0$ si $\\lambda > 4$. En general, $e^{-\\lambda}\\lambda^k$ se maximiza en $\\lambda = k$."
+        },
+        {
+          "text": "No tiene máximo: crece siempre",
+          "correct": false,
+          "explanation": "Para $\\lambda > 4$ la derivada es negativa."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "prompt": "¿Qué fuente tiene mayor probabilidad de emitir 4 partículas?",
+      "hints": [
+        "$2 < 3 < 4$ están en la zona donde $g$ crece."
+      ],
+      "cards": [
+        {
+          "text": "$F_1$",
+          "correct": false,
+          "explanation": "Tiene el menor valor de $g$ de las tres."
+        },
+        {
+          "text": "Las tres por igual",
+          "correct": false,
+          "explanation": "Distintos $\\lambda$ dan probabilidades distintas en $k = 4$."
+        },
+        {
+          "text": "$F_2$",
+          "correct": false,
+          "explanation": "$g(3) < g(4)$ porque $g$ crece hasta 4."
+        },
+        {
+          "text": "$F_3$",
+          "correct": true,
+          "explanation": "$g$ es creciente en $(0, 4]$, así que $g(2) < g(3) < g(4)$. (Numéricamente: $\\approx 0{,}090$, $0{,}168$, $0{,}195$.)"
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-obj",
+      "kind": "setup",
+      "prompt": "¿Qué probabilidades se piden?",
+      "hints": [
+        "Se observó la emisión; la incógnita es la fuente."
+      ],
+      "cards": [
+        {
+          "text": "$P(F_i \\cap \\{N = 4\\})$",
+          "correct": false,
+          "explanation": "Falta dividir por $P(N = 4)$."
+        },
+        {
+          "text": "$P(F_i) = \\tfrac13$",
+          "correct": false,
+          "explanation": "Es la probabilidad antes de observar (prior)."
+        },
+        {
+          "text": "$P(N = 4 \\mid F_i)$",
+          "correct": false,
+          "explanation": "Es la probabilidad de la observación dada la fuente (verosimilitud), no al revés."
+        },
+        {
+          "text": "$P(F_i \\mid N = 4)$ para $i = 1, 2, 3$",
+          "correct": true,
+          "explanation": "Probabilidad de cada fuente a la luz de la observación (posterior)."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-bayes",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(F_i \\mid N = 4)$?",
+      "hints": [
+        "Fórmula de Bayes con la partición $F_1, F_2, F_3$.",
+        "Numerador: $P(F_i \\cap \\{N = 4\\})$."
+      ],
+      "cards": [
+        {
+          "text": "$P(N=4\\mid F_i)\\,\\tfrac13$",
+          "correct": false,
+          "explanation": "Es $P(F_i \\cap \\{N=4\\})$: falta normalizar por $P(N = 4)$."
+        },
+        {
+          "text": "$\\dfrac{P(N = 4 \\mid F_i)}{\\tfrac13}$",
+          "correct": false,
+          "explanation": "Divide por el prior; puede dar más que 1."
+        },
+        {
+          "text": "$\\dfrac{\\lambda_i}{\\lambda_1+\\lambda_2+\\lambda_3}$",
+          "correct": false,
+          "explanation": "No usa que se observaron 4 partículas."
+        },
+        {
+          "text": "$\\dfrac{P(N=4\\mid F_i)\\,\\tfrac13}{\\sum_j P(N = 4 \\mid F_j)\\,\\tfrac13}$",
+          "correct": true,
+          "explanation": "Numerador: $P(F_i \\cap \\{N = 4\\})$. Denominador: $P(N = 4)$ por probabilidad total."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-simp",
+      "kind": "property",
+      "prompt": "¿Qué se simplifica en ese cociente?",
+      "hints": [
+        "Factores comunes a todos los términos.",
+        "Buscar factores que aparecen en todos los términos."
+      ],
+      "cards": [
+        {
+          "text": "Los $e^{-\\lambda_j}$",
+          "correct": false,
+          "explanation": "Son distintos para cada fuente: no se cancelan."
+        },
+        {
+          "text": "Sólo el $\\tfrac13$",
+          "correct": false,
+          "explanation": "El $4!$ también es común a todos los términos."
+        },
+        {
+          "text": "Nada",
+          "correct": false,
+          "explanation": "$\\tfrac13$ y $4!$ son comunes a todos los términos."
+        },
+        {
+          "text": "El $\\tfrac13$ y el $4!$: queda $\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{\\sum_j e^{-\\lambda_j}\\lambda_j^4}$",
+          "correct": true,
+          "explanation": "Aparecen en el numerador y en cada término del denominador."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-armar",
+      "kind": "compute",
+      "prompt": "Con $e^{-2}2^4 \\approx 2{,}17$, $e^{-3}3^4 \\approx 4{,}03$, $e^{-4}4^4 \\approx 4{,}69$ (suma $\\approx 10{,}89$), ¿cuánto valen las probabilidades?",
+      "hints": [
+        "Dividir cada valor por la suma."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac29$, $\\tfrac39$, $\\tfrac49$",
+          "correct": false,
+          "explanation": "Es proporcional a $\\lambda_i$: no usa la observación $N = 4$."
+        },
+        {
+          "text": "$\\approx 2{,}17$, $4{,}03$, $4{,}69$",
+          "correct": false,
+          "explanation": "Son los valores sin normalizar: no son probabilidades."
+        },
+        {
+          "text": "$\\tfrac13$, $\\tfrac13$, $\\tfrac13$",
+          "correct": false,
+          "explanation": "Son las probabilidades antes de observar."
+        },
+        {
+          "text": "$\\approx 0{,}20$, $0{,}37$, $0{,}43$",
+          "correct": true,
+          "explanation": "$2{,}17/10{,}89$, $4{,}03/10{,}89$ y $4{,}69/10{,}89$; suman 1."
+        }
+      ],
+      "item": "(b)"
+    }
+  ]
+}

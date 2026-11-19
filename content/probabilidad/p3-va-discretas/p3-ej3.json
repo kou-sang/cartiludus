@@ -1,0 +1,235 @@
+{
+  "id": "p3-ej3",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Geométrica: acumulada, paridad y falta de memoria",
+  "source": "Práctica 3 · Ejercicio 3",
+  "statement": "Sea $Y$ una variable aleatoria con distribución geométrica de parámetro $p$.\n(a) Calcular la función de distribución acumulada de $Y$.\n(b) Hallar la probabilidad de que $Y$ sea impar. ¿Es mayor que la de que $Y$ sea par?\n(c) Se dice que una variable aleatoria $X$ a valores en $\\mathbb N_0$ tiene la propiedad de falta de memoria discreta si para todo par de números naturales $s, t \\in \\mathbb N$ se verifica $P(X \\ge s + t \\mid X > t) = P(X \\ge s)$. Probar que una variable aleatoria $X$ a valores en $\\mathbb N_0$ posee la propiedad de falta de memoria discreta si y sólo si tiene distribución geométrica de parámetro $p = P(X = 1)$. Sugerencia: una posibilidad es probar primero por inducción que $P(X > n) = (P(X > 1))^n$, para todo $n \\in \\mathbb N$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "cola",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(Y > k)$ para $k \\in \\mathbb N_0$?",
+      "hints": [
+        "$Y > k$: los primeros $k$ ensayos son fracasos.",
+        "Ensayos independientes, cada fracaso con probabilidad $1 - p$."
+      ],
+      "cards": [
+        {
+          "text": "$(1-p)^{k-1}p$",
+          "correct": false,
+          "explanation": "Es $P(Y = k)$."
+        },
+        {
+          "text": "$1 - (1-p)^k$",
+          "correct": false,
+          "explanation": "Es la probabilidad de algún éxito en los primeros $k$."
+        },
+        {
+          "text": "$(1-p)^k$",
+          "correct": true,
+          "explanation": "Que el primer éxito llegue después del ensayo $k$ es que los $k$ primeros fracasen."
+        },
+        {
+          "text": "$p^k$",
+          "correct": false,
+          "explanation": "Son $k$ éxitos seguidos."
+        }
+      ]
+    },
+    {
+      "id": "acum",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuál es $F_Y(x)$ para $x \\ge 0$?",
+      "hints": [
+        "$F_Y(x) = P(Y \\le x) = P(Y \\le \\lfloor x \\rfloor)$, porque $Y$ toma valores enteros.",
+        "Complemento de la cola."
+      ],
+      "cards": [
+        {
+          "text": "$(1-p)^{\\lfloor x \\rfloor}$",
+          "correct": false,
+          "explanation": "Es la cola, no la acumulada."
+        },
+        {
+          "text": "$1 - (1-p)^{\\lfloor x \\rfloor}$ (y 0 si $x < 1$)",
+          "correct": true,
+          "explanation": "Es escalonada, con saltos en los naturales."
+        },
+        {
+          "text": "$1 - e^{-px}$",
+          "correct": false,
+          "explanation": "Es la acumulada de una exponencial."
+        },
+        {
+          "text": "$1 - (1-p)^x$",
+          "correct": false,
+          "explanation": "Entre dos enteros la acumulada no cambia."
+        }
+      ]
+    },
+    {
+      "id": "imp",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(Y \\text{ impar}) = \\sum_{j \\ge 0} (1-p)^{2j} p$?",
+      "hints": [
+        "Serie geométrica de razón $(1-p)^2$.",
+        "$1 - (1-p)^2 = p(2 - p)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1-p}{2-p}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que sea par."
+        },
+        {
+          "text": "$\\dfrac{p}{1 - (1-p)}$",
+          "correct": false,
+          "explanation": "La razón de la serie es el cuadrado."
+        },
+        {
+          "text": "$\\dfrac{p}{1 - (1-p)^2} = \\dfrac{1}{2 - p}$",
+          "correct": true,
+          "explanation": "Suma de la serie geométrica y simplificación por $p$."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Los valores impares y pares no son igualmente probables."
+        }
+      ]
+    },
+    {
+      "id": "comp",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Es más probable impar que par?",
+      "hints": [
+        "Comparar $\\tfrac{1}{2-p}$ con $\\tfrac12$ para $0 < p < 1$."
+      ],
+      "cards": [
+        {
+          "text": "Son iguales",
+          "correct": false,
+          "explanation": "Sólo en el límite $p \\to 0$."
+        },
+        {
+          "text": "Depende de $p$",
+          "correct": false,
+          "explanation": "Para todo $p \\in (0,1)$ vale la misma desigualdad."
+        },
+        {
+          "text": "No: es más probable par",
+          "correct": false,
+          "explanation": "Revisar la comparación."
+        },
+        {
+          "text": "Sí: $\\tfrac{1}{2-p} > \\tfrac12$ porque $2 - p < 2$",
+          "correct": true,
+          "explanation": "El valor 1, el más probable, es impar."
+        }
+      ]
+    },
+    {
+      "id": "vuelta",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "(c) Si $X \\sim \\mathcal G(p)$, ¿por qué tiene falta de memoria?",
+      "hints": [
+        "$P(X \\ge s+t \\mid X > t) = \\tfrac{P(X > s + t - 1)}{P(X > t)}$.",
+        "Usar $P(X > k) = (1-p)^k$."
+      ],
+      "cards": [
+        {
+          "text": "Porque $P(X = s) = P(X = t)$",
+          "correct": false,
+          "explanation": "No es cierto en general."
+        },
+        {
+          "text": "Porque los ensayos son independientes, sin más",
+          "correct": false,
+          "explanation": "Hay que verificar la igualdad de probabilidades."
+        },
+        {
+          "text": "Porque toda variable discreta la tiene",
+          "correct": false,
+          "explanation": "Por ejemplo, la binomial no la tiene."
+        },
+        {
+          "text": "El cociente da $(1-p)^{s-1} = P(X \\ge s)$",
+          "correct": true,
+          "explanation": "$\\tfrac{(1-p)^{s+t-1}}{(1-p)^t}$; y $P(X \\ge s) = P(X > s - 1)$."
+        }
+      ]
+    },
+    {
+      "id": "ida",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "Recíproco: con falta de memoria, ¿por qué $P(X > n) = P(X > 1)^n$?",
+      "hints": [
+        "Tomar $s = 2$: $P(X \\ge t + 2 \\mid X > t) = P(X \\ge 2)$, o sea $P(X > t + 1) = P(X > t)P(X > 1)$.",
+        "Inducción en $t$."
+      ],
+      "cards": [
+        {
+          "text": "$P(X > t+1) = P(X > t)\\,P(X > 1)$ e inducción",
+          "correct": true,
+          "explanation": "Cada paso multiplica por el mismo factor $P(X > 1)$."
+        },
+        {
+          "text": "Porque $X$ es binomial",
+          "correct": false,
+          "explanation": "No se supone ninguna distribución."
+        },
+        {
+          "text": "Porque $P(X > n) = n\\,P(X > 1)$",
+          "correct": false,
+          "explanation": "La relación es multiplicativa, no aditiva."
+        },
+        {
+          "text": "Por la ley de los grandes números",
+          "correct": false,
+          "explanation": "Alcanza con la propiedad y la inducción."
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "Con $P(X > n) = q^n$, $q = P(X > 1)$, ¿qué distribución tiene $X$?",
+      "hints": [
+        "$P(X = n) = P(X > n - 1) - P(X > n)$.",
+        "Para $n = 1$: $P(X = 1) = P(X > 0) - P(X > 1) = 1 - q$, usando $P(X > 0) = 1$ como en la geométrica."
+      ],
+      "cards": [
+        {
+          "text": "$P(X = n) = q^{n-1}(1 - q)$: geométrica con $p = 1 - q = P(X = 1)$",
+          "correct": true,
+          "explanation": "Diferencia de colas consecutivas."
+        },
+        {
+          "text": "Binomial",
+          "correct": false,
+          "explanation": "No tiene un número fijo de ensayos."
+        },
+        {
+          "text": "Poisson",
+          "correct": false,
+          "explanation": "Las colas de una Poisson no son geométricas."
+        },
+        {
+          "text": "Geométrica con $p = q$",
+          "correct": false,
+          "explanation": "El parámetro es la probabilidad de $X = 1$."
+        }
+      ]
+    }
+  ]
+}

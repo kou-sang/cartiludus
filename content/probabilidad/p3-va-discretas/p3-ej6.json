@@ -1,0 +1,202 @@
+{
+  "id": "p3-ej6",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Grafo aleatorio: grados y triángulos",
+  "source": "Práctica 3 · Ejercicio 6",
+  "statement": "Consideramos $G_{n,p}$ el grafo aleatorio con sus vértices numerados del 1 al $n$ (cada arista de $K_n$ está presente con probabilidad $p$, independientemente).\n(a) Dado un grafo $G$ de $n$ vértices, hallar $P(G_{n,p} = G)$.\n(b) Sea $d_i$ la variable aleatoria que es el grado del vértice $i$. Hallar su distribución. (El grado de un vértice es la cantidad de aristas que lo tocan.)\n(c) Sea $\\Delta_{4,p}$ la variable aleatoria que devuelve la cantidad de triángulos de $G_{4,p}$. Hallar la distribución de $\\Delta_{4,p}$ y la probabilidad de que $G_{4,p}$ sea un grafo sin triángulos.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Si $G$ tiene $e$ aristas, ¿cuánto vale $P(G_{n,p} = G)$?",
+      "hints": [
+        "Las aristas de $G$ tienen que estar y las otras $\\binom n2 - e$ no."
+      ],
+      "cards": [
+        {
+          "text": "$p^e$",
+          "correct": false,
+          "explanation": "Falta pedir que las demás aristas no estén."
+        },
+        {
+          "text": "$p^{e}(1-p)^{\\binom n2 - e}$",
+          "correct": true,
+          "explanation": "Independencia entre aristas."
+        },
+        {
+          "text": "$\\binom{\\binom n2}{e}p^e(1-p)^{\\binom n2 - e}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de tener $e$ aristas, cualesquiera."
+        },
+        {
+          "text": "$(1-p)^e$",
+          "correct": false,
+          "explanation": "Las aristas de $G$ deben estar presentes."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "¿Qué distribución tiene el grado $d_i$?",
+      "hints": [
+        "El vértice $i$ puede estar unido a cada uno de los otros $n-1$.",
+        "Cada una de esas aristas está con probabilidad $p$, independientemente."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal P(np)$",
+          "correct": false,
+          "explanation": "Es una aproximación, no la distribución exacta."
+        },
+        {
+          "text": "$\\mathrm{Bi}\\left(\\binom n2, p\\right)$",
+          "correct": false,
+          "explanation": "Es la cantidad total de aristas del grafo."
+        },
+        {
+          "text": "$\\mathrm{Bi}(n, p)$",
+          "correct": false,
+          "explanation": "Un vértice no se une consigo mismo."
+        },
+        {
+          "text": "$d_i \\sim \\mathrm{Bi}(n-1, p)$",
+          "correct": true,
+          "explanation": "Cuenta aristas presentes entre $n - 1$ posibles."
+        }
+      ]
+    },
+    {
+      "id": "vals",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "¿Qué valores puede tomar $\\Delta_{4,p}$?",
+      "hints": [
+        "$K_4$ tiene $\\binom43 = 4$ triángulos.",
+        "¿Se puede tener exactamente 3 triángulos? ¿Cuántas aristas harían falta?"
+      ],
+      "cards": [
+        {
+          "text": "$0, 1, 2, 3, 4$",
+          "correct": false,
+          "explanation": "Revisar si 3 triángulos son posibles sin el cuarto."
+        },
+        {
+          "text": "$0, 1, 2$ y $4$",
+          "correct": true,
+          "explanation": "Tres triángulos de $K_4$ cubren las 6 aristas, y entonces aparece el cuarto."
+        },
+        {
+          "text": "$0, \\dots, 6$",
+          "correct": false,
+          "explanation": "Hay sólo 4 triángulos posibles."
+        },
+        {
+          "text": "$0$ y $1$",
+          "correct": false,
+          "explanation": "Con 5 aristas hay 2 triángulos."
+        }
+      ]
+    },
+    {
+      "id": "p24",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuánto valen $P(\\Delta = 4)$ y $P(\\Delta = 2)$?",
+      "hints": [
+        "4 triángulos: están las 6 aristas.",
+        "2 triángulos: exactamente 5 aristas (falta una)."
+      ],
+      "cards": [
+        {
+          "text": "$p^{12}$ y $p^{6}$",
+          "correct": false,
+          "explanation": "Cuenta aristas compartidas más de una vez."
+        },
+        {
+          "text": "$p^6$ y $\\binom42 p^6$",
+          "correct": false,
+          "explanation": "Con todas las aristas hay 4 triángulos, no 2."
+        },
+        {
+          "text": "$p^6$ y $p^5$",
+          "correct": false,
+          "explanation": "Falta pedir que la sexta arista no esté y elegir cuál falta."
+        },
+        {
+          "text": "$p^6$ y $6p^5(1-p)$",
+          "correct": true,
+          "explanation": "Con 5 aristas hay siempre 2 triángulos; hay 6 maneras de elegir la que falta."
+        }
+      ]
+    },
+    {
+      "id": "p1",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuánto vale $P(\\Delta = 1)$?",
+      "hints": [
+        "Un triángulo y ninguno más: 3 aristas (sólo el triángulo) o 4 aristas (triángulo más una arista al cuarto vértice).",
+        "4 triángulos posibles; con 4 aristas, 3 aristas posibles hacia el cuarto vértice."
+      ],
+      "cards": [
+        {
+          "text": "$4p^3(1-p)^3 + 12p^4(1-p)^2$",
+          "correct": true,
+          "explanation": "Triángulo solo: 4 casos; triángulo con una arista colgante: $4 \\cdot 3$ casos."
+        },
+        {
+          "text": "$4p^3(1-p)^3$",
+          "correct": false,
+          "explanation": "Faltan los grafos de 4 aristas con un solo triángulo."
+        },
+        {
+          "text": "$4p^3$",
+          "correct": false,
+          "explanation": "Falta exigir que no estén las demás aristas, y faltan los casos de 4 aristas."
+        },
+        {
+          "text": "$\\binom63 p^3(1-p)^3$",
+          "correct": false,
+          "explanation": "No todo conjunto de 3 aristas es un triángulo."
+        }
+      ]
+    },
+    {
+      "id": "p0",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Cuánto vale la probabilidad de que $G_{4,p}$ no tenga triángulos?",
+      "hints": [
+        "Complemento de los casos anteriores."
+      ],
+      "cards": [
+        {
+          "text": "$(1 - p^3)^4$",
+          "correct": false,
+          "explanation": "Supone que los 4 triángulos son independientes, y comparten aristas."
+        },
+        {
+          "text": "$(1-p)^3$",
+          "correct": false,
+          "explanation": "Pide que falten 3 aristas fijas."
+        },
+        {
+          "text": "$1 - 4p^3$",
+          "correct": false,
+          "explanation": "Es una cota, no el valor exacto."
+        },
+        {
+          "text": "$1 - p^6 - 6p^5(1-p) - 12p^4(1-p)^2 - 4p^3(1-p)^3$",
+          "correct": true,
+          "explanation": "$P(\\Delta = 0) = 1 - P(\\Delta = 1) - P(\\Delta = 2) - P(\\Delta = 4)$."
+        }
+      ]
+    }
+  ]
+}

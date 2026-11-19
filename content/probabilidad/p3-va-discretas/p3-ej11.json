@@ -1,0 +1,172 @@
+{
+  "id": "p3-ej11",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "Probabilidades desde la acumulada",
+  "source": "Práctica 3 · Ejercicio 11",
+  "statement": "Sea $X$ una variable aleatoria. Calcular $P(X \\in A)$, $P(X \\in B)$, $P(X \\in A \\cap B)$ y $P(X \\in B - A)$ en cada uno de los siguientes casos:\n(a) (con un gráfico de la acumulada; no incluido aquí)\n(b) $X$ tiene función de distribución acumulada $F_X(x) = 0$ si $x \\le 0$; $\\tfrac x4$ si $0 < x < 1$; $\\tfrac13$ si $1 \\le x \\le 2$; $\\tfrac x6$ si $2 < x < 4$; $\\tfrac x8 + \\tfrac14$ si $4 \\le x \\le 6$; $1$ si $x > 6$, y los eventos son $A = [1, 5]$ y $B = (\\tfrac12, 3)$.\n(c) Decidir en cada caso si $X$ es una variable aleatoria discreta.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "reglas",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "¿Cómo se calculan $P(a < X \\le b)$ y $P(a \\le X \\le b)$ a partir de $F_X$?",
+      "hints": [
+        "$F_X(b) = P(X \\le b)$.",
+        "$P(X = a) = F_X(a) - F_X(a^-)$: si hay salto en $a$, cuenta."
+      ],
+      "cards": [
+        {
+          "text": "$F(b) + F(a)$",
+          "correct": false,
+          "explanation": "Las probabilidades de intervalos son diferencias."
+        },
+        {
+          "text": "$F(b^-) - F(a)$ en ambos casos",
+          "correct": false,
+          "explanation": "Revisar qué extremos se incluyen."
+        },
+        {
+          "text": "$F(b) - F(a)$ y $F(b) - F(a^-)$",
+          "correct": true,
+          "explanation": "Incluir el extremo $a$ agrega el salto $F(a) - F(a^-)$."
+        },
+        {
+          "text": "$F(b) - F(a)$ en ambos casos",
+          "correct": false,
+          "explanation": "Ignora un posible salto en $a$."
+        }
+      ]
+    },
+    {
+      "id": "ea",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(X \\in [1, 5])$?",
+      "hints": [
+        "$F(5) = \\tfrac58 + \\tfrac14 = \\tfrac78$.",
+        "$F(1^-) = \\tfrac14$ (el límite de $\\tfrac x4$)."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac78$",
+          "correct": false,
+          "explanation": "Es $P(X \\le 5)$."
+        },
+        {
+          "text": "$\\tfrac78 - \\tfrac13 = \\tfrac{13}{24}$",
+          "correct": false,
+          "explanation": "No incluye el salto en $x = 1$, que está en el intervalo."
+        },
+        {
+          "text": "$\\tfrac78 - \\tfrac14 = \\tfrac58$",
+          "correct": true,
+          "explanation": "Incluye el salto en 1, de $\\tfrac14$ a $\\tfrac13$."
+        },
+        {
+          "text": "$\\tfrac56 - \\tfrac14$",
+          "correct": false,
+          "explanation": "Evalúa mal $F(5)$: en $[4,6]$ la fórmula es otra."
+        }
+      ]
+    },
+    {
+      "id": "eb",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(X \\in (\\tfrac12, 3))$?",
+      "hints": [
+        "$F(3^-) = \\tfrac36 = \\tfrac12$ ($F$ es continua en 3).",
+        "$F(\\tfrac12) = \\tfrac18$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac12 - \\tfrac14$",
+          "correct": false,
+          "explanation": "Usa $F(1^-)$ en lugar de $F(\\tfrac12)$."
+        },
+        {
+          "text": "$\\tfrac12 - \\tfrac18 = \\tfrac38$",
+          "correct": true,
+          "explanation": "Diferencia de la acumulada."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Es $P(X < 3)$."
+        },
+        {
+          "text": "$\\tfrac13 - \\tfrac18$",
+          "correct": false,
+          "explanation": "Usa $F(2)$ en lugar de $F(3^-)$."
+        }
+      ]
+    },
+    {
+      "id": "eab",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto valen $P(X \\in A \\cap B)$ y $P(X \\in B - A)$?",
+      "hints": [
+        "$A \\cap B = [1, 3)$ y $B - A = (\\tfrac12, 1)$.",
+        "$F(1^-) = \\tfrac14$, $F(3^-) = \\tfrac12$, $F(\\tfrac12) = \\tfrac18$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac14$ y $\\tfrac{5}{24}$",
+          "correct": false,
+          "explanation": "En $B - A$ incluye el salto en 1, que pertenece a $A$."
+        },
+        {
+          "text": "$\\tfrac12 - \\tfrac14 = \\tfrac14$ y $\\tfrac14 - \\tfrac18 = \\tfrac18$",
+          "correct": true,
+          "explanation": "Intervalos $[1, 3)$ (incluye el salto en 1) y $(\\tfrac12, 1)$ (no lo incluye)."
+        },
+        {
+          "text": "$\\tfrac16$ y $\\tfrac18$",
+          "correct": false,
+          "explanation": "En $A \\cap B$ no incluye el salto en 1."
+        },
+        {
+          "text": "$\\tfrac38$ y $\\tfrac18$",
+          "correct": false,
+          "explanation": "Es $P(X \\in B)$, no la intersección."
+        }
+      ]
+    },
+    {
+      "id": "disc",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Es $X$ discreta?",
+      "hints": [
+        "Buscar los saltos: en 1 y en 4.",
+        "¿Los saltos suman 1?"
+      ],
+      "cards": [
+        {
+          "text": "No: los saltos (en 1 y en 4, de $\\tfrac1{12}$ cada uno) suman $\\tfrac16 < 1$; el resto de la probabilidad está repartido en forma continua",
+          "correct": true,
+          "explanation": "Una variable discreta acumula toda su probabilidad en saltos."
+        },
+        {
+          "text": "No, porque $F$ no tiene saltos",
+          "correct": false,
+          "explanation": "Tiene saltos en 1 y en 4."
+        },
+        {
+          "text": "Sí, porque $F$ es escalonada",
+          "correct": false,
+          "explanation": "Hay tramos donde $F$ crece en forma continua."
+        },
+        {
+          "text": "Sí, porque $F$ tiene saltos",
+          "correct": false,
+          "explanation": "Tener saltos no alcanza: tienen que sumar 1."
+        }
+      ]
+    }
+  ]
+}

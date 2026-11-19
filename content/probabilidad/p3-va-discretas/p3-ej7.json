@@ -1,0 +1,133 @@
+{
+  "id": "p3-ej7",
+  "version": 4,
+  "subject": "probabilidad",
+  "topic": "p3-va-discretas",
+  "title": "El problema de los puntos",
+  "source": "Práctica 3 · Ejercicio 7",
+  "statement": "El problema de los puntos. Calcular la probabilidad de obtener $k$ éxitos antes de $r$ fracasos en una sucesión de ensayos Bernoulli independientes con probabilidad de éxito $p$.\n(Interpretación: dos jugadores a y b interrumpen un juego cuando a necesita $k$ puntos y b necesita $r$; a gana un punto con cada éxito y b con cada fracaso. La probabilidad buscada es la de que a gane si el juego continuara, y da la manera justa de repartir el premio.)",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "clave",
+      "kind": "property",
+      "prompt": "¿En cuántos ensayos se decide si hay $k$ éxitos antes de $r$ fracasos?",
+      "hints": [
+        "El juego termina cuando alguno junta lo que necesita.",
+        "En $k + r - 1$ ensayos alguno de los dos seguro llegó."
+      ],
+      "cards": [
+        {
+          "text": "A lo sumo $k + r - 1$: hay $k$ éxitos antes de $r$ fracasos si y sólo si en los primeros $k + r - 1$ ensayos hay al menos $k$ éxitos",
+          "correct": true,
+          "explanation": "Con $k + r - 1$ ensayos no pueden faltar a la vez éxitos y fracasos: o hay $\\ge k$ éxitos o hay $\\ge r$ fracasos."
+        },
+        {
+          "text": "En exactamente $k$ ensayos",
+          "correct": false,
+          "explanation": "Puede haber fracasos intercalados."
+        },
+        {
+          "text": "No hay cota",
+          "correct": false,
+          "explanation": "Alguno de los dos llega antes de $k + r$ ensayos."
+        },
+        {
+          "text": "En $k + r$ ensayos",
+          "correct": false,
+          "explanation": "Con uno menos ya se decide."
+        }
+      ]
+    },
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "prompt": "Sea $S$ la cantidad de éxitos en los primeros $k + r - 1$ ensayos. ¿Qué distribución tiene?",
+      "hints": [
+        "Ensayos independientes con probabilidad $p$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal{BN}(k, p)$",
+          "correct": false,
+          "explanation": "La binomial negativa cuenta ensayos, no éxitos."
+        },
+        {
+          "text": "$\\mathcal G(p)$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        },
+        {
+          "text": "$S \\sim \\mathrm{Bi}(k + r - 1, p)$",
+          "correct": true,
+          "explanation": "Cuenta éxitos en una cantidad fija de ensayos."
+        },
+        {
+          "text": "$\\mathrm{Bi}(k, p)$",
+          "correct": false,
+          "explanation": "Hay más ensayos."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "setup",
+      "prompt": "¿Cómo queda la probabilidad pedida?",
+      "hints": [
+        "$P(S \\ge k)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom{k+r-1}{k} p^k (1-p)^{r-1}$",
+          "correct": false,
+          "explanation": "Es $P(S = k)$: \"al menos $k$\" incluye más casos."
+        },
+        {
+          "text": "$p^k$",
+          "correct": false,
+          "explanation": "Supone que no hay fracasos intercalados."
+        },
+        {
+          "text": "$\\sum_{j=0}^{k} \\binom{k+r-1}{j} p^j (1-p)^{k+r-1-j}$",
+          "correct": false,
+          "explanation": "Suma $j \\le k$."
+        },
+        {
+          "text": "$\\sum_{j=k}^{k+r-1} \\binom{k+r-1}{j} p^j (1-p)^{k+r-1-j}$",
+          "correct": true,
+          "explanation": "Suma de la binomial desde $k$."
+        }
+      ]
+    },
+    {
+      "id": "alt",
+      "kind": "interpret",
+      "prompt": "Otra forma: si el $k$-ésimo éxito llega en el ensayo $k + i$, ¿qué valores puede tomar $i$?",
+      "hints": [
+        "$i$ es la cantidad de fracasos antes del $k$-ésimo éxito."
+      ],
+      "cards": [
+        {
+          "text": "$i = 0, \\dots, k$",
+          "correct": false,
+          "explanation": "La cota la ponen los fracasos."
+        },
+        {
+          "text": "$i = 0, \\dots, r-1$, y la probabilidad es $\\sum_{i=0}^{r-1} \\binom{k-1+i}{i} p^k (1-p)^i$",
+          "correct": true,
+          "explanation": "Binomial negativa: el último ensayo es éxito y antes hay $k-1$ éxitos e $i$ fracasos."
+        },
+        {
+          "text": "$i = 0$ solamente",
+          "correct": false,
+          "explanation": "Puede haber fracasos antes."
+        },
+        {
+          "text": "$i = 0, \\dots, r$",
+          "correct": false,
+          "explanation": "Con $r$ fracasos ya ganó b."
+        }
+      ]
+    }
+  ]
+}
