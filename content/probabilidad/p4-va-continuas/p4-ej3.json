@@ -1,0 +1,293 @@
+{
+  "id": "p4-ej3",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Transformaciones de una uniforme",
+  "source": "Práctica 4 · Ejercicio 3",
+  "statement": "Sea $X$ una variable aleatoria con distribución $\\mathcal U[0,1]$. Hallar las funciones de distribución y de densidad de las siguientes variables aleatorias:\n(a) $cX + d$\n(b) $\\dfrac{X}{X+1}$\n(c) $-\\tfrac1\\lambda \\ln(1 - X)$, $\\lambda > 0$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "a-pos",
+      "kind": "setup",
+      "prompt": "Para $c > 0$, ¿cómo se escribe $F_Y(y)$?",
+      "hints": [
+        "Despejar $X$; dividir por $c > 0$ no invierte la desigualdad."
+      ],
+      "cards": [
+        {
+          "text": "$F_Y(y) = F_X(cy + d)$",
+          "correct": false,
+          "explanation": "Aplica la transformación en vez de su inversa."
+        },
+        {
+          "text": "$F_Y(y) = 1 - F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": false,
+          "explanation": "Corresponde a $c < 0$."
+        },
+        {
+          "text": "$F_Y(y) = c\\,F_X(y) + d$",
+          "correct": false,
+          "explanation": "Se transforma el argumento, no el valor de la acumulada."
+        },
+        {
+          "text": "$F_Y(y) = P\\left(X \\le \\tfrac{y-d}{c}\\right) = F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": true,
+          "explanation": "Se aplica la inversa de la transformación."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-neg",
+      "kind": "setup",
+      "prompt": "Para $c < 0$, ¿cómo se escribe $F_Y(y)$?",
+      "hints": [
+        "Dividir por $c < 0$ invierte la desigualdad."
+      ],
+      "cards": [
+        {
+          "text": "$F_Y(y) = F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": false,
+          "explanation": "No invierte la desigualdad."
+        },
+        {
+          "text": "$F_Y(y) = -F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": false,
+          "explanation": "Una acumulada no es negativa."
+        },
+        {
+          "text": "$F_Y(y) = F_X\\left(\\tfrac{d-y}{c}\\right)$",
+          "correct": false,
+          "explanation": "Cambia el signo del argumento en lugar de complementar."
+        },
+        {
+          "text": "$F_Y(y) = P\\left(X \\ge \\tfrac{y-d}{c}\\right) = 1 - F_X\\left(\\tfrac{y-d}{c}\\right)$",
+          "correct": true,
+          "explanation": "$X$ es continua: $P(X = \\cdot) = 0$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-res",
+      "kind": "distribution",
+      "prompt": "Distribución de $Y$:",
+      "hints": [
+        "Derivar y mirar el rango."
+      ],
+      "cards": [
+        {
+          "text": "$Y \\sim \\mathcal{U}[d, c+d]$ con densidad $c$",
+          "correct": false,
+          "explanation": "La densidad es $1/|c|$; si $c < 0$ el intervalo es $[c+d, d]$."
+        },
+        {
+          "text": "$f_Y(y) = \\tfrac1c$ en $[d, c+d]$ para todo $c \\ne 0$",
+          "correct": false,
+          "explanation": "Si $c<0$ daría densidad negativa."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{N}(d, c^2)$",
+          "correct": false,
+          "explanation": "No hay normalidad."
+        },
+        {
+          "text": "$Y$ uniforme en el intervalo de extremos $d$ y $c + d$, con $f_Y = \\tfrac{1}{|c|}$ allí",
+          "correct": true,
+          "explanation": "Una transformación afín de una uniforme es uniforme."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-rango",
+      "kind": "property",
+      "prompt": "¿Qué valores toma $Y$ y cómo es $g(x) = \\tfrac{x}{x+1}$ en $[0,1]$?",
+      "hints": [
+        "$g(0)$, $g(1)$ y $g^{\\prime}(x)$."
+      ],
+      "cards": [
+        {
+          "text": "$g$ no es inyectiva",
+          "correct": false,
+          "explanation": "Es estrictamente monótona."
+        },
+        {
+          "text": "$Y \\in [0, 1]$",
+          "correct": false,
+          "explanation": "$g(1) = \\tfrac12$."
+        },
+        {
+          "text": "$g$ es decreciente; $Y \\in [0, 1]$",
+          "correct": false,
+          "explanation": "La derivada es positiva y $g(1) = \\tfrac12$."
+        },
+        {
+          "text": "$g$ es estrictamente creciente; $Y \\in [0, \\tfrac12]$",
+          "correct": true,
+          "explanation": "$g^{\\prime}(x) = \\tfrac{1}{(x+1)^2} > 0$, $g(0) = 0$, $g(1) = \\tfrac12$."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-acum",
+      "kind": "compute",
+      "prompt": "$F_Y(y)$ para $0 \\le y \\le \\tfrac12$:",
+      "hints": [
+        "$\\tfrac{x}{x+1} \\le y \\iff x \\le \\tfrac{y}{1-y}$.",
+        "Despejar $x$ de $y = \\tfrac{x}{x+1}$."
+      ],
+      "cards": [
+        {
+          "text": "$F_Y(y) = \\dfrac{1-y}{y}$",
+          "correct": false,
+          "explanation": "Invierte la fracción."
+        },
+        {
+          "text": "$F_Y(y) = \\dfrac{y}{1-y}$",
+          "correct": true,
+          "explanation": "$F_X\\left(\\tfrac{y}{1-y}\\right)$ con $\\tfrac{y}{1-y} \\in [0,1]$."
+        },
+        {
+          "text": "$F_Y(y) = \\dfrac{y}{y+1}$",
+          "correct": false,
+          "explanation": "Aplica $g$ en lugar de $g^{-1}$."
+        },
+        {
+          "text": "$F_Y(y) = 2y$",
+          "correct": false,
+          "explanation": "Supone que $Y$ es uniforme."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-dens",
+      "kind": "compute",
+      "prompt": "Densidad:",
+      "hints": [
+        "Derivar $F_Y$."
+      ],
+      "cards": [
+        {
+          "text": "$f_Y(y) = \\dfrac{1}{(1+y)^2}\\,\\mathbb{1}_{(0,1/2)}(y)$",
+          "correct": false,
+          "explanation": "Es $g^{\\prime}$ evaluada en $y$, no la densidad."
+        },
+        {
+          "text": "$f_Y(y) = \\dfrac{1}{(1-y)^2}\\,\\mathbb{1}_{(0, 1/2)}(y)$",
+          "correct": true,
+          "explanation": "$\\tfrac{d}{dy}\\tfrac{y}{1-y} = \\tfrac{1}{(1-y)^2}$; integra 1 en $(0,\\tfrac12)$."
+        },
+        {
+          "text": "$f_Y(y) = 2\\cdot\\mathbb{1}_{(0,1/2)}(y)$",
+          "correct": false,
+          "explanation": "Supone uniforme."
+        },
+        {
+          "text": "$f_Y(y) = \\dfrac{1}{(1-y)^2}\\,\\mathbb{1}_{(0,1)}(y)$",
+          "correct": false,
+          "explanation": "Soporte incorrecto: no integra 1."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "c-acum",
+      "kind": "compute",
+      "prompt": "$F_Y(y)$ para $y \\ge 0$:",
+      "hints": [
+        "$-\\tfrac1\\lambda\\ln(1-X) \\le y \\iff X \\le 1 - e^{-\\lambda y}$.",
+        "Despejar $X$ de $-\\tfrac1\\lambda\\ln(1 - X) \\le y$; ojo con el signo al multiplicar por $-\\lambda$."
+      ],
+      "cards": [
+        {
+          "text": "$F_Y(y) = e^{-\\lambda y}$",
+          "correct": false,
+          "explanation": "Es $P(Y > y)$."
+        },
+        {
+          "text": "$F_Y(y) = \\lambda y$",
+          "correct": false,
+          "explanation": "Supone uniforme."
+        },
+        {
+          "text": "$F_Y(y) = 1 - e^{-\\lambda y}$",
+          "correct": true,
+          "explanation": "La transformación es creciente; se aplica $F_X$ a la inversa."
+        },
+        {
+          "text": "$F_Y(y) = 1 - e^{\\lambda y}$",
+          "correct": false,
+          "explanation": "Signo del exponente incorrecto: no es una acumulada."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-dist",
+      "kind": "distribution",
+      "prompt": "Distribución de $Y$:",
+      "hints": [
+        "Reconocer la acumulada."
+      ],
+      "cards": [
+        {
+          "text": "$Y \\sim \\mathcal{U}[0, \\lambda]$",
+          "correct": false,
+          "explanation": "No es uniforme."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{E}(\\lambda)$, $f_Y(y) = \\lambda e^{-\\lambda y}\\mathbb{1}_{(0,\\infty)}(y)$",
+          "correct": true,
+          "explanation": "Exponencial de parámetro $\\lambda$."
+        },
+        {
+          "text": "$Y \\sim \\mathcal{E}(1/\\lambda)$",
+          "correct": false,
+          "explanation": "La acumulada es $1 - e^{-\\lambda y}$: parámetro $\\lambda$."
+        },
+        {
+          "text": "$Y \\sim \\Gamma(2, \\lambda)$",
+          "correct": false,
+          "explanation": "No es suma de exponenciales."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-uso",
+      "kind": "interpret",
+      "prompt": "¿Para qué sirve este resultado?",
+      "hints": [
+        "Método de la transformada inversa."
+      ],
+      "cards": [
+        {
+          "text": "Calcular la esperanza de una uniforme",
+          "correct": false,
+          "explanation": "No se relaciona."
+        },
+        {
+          "text": "Simular exponenciales a partir de uniformes",
+          "correct": true,
+          "explanation": "$Y = F^{-1}(X)$ con $F(y) = 1 - e^{-\\lambda y}$."
+        },
+        {
+          "text": "Probar la falta de memoria de la uniforme",
+          "correct": false,
+          "explanation": "La uniforme no la tiene."
+        },
+        {
+          "text": "Mostrar que toda variable continua es exponencial",
+          "correct": false,
+          "explanation": "Sólo esta transformación da exponencial."
+        }
+      ],
+      "item": "(c)"
+    }
+  ]
+}

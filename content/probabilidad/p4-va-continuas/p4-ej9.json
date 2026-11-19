@@ -1,0 +1,203 @@
+{
+  "id": "p4-ej9",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Pilas falladas",
+  "source": "Práctica 4 · Ejercicio 9",
+  "statement": "Una fábrica produce pilas cuya duración en horas, cuando se las destina para un determinado uso, tiene distribución normal de parámetros $\\mu_0 = 53$ y $\\sigma_0^2 = 25$. No obstante, un desperfecto en un sector de la fábrica produjo un cambio en la calidad de las pilas: del total que se fabrica una proporción 0,7 de ellas tiene la duración correcta mientras que las restantes están falladas y tienen una duración en horas con distribución normal de parámetros desconocidos $\\mu_1$ y $\\sigma_1^2$. Desafortunadamente, no hay forma de distinguir entre una pila común y una fallada a simple vista. Sea $D$ la duración en horas de una pila extraída al azar del lote de producción de la fábrica.\n(a) Calcular $\\mu_1$ y $\\sigma_1^2$ sabiendo que $P(D \\ge 47) = 0{,}82688$ y $P(D \\ge 60) = 0{,}05746$.\n(b) Calcular la función de densidad de la duración en horas de una pila extraída al azar del lote de producción de la fábrica.\n(c) Si se extrae una pila al azar del lote de producción y se observa que dura más de 51 horas en funcionamiento, ¿cuál es la probabilidad de que sea una pila fallada?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "ab-mezcla",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(D \\ge t)$?",
+      "hints": [
+        "Probabilidad total según el tipo de pila.",
+        "Condicionar en si la pila es fallada."
+      ],
+      "cards": [
+        {
+          "text": "$P(\\mathcal N(0{,}7\\cdot 53 + 0{,}3\\mu_1, \\cdot) \\ge t)$",
+          "correct": false,
+          "explanation": "Una mezcla de normales no es normal."
+        },
+        {
+          "text": "$P(N_0 \\ge t)\\,P(N_1 \\ge t)$",
+          "correct": false,
+          "explanation": "No hay producto."
+        },
+        {
+          "text": "$0{,}7\\,P(N_0 \\ge t) + 0{,}3\\,P(N_1 \\ge t)$ con $N_0 \\sim \\mathcal N(53,25)$, $N_1 \\sim \\mathcal N(\\mu_1,\\sigma_1^2)$",
+          "correct": true,
+          "explanation": "Mezcla de dos normales con pesos $0{,}7$ y $0{,}3$."
+        },
+        {
+          "text": "$P(0{,}7 N_0 + 0{,}3 N_1 \\ge t)$",
+          "correct": false,
+          "explanation": "Confunde mezcla con combinación lineal de variables."
+        }
+      ],
+      "item": "(a), (b)"
+    },
+    {
+      "id": "ab-z",
+      "kind": "compute",
+      "prompt": "¿Qué valores de $P(N_1 \\ge 47)$ y $P(N_1 \\ge 60)$ se obtienen?",
+      "hints": [
+        "$P(N_0 \\ge 47) = P(Z \\ge -1{,}2) \\approx 0{,}8849$ y $P(N_0 \\ge 60) = P(Z \\ge 1{,}4) \\approx 0{,}0808$.",
+        "Despejar de la mezcla."
+      ],
+      "cards": [
+        {
+          "text": "$\\approx 0{,}6914$ y $\\approx 0{,}0031$",
+          "correct": true,
+          "explanation": "$(0{,}82688 - 0{,}7\\cdot0{,}8849)/0{,}3$ y $(0{,}05746 - 0{,}7 \\cdot 0{,}0808)/0{,}3$."
+        },
+        {
+          "text": "$\\approx 0{,}8849$ y $\\approx 0{,}0808$",
+          "correct": false,
+          "explanation": "Son las probabilidades de las pilas correctas."
+        },
+        {
+          "text": "$0{,}82688$ y $0{,}05746$",
+          "correct": false,
+          "explanation": "Ignora la mezcla."
+        },
+        {
+          "text": "$\\approx 0{,}2074$ y $\\approx 0{,}0009$",
+          "correct": false,
+          "explanation": "Falta dividir por $0{,}3$."
+        }
+      ],
+      "timeLimitSec": 240,
+      "item": "(a), (b)"
+    },
+    {
+      "id": "ab-sist",
+      "kind": "compute",
+      "prompt": "Resolver para $\\mu_1, \\sigma_1$:",
+      "hints": [
+        "Con la tabla normal: $\\tfrac{47 - \\mu_1}{\\sigma_1} \\approx -0{,}5$ y $\\tfrac{60-\\mu_1}{\\sigma_1} \\approx 2{,}75$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mu_1 = 45$, $\\sigma_1^2 = 16$",
+          "correct": false,
+          "explanation": "Signo incorrecto al despejar $\\mu_1$."
+        },
+        {
+          "text": "$\\mu_1 = 49$, $\\sigma_1^2 = 4$",
+          "correct": false,
+          "explanation": "Confunde desvío con varianza."
+        },
+        {
+          "text": "$\\mu_1 = 53$, $\\sigma_1^2 = 25$",
+          "correct": false,
+          "explanation": "Son los parámetros de las pilas correctas."
+        },
+        {
+          "text": "$\\mu_1 = 49$, $\\sigma_1^2 = 16$",
+          "correct": true,
+          "explanation": "Restando: $13 = 3{,}25\\,\\sigma_1$, $\\sigma_1 = 4$; luego $\\mu_1 = 47 + 0{,}5 \\cdot 4$."
+        }
+      ],
+      "item": "(a), (b)"
+    },
+    {
+      "id": "ab-dens",
+      "kind": "compute",
+      "prompt": "Densidad de $D$:",
+      "hints": [
+        "Derivar $F_D = 0{,}7 F_{N_0} + 0{,}3 F_{N_1}$."
+      ],
+      "cards": [
+        {
+          "text": "$f_D(x) = \\dfrac{0{,}7}{25\\sqrt{2\\pi}} e^{-\\frac{(x-53)^2}{50}} + \\dfrac{0{,}3}{16\\sqrt{2\\pi}} e^{-\\frac{(x-49)^2}{32}}$",
+          "correct": false,
+          "explanation": "Usa $\\sigma^2$ en lugar de $\\sigma$ en la constante."
+        },
+        {
+          "text": "$f_D(x) = \\dfrac{0{,}7}{5\\sqrt{2\\pi}} e^{-\\frac{(x-53)^2}{50}} + \\dfrac{0{,}3}{4\\sqrt{2\\pi}} e^{-\\frac{(x-49)^2}{32}}$",
+          "correct": true,
+          "explanation": "Combinación convexa de las dos densidades normales."
+        },
+        {
+          "text": "Producto de las dos densidades",
+          "correct": false,
+          "explanation": "No integra 1 ni corresponde a la mezcla."
+        },
+        {
+          "text": "Densidad de una normal de media $51{,}8$",
+          "correct": false,
+          "explanation": "Una mezcla no es normal; $51{,}8 = 0{,}7\\cdot53 + 0{,}3\\cdot49$ es sólo su media."
+        }
+      ],
+      "item": "(a), (b)"
+    },
+    {
+      "id": "c-bayes",
+      "kind": "setup",
+      "prompt": "Plantear la probabilidad pedida:",
+      "hints": [
+        "Bayes.",
+        "Fallada es la \"causa\"; durar más de 51 horas, la \"observación\"."
+      ],
+      "cards": [
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Ignora la observación."
+        },
+        {
+          "text": "$\\dfrac{0{,}3\\,P(N_1 > 51)}{0{,}3\\,P(N_1 > 51) + 0{,}7\\,P(N_0 > 51)}$",
+          "correct": true,
+          "explanation": "$P(\\text{fallada} \\mid D > 51)$."
+        },
+        {
+          "text": "$P(N_1 > 51)$",
+          "correct": false,
+          "explanation": "Es $P(D > 51 \\mid \\text{fallada})$."
+        },
+        {
+          "text": "$\\dfrac{P(N_1 > 51)}{P(N_0 > 51)}$",
+          "correct": false,
+          "explanation": "Cociente de verosimilitudes, no la probabilidad posterior."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$P(N_1 > 51) = P(Z > 0{,}5) \\approx 0{,}3085$ y $P(N_0 > 51) = P(Z > -0{,}4) \\approx 0{,}6554$."
+      ],
+      "cards": [
+        {
+          "text": "$\\approx 0{,}471$",
+          "correct": false,
+          "explanation": "Cociente de verosimilitudes."
+        },
+        {
+          "text": "$\\approx 0{,}168$",
+          "correct": true,
+          "explanation": "$\\tfrac{0{,}3 \\cdot 0{,}3085}{0{,}3 \\cdot 0{,}3085 + 0{,}7 \\cdot 0{,}6554} = \\tfrac{0{,}0926}{0{,}5514}$."
+        },
+        {
+          "text": "$\\approx 0{,}309$",
+          "correct": false,
+          "explanation": "Es $P(N_1 > 51)$."
+        },
+        {
+          "text": "$0{,}3$",
+          "correct": false,
+          "explanation": "Es la proporción de falladas, sin usar la observación."
+        }
+      ],
+      "timeLimitSec": 240,
+      "item": "(c)"
+    }
+  ]
+}

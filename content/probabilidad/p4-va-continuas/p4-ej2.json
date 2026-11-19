@@ -1,0 +1,199 @@
+{
+  "id": "p4-ej2",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Esperando el colectivo",
+  "source": "Práctica 4 · Ejercicio 2",
+  "statement": "El colectivo que toma Felipe para ir al trabajo llega a la parada en algún momento entre las 10 y las 10:30 de la mañana con distribución uniforme. Felipe llega a la parada a las 10 de la mañana.\n(a) ¿Cuál es la probabilidad de que tenga que esperar más de 10 minutos?\n(b) Si el colectivo no ha llegado todavía a las 10:15, hallar la probabilidad de que Felipe tenga que esperar por lo menos otros 10 minutos más.",
+  "difficulty": 1,
+  "steps": [
+    {
+      "id": "a-va",
+      "kind": "distribution",
+      "prompt": "Modelo para la espera de Felipe:",
+      "hints": [
+        "Medir el tiempo en minutos desde las 10."
+      ],
+      "cards": [
+        {
+          "text": "$T \\sim \\mathcal{U}[10, 30]$",
+          "correct": false,
+          "explanation": "El intervalo es de 10:00 a 10:30, es decir $[0, 30]$ minutos."
+        },
+        {
+          "text": "$T \\sim \\mathcal{U}[0, 30]$",
+          "correct": true,
+          "explanation": "La espera coincide con el momento de llegada del colectivo."
+        },
+        {
+          "text": "$T \\sim \\mathcal{E}(\\tfrac1{30})$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme."
+        },
+        {
+          "text": "$T \\sim \\mathcal{N}(15, 30)$",
+          "correct": false,
+          "explanation": "El enunciado dice uniforme; además una normal toma valores fuera de $[0,30]$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-acum",
+      "kind": "compute",
+      "prompt": "¿Cuál es $F_T(t)$ para $0 \\le t \\le 30$?",
+      "hints": [
+        "Uniforme: proporcional a la longitud."
+      ],
+      "cards": [
+        {
+          "text": "$F_T(t) = \\tfrac{t}{30}$",
+          "correct": true,
+          "explanation": "$\\int_0^t \\tfrac{1}{30}\\,ds$."
+        },
+        {
+          "text": "$F_T(t) = \\tfrac{t}{10}$",
+          "correct": false,
+          "explanation": "Escala incorrecta: el intervalo mide 30."
+        },
+        {
+          "text": "$F_T(t) = \\tfrac{1}{30}$",
+          "correct": false,
+          "explanation": "Es la densidad."
+        },
+        {
+          "text": "$F_T(t) = 1 - \\tfrac{t}{30}$",
+          "correct": false,
+          "explanation": "Es $P(T > t)$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-res",
+      "kind": "compute",
+      "prompt": "$P(T > 10)$:",
+      "hints": [
+        "$1 - F_T(10)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{10}{30} \\cdot \\tfrac{20}{30}$",
+          "correct": false,
+          "explanation": "No corresponde a ningún evento del problema."
+        },
+        {
+          "text": "$e^{-1/3}$",
+          "correct": false,
+          "explanation": "Usa una exponencial."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Es $P(T \\le 10)$."
+        },
+        {
+          "text": "$1 - \\tfrac{10}{30} = \\tfrac23$",
+          "correct": true,
+          "explanation": "Complemento de la acumulada."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-cond",
+      "kind": "setup",
+      "prompt": "Plantear:",
+      "hints": [
+        "\"Otros 10 minutos\" se cuentan desde las 10:15.",
+        "Medir todo desde las 10."
+      ],
+      "cards": [
+        {
+          "text": "$P(T \\ge 10)$",
+          "correct": false,
+          "explanation": "Usa falta de memoria, que la uniforme no tiene."
+        },
+        {
+          "text": "$P(T \\ge 25)$",
+          "correct": false,
+          "explanation": "No condiciona."
+        },
+        {
+          "text": "$P(T \\ge 10 \\mid T > 15)$",
+          "correct": false,
+          "explanation": "Ese evento ya ocurrió: daría 1."
+        },
+        {
+          "text": "$P(T \\ge 25 \\mid T > 15)$",
+          "correct": true,
+          "explanation": "Esperar al menos hasta las 10:25, sabiendo que no llegó antes de las 10:15."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$\\dfrac{P(T \\ge 25)}{P(T > 15)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{5/30}{15/30} = \\tfrac13$",
+          "correct": true,
+          "explanation": "Dado $T > 15$, $T$ es uniforme en $(15, 30]$: quedan 5 de 15 minutos."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Sin justificación."
+        },
+        {
+          "text": "$\\tfrac23$",
+          "correct": false,
+          "explanation": "Es $P(T > 10)$ sin condicionar."
+        },
+        {
+          "text": "$\\tfrac16$",
+          "correct": false,
+          "explanation": "No divide por $P(T > 15)$."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-int",
+      "kind": "property",
+      "prompt": "Sin información previa, $P(T > 10) = \\tfrac23$. ¿Qué muestra compararlo con $\\tfrac13$?",
+      "hints": [
+        "Falta de memoria."
+      ],
+      "cards": [
+        {
+          "text": "La uniforme no tiene falta de memoria",
+          "correct": true,
+          "explanation": "Haber esperado cambia la probabilidad de seguir esperando otros 10 minutos."
+        },
+        {
+          "text": "La uniforme tiene falta de memoria",
+          "correct": false,
+          "explanation": "Si la tuviera, ambas probabilidades coincidirían."
+        },
+        {
+          "text": "La espera es independiente de lo ya esperado",
+          "correct": false,
+          "explanation": "Contradice el cálculo."
+        },
+        {
+          "text": "Las dos preguntas son equivalentes",
+          "correct": false,
+          "explanation": "Dan valores distintos."
+        }
+      ],
+      "item": "(b)"
+    }
+  ]
+}

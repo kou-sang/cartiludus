@@ -1,0 +1,139 @@
+{
+  "id": "p4-ej7",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "La geométrica y la exponencial (2)",
+  "source": "Práctica 4 · Ejercicio 7",
+  "statement": "La geométrica y la exponencial, parte 2. Una variable aleatoria $X$ tiene la propiedad de falta de memoria si para todo par de números reales $s$ y $t$ se verifica $P(X > s + t \\mid X > t) = P(X > s)$.\n(a) Probar que una variable aleatoria absolutamente continua $X$ posee la propiedad de falta de memoria si y sólo si tiene distribución exponencial de parámetro $\\lambda = -\\log P(X > 1)$.\n(b) Sean $\\lambda > 0$ y $X$ una variable aleatoria con distribución $\\mathcal E(\\lambda)$. Probar que $Y = [X] + 1$ tiene distribución geométrica de parámetro $p = 1 - e^{-\\lambda}$, donde $[x]$ denota la parte entera de $x$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "vuelta",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "Si $X \\sim \\mathcal E(\\lambda)$, ¿por qué no tiene memoria?",
+      "hints": [
+        "$P(X > s+t \\mid X > t) = \\tfrac{P(X > s+t)}{P(X > t)}$.",
+        "$P(X > u) = e^{-\\lambda u}$."
+      ],
+      "cards": [
+        {
+          "text": "El cociente es $\\tfrac{e^{-\\lambda(s+t)}}{e^{-\\lambda t}} = e^{-\\lambda s} = P(X > s)$",
+          "correct": true,
+          "explanation": "$\\{X > s+t\\} \\subseteq \\{X > t\\}$, así que la intersección es $\\{X > s + t\\}$."
+        },
+        {
+          "text": "Porque es continua",
+          "correct": false,
+          "explanation": "La uniforme es continua y tiene memoria."
+        },
+        {
+          "text": "Porque $E(X) = \\tfrac1\\lambda$",
+          "correct": false,
+          "explanation": "La esperanza no prueba la propiedad."
+        },
+        {
+          "text": "Porque $P(X > s) = P(X > t)$",
+          "correct": false,
+          "explanation": "No es cierto en general."
+        }
+      ]
+    },
+    {
+      "id": "func",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "Recíproco: con $G(t) = P(X > t)$, ¿qué ecuación da la falta de memoria?",
+      "hints": [
+        "Multiplicar por $P(X > t)$."
+      ],
+      "cards": [
+        {
+          "text": "$G(s + t) = G(s) + G(t)$",
+          "correct": false,
+          "explanation": "La propiedad es multiplicativa."
+        },
+        {
+          "text": "$G(s) = G(t)$",
+          "correct": false,
+          "explanation": "Eso diría que $G$ es constante."
+        },
+        {
+          "text": "$G(s + t) = G(s)\\,G(t)$",
+          "correct": true,
+          "explanation": "Ecuación funcional de Cauchy multiplicativa."
+        },
+        {
+          "text": "$G(st) = G(s)G(t)$",
+          "correct": false,
+          "explanation": "Los argumentos se suman."
+        }
+      ]
+    },
+    {
+      "id": "sol",
+      "kind": "interpret",
+      "item": "(a)",
+      "prompt": "¿Qué soluciones tiene, si $G$ es monótona?",
+      "hints": [
+        "Con $G(1) = q$: $G(n) = q^n$, $G(\\tfrac1m) = q^{1/m}$, y así $G(r) = q^r$ para racionales.",
+        "Por monotonía, vale para todo $t$."
+      ],
+      "cards": [
+        {
+          "text": "$G(t) = e^{-t}$ siempre",
+          "correct": false,
+          "explanation": "El parámetro depende de $G(1)$."
+        },
+        {
+          "text": "$G(t) = 1 - \\lambda t$",
+          "correct": false,
+          "explanation": "No cumple la ecuación funcional."
+        },
+        {
+          "text": "Cualquier función decreciente",
+          "correct": false,
+          "explanation": "La ecuación funcional restringe mucho."
+        },
+        {
+          "text": "$G(t) = G(1)^t = e^{-\\lambda t}$ con $\\lambda = -\\log G(1)$",
+          "correct": true,
+          "explanation": "Es la cola de una $\\mathcal E(\\lambda)$."
+        }
+      ]
+    },
+    {
+      "id": "geo",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "(b) ¿Cuánto vale $P(Y = k) = P(k - 1 \\le X < k)$ para $k \\in \\mathbb N$?",
+      "hints": [
+        "$P(a \\le X < b) = e^{-\\lambda a} - e^{-\\lambda b}$.",
+        "Sacar factor común $e^{-\\lambda(k-1)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(e^{-\\lambda}\\right)^{k-1}\\left(1 - e^{-\\lambda}\\right)$: geométrica de parámetro $1 - e^{-\\lambda}$",
+          "correct": true,
+          "explanation": "Forma $(1-p)^{k-1}p$ con $p = 1 - e^{-\\lambda}$."
+        },
+        {
+          "text": "$\\lambda e^{-\\lambda k}$",
+          "correct": false,
+          "explanation": "Es la densidad en $k$, no la probabilidad de un intervalo."
+        },
+        {
+          "text": "$(1 - e^{-\\lambda})^{k-1}e^{-\\lambda}$",
+          "correct": false,
+          "explanation": "Intercambia éxito y fracaso."
+        },
+        {
+          "text": "$e^{-\\lambda k}$",
+          "correct": false,
+          "explanation": "Es $P(X > k)$."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "p4-ej4",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Un rayo al azar",
+  "source": "Práctica 4 · Ejercicio 4",
+  "statement": "(a) Un rayo emana del punto $(-1, 0)$ formando un ángulo $\\theta$ con el semieje positivo. Si $\\theta \\sim \\mathcal U[-\\tfrac\\pi2, \\tfrac\\pi2]$, calcular la distribución de la intersección del rayo con el eje $y$.\n(b) Generalizar a un punto cualquiera $P$, distante en $a > 0$ unidades de una recta $r$. La variable $Y$ que da la intersección del rayo con la recta $r$ es una distribución conocida. ¿Cuál?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "y",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Dónde corta el rayo al eje $y$?",
+      "hints": [
+        "Dibujar: el rayo sale de $(-1, 0)$ y recorre 1 unidad horizontal hasta el eje $y$.",
+        "Pendiente $\\tan\\theta$."
+      ],
+      "cards": [
+        {
+          "text": "En $Y = \\tan\\theta$",
+          "correct": true,
+          "explanation": "El triángulo rectángulo tiene cateto horizontal 1 y vertical $Y$: $\\tan\\theta = \\tfrac{Y}{1}$."
+        },
+        {
+          "text": "En $Y = \\cos\\theta$",
+          "correct": false,
+          "explanation": "Revisar qué cateto es cuál."
+        },
+        {
+          "text": "En $Y = \\theta$",
+          "correct": false,
+          "explanation": "El corte no es lineal en el ángulo."
+        },
+        {
+          "text": "En $Y = \\sin\\theta$",
+          "correct": false,
+          "explanation": "Esa sería la altura a distancia 1 sobre el rayo, no sobre la horizontal."
+        }
+      ]
+    },
+    {
+      "id": "acum",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $F_Y(y) = P(\\tan\\theta \\le y)$?",
+      "hints": [
+        "$\\tan$ es creciente en $(-\\tfrac\\pi2, \\tfrac\\pi2)$.",
+        "$P(\\theta \\le \\arctan y)$ con $\\theta$ uniforme en un intervalo de largo $\\pi$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{y}{\\pi}$",
+          "correct": false,
+          "explanation": "El ángulo no es uniforme en $y$."
+        },
+        {
+          "text": "$\\dfrac{\\arctan y + \\pi/2}{\\pi} = \\dfrac12 + \\dfrac{\\arctan y}{\\pi}$",
+          "correct": true,
+          "explanation": "Acumulada de la uniforme evaluada en $\\arctan y$."
+        },
+        {
+          "text": "$\\dfrac{\\arctan y}{\\pi}$",
+          "correct": false,
+          "explanation": "Falta sumar la parte de $[-\\tfrac\\pi2, 0]$: daría valores negativos."
+        },
+        {
+          "text": "$\\dfrac{\\tan y + \\pi/2}{\\pi}$",
+          "correct": false,
+          "explanation": "Hay que aplicar la inversa de la tangente."
+        }
+      ]
+    },
+    {
+      "id": "f",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "¿Qué densidad tiene $Y$?",
+      "hints": [
+        "$\\tfrac{d}{dy}\\arctan y = \\tfrac{1}{1 + y^2}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{1 + y^2}$",
+          "correct": false,
+          "explanation": "Falta $\\tfrac1\\pi$: no integraría 1."
+        },
+        {
+          "text": "Uniforme en $\\mathbb R$",
+          "correct": false,
+          "explanation": "No existe una uniforme en toda la recta."
+        },
+        {
+          "text": "Normal estándar",
+          "correct": false,
+          "explanation": "La densidad tiene otra forma."
+        },
+        {
+          "text": "$f_Y(y) = \\dfrac{1}{\\pi(1 + y^2)}$: distribución de Cauchy",
+          "correct": true,
+          "explanation": "Su esperanza no existe: las colas son muy pesadas."
+        }
+      ]
+    },
+    {
+      "id": "gen",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "Si $P$ está a distancia $a$ de la recta, ¿qué distribución tiene el corte $Y$?",
+      "hints": [
+        "Ahora $Y = a\\tan\\theta$.",
+        "Cambio de escala de la Cauchy."
+      ],
+      "cards": [
+        {
+          "text": "Normal de varianza $a^2$",
+          "correct": false,
+          "explanation": "Sigue siendo Cauchy."
+        },
+        {
+          "text": "Cauchy estándar, sin cambios",
+          "correct": false,
+          "explanation": "La distancia cambia la escala."
+        },
+        {
+          "text": "Cauchy de escala $a$: $f_Y(y) = \\dfrac{a}{\\pi(a^2 + y^2)}$",
+          "correct": true,
+          "explanation": "$f_Y(y) = \\tfrac1a f_{\\tan\\theta}(\\tfrac ya)$."
+        },
+        {
+          "text": "$\\dfrac{1}{\\pi(a + y^2)}$",
+          "correct": false,
+          "explanation": "Revisar el cambio de variable."
+        }
+      ]
+    }
+  ]
+}

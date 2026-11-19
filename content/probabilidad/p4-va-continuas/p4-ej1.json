@@ -1,0 +1,482 @@
+{
+  "id": "p4-ej1",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Diámetro de los troncos",
+  "source": "Práctica 4 · Ejercicio 1",
+  "statement": "El diámetro $D$ expresado en decímetros del tronco de una cierta especie de árboles es una variable aleatoria continua (o absolutamente continua) con función de densidad $f_D(x) = k\\,x\\,\\mathbb 1_{(0,10)}(x)$.\n(a) Hallar el valor de la constante $k$.\n(b) ¿Cuál es la probabilidad de que el diámetro de un árbol de esa especie elegido al azar mida entre 4 y 6 decímetros?\n(c) ¿Cómo se modifica la probabilidad anterior si se sabe que el diámetro mide más de 5 decímetros?\n(d) En un área del bosque hay 3 árboles de esa especie. Calcular la probabilidad de que exactamente 2 de ellos tengan diámetro entre 4 y 6 decímetros.\n(e) ¿Cuántos árboles habría que muestrear en el bosque para que la probabilidad de encontrar al menos uno cuyo diámetro mida entre 4 y 6 decímetros sea no menor a 0,99?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "a-cond",
+      "kind": "property",
+      "prompt": "¿Qué condiciones debe cumplir una densidad?",
+      "hints": [
+        "Propiedades que definen una densidad."
+      ],
+      "cards": [
+        {
+          "text": "$0 \\le f_D \\le 1$",
+          "correct": false,
+          "explanation": "Una densidad puede superar 1; lo que vale 1 es la integral."
+        },
+        {
+          "text": "$f_D(10) = 1$",
+          "correct": false,
+          "explanation": "Una densidad no se normaliza en un punto."
+        },
+        {
+          "text": "$\\int_{-\\infty}^{\\infty} f_D = 0$",
+          "correct": false,
+          "explanation": "La integral total es 1."
+        },
+        {
+          "text": "$f_D \\ge 0$ y $\\int_{-\\infty}^{\\infty} f_D = 1$",
+          "correct": true,
+          "explanation": "No negativa e integral total 1."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-signo",
+      "kind": "property",
+      "prompt": "¿Qué signo debe tener $k$?",
+      "hints": [
+        "En $(0, 10)$, $x > 0$."
+      ],
+      "cards": [
+        {
+          "text": "$k < 0$",
+          "correct": false,
+          "explanation": "Daría una densidad negativa."
+        },
+        {
+          "text": "Cualquiera",
+          "correct": false,
+          "explanation": "La densidad debe ser no negativa."
+        },
+        {
+          "text": "$k = 0$",
+          "correct": false,
+          "explanation": "Entonces la integral sería 0, no 1."
+        },
+        {
+          "text": "$k > 0$",
+          "correct": true,
+          "explanation": "Si $k < 0$ la densidad sería negativa en $(0,10)$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-int",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\int_{-\\infty}^{\\infty} f_D$ en función de $k$?",
+      "hints": [
+        "Fuera de $(0,10)$ la densidad es 0.",
+        "Fuera de $(0, 10)$ la densidad vale 0."
+      ],
+      "cards": [
+        {
+          "text": "$k \\int_0^{10} x\\,dx = 50k$",
+          "correct": true,
+          "explanation": "$\\left.\\tfrac{x^2}{2}\\right|_0^{10} = 50$."
+        },
+        {
+          "text": "$10k$",
+          "correct": false,
+          "explanation": "Integra la constante $k$ en lugar de $kx$."
+        },
+        {
+          "text": "$100k$",
+          "correct": false,
+          "explanation": "Olvida el $\\tfrac12$."
+        },
+        {
+          "text": "$k$",
+          "correct": false,
+          "explanation": "Ignora el factor $x$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-res",
+      "kind": "compute",
+      "prompt": "Valor de $k$:",
+      "hints": [
+        "$50k = 1$."
+      ],
+      "cards": [
+        {
+          "text": "$k = \\tfrac{1}{100}$",
+          "correct": false,
+          "explanation": "Viene de $100k = 1$."
+        },
+        {
+          "text": "$k = \\tfrac{1}{50}$",
+          "correct": true,
+          "explanation": "Despeje."
+        },
+        {
+          "text": "$k = 50$",
+          "correct": false,
+          "explanation": "Invierte la ecuación."
+        },
+        {
+          "text": "$k = \\tfrac{1}{10}$",
+          "correct": false,
+          "explanation": "Viene de $10k = 1$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-acum",
+      "kind": "compute",
+      "prompt": "¿Cuál es $F_D(x)$ para $0 \\le x \\le 10$?",
+      "hints": [
+        "$F_D(x) = \\int_0^x \\tfrac{t}{50}\\,dt$."
+      ],
+      "cards": [
+        {
+          "text": "$F_D(x) = \\tfrac{x^2}{100}$",
+          "correct": true,
+          "explanation": "$\\tfrac{1}{50} \\cdot \\tfrac{x^2}{2}$; vale 1 en $x = 10$."
+        },
+        {
+          "text": "$F_D(x) = \\tfrac{x}{10}$",
+          "correct": false,
+          "explanation": "Supone que $D$ es uniforme."
+        },
+        {
+          "text": "$F_D(x) = \\tfrac{x}{50}$",
+          "correct": false,
+          "explanation": "Es la densidad, no la acumulada."
+        },
+        {
+          "text": "$F_D(x) = \\tfrac{x^2}{50}$",
+          "correct": false,
+          "explanation": "Olvida el $\\tfrac12$; daría $F_D(10) = 2$."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-plan",
+      "kind": "setup",
+      "prompt": "¿Cómo se calcula $P(4 < D < 6)$?",
+      "hints": [
+        "Usar la acumulada.",
+        "La probabilidad de un intervalo es el área bajo la densidad."
+      ],
+      "cards": [
+        {
+          "text": "$\\int_4^6 F_D(x)\\,dx$",
+          "correct": false,
+          "explanation": "Integra la acumulada en lugar de la densidad."
+        },
+        {
+          "text": "$F_D(6) - F_D(4)$",
+          "correct": true,
+          "explanation": "Equivale a integrar la densidad entre 4 y 6."
+        },
+        {
+          "text": "$F_D(6) \\cdot F_D(4)$",
+          "correct": false,
+          "explanation": "No hay producto en esta probabilidad."
+        },
+        {
+          "text": "$f_D(6) - f_D(4)$",
+          "correct": false,
+          "explanation": "Diferencia de densidades, no de probabilidades."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$F_D(x) = \\tfrac{x^2}{100}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{36}{100}$",
+          "correct": false,
+          "explanation": "Es $P(D < 6)$."
+        },
+        {
+          "text": "$\\tfrac{16}{100}$",
+          "correct": false,
+          "explanation": "Es $P(D < 4)$."
+        },
+        {
+          "text": "$\\tfrac{36 - 16}{50} = \\tfrac25$",
+          "correct": false,
+          "explanation": "Usa $F_D(x) = x^2/50$."
+        },
+        {
+          "text": "$\\tfrac{36 - 16}{100} = \\tfrac15$",
+          "correct": true,
+          "explanation": "Diferencia de la acumulada."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "c-cond",
+      "kind": "setup",
+      "prompt": "Plantear la probabilidad condicional:",
+      "hints": [
+        "$\\{4 < D < 6\\} \\cap \\{D > 5\\}$.",
+        "Definición de probabilidad condicional."
+      ],
+      "cards": [
+        {
+          "text": "$P(4 < D < 6) \\cdot P(D > 5)$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{P(5 < D < 6)}{P(D > 5)}$",
+          "correct": true,
+          "explanation": "La intersección es $\\{5 < D < 6\\}$."
+        },
+        {
+          "text": "$P(D < 1)$ (falta de memoria)",
+          "correct": false,
+          "explanation": "Sólo la exponencial tiene falta de memoria."
+        },
+        {
+          "text": "$\\dfrac{P(4 < D < 6)}{P(D > 5)}$",
+          "correct": false,
+          "explanation": "No interseca con el evento condicionante."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$P(5<D<6) = F_D(6) - F_D(5)$ y $P(D > 5) = 1 - F_D(5)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{11}{100}$",
+          "correct": false,
+          "explanation": "No divide por $P(D>5)$."
+        },
+        {
+          "text": "$\\dfrac{11/100}{75/100} = \\tfrac{11}{75} \\approx 0{,}147$",
+          "correct": true,
+          "explanation": "Cociente de las dos probabilidades."
+        },
+        {
+          "text": "$\\tfrac{11}{25}$",
+          "correct": false,
+          "explanation": "Divide por $P(D \\le 5)$."
+        },
+        {
+          "text": "$\\tfrac{20}{75}$",
+          "correct": false,
+          "explanation": "Usa $P(4<D<6)$ en el numerador."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "d-va",
+      "kind": "identify",
+      "prompt": "Variable:",
+      "hints": [
+        "Contar árboles."
+      ],
+      "cards": [
+        {
+          "text": "$N$ = diámetro del segundo árbol",
+          "correct": false,
+          "explanation": "Un solo árbol."
+        },
+        {
+          "text": "$N$ = cantidad de árboles (de 3) con diámetro en $(4,6)$",
+          "correct": true,
+          "explanation": "Se pide $P(N = 2)$."
+        },
+        {
+          "text": "$N$ = cantidad de árboles hasta el primero en $(4,6)$",
+          "correct": false,
+          "explanation": "Tiempo de espera, no conteo."
+        },
+        {
+          "text": "$N$ = diámetro promedio de los 3",
+          "correct": false,
+          "explanation": "No describe el evento pedido."
+        }
+      ],
+      "item": "(d)"
+    },
+    {
+      "id": "d-dist",
+      "kind": "distribution",
+      "prompt": "Distribución:",
+      "hints": [
+        "Árboles independientes, cada uno \"éxito\" con probabilidad $p$.",
+        "Del ítem (b): cada árbol está en $(4,6)$ con probabilidad $\\tfrac15$."
+      ],
+      "cards": [
+        {
+          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac45)$",
+          "correct": false,
+          "explanation": "Ese parámetro cuenta los que no están en $(4,6)$."
+        },
+        {
+          "text": "Hipergeométrica",
+          "correct": false,
+          "explanation": "No hay población finita de la que se extraiga sin reposición."
+        },
+        {
+          "text": "$N \\sim \\mathrm{Bi}(3, \\tfrac15)$",
+          "correct": true,
+          "explanation": "3 ensayos independientes con éxito de prob. $\\tfrac15$."
+        },
+        {
+          "text": "$N \\sim \\mathcal{G}(\\tfrac15)$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        }
+      ],
+      "item": "(d)"
+    },
+    {
+      "id": "d-res",
+      "kind": "compute",
+      "prompt": "$P(N = 2)$:",
+      "hints": [
+        "$\\binom32 p^2 (1-p)$."
+      ],
+      "cards": [
+        {
+          "text": "$3 \\cdot \\tfrac1{25} \\cdot \\tfrac45 = \\tfrac{12}{125} = 0{,}096$",
+          "correct": true,
+          "explanation": "Fórmula binomial."
+        },
+        {
+          "text": "$\\tfrac{1}{25} \\cdot \\tfrac45$",
+          "correct": false,
+          "explanation": "Falta el $\\binom32$."
+        },
+        {
+          "text": "$3 \\cdot \\tfrac{16}{25} \\cdot \\tfrac15$",
+          "correct": false,
+          "explanation": "Intercambia $p$ y $1-p$."
+        },
+        {
+          "text": "$\\tfrac{1}{25}$",
+          "correct": false,
+          "explanation": "Ignora al tercer árbol."
+        }
+      ],
+      "item": "(d)"
+    },
+    {
+      "id": "e-dist",
+      "kind": "distribution",
+      "prompt": "Con $n$ árboles, sea $N_n$ la cantidad con diámetro en $(4,6)$. Distribución:",
+      "hints": [
+        "Ensayos independientes."
+      ],
+      "cards": [
+        {
+          "text": "$N_n \\sim \\mathrm{Bi}(n, \\tfrac45)$",
+          "correct": false,
+          "explanation": "Cuenta los que no están en $(4,6)$."
+        },
+        {
+          "text": "$N_n \\sim \\mathrm{Bi}(n, \\tfrac15)$",
+          "correct": true,
+          "explanation": "$n$ ensayos con éxito de prob. $\\tfrac15$."
+        },
+        {
+          "text": "$N_n \\sim \\mathcal{G}(\\tfrac15)$",
+          "correct": false,
+          "explanation": "Es un conteo con $n$ fijo."
+        },
+        {
+          "text": "$N_n \\sim \\mathcal{P}(\\tfrac n5)$",
+          "correct": false,
+          "explanation": "Es una aproximación, no la distribución exacta."
+        }
+      ],
+      "item": "(e)"
+    },
+    {
+      "id": "e-ineq",
+      "kind": "setup",
+      "prompt": "Condición sobre $n$:",
+      "hints": [
+        "Complemento de \"ninguno\".",
+        "¿Qué es lo contrario de \"al menos uno\"?"
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac n5 \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Cota lineal sin justificación."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac45\\right)^n \\ge 0{,}99$",
+          "correct": true,
+          "explanation": "$P(N_n \\ge 1) = 1 - P(N_n = 0)$."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac15\\right)^n \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Usa $p$ en lugar de $1-p$."
+        },
+        {
+          "text": "$\\left(\\tfrac15\\right)^n \\ge 0{,}99$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que todos estén en $(4,6)$."
+        }
+      ],
+      "item": "(e)"
+    },
+    {
+      "id": "e-res",
+      "kind": "compute",
+      "prompt": "Menor $n$:",
+      "hints": [
+        "$n \\ge \\dfrac{\\ln(0{,}01)}{\\ln(0{,}8)} \\approx 20{,}6$."
+      ],
+      "cards": [
+        {
+          "text": "$n = 21$",
+          "correct": true,
+          "explanation": "Primer entero que cumple la desigualdad."
+        },
+        {
+          "text": "$n = 3$",
+          "correct": false,
+          "explanation": "Viene de $1 - 0{,}2^n \\ge 0{,}99$."
+        },
+        {
+          "text": "$n = 5$",
+          "correct": false,
+          "explanation": "Viene de $\\tfrac n5 \\ge 0{,}99$."
+        },
+        {
+          "text": "$n = 20$",
+          "correct": false,
+          "explanation": "$1 - 0{,}8^{20} \\approx 0{,}9885 < 0{,}99$."
+        }
+      ],
+      "item": "(e)"
+    }
+  ]
+}

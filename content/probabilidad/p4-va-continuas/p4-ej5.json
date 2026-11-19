@@ -1,0 +1,234 @@
+{
+  "id": "p4-ej5",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Los experimentos de Buffon",
+  "source": "Práctica 4 · Ejercicio 5",
+  "statement": "Los experimentos del conde de Buffon, George Louis Leclerc (1707-1788, París)\n(a) Supongamos que, en un piso cubierto con cerámicas cuadradas de largo $a > 0$, tiramos una moneda de radio menor que $\\tfrac a2$. Proponer un modelo matemático apropiado, y calcular la probabilidad de que la moneda caiga en dos o más cerámicas a la vez.\n(b) Supongamos que, en una hoja rayada, los renglones distan entre sí en $a > 0$ centímetros, y que arrojamos una pequeña aguja, cuyo largo es menor que $\\tfrac a2$, sobre la hoja. Proponer un modelo matemático apropiado, y calcular la probabilidad de que la aguja corte uno de los renglones.\n(c) Diseñar un experimento aleatorio que permita calcular el valor de $\\pi$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "ma",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "(a) ¿Qué modelo conviene para la moneda (radio $r$)?",
+      "hints": [
+        "Lo que importa es dónde cae el centro dentro de la cerámica.",
+        "Por la periodicidad del piso, alcanza con mirar una cerámica."
+      ],
+      "cards": [
+        {
+          "text": "El ángulo de la moneda es uniforme",
+          "correct": false,
+          "explanation": "Una moneda es simétrica: el ángulo no importa."
+        },
+        {
+          "text": "El centro es uniforme en $[0, r]^2$",
+          "correct": false,
+          "explanation": "El centro puede caer en cualquier parte de la cerámica."
+        },
+        {
+          "text": "El centro es normal en el cuadrado",
+          "correct": false,
+          "explanation": "No hay motivo para preferir el centro de la cerámica."
+        },
+        {
+          "text": "El centro es uniforme en el cuadrado $[0, a]^2$",
+          "correct": true,
+          "explanation": "Sin preferencia de posición, y todas las cerámicas son iguales."
+        }
+      ]
+    },
+    {
+      "id": "una",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuándo cae la moneda en una sola cerámica?",
+      "hints": [
+        "El borde de la moneda no debe cruzar ningún lado.",
+        "El centro tiene que estar a distancia $\\ge r$ de los cuatro lados."
+      ],
+      "cards": [
+        {
+          "text": "Probabilidad $\\dfrac{\\pi r^2}{a^2}$",
+          "correct": false,
+          "explanation": "Es la proporción de área que ocupa la moneda, otra cosa."
+        },
+        {
+          "text": "Probabilidad $\\dfrac{a - 2r}{a}$",
+          "correct": false,
+          "explanation": "Son dos dimensiones."
+        },
+        {
+          "text": "Si el centro cae en el cuadrado interior de lado $a - 2r$: probabilidad $\\dfrac{(a - 2r)^2}{a^2}$",
+          "correct": true,
+          "explanation": "Se pierde una franja de ancho $r$ junto a cada lado."
+        },
+        {
+          "text": "Probabilidad $\\dfrac{(a - r)^2}{a^2}$",
+          "correct": false,
+          "explanation": "Hay que alejarse $r$ de los dos lados de cada dirección."
+        }
+      ]
+    },
+    {
+      "id": "dos",
+      "kind": "interpret",
+      "item": "(a)",
+      "prompt": "¿Cuál es la probabilidad de caer en dos o más cerámicas?",
+      "hints": [
+        "Complemento."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{2r}{a}$",
+          "correct": false,
+          "explanation": "Considera una sola dirección."
+        },
+        {
+          "text": "$\\dfrac{(a - 2r)^2}{a^2}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de caer en una sola."
+        },
+        {
+          "text": "$\\dfrac{4r}{a}$",
+          "correct": false,
+          "explanation": "Es una aproximación que cuenta dos veces las esquinas."
+        },
+        {
+          "text": "$1 - \\dfrac{(a - 2r)^2}{a^2}$",
+          "correct": true,
+          "explanation": "Lo contrario de quedar dentro de una sola."
+        }
+      ]
+    },
+    {
+      "id": "mb",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "(b) ¿Qué modelo conviene para la aguja de largo $\\ell$?",
+      "hints": [
+        "Importan la distancia del centro al renglón más cercano y el ángulo con los renglones.",
+        "Distancia uniforme en $[0, \\tfrac a2]$; ángulo agudo uniforme en $[0, \\tfrac\\pi2]$; independientes."
+      ],
+      "cards": [
+        {
+          "text": "Los extremos de la aguja, uniformes e independientes",
+          "correct": false,
+          "explanation": "Los extremos están a distancia fija $\\ell$: no son independientes."
+        },
+        {
+          "text": "$Y \\sim \\mathcal U[0, a]$ y $\\Theta$ fijo",
+          "correct": false,
+          "explanation": "El ángulo es aleatorio y es clave."
+        },
+        {
+          "text": "Sólo el ángulo, uniforme en $[0, 2\\pi]$",
+          "correct": false,
+          "explanation": "Falta la posición del centro."
+        },
+        {
+          "text": "$Y \\sim \\mathcal U[0, \\tfrac a2]$ (distancia del centro al renglón más cercano) y $\\Theta \\sim \\mathcal U[0, \\tfrac\\pi2]$, independientes",
+          "correct": true,
+          "explanation": "Simetría: no hay posición ni dirección preferida."
+        }
+      ]
+    },
+    {
+      "id": "corte",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "¿Cuándo corta la aguja un renglón?",
+      "hints": [
+        "La proyección vertical de media aguja es $\\tfrac\\ell2 \\sin\\Theta$."
+      ],
+      "cards": [
+        {
+          "text": "Si $Y \\le \\tfrac\\ell2 \\sin\\Theta$",
+          "correct": true,
+          "explanation": "El extremo más cercano alcanza el renglón."
+        },
+        {
+          "text": "Si $Y \\le \\ell \\cos\\Theta$",
+          "correct": false,
+          "explanation": "Revisar qué proyección y qué mitad intervienen."
+        },
+        {
+          "text": "Si $\\Theta \\le \\tfrac\\pi4$",
+          "correct": false,
+          "explanation": "También depende de la distancia."
+        },
+        {
+          "text": "Si $Y \\le \\tfrac\\ell2$",
+          "correct": false,
+          "explanation": "Ignora la inclinación de la aguja."
+        }
+      ]
+    },
+    {
+      "id": "pb",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuál es la probabilidad de corte?",
+      "hints": [
+        "Densidad conjunta constante $\\tfrac{1}{(a/2)(\\pi/2)} = \\tfrac{4}{a\\pi}$.",
+        "$\\int_0^{\\pi/2} \\tfrac\\ell2 \\sin\\theta\\,d\\theta = \\tfrac\\ell2$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\ell}{\\pi a}$",
+          "correct": false,
+          "explanation": "Revisar la normalización de la densidad."
+        },
+        {
+          "text": "$\\dfrac{4}{a\\pi} \\cdot \\dfrac\\ell2 = \\dfrac{2\\ell}{\\pi a}$",
+          "correct": true,
+          "explanation": "Área de la región favorable por la densidad."
+        },
+        {
+          "text": "$\\dfrac{2\\ell}{a}$",
+          "correct": false,
+          "explanation": "Falta el factor que aporta el ángulo."
+        },
+        {
+          "text": "$\\dfrac{\\ell}{a}$",
+          "correct": false,
+          "explanation": "Ignora el ángulo."
+        }
+      ]
+    },
+    {
+      "id": "pi",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "(c) ¿Cómo se estima $\\pi$?",
+      "hints": [
+        "Despejar $\\pi$ de $p = \\tfrac{2\\ell}{\\pi a}$.",
+        "Estimar $p$ con la frecuencia relativa de cortes en muchas tiradas."
+      ],
+      "cards": [
+        {
+          "text": "Medir la aguja con precisión",
+          "correct": false,
+          "explanation": "Es un método geométrico, no aleatorio."
+        },
+        {
+          "text": "Tirar la aguja $n$ veces y usar $\\pi \\approx \\dfrac{2\\ell\\,n}{a \\cdot (\\text{cantidad de cortes})}$",
+          "correct": true,
+          "explanation": "La frecuencia relativa de cortes se acerca a $p$ (ley de los grandes números)."
+        },
+        {
+          "text": "$\\pi \\approx \\dfrac{\\text{cortes}}{n}$",
+          "correct": false,
+          "explanation": "Esa frecuencia estima $p$, no $\\pi$."
+        },
+        {
+          "text": "$\\pi \\approx \\dfrac{2\\ell}{a}$",
+          "correct": false,
+          "explanation": "No usa los resultados del experimento."
+        }
+      ]
+    }
+  ]
+}

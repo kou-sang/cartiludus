@@ -1,0 +1,138 @@
+{
+  "id": "p4-ej6",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "La geométrica y la exponencial (1)",
+  "source": "Práctica 4 · Ejercicio 6",
+  "statement": "La geométrica y la exponencial, parte 1. Para medir la duración de una lamparita, José diseñó el siguiente experimento: en una habitación, poner la lamparita nueva y encenderla. Cada $\\varepsilon$ segundos, ingresar a la habitación y chequear si la lamparita está encendida. El experimento se repite hasta que la lamparita aparece apagada. Se consideran independientes las repeticiones. Si $Y$ es el tiempo que tarda en apagarse la lamparita, y $p_\\varepsilon$ es la probabilidad de encontrar la lamparita apagada al entrar a la habitación:\n(a) Hallar $P(Y > k\\varepsilon)$, para todo $k \\in \\mathbb N$. ¿Cuál es la distribución de $X$ = cantidad de veces que se realiza el experimento hasta que aparece apagada?\n(b) Supongamos que $p_\\varepsilon$ verifica que $\\tfrac{p_\\varepsilon}{\\varepsilon} \\to \\lambda$ si $\\varepsilon \\to 0$. Calcular la distribución de $Y$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "cola",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(Y > k\\varepsilon)$?",
+      "hints": [
+        "$Y > k\\varepsilon$: en las primeras $k$ entradas estaba encendida.",
+        "Entradas independientes."
+      ],
+      "cards": [
+        {
+          "text": "$(1 - p_\\varepsilon)^k$",
+          "correct": true,
+          "explanation": "$k$ chequeos seguidos con la lamparita encendida."
+        },
+        {
+          "text": "$e^{-k\\varepsilon}$",
+          "correct": false,
+          "explanation": "Todavía no se tomó ningún límite."
+        },
+        {
+          "text": "$p_\\varepsilon^k$",
+          "correct": false,
+          "explanation": "Es encontrarla apagada $k$ veces."
+        },
+        {
+          "text": "$1 - (1 - p_\\varepsilon)^k$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que se haya apagado antes."
+        }
+      ]
+    },
+    {
+      "id": "xdist",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "¿Qué distribución tiene $X$?",
+      "hints": [
+        "Ensayos independientes hasta el primer \"apagada\"."
+      ],
+      "cards": [
+        {
+          "text": "$X \\sim \\mathcal E(p_\\varepsilon)$",
+          "correct": false,
+          "explanation": "$X$ es discreta."
+        },
+        {
+          "text": "$X \\sim \\mathcal P(p_\\varepsilon)$",
+          "correct": false,
+          "explanation": "No cuenta eventos en un intervalo."
+        },
+        {
+          "text": "$X \\sim \\mathcal G(p_\\varepsilon)$",
+          "correct": true,
+          "explanation": "Número de ensayo del primer éxito."
+        },
+        {
+          "text": "$X \\sim \\mathrm{Bi}(k, p_\\varepsilon)$",
+          "correct": false,
+          "explanation": "No hay cantidad fija de ensayos."
+        }
+      ]
+    },
+    {
+      "id": "lim",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "(b) Para $t > 0$, $P(Y > t) \\approx (1 - p_\\varepsilon)^{t/\\varepsilon}$. ¿A qué tiende cuando $\\varepsilon \\to 0$?",
+      "hints": [
+        "Escribir $(1 - p_\\varepsilon)^{t/\\varepsilon} = \\exp\\left(\\tfrac t\\varepsilon \\ln(1 - p_\\varepsilon)\\right)$.",
+        "$\\ln(1 - x) \\approx -x$ para $x$ chico, y $\\tfrac{p_\\varepsilon}{\\varepsilon} \\to \\lambda$."
+      ],
+      "cards": [
+        {
+          "text": "$e^{-\\lambda t}$",
+          "correct": true,
+          "explanation": "$\\tfrac t\\varepsilon \\ln(1 - p_\\varepsilon) \\approx -t\\tfrac{p_\\varepsilon}{\\varepsilon} \\to -\\lambda t$."
+        },
+        {
+          "text": "$1$",
+          "correct": false,
+          "explanation": "El exponente también crece."
+        },
+        {
+          "text": "$1 - \\lambda t$",
+          "correct": false,
+          "explanation": "Es sólo una aproximación lineal."
+        },
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "El factor $p_\\varepsilon$ también tiende a 0."
+        }
+      ]
+    },
+    {
+      "id": "ydist",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "¿Qué distribución tiene $Y$?",
+      "hints": [
+        "$P(Y > t) = e^{-\\lambda t}$ para $t > 0$."
+      ],
+      "cards": [
+        {
+          "text": "$Y \\sim \\mathcal E(\\lambda)$",
+          "correct": true,
+          "explanation": "Es la cola de una exponencial."
+        },
+        {
+          "text": "$Y \\sim \\mathcal G(\\lambda)$",
+          "correct": false,
+          "explanation": "En el límite el tiempo es continuo."
+        },
+        {
+          "text": "$Y \\sim \\mathcal E(1/\\lambda)$",
+          "correct": false,
+          "explanation": "Revisar el parámetro en la cola."
+        },
+        {
+          "text": "$Y \\sim \\mathcal P(\\lambda)$",
+          "correct": false,
+          "explanation": "La Poisson es discreta."
+        }
+      ]
+    }
+  ]
+}

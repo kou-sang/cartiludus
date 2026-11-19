@@ -1,0 +1,328 @@
+{
+  "id": "p4-ej10",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "Las vacas de Don Zoilo",
+  "source": "Práctica 4 · Ejercicio 10",
+  "statement": "Don Zoilo tiene dos vacas, Aurora y Belinda. La cantidad de leche en litros que da Aurora en un día es una variable aleatoria $X$ con distribución $\\mathcal E(0{,}2)$. Belinda, en cambio, da 5 litros el 20% de las veces que es ordeñada y el resto no da nada. Don Zoilo ordeña a Belinda solamente los días en que Aurora da menos de 6 litros.\n(a) ¿Cuál es la probabilidad de que Aurora dé más de 6 litros en exactamente dos días de la próxima semana? Cabe aclarar que los fines de semana Don Zoilo no ordeña a sus vacas.\n(b) ¿Cuál es la probabilidad de que Don Zoilo obtenga más de 8 litros en un día?\n(c) Con la leche que obtiene de Aurora, Don Zoilo fabrica manteca. La cantidad de manteca en kilos que obtiene con $X$ litros de leche es $W = g(X)$ siendo $g(X) = \\sqrt[3]{X}$ si $X \\le 8$; $\\tfrac17(X - 1)^2 - 5$ si $8 < X \\le 15$; $2X - 7$ si $15 < X$. Hallar la función de densidad de la cantidad de manteca fabricada.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "a-p",
+      "kind": "compute",
+      "prompt": "$p = P(X > 6)$:",
+      "hints": [
+        "Cola de la exponencial: $P(X > t) = e^{-\\lambda t}$."
+      ],
+      "cards": [
+        {
+          "text": "$e^{-30}$",
+          "correct": false,
+          "explanation": "Usa $t/\\lambda$ en vez de $\\lambda t$."
+        },
+        {
+          "text": "$1 - e^{-1{,}2}$",
+          "correct": false,
+          "explanation": "Es $P(X \\le 6)$."
+        },
+        {
+          "text": "$e^{-1{,}2} \\approx 0{,}301$",
+          "correct": true,
+          "explanation": "$\\lambda t = 0{,}2 \\cdot 6$."
+        },
+        {
+          "text": "$0{,}2 e^{-1{,}2}$",
+          "correct": false,
+          "explanation": "Es la densidad en 6."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-dist",
+      "kind": "distribution",
+      "prompt": "Cantidad de días (de la semana hábil) con más de 6 litros:",
+      "hints": [
+        "Días independientes."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal{P}(5e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "Aproximación innecesaria con $n = 5$."
+        },
+        {
+          "text": "$\\mathcal{G}(e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "No es un tiempo de espera."
+        },
+        {
+          "text": "$\\mathrm{Bi}(7, e^{-1{,}2})$",
+          "correct": false,
+          "explanation": "Los fines de semana no se ordeña."
+        },
+        {
+          "text": "$\\mathrm{Bi}(5, e^{-1{,}2})$",
+          "correct": true,
+          "explanation": "5 días hábiles, cada uno con probabilidad $p$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$\\binom52 p^2(1-p)^3$.",
+        "$e^{-1{,}2} \\approx 0{,}301$."
+      ],
+      "cards": [
+        {
+          "text": "$10\\,(1-e^{-1{,}2})^2 e^{-3{,}6}$",
+          "correct": false,
+          "explanation": "Intercambia $p$ y $1-p$."
+        },
+        {
+          "text": "$10\\,e^{-2{,}4}(1 - e^{-1{,}2})^3 \\approx 0{,}310$",
+          "correct": true,
+          "explanation": "Binomial en $k = 2$."
+        },
+        {
+          "text": "$e^{-2{,}4} \\approx 0{,}091$",
+          "correct": false,
+          "explanation": "Falta el resto de los factores."
+        },
+        {
+          "text": "$21\\,e^{-2{,}4}(1 - e^{-1{,}2})^5 \\approx 0{,}317$",
+          "correct": false,
+          "explanation": "Usa 7 días."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-part",
+      "kind": "setup",
+      "prompt": "¿Qué partición conviene?",
+      "hints": [
+        "Si se ordeña o no a Belinda, y lo que da."
+      ],
+      "cards": [
+        {
+          "text": "$\\{X \\le 3\\}$ y $\\{X > 3\\}$",
+          "correct": false,
+          "explanation": "Es parte del cálculo, pero sin separar si se ordeña a Belinda."
+        },
+        {
+          "text": "Los días de la semana",
+          "correct": false,
+          "explanation": "No influyen en un día dado."
+        },
+        {
+          "text": "Sólo $\\{X > 8\\}$ y $\\{X \\le 8\\}$",
+          "correct": false,
+          "explanation": "Ignora el aporte de Belinda."
+        },
+        {
+          "text": "$\\{X \\ge 6\\}$, $\\{X < 6, \\text{Belinda da 5}\\}$, $\\{X < 6, \\text{Belinda da 0}\\}$",
+          "correct": true,
+          "explanation": "En cada caso el total es $X$, $X + 5$ o $X$."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-casos",
+      "kind": "compute",
+      "prompt": "¿Qué aporta cada caso?",
+      "hints": [
+        "Con $X<6$ y Belinda da 5: total $>8 \\iff X > 3$.",
+        "Separar según si se ordeña a Belinda."
+      ],
+      "cards": [
+        {
+          "text": "$P(X > 8) + 0{,}8\\,P(3 < X < 6)$",
+          "correct": false,
+          "explanation": "Belinda da 5 litros con probabilidad $0{,}2$."
+        },
+        {
+          "text": "$0{,}2\\,P(X > 3)$",
+          "correct": false,
+          "explanation": "Omite los días en que Aurora sola supera 8."
+        },
+        {
+          "text": "$P(X > 8) + 0{,}2\\,P(3 < X < 6)$",
+          "correct": true,
+          "explanation": "Si $X \\ge 6$ el total es $X$ y supera 8 sólo si $X > 8$; si $X<6$ sin Belinda, nunca supera 8."
+        },
+        {
+          "text": "$P(X > 8) + 0{,}2\\,P(X > 3)$",
+          "correct": false,
+          "explanation": "Si $X \\ge 6$ no se ordeña a Belinda."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$P(X > t) = e^{-0{,}2t}$.",
+        "$e^{-1{,}6} \\approx 0{,}202$, $e^{-0{,}6} \\approx 0{,}549$, $e^{-1{,}2} \\approx 0{,}301$."
+      ],
+      "cards": [
+        {
+          "text": "$e^{-1{,}6} + 0{,}2(e^{-0{,}6} - e^{-1{,}2}) \\approx 0{,}251$",
+          "correct": true,
+          "explanation": "$0{,}2019 + 0{,}2\\cdot(0{,}5488 - 0{,}3012)$."
+        },
+        {
+          "text": "$e^{-1{,}6} + 0{,}2e^{-0{,}6} \\approx 0{,}312$",
+          "correct": false,
+          "explanation": "Cuenta días con $X \\ge 6$ en que no se ordeña a Belinda."
+        },
+        {
+          "text": "$0{,}2(e^{-0{,}6} - e^{-1{,}2}) \\approx 0{,}050$",
+          "correct": false,
+          "explanation": "Falta el caso de Aurora sola."
+        },
+        {
+          "text": "$e^{-1{,}6} \\approx 0{,}202$",
+          "correct": false,
+          "explanation": "Ignora a Belinda."
+        }
+      ],
+      "timeLimitSec": 180,
+      "item": "(b)"
+    },
+    {
+      "id": "c-mono",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "¿Cómo es $g$ y qué valores toma $W$?",
+      "hints": [
+        "Evaluar los tramos en $X = 8$ y $X = 15$.",
+        "$\\sqrt[3]{8} = 2$, $\\tfrac17 \\cdot 49 - 5 = 2$, $\\tfrac17\\cdot 196 - 5 = 23$, $2 \\cdot 15 - 7 = 23$."
+      ],
+      "cards": [
+        {
+          "text": "Decreciente",
+          "correct": false,
+          "explanation": "Cada tramo es creciente."
+        },
+        {
+          "text": "Continua y estrictamente creciente: $W \\in (0,2]$ en el primer tramo, $(2, 23]$ en el segundo y $(23, \\infty)$ en el tercero",
+          "correct": true,
+          "explanation": "Los tramos empalman en 2 y en 23."
+        },
+        {
+          "text": "Tiene saltos en 8 y en 15",
+          "correct": false,
+          "explanation": "Los valores empalman."
+        },
+        {
+          "text": "$W \\in (0, 8]$ en el primer tramo",
+          "correct": false,
+          "explanation": "Hay que aplicar $g$, no mirar $X$."
+        }
+      ]
+    },
+    {
+      "id": "c-inv",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuál es la inversa $x = g^{-1}(w)$ en cada tramo?",
+      "hints": [
+        "$w = x^{1/3}$; $w = \\tfrac17(x-1)^2 - 5$ con $x > 1$; $w = 2x - 7$."
+      ],
+      "cards": [
+        {
+          "text": "$w^3$; $\\ \\sqrt{7w + 5}$; $\\ \\tfrac{w - 7}{2}$",
+          "correct": false,
+          "explanation": "Revisar los despejes."
+        },
+        {
+          "text": "$w^3$; $\\ 1 - \\sqrt{7(w+5)}$; $\\ \\tfrac{w+7}{2}$",
+          "correct": false,
+          "explanation": "En el segundo tramo $x > 8$: va la raíz positiva."
+        },
+        {
+          "text": "$w^{1/3}$; $\\ 1 + \\sqrt{7(w+5)}$; $\\ 2w + 7$",
+          "correct": false,
+          "explanation": "Aplica $g$ en lugar de invertirla."
+        },
+        {
+          "text": "$w^3$; $\\ 1 + \\sqrt{7(w + 5)}$; $\\ \\tfrac{w + 7}{2}$",
+          "correct": true,
+          "explanation": "Despeje en cada tramo (en el segundo, la raíz positiva porque $x > 8$)."
+        }
+      ]
+    },
+    {
+      "id": "c-f",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "Con $f_W(w) = f_X(g^{-1}(w))\\,\\left|\\tfrac{d}{dw}g^{-1}(w)\\right|$ y $f_X(x) = 0{,}2e^{-0{,}2x}$, ¿cuál es la densidad en el tramo $(2, 23]$?",
+      "hints": [
+        "$\\tfrac{d}{dw}\\left(1 + \\sqrt{7(w+5)}\\right) = \\tfrac{7}{2\\sqrt{7(w+5)}}$."
+      ],
+      "cards": [
+        {
+          "text": "$0{,}2\\,e^{-0{,}2w}$",
+          "correct": false,
+          "explanation": "Evalúa la densidad en $w$ en lugar de $g^{-1}(w)$."
+        },
+        {
+          "text": "$0{,}2\\,e^{-0{,}2\\left(1 + \\sqrt{7(w+5)}\\right)}$",
+          "correct": false,
+          "explanation": "Falta la derivada de la inversa."
+        },
+        {
+          "text": "$0{,}2\\,e^{-0{,}2\\left(1 + \\sqrt{7(w+5)}\\right)} \\cdot \\dfrac{7}{2\\sqrt{7(w+5)}}$",
+          "correct": true,
+          "explanation": "Fórmula del cambio de variable para $g$ creciente."
+        },
+        {
+          "text": "$0{,}2\\,e^{-0{,}2\\left(1 + \\sqrt{7(w+5)}\\right)} \\cdot \\tfrac{2}{7}(w-1)$",
+          "correct": false,
+          "explanation": "Usa la derivada de $g$ en lugar de la de su inversa."
+        }
+      ]
+    },
+    {
+      "id": "c-todo",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuál es la densidad completa de $W$?",
+      "hints": [
+        "Aplicar lo mismo en los otros dos tramos.",
+        "Primer tramo: $(w^3)^{\\prime} = 3w^2$. Tercero: $(\\tfrac{w+7}{2})^{\\prime} = \\tfrac12$."
+      ],
+      "cards": [
+        {
+          "text": "$0{,}2\\,e^{-0{,}2w^3}$ en $(0,2]$",
+          "correct": false,
+          "explanation": "Falta el factor $3w^2$."
+        },
+        {
+          "text": "Una exponencial de parámetro 0,2",
+          "correct": false,
+          "explanation": "La transformación cambia la forma de la densidad."
+        },
+        {
+          "text": "$0{,}2\\,e^{-0{,}1(w+7)}$ en $(23, \\infty)$",
+          "correct": false,
+          "explanation": "Falta el factor $\\tfrac12$."
+        },
+        {
+          "text": "$0{,}6\\,w^2e^{-0{,}2w^3}$ en $(0,2]$; la del paso anterior en $(2,23]$; $0{,}1\\,e^{-0{,}1(w+7)}$ en $(23,\\infty)$",
+          "correct": true,
+          "explanation": "Cambio de variable tramo por tramo; integra 1."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "id": "p4-ej8",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p4-va-continuas",
+  "title": "La función Gamma",
+  "source": "Práctica 4 · Ejercicio 8",
+  "statement": "Definimos la función Gamma $\\Gamma : \\mathbb R_{>0} \\to \\mathbb R_{>0}$ por la fórmula $\\Gamma(\\alpha) = \\int_0^\\infty x^{\\alpha - 1} e^{-x}\\,dx$.\n(a) Probar que $\\Gamma$ está bien definida (la integral impropia converge para todo $\\alpha > 0$).\n(b) Mostrar que $\\Gamma(\\alpha) = (\\alpha - 1)\\Gamma(\\alpha - 1)$ para todo $\\alpha > 1$. Deducir que $\\Gamma(n) = (n-1)!$ para todo $n \\in \\mathbb N$.\n(c) Sean $n \\in \\mathbb N$ y $Z \\sim \\Gamma(n, \\lambda)$. Probar que para todo $z > 0$ se tiene $F_Z(z) = P(X_z \\ge n)$ donde $X_z$ es una variable aleatoria con distribución $\\mathcal P(z\\lambda)$.\n(d) Probar que $\\Gamma(\\tfrac12) = \\sqrt\\pi$. Sugerencia: hallar la función de densidad de $Z^2$ para $Z$ una variable aleatoria con distribución normal estándar. ¿Es la densidad obtenida la de una distribución conocida? ¿Cuál?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "a",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Por qué converge la integral?",
+      "hints": [
+        "Separar $\\int_0^1$ y $\\int_1^\\infty$.",
+        "Cerca de 0, $e^{-x} \\le 1$; en infinito, la exponencial le gana a cualquier potencia."
+      ],
+      "cards": [
+        {
+          "text": "Porque $e^{-x} \\to 0$",
+          "correct": false,
+          "explanation": "No alcanza: hay que controlar cerca de 0 y la velocidad en infinito."
+        },
+        {
+          "text": "En $(0,1]$: $x^{\\alpha-1}e^{-x} \\le x^{\\alpha-1}$, integrable si $\\alpha > 0$; en $[1, \\infty)$: $x^{\\alpha-1}e^{-x} \\le C e^{-x/2}$",
+          "correct": true,
+          "explanation": "Comparación en cada tramo."
+        },
+        {
+          "text": "Porque el integrando es continuo",
+          "correct": false,
+          "explanation": "El intervalo no es acotado y puede haber singularidad en 0."
+        },
+        {
+          "text": "Converge sólo para $\\alpha > 1$",
+          "correct": false,
+          "explanation": "Cerca de 0, $x^{\\alpha-1}$ es integrable para todo $\\alpha > 0$."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Qué da integrar por partes con $u = x^{\\alpha-1}$, $dv = e^{-x}dx$?",
+      "hints": [
+        "$\\int u\\,dv = uv - \\int v\\,du$, con $v = -e^{-x}$.",
+        "El término de borde se anula en 0 y en infinito."
+      ],
+      "cards": [
+        {
+          "text": "$\\Gamma(\\alpha) = \\Gamma(\\alpha - 1)$",
+          "correct": false,
+          "explanation": "Falta el factor de la derivada."
+        },
+        {
+          "text": "$\\Gamma(\\alpha) = (\\alpha - 1)\\int_0^\\infty x^{\\alpha - 2}e^{-x}dx = (\\alpha - 1)\\Gamma(\\alpha - 1)$",
+          "correct": true,
+          "explanation": "$du = (\\alpha-1)x^{\\alpha-2}dx$."
+        },
+        {
+          "text": "$\\Gamma(\\alpha) = \\alpha\\,\\Gamma(\\alpha - 1)$",
+          "correct": false,
+          "explanation": "La derivada de $x^{\\alpha-1}$ trae el factor $\\alpha - 1$."
+        },
+        {
+          "text": "$\\Gamma(\\alpha) = (\\alpha-1)\\Gamma(\\alpha)$",
+          "correct": false,
+          "explanation": "Revisar el exponente que queda."
+        }
+      ]
+    },
+    {
+      "id": "n",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Por qué $\\Gamma(n) = (n-1)!$?",
+      "hints": [
+        "$\\Gamma(1) = \\int_0^\\infty e^{-x}dx$."
+      ],
+      "cards": [
+        {
+          "text": "$\\Gamma(1) = 1$ y aplicando la recursión: $\\Gamma(n) = (n-1)(n-2)\\cdots 1 \\cdot \\Gamma(1)$",
+          "correct": true,
+          "explanation": "Inducción en $n$."
+        },
+        {
+          "text": "Porque $\\Gamma(n) = n!$",
+          "correct": false,
+          "explanation": "Revisar el desplazamiento en uno."
+        },
+        {
+          "text": "Por la fórmula de Stirling",
+          "correct": false,
+          "explanation": "Es una aproximación, no una identidad."
+        },
+        {
+          "text": "Porque $\\Gamma(0) = 1$",
+          "correct": false,
+          "explanation": "$\\Gamma$ no está definida en 0."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "property",
+      "item": "(c)",
+      "prompt": "(c) Si $Z$ es el tiempo del $n$-ésimo evento de un proceso de Poisson de tasa $\\lambda$ (suma de $n$ exponenciales), ¿por qué $\\{Z \\le z\\} = \\{X_z \\ge n\\}$?",
+      "hints": [
+        "$X_z$ = cantidad de eventos en $[0, z]$, con distribución $\\mathcal P(\\lambda z)$."
+      ],
+      "cards": [
+        {
+          "text": "Porque $Z$ es Poisson",
+          "correct": false,
+          "explanation": "$Z$ es continua."
+        },
+        {
+          "text": "El $n$-ésimo evento ocurre antes de $z$ si y sólo si hubo al menos $n$ eventos en $[0, z]$",
+          "correct": true,
+          "explanation": "Igualando probabilidades: $F_Z(z) = P(X_z \\ge n)$. (Por cálculo directo, se prueba integrando por partes $n$ veces.)"
+        },
+        {
+          "text": "Porque $\\{Z \\le z\\} = \\{X_z = n\\}$",
+          "correct": false,
+          "explanation": "Puede haber más de $n$ eventos antes de $z$."
+        },
+        {
+          "text": "Porque $E(Z) = E(X_z)$",
+          "correct": false,
+          "explanation": "La identidad es entre eventos, no entre esperanzas."
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "(d) Si $Z \\sim \\mathcal N(0,1)$, ¿cuál es la densidad de $U = Z^2$?",
+      "hints": [
+        "$F_U(u) = P(-\\sqrt u \\le Z \\le \\sqrt u) = 2\\Phi(\\sqrt u) - 1$.",
+        "Derivar: $2\\varphi(\\sqrt u)\\tfrac{1}{2\\sqrt u}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{\\sqrt{2\\pi}}e^{-u/2}$",
+          "correct": false,
+          "explanation": "Falta el factor $u^{-1/2}$ del cambio de variable."
+        },
+        {
+          "text": "$\\varphi(\\sqrt u)$",
+          "correct": false,
+          "explanation": "Falta la regla de la cadena y los dos lados."
+        },
+        {
+          "text": "$f_U(u) = \\dfrac{1}{\\sqrt{2\\pi}}\\,u^{-1/2} e^{-u/2}$, $u > 0$",
+          "correct": true,
+          "explanation": "$\\varphi(\\sqrt u) = \\tfrac{1}{\\sqrt{2\\pi}}e^{-u/2}$."
+        },
+        {
+          "text": "$2\\varphi(u)$",
+          "correct": false,
+          "explanation": "Evalúa en $u$ en lugar de $\\sqrt u$."
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "kind": "interpret",
+      "item": "(d)",
+      "prompt": "Comparando con la densidad $\\Gamma(\\tfrac12, \\tfrac12)$: $\\dfrac{(1/2)^{1/2}}{\\Gamma(1/2)}u^{-1/2}e^{-u/2}$, ¿qué se concluye?",
+      "hints": [
+        "Dos densidades con la misma forma tienen la misma constante."
+      ],
+      "cards": [
+        {
+          "text": "$\\Gamma(\\tfrac12) = \\tfrac12$",
+          "correct": false,
+          "explanation": "Revisar el despeje."
+        },
+        {
+          "text": "$\\dfrac{(1/2)^{1/2}}{\\Gamma(1/2)} = \\dfrac{1}{\\sqrt{2\\pi}}$, de donde $\\Gamma(\\tfrac12) = \\sqrt\\pi$",
+          "correct": true,
+          "explanation": "Despejando: $\\Gamma(\\tfrac12) = \\sqrt{2\\pi}\\cdot\\tfrac{1}{\\sqrt2}$. Además $Z^2 \\sim \\chi^2(1)$."
+        },
+        {
+          "text": "No se puede concluir nada",
+          "correct": false,
+          "explanation": "Ambas integran 1, así que las constantes coinciden."
+        },
+        {
+          "text": "$\\Gamma(\\tfrac12) = \\sqrt{2\\pi}$",
+          "correct": false,
+          "explanation": "Falta el factor $(\\tfrac12)^{1/2}$."
+        }
+      ]
+    }
+  ]
+}
