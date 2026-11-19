@@ -76,7 +76,7 @@
       ],
       "cards": [
         {
-          "text": "$\\mathrm{Bi}\\left(2, \\tfrac{2}{4{,}5}\\right) = \\mathrm{Bi}(2, \\tfrac49)$",
+          "text": "$\\mathrm{Bi}(2, \\tfrac49)$",
           "correct": true,
           "explanation": "Cada persona es hombre con probabilidad $\\tfrac{\\lambda_H}{\\lambda_H + \\lambda_M}$."
         },

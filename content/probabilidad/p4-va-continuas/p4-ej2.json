@@ -94,7 +94,7 @@
           "explanation": "Es $P(T \\le 10)$."
         },
         {
-          "text": "$1 - \\tfrac{10}{30} = \\tfrac23$",
+          "text": "$\\tfrac23$",
           "correct": true,
           "explanation": "Complemento de la acumulada."
         }
@@ -142,7 +142,7 @@
       ],
       "cards": [
         {
-          "text": "$\\dfrac{5/30}{15/30} = \\tfrac13$",
+          "text": "$\\tfrac13$",
           "correct": true,
           "explanation": "Dado $T > 15$, $T$ es uniforme en $(15, 30]$: quedan 5 de 15 minutos."
         },

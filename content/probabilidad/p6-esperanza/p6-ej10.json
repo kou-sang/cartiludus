@@ -23,9 +23,9 @@
           "explanation": "$(1, 1)$ iría a $(-1, -1)$, fuera del pentágono."
         },
         {
-          "text": "Es simétrico respecto del eje $y$: $(x, y) \\mapsto (-x, y)$ lo deja igual",
+          "text": "Es simétrico respecto del eje $y$",
           "correct": true,
-          "explanation": "Los vértices se intercambian de a pares y $(0,-1)$ queda fijo."
+          "explanation": "$(x, y) \\mapsto (-x, y)$ lo deja igual. Los vértices se intercambian de a pares y $(0,-1)$ queda fijo."
         },
         {
           "text": "Es simétrico respecto del eje $x$",
@@ -55,9 +55,9 @@
           "explanation": "La convexidad no implica covarianza nula."
         },
         {
-          "text": "$E(X) = 0$ y $E(XY) = 0$ por la simetría, así que $\\mathrm{Cov} = E(XY) - E(X)E(Y) = 0$",
+          "text": "$E(X) = 0$ y $E(XY) = 0$ por la simetría",
           "correct": true,
-          "explanation": "Una cantidad igual a su opuesta vale 0."
+          "explanation": "$\\mathrm{Cov} = E(XY) - E(X)E(Y) = 0$. Una cantidad igual a su opuesta vale 0."
         },
         {
           "text": "Porque $X$ e $Y$ son independientes",
@@ -92,7 +92,7 @@
           "explanation": "$(0,0)$ está dentro del pentágono."
         },
         {
-          "text": "Cerca de $(0{,}9;\\ -0{,}9)$ la densidad es 0, pero $f_X(0{,}9) > 0$ y $f_Y(-0{,}9) > 0$",
+          "text": "La densidad se anula cerca de $(0{,}9;\\ -0{,}9)$",
           "correct": true,
           "explanation": "El producto de las marginales es positivo donde la conjunta se anula."
         },
@@ -118,9 +118,9 @@
           "explanation": "Para indicadoras, covarianza nula equivale a independencia de los eventos."
         },
         {
-          "text": "$P(X = 1, Y = 1) = P(X = 1)P(Y = 1)$: los eventos $\\{X = 1\\}$ e $\\{Y = 1\\}$ son independientes",
+          "text": "$P(X = 1, Y = 1) = P(X = 1)P(Y = 1)$",
           "correct": true,
-          "explanation": "Si $A$ y $B$ son independientes, también lo son $A$ con $B^c$, $A^c$ con $B$ y $A^c$ con $B^c$: eso cubre los cuatro valores del vector."
+          "explanation": "Los eventos $\\{X = 1\\}$ e $\\{Y = 1\\}$ son independientes. Si $A$ y $B$ son independientes, también lo son $A$ con $B^c$, $A^c$ con $B$ y $A^c$ con $B^c$: eso cubre los cuatro valores del vector."
         },
         {
           "text": "$P(X = 1) = P(Y = 1)$",
@@ -155,7 +155,7 @@
           "explanation": "Una transformación afín reduce todos los casos al 0–1."
         },
         {
-          "text": "Con $X^* = \\tfrac{X-a}{b-a}$ e $Y^*$ análoga: $\\mathrm{Cov}(X^*, Y^*) = 0$, y $X^*, Y^*$ son funciones biyectivas de $X, Y$",
+          "text": "Con $X^* = \\tfrac{X-a}{b-a}$ se reduce al caso 0–1",
           "correct": true,
           "explanation": "Por el caso 0–1 son independientes, y funciones biyectivas de variables independientes lo siguen siendo (y al revés)."
         },

@@ -95,7 +95,7 @@
           "explanation": "Las urnas no son equiprobables."
         },
         {
-          "text": "$\\tfrac{16 + 9 + 8}{64} = \\tfrac{33}{64}$",
+          "text": "$\\tfrac{33}{64}$",
           "correct": true,
           "explanation": "Partición en las tres urnas."
         }
@@ -115,7 +115,7 @@
           "explanation": "Ignora la información de las dos blancas."
         },
         {
-          "text": "$\\dfrac{16/64}{33/64} = \\tfrac{16}{33} \\approx 0{,}48$",
+          "text": "$\\tfrac{16}{33} \\approx 0{,}48$",
           "correct": true,
           "explanation": "Numerador: término de la primera urna; denominador: probabilidad total."
         },

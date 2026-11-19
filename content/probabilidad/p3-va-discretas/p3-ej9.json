@@ -64,7 +64,7 @@
           "explanation": "Una media más alta no implica mayor probabilidad en un valor dado."
         },
         {
-          "text": "$g(\\lambda) = e^{-\\lambda}\\lambda^4$ en $\\lambda = 2, 3, 4$",
+          "text": "$e^{-\\lambda}\\lambda^4$ en $2, 3, 4$",
           "correct": true,
           "explanation": "Dividir las tres probabilidades por la misma constante $4!$ no cambia cuál es mayor."
         }
@@ -158,7 +158,7 @@
           "explanation": "Es la probabilidad de la observación dada la fuente (verosimilitud), no al revés."
         },
         {
-          "text": "$P(F_i \\mid N = 4)$ para $i = 1, 2, 3$",
+          "text": "$P(F_i \\mid N = 4)$",
           "correct": true,
           "explanation": "Probabilidad de cada fuente a la luz de la observación (posterior)."
         }
@@ -222,9 +222,9 @@
           "explanation": "$\\tfrac13$ y $4!$ son comunes a todos los términos."
         },
         {
-          "text": "El $\\tfrac13$ y el $4!$: queda $\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{\\sum_j e^{-\\lambda_j}\\lambda_j^4}$",
+          "text": "El $\\tfrac13$ y el $4!$",
           "correct": true,
-          "explanation": "Aparecen en el numerador y en cada término del denominador."
+          "explanation": "Queda $\\dfrac{e^{-\\lambda_i}\\lambda_i^4}{\\sum_j e^{-\\lambda_j}\\lambda_j^4}$. Aparecen en el numerador y en cada término del denominador."
         }
       ],
       "item": "(b)"

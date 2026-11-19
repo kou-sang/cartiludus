@@ -19,7 +19,7 @@
       ],
       "cards": [
         {
-          "text": "$n^r$, equiprobables",
+          "text": "$n^r$",
           "correct": true,
           "explanation": "Cada una de las $r$ extracciones elige uno de los $n$ elementos."
         },
@@ -83,7 +83,7 @@
       ],
       "cards": [
         {
-          "text": "$\\dfrac{n(n-1)\\cdots(n-r+1)}{n^r} = \\prod_{i=0}^{r-1}\\left(1 - \\tfrac in\\right)$",
+          "text": "$\\prod_{i=0}^{r-1}\\left(1 - \\tfrac in\\right)$",
           "correct": true,
           "explanation": "Cociente de los dos conteos."
         },
@@ -120,7 +120,7 @@
           "explanation": "Sin reposición nunca habría coincidencias."
         },
         {
-          "text": "Población: los $n = 365$ días; muestra de tamaño $r$ con reposición (una fecha por persona)",
+          "text": "Población: 365 días; muestra de tamaño $r$",
           "correct": true,
           "explanation": "Elegir personas al azar equivale a elegir fechas al azar, y dos personas pueden coincidir."
         },
@@ -156,7 +156,7 @@
           "explanation": "No resulta de contar casos."
         },
         {
-          "text": "$\\prod_{i=0}^{r-1}\\left(1 - \\tfrac{i}{365}\\right) = \\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r}$",
+          "text": "$\\dfrac{365 \\cdot 364 \\cdots (365-r+1)}{365^r}$",
           "correct": true,
           "explanation": "Es la fórmula de (a) con $n = 365$."
         },
@@ -177,9 +177,9 @@
       ],
       "cards": [
         {
-          "text": "La probabilidad de que al menos dos compartan cumpleaños es $\\approx 0{,}507$: mayor que $\\tfrac12$",
+          "text": "La probabilidad de que al menos dos compartan cumpleaños es $\\approx 0{,}507$",
           "correct": true,
-          "explanation": "$1 - 0{,}493$. Parece mucho porque hay $\\binom{23}{2} = 253$ pares de personas que pueden coincidir."
+          "explanation": "Mayor que $\\tfrac12$. $1 - 0{,}493$. Parece mucho porque hay $\\binom{23}{2} = 253$ pares de personas que pueden coincidir."
         },
         {
           "text": "Al menos una coincidencia tiene probabilidad $0{,}493$",
@@ -209,9 +209,9 @@
       ],
       "cards": [
         {
-          "text": "A que no haya dos bolillas en la misma urna: es (a) con $r = n$",
+          "text": "A que no haya dos bolillas en la misma urna",
           "correct": true,
-          "explanation": "Con $n$ bolillas y $n$ urnas, todas ocupadas significa exactamente una por urna; la urna de cada bolilla es una muestra con reposición de tamaño $n$."
+          "explanation": "Es (a) con $r = n$. Con $n$ bolillas y $n$ urnas, todas ocupadas significa exactamente una por urna; la urna de cada bolilla es una muestra con reposición de tamaño $n$."
         },
         {
           "text": "A que la primera urna esté ocupada",
@@ -251,7 +251,7 @@
           "explanation": "Usa el conteo de bolillas indistinguibles."
         },
         {
-          "text": "$\\dfrac{n!}{n^n}$; con $n = 6$, $\\tfrac{720}{46656} \\approx 0{,}015$",
+          "text": "$\\dfrac{n!}{n^n}$",
           "correct": true,
           "explanation": "$n(n-1)\\cdots 1 = n!$ casos favorables."
         },

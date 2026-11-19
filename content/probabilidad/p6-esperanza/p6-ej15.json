@@ -60,9 +60,9 @@
           "explanation": "Los estadísticos de orden están ordenados: sus esperanzas crecen con $i$."
         },
         {
-          "text": "$\\tfrac{i}{n+1}$: son equiespaciadas, a distancia $\\tfrac{1}{n+1}$",
+          "text": "$\\tfrac{i}{n+1}$",
           "correct": true,
-          "explanation": "$a + b = n + 1$; los $n$ puntos dividen $[0,1]$ en $n+1$ partes iguales en promedio."
+          "explanation": "Son equiespaciadas, a distancia $\\tfrac{1}{n+1}$. $a + b = n + 1$; los $n$ puntos dividen $[0,1]$ en $n+1$ partes iguales en promedio."
         },
         {
           "text": "$\\tfrac{i}{n+1}$, pero sin relación entre ellas",

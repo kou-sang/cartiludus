@@ -18,9 +18,9 @@
       ],
       "cards": [
         {
-          "text": "$\\{1,\\dots,7\\}^5$, equiprobable: $7^5$ resultados",
+          "text": "$\\{1,\\dots,7\\}^5$, equiprobable",
           "correct": true,
-          "explanation": "Independencia y uniformidad hacen equiprobables las 5-uplas de pisos."
+          "explanation": "$7^5$ resultados. Independencia y uniformidad hacen equiprobables las 5-uplas de pisos."
         },
         {
           "text": "Multiconjuntos de pisos, equiprobables",
@@ -80,7 +80,7 @@
       ],
       "cards": [
         {
-          "text": "$\\tfrac{2520}{16807} = \\tfrac{360}{2401} \\approx 0{,}15$",
+          "text": "$\\tfrac{360}{2401} \\approx 0{,}15$",
           "correct": true,
           "explanation": "Cociente de casos en un espacio equiprobable."
         },

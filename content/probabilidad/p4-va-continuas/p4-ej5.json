@@ -61,7 +61,7 @@
           "explanation": "Son dos dimensiones."
         },
         {
-          "text": "Si el centro cae en el cuadrado interior de lado $a - 2r$: probabilidad $\\dfrac{(a - 2r)^2}{a^2}$",
+          "text": "Probabilidad $\\dfrac{(a - 2r)^2}{a^2}$",
           "correct": true,
           "explanation": "Se pierde una franja de ancho $r$ junto a cada lado."
         },
@@ -129,7 +129,7 @@
           "explanation": "Falta la posición del centro."
         },
         {
-          "text": "$Y \\sim \\mathcal U[0, \\tfrac a2]$ (distancia del centro al renglón más cercano) y $\\Theta \\sim \\mathcal U[0, \\tfrac\\pi2]$, independientes",
+          "text": "$Y \\sim \\mathcal U[0, \\tfrac a2]$ y $\\Theta \\sim \\mathcal U[0, \\tfrac\\pi2]$, independientes",
           "correct": true,
           "explanation": "Simetría: no hay posición ni dirección preferida."
         }
@@ -182,7 +182,7 @@
           "explanation": "Revisar la normalización de la densidad."
         },
         {
-          "text": "$\\dfrac{4}{a\\pi} \\cdot \\dfrac\\ell2 = \\dfrac{2\\ell}{\\pi a}$",
+          "text": "$\\dfrac{2\\ell}{\\pi a}$",
           "correct": true,
           "explanation": "Área de la región favorable por la densidad."
         },
@@ -214,7 +214,7 @@
           "explanation": "Es un método geométrico, no aleatorio."
         },
         {
-          "text": "Tirar la aguja $n$ veces y usar $\\pi \\approx \\dfrac{2\\ell\\,n}{a \\cdot (\\text{cantidad de cortes})}$",
+          "text": "$\\pi \\approx \\dfrac{2\\ell\\,n}{a \\cdot \\text{cortes}}$",
           "correct": true,
           "explanation": "La frecuencia relativa de cortes se acerca a $p$ (ley de los grandes números)."
         },

@@ -89,9 +89,9 @@
           "explanation": "Es la esperanza de una Bernoulli."
         },
         {
-          "text": "$\\sum_{k\\ge1} k q^{k-1} = \\dfrac{1}{(1-q)^2}$, así que $E(X) = \\dfrac{p}{p^2} = \\dfrac1p$",
+          "text": "$\\sum_{k\\ge1} k q^{k-1} = \\dfrac{1}{(1-q)^2}$",
           "correct": true,
-          "explanation": "Se deriva la serie geométrica dentro de su radio de convergencia ($|q| < 1$)."
+          "explanation": "$E(X) = \\dfrac{p}{p^2} = \\dfrac1p$. Se deriva la serie geométrica dentro de su radio de convergencia ($|q| < 1$)."
         },
         {
           "text": "$E(X) = \\dfrac{q}{p}$",
@@ -131,7 +131,7 @@
           "explanation": "Olvida sumar $E(X)$ para pasar de $E(X(X-1))$ a $E(X^2)$."
         },
         {
-          "text": "$\\dfrac{q}{p^2} = \\dfrac{1-p}{p^2}$",
+          "text": "$\\dfrac{1-p}{p^2}$",
           "correct": true,
           "explanation": "$\\tfrac{2q}{p^2} + \\tfrac1p - \\tfrac1{p^2} = \\tfrac{2q + p - 1}{p^2} = \\tfrac{q}{p^2}$."
         }
@@ -255,7 +255,7 @@
           "explanation": "Sólo vale para $\\alpha = 1$."
         },
         {
-          "text": "$E(X) = \\dfrac{\\lambda^\\alpha}{\\Gamma(\\alpha)} \\cdot \\dfrac{\\Gamma(\\alpha+1)}{\\lambda^{\\alpha+1}} = \\dfrac{\\alpha}{\\lambda}$",
+          "text": "$E(X) = \\dfrac{\\alpha}{\\lambda}$",
           "correct": true,
           "explanation": "$\\int_0^\\infty x^{\\alpha} e^{-\\lambda x}dx = \\tfrac{\\Gamma(\\alpha+1)}{\\lambda^{\\alpha+1}}$ porque la densidad $\\Gamma(\\alpha+1,\\lambda)$ integra 1."
         },

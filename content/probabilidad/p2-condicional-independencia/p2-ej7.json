@@ -24,9 +24,9 @@
           "explanation": "\"Una sola cara\" puede ocurrir con la primera o con la segunda."
         },
         {
-          "text": "$\\tfrac14$ cada una: los tres pares son independientes",
+          "text": "$\\tfrac14$ cada una",
           "correct": true,
-          "explanation": "Cada intersección es un solo resultado de 4 y coincide con $\\tfrac12 \\cdot \\tfrac12$."
+          "explanation": "Los tres pares son independientes. Cada intersección es un solo resultado de 4 y coincide con $\\tfrac12 \\cdot \\tfrac12$."
         },
         {
           "text": "$A \\cap C = \\emptyset$",
@@ -66,9 +66,9 @@
           "explanation": "La independencia de a pares no alcanza."
         },
         {
-          "text": "No: $A \\cap B \\cap C = \\emptyset$, pero $P(A)P(B)P(C) = \\tfrac18$",
+          "text": "No",
           "correct": true,
-          "explanation": "Son independientes de a pares, pero no mutuamente."
+          "explanation": "$A \\cap B \\cap C = \\emptyset$, pero $P(A)P(B)P(C) = \\tfrac18$. Son independientes de a pares, pero no mutuamente."
         }
       ]
     },
@@ -88,9 +88,9 @@
           "explanation": "Una sola cara está en ambos."
         },
         {
-          "text": "Exactamente una cara: $P(D \\cap E) = \\tfrac{n}{2^n}$ (para $n \\ge 2$)",
+          "text": "Exactamente una cara",
           "correct": true,
-          "explanation": "Una cara y $n-1 \\ge 1$ cecas cumple ambas."
+          "explanation": "$P(D \\cap E) = \\tfrac{n}{2^n}$ (para $n \\ge 2$). Una cara y $n-1 \\ge 1$ cecas cumple ambas."
         },
         {
           "text": "$D \\cap E = D$",
@@ -152,9 +152,9 @@
           "explanation": "Los pares con $\\emptyset$ u $\\Omega$ lo son."
         },
         {
-          "text": "Uno de los dos es $\\emptyset$ u $\\Omega$: los únicos pares independientes son los triviales",
+          "text": "Uno de los dos es $\\emptyset$ u $\\Omega$",
           "correct": true,
-          "explanation": "$p \\mid |A|$ obliga a $|A| \\in \\{0, p\\}$ (o lo mismo para $B$). Esos pares siempre son independientes."
+          "explanation": "Los únicos pares independientes son los triviales. $p \\mid |A|$ obliga a $|A| \\in \\{0, p\\}$ (o lo mismo para $B$). Esos pares siempre son independientes."
         },
         {
           "text": "Todo par de eventos disjuntos es independiente",

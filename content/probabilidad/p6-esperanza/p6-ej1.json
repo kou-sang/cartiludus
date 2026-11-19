@@ -64,7 +64,7 @@
           "explanation": "No suma sobre los valores posibles."
         },
         {
-          "text": "$\\sum_{k=1}^{6} h(k)\\,P(X = k) = \\tfrac16 \\sum_{k=1}^6 \\tfrac1k$",
+          "text": "$\\tfrac16 \\sum_{k=1}^6 \\tfrac1k$",
           "correct": true,
           "explanation": "Propiedad de la esperanza de una función de una variable discreta."
         }
@@ -119,9 +119,9 @@
           "explanation": "Su valor esperado es menor que el de la otra opción."
         },
         {
-          "text": "Recibir $\\tfrac1X$: su valor esperado es mayor",
+          "text": "Recibir $\\tfrac1X$",
           "correct": true,
-          "explanation": "$\\tfrac{49}{120} > \\tfrac27$."
+          "explanation": "Su valor esperado es mayor. $\\tfrac{49}{120} > \\tfrac27$."
         },
         {
           "text": "Depende de lo que salga en el dado",

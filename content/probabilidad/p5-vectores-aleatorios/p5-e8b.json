@@ -116,7 +116,7 @@
           "explanation": "Promedio de las colas: corresponde a una mezcla."
         },
         {
-          "text": "$1 - 0{,}6 \\cdot 0{,}84 \\cdot 0{,}36 = 0{,}81856$",
+          "text": "$0{,}81856$",
           "correct": true,
           "explanation": "Complemento de la acumulada del máximo."
         },

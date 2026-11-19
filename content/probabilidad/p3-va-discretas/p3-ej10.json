@@ -29,7 +29,7 @@
           "explanation": "Por ejemplo $1 - \\tfrac1n$ no lo alcanza."
         },
         {
-          "text": "Si $s$ es el supremo ($s > 0$), sólo finitos valores tienen $p_X(x) > \\tfrac s2$, y el máximo de un conjunto finito se alcanza",
+          "text": "Sólo finitos valores superan $\\tfrac s2$",
           "correct": true,
           "explanation": "A lo sumo $\\tfrac2s$ valores superan $\\tfrac s2$; el supremo sobre todos coincide con el máximo sobre esos finitos."
         },
@@ -86,7 +86,7 @@
           "explanation": "Para $k$ grande el cociente es menor que 1."
         },
         {
-          "text": "Si $k \\le (n+1)p$: la función crece hasta $[(n+1)p]$ y después decrece, así que $[(n+1)p]$ es un valor más probable",
+          "text": "Si $k \\le (n+1)p$: máximo en $[(n+1)p]$",
           "correct": true,
           "explanation": "Mientras el cociente es $\\ge 1$ la probabilidad no baja."
         },
@@ -118,7 +118,7 @@
           "explanation": "Sólo si $\\lambda < 1$."
         },
         {
-          "text": "El valor más probable es $[\\lambda]$; en 9(a), con $k$ fijo, la probabilidad era máxima en $\\lambda = k$",
+          "text": "$[\\lambda]$; en 9(a), máximo en $\\lambda = k$",
           "correct": true,
           "explanation": "Son dos preguntas distintas: variar $k$ con $\\lambda$ fijo, o variar $\\lambda$ con $k$ fijo."
         },

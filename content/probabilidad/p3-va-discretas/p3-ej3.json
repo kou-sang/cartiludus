@@ -56,7 +56,7 @@
           "explanation": "Es la cola, no la acumulada."
         },
         {
-          "text": "$1 - (1-p)^{\\lfloor x \\rfloor}$ (y 0 si $x < 1$)",
+          "text": "$1 - (1-p)^{\\lfloor x \\rfloor}$",
           "correct": true,
           "explanation": "Es escalonada, con saltos en los naturales."
         },
@@ -93,7 +93,7 @@
           "explanation": "La razón de la serie es el cuadrado."
         },
         {
-          "text": "$\\dfrac{p}{1 - (1-p)^2} = \\dfrac{1}{2 - p}$",
+          "text": "$\\dfrac{1}{2 - p}$",
           "correct": true,
           "explanation": "Suma de la serie geométrica y simplificación por $p$."
         },
@@ -210,9 +210,9 @@
       ],
       "cards": [
         {
-          "text": "$P(X = n) = q^{n-1}(1 - q)$: geométrica con $p = 1 - q = P(X = 1)$",
+          "text": "$P(X = n) = q^{n-1}(1 - q)$",
           "correct": true,
-          "explanation": "Diferencia de colas consecutivas."
+          "explanation": "Geométrica con $p = 1 - q = P(X = 1)$. Diferencia de colas consecutivas."
         },
         {
           "text": "Binomial",

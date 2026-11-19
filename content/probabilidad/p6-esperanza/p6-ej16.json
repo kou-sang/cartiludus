@@ -114,7 +114,7 @@
       ],
       "cards": [
         {
-          "text": "$mr$ y $ra^2 - \\dfrac{r(r-1)a^2}{n-1} = \\dfrac{a^2 r(n-r)}{n-1}$",
+          "text": "$mr$ y $\\dfrac{a^2 r(n-r)}{n-1}$",
           "correct": true,
           "explanation": "$r a^2 \\cdot \\tfrac{(n - 1) - (r - 1)}{n-1}$."
         },

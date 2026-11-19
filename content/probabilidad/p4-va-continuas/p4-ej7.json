@@ -19,7 +19,7 @@
       ],
       "cards": [
         {
-          "text": "El cociente es $\\tfrac{e^{-\\lambda(s+t)}}{e^{-\\lambda t}} = e^{-\\lambda s} = P(X > s)$",
+          "text": "El cociente da $e^{-\\lambda s}$",
           "correct": true,
           "explanation": "$\\{X > s+t\\} \\subseteq \\{X > t\\}$, así que la intersección es $\\{X > s + t\\}$."
         },
@@ -114,9 +114,9 @@
       ],
       "cards": [
         {
-          "text": "$\\left(e^{-\\lambda}\\right)^{k-1}\\left(1 - e^{-\\lambda}\\right)$: geométrica de parámetro $1 - e^{-\\lambda}$",
+          "text": "$\\left(e^{-\\lambda}\\right)^{k-1}\\left(1 - e^{-\\lambda}\\right)$",
           "correct": true,
-          "explanation": "Forma $(1-p)^{k-1}p$ con $p = 1 - e^{-\\lambda}$."
+          "explanation": "Geométrica de parámetro $1 - e^{-\\lambda}$. Forma $(1-p)^{k-1}p$ con $p = 1 - e^{-\\lambda}$."
         },
         {
           "text": "$\\lambda e^{-\\lambda k}$",

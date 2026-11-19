@@ -80,7 +80,7 @@
       ],
       "cards": [
         {
-          "text": "$k \\int_0^{10} x\\,dx = 50k$",
+          "text": "$50k$",
           "correct": true,
           "explanation": "$\\left.\\tfrac{x^2}{2}\\right|_0^{10} = 50$."
         },
@@ -273,7 +273,7 @@
           "explanation": "No divide por $P(D>5)$."
         },
         {
-          "text": "$\\dfrac{11/100}{75/100} = \\tfrac{11}{75} \\approx 0{,}147$",
+          "text": "$\\tfrac{11}{75} \\approx 0{,}147$",
           "correct": true,
           "explanation": "Cociente de las dos probabilidades."
         },
@@ -362,7 +362,7 @@
       ],
       "cards": [
         {
-          "text": "$3 \\cdot \\tfrac1{25} \\cdot \\tfrac45 = \\tfrac{12}{125} = 0{,}096$",
+          "text": "$0{,}096$",
           "correct": true,
           "explanation": "Fórmula binomial."
         },

@@ -158,7 +158,7 @@
           "explanation": "Sólo coinciden esas dos probabilidades; $X$ toma valores en $\\{0,\\dots,n\\}$ e $Y$ en $\\mathbb{N}$."
         },
         {
-          "text": "Con la misma sucesión de ensayos, ambos eventos son \"los primeros $n$ ensayos fracasan\"",
+          "text": "Ambos son \"los primeros $n$ fracasan\"",
           "correct": true,
           "explanation": "Si $X$ cuenta éxitos en los primeros $n$ ensayos e $Y$ marca el primer éxito, $\\{X = 0\\} = \\{Y > n\\}$ como eventos, no sólo en probabilidad."
         }
@@ -248,7 +248,7 @@
           "explanation": "Es $P(X = 0)$: ninguna de Messi."
         },
         {
-          "text": "$1 - P(X = 0) = 1 - \\left(\\tfrac{637}{638}\\right)^{5n}$",
+          "text": "$1 - \\left(\\tfrac{637}{638}\\right)^{5n}$",
           "correct": true,
           "explanation": "$\\{X \\ge 1\\}^c = \\{X = 0\\}$, y cada figurita no es Messi con probabilidad $\\tfrac{637}{638}$, independientemente."
         },

@@ -61,7 +61,7 @@
           "explanation": "Factor espurio."
         },
         {
-          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}}{n!}\\sum_k \\binom nk \\lambda_1^k\\lambda_2^{n-k} = \\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{n!}$",
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{n!}$",
           "correct": true,
           "explanation": "Binomio de Newton."
         }

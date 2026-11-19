@@ -29,9 +29,9 @@
           "explanation": "Sin reposición no lo son; el resultado vale por simetría."
         },
         {
-          "text": "Por simetría: la bolilla de la posición $i$ es uniforme entre las $N$, y $D$ son blancas",
+          "text": "Por simetría",
           "correct": true,
-          "explanation": "Igual que la primera extracción; no depende de $i$."
+          "explanation": "La bolilla de la posición $i$ es uniforme entre las $N$, y $D$ son blancas. Igual que la primera extracción; no depende de $i$."
         },
         {
           "text": "Porque $P(X_i = 1) = \\tfrac{D - i + 1}{N - i + 1}$",
@@ -66,7 +66,7 @@
           "explanation": "Supone independencia, que sin reposición no vale."
         },
         {
-          "text": "$P(X_1 = 1)\\,P(X_2 = 1 \\mid X_1 = 1) = \\tfrac DN \\cdot \\tfrac{D-1}{N-1}$",
+          "text": "$\\tfrac DN \\cdot \\tfrac{D-1}{N-1}$",
           "correct": true,
           "explanation": "Regla del producto; quitada una blanca quedan $D-1$ blancas entre $N-1$."
         }
@@ -87,7 +87,7 @@
           "explanation": "Es la probabilidad de no ser ambas blancas, que incluye otros casos."
         },
         {
-          "text": "$\\tfrac DN - \\tfrac{D(D-1)}{N(N-1)} = \\tfrac{D(N-D)}{N(N-1)}$",
+          "text": "$\\tfrac{D(N-D)}{N(N-1)}$",
           "correct": true,
           "explanation": "Se despeja de la marginal; por simetría $P(X_i = 0, X_j = 1)$ es igual."
         },

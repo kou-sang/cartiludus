@@ -93,7 +93,7 @@
           "explanation": "Es posible pero mucho más largo: hay que revisar caso por caso."
         },
         {
-          "text": "La arista $uv$: $P(\\text{conectados}) = p \\cdot 1 + (1 - p) \\cdot P(\\text{conectados} \\mid uv \\text{ se saca})$",
+          "text": "La arista $uv$",
           "correct": true,
           "explanation": "Con la arista directa la conexión es segura; si no está, hay que conectar pasando por $w$ o $x$."
         },
@@ -126,7 +126,7 @@
           "explanation": "Exige un par fijo de aristas, pero $u$ puede llegar por $w$ o por $x$."
         },
         {
-          "text": "Si $u$ y $v$ se unen al bloque $\\{w, x\\}$: probabilidad $\\left(1 - (1-p)^2\\right)^2$",
+          "text": "$\\left(1 - (1-p)^2\\right)^2$",
           "correct": true,
           "explanation": "$u$ llega al bloque con probabilidad $1-(1-p)^2$, $v$ también, y usan aristas distintas: son independientes."
         },
@@ -159,9 +159,9 @@
           "explanation": "Sin la arista $wx$, llegar a $w$ o a $x$ no alcanza: hay que pasar por el mismo vértice."
         },
         {
-          "text": "Si está $u{-}w{-}v$ o $u{-}x{-}v$: probabilidad $1 - (1 - p^2)^2$",
+          "text": "Si está $u{-}w{-}v$ o $u{-}x{-}v$",
           "correct": true,
-          "explanation": "Los dos caminos usan aristas disjuntas, así que son independientes; se usa el complemento."
+          "explanation": "Probabilidad $1 - (1 - p^2)^2$. Los dos caminos usan aristas disjuntas, así que son independientes; se usa el complemento."
         },
         {
           "text": "$2p^2$",
@@ -222,9 +222,9 @@
           "explanation": "Un camino $1{-}2{-}3{-}4$ ya es conexo con menos."
         },
         {
-          "text": "3: con 0, 1 o 2 aristas nunca es conexo",
+          "text": "3",
           "correct": true,
-          "explanation": "Un grafo conexo de 4 vértices contiene un árbol generador, que tiene 3 aristas."
+          "explanation": "Con 0, 1 o 2 aristas nunca es conexo. Un grafo conexo de 4 vértices contiene un árbol generador, que tiene 3 aristas."
         },
         {
           "text": "6",

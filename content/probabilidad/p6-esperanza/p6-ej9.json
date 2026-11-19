@@ -23,7 +23,7 @@
           "explanation": "La cantidad de distintos es una suma de indicadoras."
         },
         {
-          "text": "$I_j = 1$ si el cupón $j$ aparece entre los $k$; la cantidad de distintos es $\\sum_{j=1}^N I_j$",
+          "text": "$I_j = 1$ si el cupón $j$ aparece",
           "correct": true,
           "explanation": "Linealidad: alcanza con $P(I_j = 1)$."
         },

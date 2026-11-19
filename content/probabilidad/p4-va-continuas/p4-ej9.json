@@ -28,7 +28,7 @@
           "explanation": "No hay producto."
         },
         {
-          "text": "$0{,}7\\,P(N_0 \\ge t) + 0{,}3\\,P(N_1 \\ge t)$ con $N_0 \\sim \\mathcal N(53,25)$, $N_1 \\sim \\mathcal N(\\mu_1,\\sigma_1^2)$",
+          "text": "$0{,}7\\,P(N_0 \\ge t) + 0{,}3\\,P(N_1 \\ge t)$",
           "correct": true,
           "explanation": "Mezcla de dos normales con pesos $0{,}7$ y $0{,}3$."
         },

@@ -21,7 +21,7 @@
           "explanation": "Olvida dividir por 2 en el área del trapecio."
         },
         {
-          "text": "$f(x,y) = \\tfrac{1}{36}$ en el trapecio",
+          "text": "$\\tfrac{1}{36}$ en el trapecio",
           "correct": true,
           "explanation": "Área $= \\tfrac{(12 + 6)}{2} \\cdot 4 = 36$."
         },

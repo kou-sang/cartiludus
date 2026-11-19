@@ -27,7 +27,7 @@
           "explanation": "Es la cantidad de aristas de un árbol."
         },
         {
-          "text": "$M = \\binom n2$",
+          "text": "$\\binom n2$",
           "correct": true,
           "explanation": "Pares no ordenados de vértices distintos."
         },
@@ -108,9 +108,9 @@
       ],
       "cards": [
         {
-          "text": "$\\dfrac{1}{\\binom Mm}$: no depende de $p$",
+          "text": "$\\dfrac{1}{\\binom Mm}$",
           "correct": true,
-          "explanation": "Dado el número de aristas, todos los grafos con $m$ aristas son equiprobables."
+          "explanation": "No depende de $p$. Dado el número de aristas, todos los grafos con $m$ aristas son equiprobables."
         },
         {
           "text": "$p^m(1-p)^{M-m}$",

@@ -51,7 +51,7 @@
       ],
       "cards": [
         {
-          "text": "$P\\left(\\bigcap N_n\\right) = \\lim P(N_n) = 0$",
+          "text": "$0$",
           "correct": true,
           "explanation": "Continuidad para sucesiones decrecientes de eventos."
         },
@@ -83,7 +83,7 @@
       ],
       "cards": [
         {
-          "text": "a, c, b, a, c, b, … (cada secuencia de $k$ partidos tiene probabilidad $(\\tfrac12)^k$)",
+          "text": "a, c, b, a, c, b, …",
           "correct": true,
           "explanation": "Cada partido extra lo gana el entrante hasta que alguien repite."
         },
@@ -125,7 +125,7 @@
           "explanation": "c no está en la misma situación que a y b."
         },
         {
-          "text": "$2 \\cdot \\dfrac{1/8}{1 - 1/8} = \\tfrac27$",
+          "text": "$\\tfrac27$",
           "correct": true,
           "explanation": "Dos secuencias posibles para cada $k = 3j$."
         },
@@ -157,7 +157,7 @@
           "explanation": "Las probabilidades no son iguales."
         },
         {
-          "text": "$\\tfrac{5}{14}$ cada uno: conviene jugar el primer partido",
+          "text": "$\\tfrac{5}{14}$ cada uno: conviene",
           "correct": true,
           "explanation": "$\\tfrac{1 - 2/7}{2} = \\tfrac5{14} > \\tfrac{4}{14}$."
         },

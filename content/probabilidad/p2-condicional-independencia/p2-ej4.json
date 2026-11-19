@@ -115,7 +115,7 @@
           "explanation": "Los totales son consistentes con la tabla."
         },
         {
-          "text": "La droga 1 se dio casi sólo al grupo A, el difícil de curar, y la droga 2 casi sólo al B: el promedio global compara grupos distintos",
+          "text": "Cada droga se dio sobre todo a otro grupo",
           "correct": true,
           "explanation": "El grupo es una variable de confusión: influye en la cura y en qué droga se recibió."
         },

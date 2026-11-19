@@ -61,7 +61,7 @@
           "explanation": "La divisibilidad conjunta no involucra la suma."
         },
         {
-          "text": "$A_{k_1 \\cdots k_m}$, y $k_1 \\cdots k_m$ también divide a $n$",
+          "text": "$A_{k_1 \\cdots k_m}$",
           "correct": true,
           "explanation": "Divisible por todos ⟺ divisible por el mcm, que aquí es el producto."
         },
@@ -98,7 +98,7 @@
           "explanation": "No son disjuntos."
         },
         {
-          "text": "$P\\left(\\bigcap A_{k_i}\\right) = \\tfrac{1}{k_1\\cdots k_m} = \\prod P(A_{k_i})$, y lo mismo para cada subfamilia",
+          "text": "$\\prod P(A_{k_i})$, y lo mismo para cada subfamilia",
           "correct": true,
           "explanation": "Esa es la definición de independencia de una familia de eventos."
         }
@@ -151,7 +151,7 @@
           "explanation": "La intersección de independientes da producto, no suma."
         },
         {
-          "text": "$P\\left(\\bigcap A_p^c\\right) = \\prod (1 - \\tfrac1p)$, y se multiplica por $n$",
+          "text": "$\\prod_{p \\mid n} (1 - \\tfrac1p)$",
           "correct": true,
           "explanation": "Independencia de complementos y (a)."
         },

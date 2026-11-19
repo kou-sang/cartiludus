@@ -28,7 +28,7 @@
           "explanation": "Es la variable que se quiere estudiar; su distribución depende de $G$, así que primero hay que condicionar en $G$."
         },
         {
-          "text": "$G$ = {el acusado es culpable}, con $P(G) = \\alpha$",
+          "text": "$G$ = {el acusado es culpable}, con $\\alpha$",
           "correct": true,
           "explanation": "Una vez fijado si es culpable, cada jurado vota culpable con una probabilidad conocida y los votos son independientes. $G$ y $G^c$ forman una partición."
         },

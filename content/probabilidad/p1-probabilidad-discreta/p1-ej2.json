@@ -154,7 +154,7 @@
           "explanation": "Fija además que $m$ esté entre las extraídas: es otro evento."
         },
         {
-          "text": "$\\dfrac{\\binom mn}{\\binom Nn}$ (vale 0 si $m < n$)",
+          "text": "$\\dfrac{\\binom mn}{\\binom Nn}$",
           "correct": true,
           "explanation": "Todas las bolillas deben salir de las $m$ primeras."
         },
@@ -277,9 +277,9 @@
       ],
       "cards": [
         {
-          "text": "$\\{1, \\dots, N\\}^n$, equiprobable: $N^n$ resultados",
+          "text": "$\\{1, \\dots, N\\}^n$, equiprobable",
           "correct": true,
-          "explanation": "Cada extracción es independiente y uniforme en $\\{1,\\dots,N\\}$."
+          "explanation": "$N^n$ resultados. Cada extracción es independiente y uniforme en $\\{1,\\dots,N\\}$."
         },
         {
           "text": "Multiconjuntos de tamaño $n$, equiprobables",

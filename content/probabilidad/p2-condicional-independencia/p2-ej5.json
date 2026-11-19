@@ -24,7 +24,7 @@
           "explanation": "Incluye al evento que se quiere calcular."
         },
         {
-          "text": "$R_1$ y $B_1$: después de la primera extracción queda un esquema de Pólya con otra composición",
+          "text": "$R_1$ y $B_1$",
           "correct": true,
           "explanation": "Dado $R_1$, la extracción $n$ es la $(n-1)$-ésima de un Pólya con $R + c$ rojas y $B$ blancas."
         },
@@ -66,7 +66,7 @@
           "explanation": "No resulta de la probabilidad total."
         },
         {
-          "text": "$\\dfrac{R(R+c) + RB}{(R+B)(R+B+c)} = \\dfrac{R}{R+B}$",
+          "text": "$\\dfrac{R}{R+B}$",
           "correct": true,
           "explanation": "El numerador es $R(R + B + c)$ y se simplifica."
         }
@@ -125,9 +125,9 @@
           "explanation": "Pueden ocurrir ambos."
         },
         {
-          "text": "No (si $c > 0$): $\\tfrac{R+c}{R+B+c} > \\tfrac{R}{R+B}$, así que la intersección es más probable que el producto",
+          "text": "No (si $c > 0$)",
           "correct": true,
-          "explanation": "Sacar una roja aumenta la chance de rojas futuras: hay dependencia positiva."
+          "explanation": "$\\tfrac{R+c}{R+B+c} > \\tfrac{R}{R+B}$, así que la intersección es más probable que el producto. Sacar una roja aumenta la chance de rojas futuras: hay dependencia positiva."
         },
         {
           "text": "Sí, porque $P(R_n)$ no depende de $n$",

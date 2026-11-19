@@ -86,9 +86,9 @@
           "explanation": "El parámetro es $\\lambda p$."
         },
         {
-          "text": "La conjunta es producto de una función de $h$ y una de $m$: $H \\perp M$, $H \\sim \\mathcal P(\\lambda p)$, $M \\sim \\mathcal P(\\lambda(1-p))$",
+          "text": "La conjunta es producto de una función de $h$ y una de $m$",
           "correct": true,
-          "explanation": "Factorización de la función de probabilidad conjunta en las marginales."
+          "explanation": "$H \\perp M$, $H \\sim \\mathcal P(\\lambda p)$, $M \\sim \\mathcal P(\\lambda(1-p))$. Factorización de la función de probabilidad conjunta en las marginales."
         },
         {
           "text": "$H \\sim \\mathrm{Bi}(N, p)$ marginalmente",

@@ -24,9 +24,9 @@
           "explanation": "No alcanza: hay que controlar cerca de 0 y la velocidad en infinito."
         },
         {
-          "text": "En $(0,1]$: $x^{\\alpha-1}e^{-x} \\le x^{\\alpha-1}$, integrable si $\\alpha > 0$; en $[1, \\infty)$: $x^{\\alpha-1}e^{-x} \\le C e^{-x/2}$",
+          "text": "En $(0,1]$",
           "correct": true,
-          "explanation": "Comparación en cada tramo."
+          "explanation": "$x^{\\alpha-1}e^{-x} \\le x^{\\alpha-1}$, integrable si $\\alpha > 0$; en $[1, \\infty)$: $x^{\\alpha-1}e^{-x} \\le C e^{-x/2}$. Comparación en cada tramo."
         },
         {
           "text": "Porque el integrando es continuo",
@@ -56,7 +56,7 @@
           "explanation": "Falta el factor de la derivada."
         },
         {
-          "text": "$\\Gamma(\\alpha) = (\\alpha - 1)\\int_0^\\infty x^{\\alpha - 2}e^{-x}dx = (\\alpha - 1)\\Gamma(\\alpha - 1)$",
+          "text": "$\\Gamma(\\alpha) = (\\alpha - 1)\\Gamma(\\alpha - 1)$",
           "correct": true,
           "explanation": "$du = (\\alpha-1)x^{\\alpha-2}dx$."
         },
@@ -82,9 +82,9 @@
       ],
       "cards": [
         {
-          "text": "$\\Gamma(1) = 1$ y aplicando la recursión: $\\Gamma(n) = (n-1)(n-2)\\cdots 1 \\cdot \\Gamma(1)$",
+          "text": "$\\Gamma(1) = 1$ y aplicando la recursión",
           "correct": true,
-          "explanation": "Inducción en $n$."
+          "explanation": "$\\Gamma(n) = (n-1)(n-2)\\cdots 1 \\cdot \\Gamma(1)$. Inducción en $n$."
         },
         {
           "text": "Porque $\\Gamma(n) = n!$",
@@ -118,7 +118,7 @@
           "explanation": "$Z$ es continua."
         },
         {
-          "text": "El $n$-ésimo evento ocurre antes de $z$ si y sólo si hubo al menos $n$ eventos en $[0, z]$",
+          "text": "Ambos: hubo $\\ge n$ eventos en $[0, z]$",
           "correct": true,
           "explanation": "Igualando probabilidades: $F_Z(z) = P(X_z \\ge n)$. (Por cálculo directo, se prueba integrando por partes $n$ veces.)"
         },
@@ -155,7 +155,7 @@
           "explanation": "Falta la regla de la cadena y los dos lados."
         },
         {
-          "text": "$f_U(u) = \\dfrac{1}{\\sqrt{2\\pi}}\\,u^{-1/2} e^{-u/2}$, $u > 0$",
+          "text": "$\\dfrac{1}{\\sqrt{2\\pi}}\\,u^{-1/2} e^{-u/2}$, $u > 0$",
           "correct": true,
           "explanation": "$\\varphi(\\sqrt u) = \\tfrac{1}{\\sqrt{2\\pi}}e^{-u/2}$."
         },
@@ -181,9 +181,9 @@
           "explanation": "Revisar el despeje."
         },
         {
-          "text": "$\\dfrac{(1/2)^{1/2}}{\\Gamma(1/2)} = \\dfrac{1}{\\sqrt{2\\pi}}$, de donde $\\Gamma(\\tfrac12) = \\sqrt\\pi$",
+          "text": "$\\dfrac{(1/2)^{1/2}}{\\Gamma(1/2)} = \\dfrac{1}{\\sqrt{2\\pi}}$",
           "correct": true,
-          "explanation": "Despejando: $\\Gamma(\\tfrac12) = \\sqrt{2\\pi}\\cdot\\tfrac{1}{\\sqrt2}$. Además $Z^2 \\sim \\chi^2(1)$."
+          "explanation": "$\\Gamma(\\tfrac12) = \\sqrt\\pi$. Despejando: $\\Gamma(\\tfrac12) = \\sqrt{2\\pi}\\cdot\\tfrac{1}{\\sqrt2}$. Además $Z^2 \\sim \\chi^2(1)$."
         },
         {
           "text": "No se puede concluir nada",

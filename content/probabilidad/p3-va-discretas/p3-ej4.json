@@ -61,9 +61,9 @@
           "explanation": "Falta elegir las negras."
         },
         {
-          "text": "Hipergeométrica: $\\dfrac{\\binom Bk \\binom{N}{n-k}}{\\binom{B+N}{n}}$",
+          "text": "Hipergeométrica",
           "correct": true,
-          "explanation": "Casos favorables sobre subconjuntos posibles."
+          "explanation": "$\\dfrac{\\binom Bk \\binom{N}{n-k}}{\\binom{B+N}{n}}$. Casos favorables sobre subconjuntos posibles."
         },
         {
           "text": "$\\mathcal G\\left(\\tfrac{B}{B+N}\\right)$",
@@ -83,9 +83,9 @@
       ],
       "cards": [
         {
-          "text": "A $1 - p$ y a $p$: el producto tiende a $(1-p)^{k-1}p$",
+          "text": "A $1 - p$ y a $p$",
           "correct": true,
-          "explanation": "Hay $k-1$ factores de la forma $\\tfrac{N-j}{B+N-j}$; el producto de límites es el límite del producto."
+          "explanation": "El producto tiende a $(1-p)^{k-1}p$. Hay $k-1$ factores de la forma $\\tfrac{N-j}{B+N-j}$; el producto de límites es el límite del producto."
         },
         {
           "text": "A $1$ y a $p$",

@@ -18,9 +18,9 @@
       ],
       "cards": [
         {
-          "text": "A lo sumo $k + r - 1$: hay $k$ éxitos antes de $r$ fracasos si y sólo si en los primeros $k + r - 1$ ensayos hay al menos $k$ éxitos",
+          "text": "A lo sumo $k + r - 1$",
           "correct": true,
-          "explanation": "Con $k + r - 1$ ensayos no pueden faltar a la vez éxitos y fracasos: o hay $\\ge k$ éxitos o hay $\\ge r$ fracasos."
+          "explanation": "Hay $k$ éxitos antes de $r$ fracasos si y sólo si en los primeros $k + r - 1$ ensayos hay al menos $k$ éxitos. Con $k + r - 1$ ensayos no pueden faltar a la vez éxitos y fracasos: o hay $\\ge k$ éxitos o hay $\\ge r$ fracasos."
         },
         {
           "text": "En exactamente $k$ ensayos",
@@ -113,7 +113,7 @@
           "explanation": "La cota la ponen los fracasos."
         },
         {
-          "text": "$i = 0, \\dots, r-1$, y la probabilidad es $\\sum_{i=0}^{r-1} \\binom{k-1+i}{i} p^k (1-p)^i$",
+          "text": "$i = 0, \\dots, r-1$",
           "correct": true,
           "explanation": "Binomial negativa: el último ensayo es éxito y antes hay $k-1$ éxitos e $i$ fracasos."
         },

@@ -93,9 +93,9 @@
           "explanation": "Supone equiprobables los pares sin orden, que no lo son: $\\{1,2\\}$ ocurre de dos maneras y $\\{1,1\\}$ de una."
         },
         {
-          "text": "$\\tfrac{1}{36}$: el espacio es equiprobable y $P(E) = \\tfrac{\\#E}{36}$",
+          "text": "$\\tfrac{1}{36}$",
           "correct": true,
-          "explanation": "Cada tirada vale $\\tfrac16$ y son independientes: $\\tfrac16 \\cdot \\tfrac16$. Por eso alcanza con contar casos."
+          "explanation": "El espacio es equiprobable y $P(E) = \\tfrac{\\#E}{36}$. Cada tirada vale $\\tfrac16$ y son independientes: $\\tfrac16 \\cdot \\tfrac16$. Por eso alcanza con contar casos."
         },
         {
           "text": "$\\tfrac{i+j}{252}$",
@@ -131,9 +131,9 @@
           "explanation": "No corresponde a ningún conteo correcto de pares con suma par."
         },
         {
-          "text": "$3 \\cdot 3 + 3 \\cdot 3 = 18$, así que $P(A) = \\tfrac12$",
+          "text": "$18$",
           "correct": true,
-          "explanation": "Ambos pares: $3 \\cdot 3$; ambos impares: $3 \\cdot 3$."
+          "explanation": "$P(A) = \\tfrac12$. Ambos pares: $3 \\cdot 3$; ambos impares: $3 \\cdot 3$."
         }
       ]
     },
@@ -148,9 +148,9 @@
       ],
       "cards": [
         {
-          "text": "5: $(2,6), (3,5), (4,4), (5,3), (6,2)$; $P(B) = \\tfrac{5}{36}$",
+          "text": "5",
           "correct": true,
-          "explanation": "$i$ puede valer de 2 a 6."
+          "explanation": "$(2,6), (3,5), (4,4), (5,3), (6,2)$; $P(B) = \\tfrac{5}{36}$. $i$ puede valer de 2 a 6."
         },
         {
           "text": "3",
@@ -185,7 +185,7 @@
           "explanation": "Resta un solo par igual, pero hay más."
         },
         {
-          "text": "$1 - \\tfrac{6}{36} = \\tfrac56$",
+          "text": "$\\tfrac56$",
           "correct": true,
           "explanation": "Hay 6 pares con resultados iguales; el resto son distintos."
         },

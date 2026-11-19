@@ -18,7 +18,7 @@
       ],
       "cards": [
         {
-          "text": "Subconjuntos de 3 cabinas, equiprobables: $\\binom{15}{3} = 455$",
+          "text": "Subconjuntos de 3 cabinas: $\\binom{15}{3}$",
           "correct": true,
           "explanation": "Elegir al azar 3 cabinas hace equiprobables los subconjuntos de tamaño 3."
         },

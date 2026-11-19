@@ -51,7 +51,7 @@
       ],
       "cards": [
         {
-          "text": "$\\tfrac{333}{1000}$, $\\tfrac{200}{1000} = \\tfrac15$ y $\\tfrac{66}{1000}$",
+          "text": "$\\tfrac{333}{1000}$, $\\tfrac15$ y $\\tfrac{66}{1000}$",
           "correct": true,
           "explanation": "Cantidad de múltiplos sobre 1000."
         },
@@ -131,7 +131,7 @@
           "explanation": "Hay uno por cada valor de $m$: es infinito."
         },
         {
-          "text": "Una progresión aritmética de paso $n$: $k, k + n, k + 2n, \\dots$ (los naturales de esa forma)",
+          "text": "Una progresión de paso $n$",
           "correct": true,
           "explanation": "Entre $n$ naturales consecutivos hay exactamente uno de $A_{n,k}$."
         }
@@ -180,7 +180,7 @@
       ],
       "cards": [
         {
-          "text": "$\\tfrac1n - \\tfrac1N \\le \\tfrac{|A_{n,k} \\cap \\{1..N\\}|}{N} \\le \\tfrac1n + \\tfrac1N$, y ambas cotas tienden a $\\tfrac1n$",
+          "text": "Por sándwich entre $\\tfrac1n \\pm \\tfrac1N$",
           "correct": true,
           "explanation": "Por el teorema del sándwich el cociente tiende a $\\tfrac1n$."
         },

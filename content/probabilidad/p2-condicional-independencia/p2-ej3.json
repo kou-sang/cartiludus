@@ -61,7 +61,7 @@
           "explanation": "Es la probabilidad de negativo en un sano."
         },
         {
-          "text": "$1 - 0{,}95 = 0{,}05$",
+          "text": "$0{,}05$",
           "correct": true,
           "explanation": "$P(A \\mid E^c) = 1 - P(A^c \\mid E^c)$."
         },
@@ -93,7 +93,7 @@
           "explanation": "Es la sensibilidad."
         },
         {
-          "text": "$0{,}00475 + 0{,}04975 = 0{,}0545$",
+          "text": "$0{,}0545$",
           "correct": true,
           "explanation": "Positivos verdaderos más falsos positivos."
         },
@@ -115,9 +115,9 @@
       ],
       "cards": [
         {
-          "text": "$\\approx 0{,}087$: la mayoría de los positivos son falsos",
+          "text": "$\\approx 0{,}087$",
           "correct": true,
-          "explanation": "Con baja prevalencia, los falsos positivos superan a los verdaderos."
+          "explanation": "La mayoría de los positivos son falsos. Con baja prevalencia, los falsos positivos superan a los verdaderos."
         },
         {
           "text": "$\\approx 0{,}5$",
@@ -178,7 +178,7 @@
       ],
       "cards": [
         {
-          "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
+          "text": "$\\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
           "correct": true,
           "explanation": "Despeje lineal."
         },
@@ -214,7 +214,7 @@
           "explanation": "El ítem (a) muestra lo contrario."
         },
         {
-          "text": "Con una enfermedad rara, la tasa de falsos positivos tiene que ser mucho menor que la prevalencia (≈ 0,03 %)",
+          "text": "Los falsos positivos deben ser muy raros",
           "correct": true,
           "explanation": "$1 - p \\approx 2{,}6 \\cdot 10^{-4}$."
         },

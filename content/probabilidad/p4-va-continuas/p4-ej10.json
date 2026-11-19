@@ -214,9 +214,9 @@
           "explanation": "Cada tramo es creciente."
         },
         {
-          "text": "Continua y estrictamente creciente: $W \\in (0,2]$ en el primer tramo, $(2, 23]$ en el segundo y $(23, \\infty)$ en el tercero",
+          "text": "Continua y estrictamente creciente",
           "correct": true,
-          "explanation": "Los tramos empalman en 2 y en 23."
+          "explanation": "$W \\in (0,2]$ en el primer tramo, $(2, 23]$ en el segundo y $(23, \\infty)$ en el tercero. Los tramos empalman en 2 y en 23."
         },
         {
           "text": "Tiene saltos en 8 y en 15",

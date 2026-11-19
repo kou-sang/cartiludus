@@ -124,9 +124,9 @@
           "explanation": "No depende de $n$."
         },
         {
-          "text": "Sí: cada repetición elige urna de nuevo, así que no hay información compartida",
+          "text": "Sí: cada repetición elige urna de nuevo",
           "correct": true,
-          "explanation": "Son repeticiones independientes del mismo experimento."
+          "explanation": "No hay información compartida. Son repeticiones independientes del mismo experimento."
         },
         {
           "text": "No: si sale blanca, la urna tenía más blancas",
@@ -210,9 +210,9 @@
       ],
       "cards": [
         {
-          "text": "No: $\\tfrac{2n+1}{6n} > \\tfrac14$ para todo $n$",
+          "text": "No",
           "correct": true,
-          "explanation": "Las extracciones comparten la urna: una blanca hace más probable otra blanca."
+          "explanation": "$\\tfrac{2n+1}{6n} > \\tfrac14$ para todo $n$. Las extracciones comparten la urna: una blanca hace más probable otra blanca."
         },
         {
           "text": "Sí, porque son con reposición",

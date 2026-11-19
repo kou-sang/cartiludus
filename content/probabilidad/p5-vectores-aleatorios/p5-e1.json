@@ -51,7 +51,7 @@
           "explanation": "No corresponde a ningún evento útil."
         },
         {
-          "text": "$\\left(\\tfrac23\\right)^4 = \\tfrac{16}{81}$",
+          "text": "$\\tfrac{16}{81}$",
           "correct": true,
           "explanation": "$\\binom40 (\\tfrac13)^0 (\\tfrac23)^4$."
         },

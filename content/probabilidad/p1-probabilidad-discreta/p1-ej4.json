@@ -25,7 +25,7 @@
           "explanation": "Hay muchas maneras de repartir las bolillas."
         },
         {
-          "text": "Las configuraciones $(x_1, \\dots, x_4)$ con suma 4: $\\binom{7}{4} = 35$",
+          "text": "$\\binom74 = 35$ configuraciones",
           "correct": true,
           "explanation": "En el modelo de Bose–Einstein cada configuración de ocupación es equiprobable; se cuentan con estrellas y barras."
         },
@@ -57,9 +57,9 @@
           "explanation": "Cuenta otra cosa: no reparte las bolillas que quedan."
         },
         {
-          "text": "$\\binom53 = 10$: probabilidad $\\tfrac{10}{35} = \\tfrac27$",
+          "text": "$\\binom53 = 10$",
           "correct": true,
-          "explanation": "Quedan 3 bolillas indistinguibles en 3 urnas."
+          "explanation": "Probabilidad $\\tfrac{10}{35} = \\tfrac27$. Quedan 3 bolillas indistinguibles en 3 urnas."
         },
         {
           "text": "$\\binom63 = 20$",
@@ -89,7 +89,7 @@
           "explanation": "En (b) repite el conteo de (a)."
         },
         {
-          "text": "$\\tfrac{6}{35}$ y $1 - \\tfrac{15}{35} = \\tfrac47$",
+          "text": "$\\tfrac{6}{35}$ y $\\tfrac47$",
           "correct": true,
           "explanation": "$\\binom42 = 6$; y $\\binom64 = 15$ configuraciones dejan vacía la primera urna."
         },
@@ -131,9 +131,9 @@
           "explanation": "Supone una bolilla por urna."
         },
         {
-          "text": "$\\{1,2,3,4\\}^4$ (urna de cada bolilla), equiprobable: $4^4 = 256$",
+          "text": "$\\{1,2,3,4\\}^4$ (urna de cada bolilla), equiprobable",
           "correct": true,
-          "explanation": "Cada bolilla va a una urna al azar, independientemente."
+          "explanation": "$4^4 = 256$. Cada bolilla va a una urna al azar, independientemente."
         }
       ]
     },
@@ -189,7 +189,7 @@
           "explanation": "En ambos hay 4 bolillas y 4 urnas."
         },
         {
-          "text": "Con bolillas distinguibles las configuraciones no son equiprobables: $(4,0,0,0)$ ocurre de 1 manera y $(1,1,1,1)$ de $4! = 24$",
+          "text": "Cambia qué resultados son equiprobables",
           "correct": true,
           "explanation": "Cambiar qué se considera igual cambia qué es equiprobable, y con eso las probabilidades."
         },

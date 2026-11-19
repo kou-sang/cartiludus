@@ -66,7 +66,7 @@
           "explanation": "Falta la segunda extracción."
         },
         {
-          "text": "$\\tfrac58 \\cdot \\tfrac24 = \\tfrac{5}{16}$",
+          "text": "$\\tfrac{5}{16}$",
           "correct": true,
           "explanation": "Roja de A ($\\tfrac58$); B queda con 2 rojas y 2 blancas, y sale roja con $\\tfrac24$."
         }
@@ -83,7 +83,7 @@
       ],
       "cards": [
         {
-          "text": "$\\tfrac13 \\cdot \\tfrac69 = \\tfrac29$",
+          "text": "$\\tfrac29$",
           "correct": true,
           "explanation": "Roja de B ($\\tfrac13$); A queda con 6 rojas sobre 9."
         },
@@ -120,7 +120,7 @@
           "explanation": "Los dos casos no tienen la misma probabilidad."
         },
         {
-          "text": "$\\tfrac{5}{48} + \\tfrac{4}{27} = \\tfrac{109}{432} \\approx 0{,}25$",
+          "text": "$\\tfrac{109}{432} \\approx 0{,}25$",
           "correct": true,
           "explanation": "Cada caso se pondera por la probabilidad del resultado del dado."
         },
@@ -147,7 +147,7 @@
       ],
       "cards": [
         {
-          "text": "$\\tfrac13 \\cdot \\tfrac{9}{32} + \\tfrac23 \\cdot \\tfrac{8}{27} = \\tfrac{755}{2592} \\approx 0{,}29$",
+          "text": "$\\tfrac{755}{2592} \\approx 0{,}29$",
           "correct": true,
           "explanation": "Mismo esquema que para las rojas."
         },
@@ -226,7 +226,7 @@
           "explanation": "Las dos probabilidades no son iguales."
         },
         {
-          "text": "$P(BB \\mid \\text{mismo}) = \\tfrac{755}{1409} \\approx 0{,}54$: es más probable que sean blancas",
+          "text": "$\\tfrac{755}{1409} \\approx 0{,}54$: es más probable que sean blancas",
           "correct": true,
           "explanation": "Como $P(BB) > P(RR)$, dado el mismo color predominan las blancas."
         }

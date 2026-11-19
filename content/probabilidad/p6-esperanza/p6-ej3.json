@@ -124,7 +124,7 @@
           "explanation": "Suma los puntajes sin ponderar."
         },
         {
-          "text": "$\\tfrac{17}{8} = 2{,}125$",
+          "text": "$2{,}125$",
           "correct": true,
           "explanation": "$\\tfrac{12}{8} + \\tfrac48 + \\tfrac18$."
         }

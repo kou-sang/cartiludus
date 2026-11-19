@@ -24,7 +24,7 @@
           "explanation": "Es la acumulada del mínimo."
         },
         {
-          "text": "$\\prod_{k=1}^n P(X_k \\le t) = \\prod_{k=1}^n t^k$ para $0 \\le t \\le 1$",
+          "text": "$\\prod_{k=1}^n t^k$ para $0 \\le t \\le 1$",
           "correct": true,
           "explanation": "Intersección de eventos independientes."
         },
@@ -60,9 +60,9 @@
           "explanation": "Multiplica en lugar de sumar los exponentes."
         },
         {
-          "text": "$s = \\tfrac{n(n+1)}{2}$, así que $F_Y(t) = t^{s}$ en $[0,1]$",
+          "text": "$s = \\tfrac{n(n+1)}{2}$",
           "correct": true,
-          "explanation": "Fórmula de Gauss."
+          "explanation": "$F_Y(t) = t^{s}$ en $[0,1]$. Fórmula de Gauss."
         },
         {
           "text": "$s = n$",
@@ -86,7 +86,7 @@
           "explanation": "Corresponde a una uniforme."
         },
         {
-          "text": "$\\dfrac{s}{s+1} = \\dfrac{n(n+1)}{n(n+1) + 2}$",
+          "text": "$\\dfrac{s}{s+1}$",
           "correct": true,
           "explanation": "$s \\int_0^1 t^{s}\\,dt = \\tfrac{s}{s+1}$."
         },
@@ -117,9 +117,9 @@
           "explanation": "Las $X_i$ no tienen la misma distribución."
         },
         {
-          "text": "$\\prod_i E(X_i)$, por independencia",
+          "text": "$\\prod_i E(X_i)$",
           "correct": true,
-          "explanation": "La esperanza del producto de variables independientes es el producto de las esperanzas."
+          "explanation": "Independencia. La esperanza del producto de variables independientes es el producto de las esperanzas."
         },
         {
           "text": "$\\sum_i E(X_i)$",

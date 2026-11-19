@@ -23,9 +23,9 @@
           "explanation": "Esos valores no son equiprobables y además se pierde la posición de las casillas."
         },
         {
-          "text": "$\\Omega = \\{B,N\\}^9$ equiprobable: $2^9 = 512$ coloreos",
+          "text": "$\\Omega = \\{B,N\\}^9$ equiprobable",
           "correct": true,
-          "explanation": "Cada coloreo tiene probabilidad $(\\tfrac12)^9$."
+          "explanation": "$2^9 = 512$ coloreos. Cada coloreo tiene probabilidad $(\\tfrac12)^9$."
         },
         {
           "text": "$2 \\cdot 9$ coloreos",
@@ -85,9 +85,9 @@
           "explanation": "Supone independencia entre los $E_k$."
         },
         {
-          "text": "Inclusión–exclusión: $\\sum P(E_k) - \\sum_{k<l} P(E_k E_l) + \\sum P(E_k E_l E_j) - P(E_1E_2E_3E_4)$",
+          "text": "Inclusión–exclusión",
           "correct": true,
-          "explanation": "Corrige los coloreos contados más de una vez por pertenecer a varios $E_k$."
+          "explanation": "$\\sum P(E_k) - \\sum_{k<l} P(E_k E_l) + \\sum P(E_k E_l E_j) - P(E_1E_2E_3E_4)$. Corrige los coloreos contados más de una vez por pertenecer a varios $E_k$."
         },
         {
           "text": "$\\max_k P(E_k)$",
@@ -116,7 +116,7 @@
           "explanation": "Cuenta un solo subtablero."
         },
         {
-          "text": "$4 \\cdot \\tfrac{1}{16} = \\tfrac{128}{512}$",
+          "text": "$\\tfrac{128}{512}$",
           "correct": true,
           "explanation": "Cuatro subtableros, cada uno con 4 casillas negras fijas."
         },
@@ -143,7 +143,7 @@
       ],
       "cards": [
         {
-          "text": "$4 \\cdot \\tfrac1{64} + 2 \\cdot \\tfrac1{128} = \\tfrac{40}{512}$",
+          "text": "$\\tfrac{40}{512}$",
           "correct": true,
           "explanation": "Vecinos: $(\\tfrac12)^6$; diagonales: $(\\tfrac12)^7$."
         },
@@ -179,7 +179,7 @@
           "explanation": "Multiplica como si fueran independientes."
         },
         {
-          "text": "$4 \\cdot \\tfrac1{256} = \\tfrac{8}{512}$ y $\\tfrac{1}{512}$",
+          "text": "$\\tfrac{8}{512}$ y $\\tfrac{1}{512}$",
           "correct": true,
           "explanation": "Cada terna cubre 8 casillas; las cuatro cubren 9."
         },

@@ -78,7 +78,7 @@
       ],
       "cards": [
         {
-          "text": "$\\dfrac{\\binom63}{\\binom{10}3} = \\dfrac{20}{120} = \\dfrac16$",
+          "text": "$\\dfrac16$",
           "correct": true,
           "explanation": "Casos favorables: elegir las 3 entre las 6 buenas; casos posibles: elegir 3 entre 10."
         },
@@ -118,7 +118,7 @@
           "explanation": "Corresponde a extraer con reposición."
         },
         {
-          "text": "$\\dfrac{\\binom93}{\\binom{10}3} = \\dfrac{84}{120} = \\dfrac{7}{10}$",
+          "text": "$\\dfrac{7}{10}$",
           "correct": true,
           "explanation": "Elegir las 3 entre las 9 buenas. Equivalente: la defectuosa está entre las 3 elegidas con probabilidad $\\tfrac3{10}$, así que queda fuera con $\\tfrac7{10}$."
         },
@@ -154,7 +154,7 @@
           "explanation": "Multiplica las condicionales en lugar de promediarlas con los pesos."
         },
         {
-          "text": "$0{,}3 \\cdot \\tfrac16 + 0{,}7 \\cdot \\tfrac7{10} = 0{,}05 + 0{,}49 = 0{,}54$",
+          "text": "$0{,}54$",
           "correct": true,
           "explanation": "$P(A) = P(A \\mid L_4)P(L_4) + P(A\\mid L_1)P(L_1)$."
         }
