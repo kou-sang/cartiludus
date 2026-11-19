@@ -272,18 +272,28 @@ function ProblemPlayer({
   const limit = effectiveStepLimit(config, problem.steps[current]!.timeLimitSec);
   const score = game.steps.reduce((acc, s, i) => acc + (i <= current ? stepResult(s).score : 0), 0);
   const [deadline, setDeadline] = useState(() => (limit ? Date.now() + limit * 1000 : null));
+  /** Carta seleccionada (índice en `step.cards`), pendiente de confirmar. */
+  const [selected, setSelected] = useState<number | null>(null);
 
   // Nuevo paso → nuevo plazo y se vuelve a mirar el paso actual.
   useEffect(() => {
     setDeadline(limit ? Date.now() + limit * 1000 : null);
     setViewing(current);
+    setSelected(null);
   }, [current, limit]);
 
   const goTo = (i: number) => {
     if (i >= 0 && i <= current) setViewing(i);
   };
 
-  // Atajos: 1–4 elige carta, P pista, Enter siguiente, ← → recorre pasos.
+  const confirm = () => {
+    if (selected === null) return;
+    dispatch({ type: 'pick', card: selected });
+    setSelected(null);
+  };
+  const continueOn = () => (finished ? onAdvance() : dispatch({ type: 'next' }));
+
+  // Atajos: 1–4 selecciona carta, Enter confirma (o continúa), P pista, ← → recorre pasos.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
@@ -291,9 +301,14 @@ function ProblemPlayer({
       if (e.key === 'ArrowRight') return goTo(viewing + 1);
       if (reviewing) return;
       const n = Number(e.key);
-      if (n >= 1 && n <= order.length) dispatch({ type: 'pick', card: order[n - 1]! });
-      else if (e.key === 'p' || e.key === 'P') dispatch({ type: 'hint' });
-      else if (e.key === 'Enter' && curDone) finished ? onAdvance() : dispatch({ type: 'next' });
+      if (n >= 1 && n <= order.length) {
+        const idx = order[n - 1]!;
+        if (!curDone && !curSt.wrong.includes(idx)) setSelected(idx);
+      } else if (e.key === 'p' || e.key === 'P') dispatch({ type: 'hint' });
+      else if (e.key === 'Enter') {
+        if (!curDone && selected !== null) confirm();
+        else if (curDone) continueOn();
+      }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -367,14 +382,6 @@ function ProblemPlayer({
             Revisando el paso {viewing + 1}. El paso actual es el {current + 1}
             {deadline !== null && !curDone ? ' y su reloj sigue corriendo' : ''}.
           </span>
-          <span className="flex gap-3">
-            <button type="button" className="underline disabled:opacity-40" disabled={viewing === 0} onClick={() => goTo(viewing - 1)}>
-              ← Anterior
-            </button>
-            <button type="button" className="font-medium underline" onClick={() => setViewing(current)}>
-              Volver al paso actual
-            </button>
-          </span>
         </div>
       )}
 
@@ -399,9 +406,9 @@ function ProblemPlayer({
                 text={card.text}
                 explanation={card.explanation}
                 correct={card.correct}
-                state={state}
+                state={state === 'idle' && !reviewing && selected === cardIndex ? 'selected' : state}
                 disabled={reviewing || stepDone || wrongPicked}
-                onPick={() => dispatch({ type: 'pick', card: cardIndex })}
+                onPick={() => setSelected((sel) => (sel === cardIndex ? null : cardIndex))}
               />
             );
           })}
@@ -418,46 +425,47 @@ function ProblemPlayer({
           </ol>
         )}
 
-        {!reviewing && (
-          <div className="flex flex-wrap items-center gap-3">
-            {!stepDone && (
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] pt-4">
+          <div className="flex flex-wrap gap-2">
+            <Button variant="ghost" onClick={() => goTo(viewing - 1)} disabled={viewing === 0} title="Flecha izquierda">
+              Paso anterior
+            </Button>
+            {reviewing ? (
+              <Button variant="ghost" onClick={() => goTo(viewing + 1)} title="Flecha derecha">
+                Paso siguiente
+              </Button>
+            ) : (
               <Button
                 variant="ghost"
                 onClick={() => dispatch({ type: 'hint' })}
-                disabled={st.hintsShown >= step.hints.length}
+                disabled={stepDone || st.hintsShown >= step.hints.length}
                 title="Pedir una pista: el acierto pasa a valer 0 (tecla P)"
               >
-                {st.hintsShown >= step.hints.length
-                  ? 'Sin más pistas'
-                  : st.hintsShown === 0
-                    ? `Pedir pista (${step.hints.length})`
-                    : `Otra pista (${st.hintsShown}/${step.hints.length})`}
+                {st.hintsShown === 0 ? 'Pista' : `Pista ${Math.min(st.hintsShown + 1, step.hints.length)}/${step.hints.length}`}
               </Button>
             )}
-            {stepDone && !finished && (
-              <Button onClick={() => dispatch({ type: 'next' })} title="Enter">
-                Siguiente paso
-              </Button>
-            )}
-            {finished && (
-              <Button onClick={onAdvance} title="Enter">
-                {advanceLabel}
-              </Button>
-            )}
-            {current > 0 && (
-              <button type="button" className="text-sm underline" onClick={() => goTo(current - 1)} title="Flecha izquierda">
-                ← Revisar pasos anteriores
-              </button>
-            )}
-            <StepVerdict state={st} />
           </div>
-        )}
+          <div className="flex flex-wrap items-center gap-3">
+            {!reviewing && <StepVerdict state={st} />}
+            {reviewing ? (
+              <Button onClick={() => setViewing(current)}>Volver al paso actual</Button>
+            ) : !stepDone ? (
+              <Button onClick={confirm} disabled={selected === null} title="Enter">
+                Confirmar
+              </Button>
+            ) : (
+              <Button onClick={continueOn} title="Enter">
+                {finished ? advanceLabel : 'Siguiente paso'}
+              </Button>
+            )}
+          </div>
+        </div>
       </section>
     </div>
   );
 }
 
-type CardState = 'idle' | 'wrong' | 'right' | 'revealed' | 'revealed-right';
+type CardState = 'idle' | 'selected' | 'wrong' | 'right' | 'revealed' | 'revealed-right';
 
 function CardView(props: {
   n: number;
@@ -472,6 +480,7 @@ function CardView(props: {
   const { n, delay, text, explanation, correct, state, disabled, onPick } = props;
   const tone: Record<CardState, string> = {
     idle: 'lift border-[var(--line)] hover:border-[var(--ink)]',
+    selected: 'border-[var(--ink)] -translate-y-0.5 shadow-[0_6px_18px_-10px_var(--ink)] bg-[var(--paper-2)]',
     wrong: 'anim-shake border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_8%,transparent)]',
     right: 'anim-pop border-[var(--ok)] bg-[color-mix(in_srgb,var(--ok)_10%,transparent)]',
     'revealed-right': 'border-[var(--ok)] bg-[color-mix(in_srgb,var(--ok)_10%,transparent)]',
@@ -483,7 +492,7 @@ function CardView(props: {
         type="button"
         onClick={onPick}
         disabled={disabled}
-        aria-pressed={state === 'wrong' || state === 'right'}
+        aria-pressed={state === 'selected' || state === 'wrong' || state === 'right'}
         className={`flex h-full min-h-24 w-full flex-col gap-2 rounded-lg border-2 bg-[var(--paper)] p-3 text-left transition-colors duration-200 disabled:cursor-default ${tone[state]}`}
       >
         <span className="flex items-start gap-2">
@@ -492,7 +501,7 @@ function CardView(props: {
             <Tex>{text}</Tex>
           </span>
         </span>
-        {state !== 'idle' && (
+        {state !== 'idle' && state !== 'selected' && (
           <span className="anim-reveal border-t border-[var(--line)] pt-2 text-sm text-[var(--muted)]">
             <span className={`font-medium ${correct ? 'text-[var(--ok)]' : 'text-[var(--accent)]'}`}>{correct ? 'Correcta. ' : 'Incorrecta. '}</span>
             <Tex>{explanation}</Tex>

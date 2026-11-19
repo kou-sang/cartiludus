@@ -25,7 +25,7 @@
           "explanation": "Conjuntos sin orden: identifica resultados que en el experimento son distintos."
         },
         {
-          "text": "$\\Omega = \\{1,\\dots,6\\}^2 = \\{(i,j) : 1 \\le i, j \\le 6\\}$",
+          "text": "$\\Omega = \\{1,\\dots,6\\}^2$",
           "correct": true,
           "explanation": "Cada resultado es un par ordenado (primera tirada, segunda tirada): describe completamente el experimento."
         },
