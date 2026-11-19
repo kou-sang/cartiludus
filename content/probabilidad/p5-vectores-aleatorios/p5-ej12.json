@@ -1,0 +1,103 @@
+{
+  "id": "p5-ej12",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Grados de dos vértices",
+  "source": "Práctica 5 · Ejercicio 12",
+  "statement": "Sea $G_{n,p}$ el grafo aleatorio de $n$ vértices numerados del 1 al $n$. Para cada $1 \\le i \\le n$, sea $d_i$ la variable aleatoria que corresponde al grado del vértice $i$. Dados $i, j$ fijos, calcular la función de probabilidad conjunta de $(d_i, d_j)$ y decidir si son independientes usando las marginales calculadas en la práctica anterior.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "desc",
+      "kind": "setup",
+      "prompt": "¿Cómo se descomponen $d_i$ y $d_j$?",
+      "hints": [
+        "La arista $ij$ cuenta para los dos grados.",
+        "Las demás aristas de $i$ y de $j$ son distintas."
+      ],
+      "cards": [
+        {
+          "text": "$d_i = A + I$, $d_j = B + I$, con $I$ la arista $ij$",
+          "correct": true,
+          "explanation": "Las aristas son independientes y cada una pertenece a un solo grupo."
+        },
+        {
+          "text": "$d_i + d_j \\sim \\mathrm{Bi}(2n - 2, p)$",
+          "correct": false,
+          "explanation": "La arista $ij$ se contaría dos veces."
+        },
+        {
+          "text": "$d_i$ y $d_j$ no comparten aristas",
+          "correct": false,
+          "explanation": "La arista $ij$ es común."
+        },
+        {
+          "text": "$d_i = d_j$",
+          "correct": false,
+          "explanation": "Sólo comparten una arista."
+        }
+      ]
+    },
+    {
+      "id": "conj",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(d_i = a, d_j = b)$?",
+      "hints": [
+        "Condicionar en $I$."
+      ],
+      "cards": [
+        {
+          "text": "$p\\,P(A = a)P(B = b)$",
+          "correct": false,
+          "explanation": "Falta el caso sin la arista."
+        },
+        {
+          "text": "$p\\,P(A = a-1)P(B = b-1) + (1-p)\\,P(A = a)P(B = b)$",
+          "correct": true,
+          "explanation": "Probabilidad total sobre la arista común e independencia."
+        },
+        {
+          "text": "$P(A = a)P(B = b)$",
+          "correct": false,
+          "explanation": "Ignora la arista $ij$."
+        },
+        {
+          "text": "$P(d_i = a)P(d_j = b)$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        }
+      ]
+    },
+    {
+      "id": "ind",
+      "kind": "interpret",
+      "prompt": "¿Son independientes?",
+      "hints": [
+        "$\\mathrm{Cov}(d_i, d_j) = \\mathrm{Cov}(A + I, B + I)$."
+      ],
+      "cards": [
+        {
+          "text": "Sí: ambas son $\\mathrm{Bi}(n-1, p)$",
+          "correct": false,
+          "explanation": "Tener la misma marginal no implica independencia."
+        },
+        {
+          "text": "Sí: las aristas son independientes",
+          "correct": false,
+          "explanation": "Una arista es compartida."
+        },
+        {
+          "text": "No, porque tienen distinta distribución",
+          "correct": false,
+          "explanation": "Tienen la misma distribución."
+        },
+        {
+          "text": "No: $p(1-p) > 0$",
+          "correct": true,
+          "explanation": "La arista común las hace dependientes (para $0 < p < 1$)."
+        }
+      ]
+    }
+  ]
+}

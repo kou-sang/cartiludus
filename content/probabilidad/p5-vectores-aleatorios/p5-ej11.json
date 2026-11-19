@@ -1,0 +1,201 @@
+{
+  "id": "p5-ej11",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Normales en coordenadas polares",
+  "source": "Práctica 5 · Ejercicio 11",
+  "statement": "Sean $X$ e $Y$ variables aleatorias independientes con distribución $\\mathcal N(0, \\sigma^2)$. Sea $(\\rho, \\theta)$ la expresión de $(X, Y)$ en coordenadas polares, es decir $(X, Y) = (\\rho\\cos\\theta, \\rho\\sin\\theta)$, con $\\rho \\ge 0$ y $0 \\le \\theta < 2\\pi$.\n(a) Calcular la distribución de $\\rho^2$.\n(b) Probar que si $Z_1, \\dots, Z_n$ son variables aleatorias independientes con distribución normal estándar entonces $Z_1^2 + \\cdots + Z_n^2$ tiene distribución $\\Gamma(\\tfrac n2, \\tfrac12)$.\n(c) Probar que $\\rho$ y $\\theta$ son variables aleatorias independientes y hallar su distribución.\n(d) Hallar la probabilidad de que el par $(X, Y)$ caiga en el círculo de centro en el origen y radio $r$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "z2",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "Si $Z \\sim \\mathcal N(0,1)$, ¿qué distribución tiene $Z^2$?",
+      "hints": [
+        "$f_{Z^2}(u) = \\tfrac{1}{\\sqrt{2\\pi}}u^{-1/2}e^{-u/2}$.",
+        "Comparar con una densidad Gamma."
+      ],
+      "cards": [
+        {
+          "text": "$\\Gamma(\\tfrac12, \\tfrac12)$",
+          "correct": true,
+          "explanation": "Es la $\\chi^2(1)$."
+        },
+        {
+          "text": "$\\mathcal N(0, 1)$",
+          "correct": false,
+          "explanation": "Un cuadrado es no negativo."
+        },
+        {
+          "text": "$\\Gamma(1, 1)$",
+          "correct": false,
+          "explanation": "Revisar los parámetros."
+        },
+        {
+          "text": "$\\mathcal E(\\tfrac12)$",
+          "correct": false,
+          "explanation": "Esa es $\\Gamma(1, \\tfrac12)$."
+        }
+      ]
+    },
+    {
+      "id": "suma",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "¿Por qué $Z_1^2 + \\cdots + Z_n^2 \\sim \\Gamma(\\tfrac n2, \\tfrac12)$?",
+      "hints": [
+        "Sumas de Gamma independientes con el mismo segundo parámetro."
+      ],
+      "cards": [
+        {
+          "text": "Porque $E(Z_i^2) = 1$",
+          "correct": false,
+          "explanation": "La esperanza no determina la distribución."
+        },
+        {
+          "text": "Suma de $n$ variables $\\Gamma(\\tfrac12, \\tfrac12)$ independientes",
+          "correct": true,
+          "explanation": "Se suman los primeros parámetros. Por el ejercicio de sumas de Gamma."
+        },
+        {
+          "text": "Se suman ambos parámetros",
+          "correct": false,
+          "explanation": "El segundo parámetro queda $\\tfrac12$."
+        },
+        {
+          "text": "Por el teorema central del límite",
+          "correct": false,
+          "explanation": "Es una igualdad exacta para todo $n$."
+        }
+      ]
+    },
+    {
+      "id": "rho2",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "(a) Con $\\rho^2 = X^2 + Y^2 = \\sigma^2(Z_1^2 + Z_2^2)$, ¿qué distribución tiene $\\rho^2$?",
+      "hints": [
+        "$Z_1^2 + Z_2^2 \\sim \\Gamma(1, \\tfrac12) = \\mathcal E(\\tfrac12)$.",
+        "Multiplicar una exponencial por $\\sigma^2$ divide la tasa por $\\sigma^2$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal E(2\\sigma^2)$",
+          "correct": false,
+          "explanation": "Revisar el parámetro."
+        },
+        {
+          "text": "$\\Gamma(2, \\tfrac{1}{2\\sigma^2})$",
+          "correct": false,
+          "explanation": "Son dos cuadrados: el primer parámetro es 1."
+        },
+        {
+          "text": "$\\mathcal E(\\tfrac12)$",
+          "correct": false,
+          "explanation": "Falta el factor $\\sigma^2$."
+        },
+        {
+          "text": "$\\mathcal E\\left(\\tfrac{1}{2\\sigma^2}\\right)$",
+          "correct": true,
+          "explanation": "$\\Gamma(1, \\tfrac{1}{2\\sigma^2})$."
+        }
+      ]
+    },
+    {
+      "id": "jac",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "(c) La densidad de $(\\rho, \\theta)$ es $f_{XY}(\\rho\\cos\\theta, \\rho\\sin\\theta)\\cdot|J|$. ¿Cuánto vale?",
+      "hints": [
+        "El jacobiano de polares es $\\rho$.",
+        "$f_{XY}(x,y) = \\tfrac{1}{2\\pi\\sigma^2}e^{-(x^2+y^2)/(2\\sigma^2)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{2\\pi\\sigma^2}e^{-\\rho^2/(2\\sigma^2)}$",
+          "correct": false,
+          "explanation": "Falta el jacobiano."
+        },
+        {
+          "text": "$\\dfrac{\\theta\\rho}{2\\pi\\sigma^2}e^{-\\rho^2/(2\\sigma^2)}$",
+          "correct": false,
+          "explanation": "El jacobiano no depende de $\\theta$."
+        },
+        {
+          "text": "$\\dfrac{\\rho}{2\\pi\\sigma}e^{-\\rho/\\sigma}$",
+          "correct": false,
+          "explanation": "Revisar el exponente."
+        },
+        {
+          "text": "$\\dfrac{1}{2\\pi} \\cdot \\dfrac{\\rho}{\\sigma^2}e^{-\\rho^2/(2\\sigma^2)}$",
+          "correct": true,
+          "explanation": "Factoriza: no depende de $\\theta$."
+        }
+      ]
+    },
+    {
+      "id": "ind",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Qué se concluye?",
+      "hints": [
+        "Una densidad conjunta que es producto de una función de cada variable."
+      ],
+      "cards": [
+        {
+          "text": "Son independientes y $\\rho \\sim \\mathcal N(0, \\sigma^2)$",
+          "correct": false,
+          "explanation": "$\\rho \\ge 0$."
+        },
+        {
+          "text": "$\\theta$ es normal",
+          "correct": false,
+          "explanation": "Su densidad es constante."
+        },
+        {
+          "text": "No son independientes",
+          "correct": false,
+          "explanation": "La densidad factoriza."
+        },
+        {
+          "text": "Son independientes",
+          "correct": true,
+          "explanation": "$\\theta \\sim \\mathcal U[0, 2\\pi)$ y $\\rho$ con densidad $\\tfrac{\\rho}{\\sigma^2}e^{-\\rho^2/(2\\sigma^2)}$. La segunda es la distribución de Rayleigh."
+        }
+      ]
+    },
+    {
+      "id": "d",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "(d) ¿Cuánto vale $P(\\rho \\le r)$?",
+      "hints": [
+        "Usar $\\rho^2 \\sim \\mathcal E(\\tfrac{1}{2\\sigma^2})$: $P(\\rho^2 \\le r^2)$."
+      ],
+      "cards": [
+        {
+          "text": "$1 - e^{-r^2/(2\\sigma^2)}$",
+          "correct": true,
+          "explanation": "Acumulada de la exponencial en $r^2$."
+        },
+        {
+          "text": "$1 - e^{-r/(2\\sigma^2)}$",
+          "correct": false,
+          "explanation": "Hay que evaluar en $r^2$."
+        },
+        {
+          "text": "$\\dfrac{r^2}{2\\sigma^2}$",
+          "correct": false,
+          "explanation": "Es una aproximación para $r$ chico."
+        },
+        {
+          "text": "$e^{-r^2/(2\\sigma^2)}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de caer afuera."
+        }
+      ]
+    }
+  ]
+}

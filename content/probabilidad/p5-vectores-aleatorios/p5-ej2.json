@@ -1,0 +1,139 @@
+{
+  "id": "p5-ej2",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Pólya: extracciones consecutivas",
+  "source": "Práctica 5 · Ejercicio 2",
+  "statement": "Consideremos nuevamente el Esquema de Pólya: de un bolillero que contiene $B$ bolillas blancas, $B \\ge 1$, y $R$ rojas, $R \\ge 1$, se extraen sucesivamente y al azar $n$ bolillas, $n \\ge 2$, devolviendo cada bolilla extraída al bolillero junto con otras $c$ bolillas del mismo color, $c \\ge 1$. Sean $X_i = 1$ si la $i$-ésima bolilla extraída es roja y $X_i = 0$ si es blanca.\n(a) Hallar la función de probabilidad de $(X_i, X_{i+1})$ y la marginal de $X_i$. ¿Son las $X_i$ idénticamente distribuidas?\n(b) Hallar $P(X_{i+1} = 1 \\mid X_i = 1)$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "marg",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(X_i = 1)$?",
+      "hints": [
+        "Recordar el resultado de Pólya: la probabilidad de roja en cualquier extracción.",
+        "Se prueba condicionando en la primera extracción e inducción."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Sólo si $R = B$."
+        },
+        {
+          "text": "$\\dfrac{R}{R + B + (i-1)c}$",
+          "correct": false,
+          "explanation": "El total crece, pero también pueden crecer las rojas."
+        },
+        {
+          "text": "$\\dfrac{R + (i-1)c}{R + B + (i-1)c}$",
+          "correct": false,
+          "explanation": "Supone que todas las anteriores fueron rojas."
+        },
+        {
+          "text": "$\\dfrac{R}{R+B}$ para todo $i$",
+          "correct": true,
+          "explanation": "Por inducción, condicionando en la primera extracción. Las $X_i$ son idénticamente distribuidas: $\\mathrm{Be}(\\tfrac{R}{R+B})$."
+        }
+      ]
+    },
+    {
+      "id": "uu",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(X_i = 1, X_{i+1} = 1)$?",
+      "hints": [
+        "Para $i = 1$: primera roja y, dado eso, segunda roja.",
+        "Por el mismo argumento de simetría, vale para todo $i$."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\dfrac{R}{R+B}\\right)^2$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{R(R+c)}{(R+B)^2}$",
+          "correct": false,
+          "explanation": "El total también aumenta."
+        },
+        {
+          "text": "$\\dfrac{R^2}{(R+B)(R+B+c)}$",
+          "correct": false,
+          "explanation": "Tras sacar roja se agregan rojas."
+        },
+        {
+          "text": "$\\dfrac{R(R+c)}{(R+B)(R+B+c)}$",
+          "correct": true,
+          "explanation": "Tras una roja hay $R + c$ rojas entre $R + B + c$."
+        }
+      ]
+    },
+    {
+      "id": "resto",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto valen $P(1, 0)$, $P(0, 1)$ y $P(0, 0)$?",
+      "hints": [
+        "Roja y después blanca: $\\tfrac{R}{R+B}\\cdot\\tfrac{B}{R+B+c}$.",
+        "Blanca y después blanca: se agregan blancas."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{R(B+c)}{D}$, $\\dfrac{B(R+c)}{D}$ y $\\dfrac{B(B+c)}{D}$",
+          "correct": false,
+          "explanation": "Se agregan bolillas del color extraído, no del otro."
+        },
+        {
+          "text": "$\\dfrac{RB}{D}$, $\\dfrac{RB}{D}$ y $\\dfrac{B(B+c)}{D}$, con $(R+B)(R+B+c)$",
+          "correct": true,
+          "explanation": "Regla del producto en cada caso; las cuatro suman 1."
+        },
+        {
+          "text": "Todas $\\tfrac14$",
+          "correct": false,
+          "explanation": "Los colores no son equiprobables en general."
+        },
+        {
+          "text": "$\\dfrac{RB}{D}$, $\\dfrac{RB}{D}$ y $\\dfrac{B^2}{D}$",
+          "correct": false,
+          "explanation": "Tras una blanca hay $B + c$ blancas."
+        }
+      ]
+    },
+    {
+      "id": "cond",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(X_{i+1} = 1 \\mid X_i = 1)$?",
+      "hints": [
+        "Cociente entre la conjunta y la marginal."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{R}{R+B}$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{R(R+c)}{(R+B)(R+B+c)}$",
+          "correct": false,
+          "explanation": "Es la conjunta: falta dividir."
+        },
+        {
+          "text": "$\\dfrac{R + c}{R + B + c}$",
+          "correct": true,
+          "explanation": "$\\tfrac{R(R+c)}{(R+B)(R+B+c)} \\big/ \\tfrac{R}{R+B}$."
+        },
+        {
+          "text": "$\\dfrac{R + c}{R + B}$",
+          "correct": false,
+          "explanation": "El total también aumenta en $c$."
+        }
+      ]
+    }
+  ]
+}

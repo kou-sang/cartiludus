@@ -1,0 +1,136 @@
+{
+  "id": "p5-ej9",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Estadísticos de orden",
+  "source": "Práctica 5 · Ejercicio 9",
+  "statement": "Dadas $X_1, \\dots, X_n$ variables aleatorias independientes e idénticamente distribuidas con función de distribución acumulada $F$, se definen sus estadísticos de orden $X^{(1)}, \\dots, X^{(n)}$ como aquellas variables aleatorias que se obtienen ordenando las $X_i$ de manera creciente. En particular, $X^{(1)} = \\min X_i$ y $X^{(n)} = \\max X_i$.\n(a) Hallar la función de distribución acumulada de $X^{(1)}$ y de $X^{(n)}$ en términos de $F$.\n(b) Obtener la distribución de $X^{(1)}$ cuando $F$ viene dada por la densidad $f(x) = e^{-(x - \\theta)}\\mathbb 1_{(\\theta, +\\infty)}(x)$ para $\\theta \\in \\mathbb R$.\n(c) Obtener la distribución de $X^{(n)}$ cuando $F(x) = \\tfrac x\\theta \\mathbb 1_{(0, \\theta)}(x) + \\mathbb 1_{(\\theta, +\\infty)}(x)$ para $\\theta > 0$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "max",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $F_{X^{(n)}}(x)$?",
+      "hints": [
+        "$\\max \\le x$ si y sólo si todas son $\\le x$."
+      ],
+      "cards": [
+        {
+          "text": "$F(x)^n$",
+          "correct": true,
+          "explanation": "Independencia e idéntica distribución."
+        },
+        {
+          "text": "$1 - (1 - F(x))^n$",
+          "correct": false,
+          "explanation": "Es la acumulada del mínimo."
+        },
+        {
+          "text": "$nF(x)$",
+          "correct": false,
+          "explanation": "Puede superar 1."
+        },
+        {
+          "text": "$F(x)$",
+          "correct": false,
+          "explanation": "Ignora que son $n$ variables."
+        }
+      ]
+    },
+    {
+      "id": "min",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $F_{X^{(1)}}(x)$?",
+      "hints": [
+        "Conviene $P(\\min > x)$: todas son $> x$."
+      ],
+      "cards": [
+        {
+          "text": "$1 - F(x)^n$",
+          "correct": false,
+          "explanation": "Es $P(\\max > x)$."
+        },
+        {
+          "text": "$(1 - F(x))^n$",
+          "correct": false,
+          "explanation": "Es $P(\\min > x)$."
+        },
+        {
+          "text": "$1 - (1 - F(x))^n$",
+          "correct": true,
+          "explanation": "$P(\\min > x) = (1 - F(x))^n$ y se toma el complemento."
+        },
+        {
+          "text": "$F(x)^n$",
+          "correct": false,
+          "explanation": "Es la acumulada del máximo."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "distribution",
+      "item": "(b)",
+      "prompt": "(b) Con $1 - F(x) = e^{-(x-\\theta)}$ para $x > \\theta$, ¿qué distribución tiene $X^{(1)}$?",
+      "hints": [
+        "$P(X^{(1)} > x) = e^{-n(x - \\theta)}$."
+      ],
+      "cards": [
+        {
+          "text": "$X^{(1)} - \\theta \\sim \\mathcal E(\\tfrac1n)$",
+          "correct": false,
+          "explanation": "Revisar el parámetro."
+        },
+        {
+          "text": "$X^{(1)} - \\theta \\sim \\mathcal E(1)$",
+          "correct": false,
+          "explanation": "El mínimo de $n$ es más chico: la tasa crece."
+        },
+        {
+          "text": "$X^{(1)} \\sim \\mathcal E(n)$",
+          "correct": false,
+          "explanation": "Falta el desplazamiento."
+        },
+        {
+          "text": "$X^{(1)} - \\theta \\sim \\mathcal E(n)$",
+          "correct": true,
+          "explanation": "Densidad $n e^{-n(x - \\theta)}$ en $(\\theta, \\infty)$. Exponencial desplazada con tasa $n$."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "distribution",
+      "item": "(c)",
+      "prompt": "(c) Para $F$ uniforme en $(0, \\theta)$, ¿qué distribución tiene $X^{(n)}$?",
+      "hints": [
+        "$F_{X^{(n)}}(x) = (\\tfrac x\\theta)^n$ en $(0, \\theta)$."
+      ],
+      "cards": [
+        {
+          "text": "Densidad $\\dfrac{x^{n-1}}{\\theta^n}$",
+          "correct": false,
+          "explanation": "Falta el factor $n$."
+        },
+        {
+          "text": "Densidad $\\dfrac{n x^{n-1}}{\\theta^n}$ en $(0, \\theta)$",
+          "correct": true,
+          "explanation": "Derivada de $(\\tfrac x\\theta)^n$. Equivale a $\\theta$ por una $\\beta(n, 1)$."
+        },
+        {
+          "text": "Densidad $\\dfrac{n(\\theta - x)^{n-1}}{\\theta^n}$",
+          "correct": false,
+          "explanation": "Esa es la del mínimo."
+        },
+        {
+          "text": "Uniforme en $(0, \\theta)$",
+          "correct": false,
+          "explanation": "El máximo se concentra cerca de $\\theta$."
+        }
+      ]
+    }
+  ]
+}

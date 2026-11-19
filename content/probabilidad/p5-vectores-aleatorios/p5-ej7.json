@@ -1,0 +1,169 @@
+{
+  "id": "p5-ej7",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Sumas de variables independientes",
+  "source": "Práctica 5 · Ejercicio 7",
+  "statement": "Sean $X$ e $Y$ variables aleatorias independientes. Probar las siguientes afirmaciones:\n(a) $X \\sim \\mathrm{Bi}(n, p)$, $Y \\sim \\mathrm{Bi}(m, p) \\Rightarrow X + Y \\sim \\mathrm{Bi}(n + m, p)$.\n(b) $X \\sim \\mathcal P(\\lambda)$, $Y \\sim \\mathcal P(\\mu) \\Rightarrow X + Y \\sim \\mathcal P(\\lambda + \\mu)$.\n(c) $X \\sim \\mathcal G(p)$, $Y \\sim \\mathcal G(p) \\Rightarrow X + Y \\sim \\mathcal{BN}(2, p)$.\n(d) $X \\sim \\Gamma(p, \\lambda)$, $Y \\sim \\Gamma(q, \\lambda) \\Rightarrow X + Y \\sim \\Gamma(p + q, \\lambda)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "conv",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cómo se escribe $P(X + Y = k)$ para variables discretas independientes?",
+      "hints": [
+        "Partir según el valor de $X$."
+      ],
+      "cards": [
+        {
+          "text": "$\\sum_j P(X = j)\\,P(Y = j)$",
+          "correct": false,
+          "explanation": "Es $P(X = Y)$."
+        },
+        {
+          "text": "$P(X = k)\\,P(Y = k)$",
+          "correct": false,
+          "explanation": "Pide $X = Y = k$."
+        },
+        {
+          "text": "$P(X = k) + P(Y = k)$",
+          "correct": false,
+          "explanation": "No describe la suma."
+        },
+        {
+          "text": "$\\sum_j P(X = j)\\,P(Y = k - j)$",
+          "correct": true,
+          "explanation": "Probabilidad total e independencia."
+        }
+      ]
+    },
+    {
+      "id": "bin",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "En (a), ¿qué identidad cierra la cuenta?",
+      "hints": [
+        "Aparece $\\sum_j \\binom nj \\binom{m}{k-j}$.",
+        "Elegir $k$ objetos de $n + m$ separando los de cada grupo."
+      ],
+      "cards": [
+        {
+          "text": "Vandermonde",
+          "correct": true,
+          "explanation": "$\\sum_j \\binom nj \\binom m{k-j} = \\binom{n+m}k$. Los factores $p^k(1-p)^{n+m-k}$ son comunes. Intuición: son $n + m$ ensayos independientes."
+        },
+        {
+          "text": "El binomio de Newton",
+          "correct": false,
+          "explanation": "Es la identidad de la Poisson."
+        },
+        {
+          "text": "$\\binom nk\\binom mk = \\binom{n+m}k$",
+          "correct": false,
+          "explanation": "Falso en general."
+        },
+        {
+          "text": "$\\sum_j \\binom nj = 2^n$",
+          "correct": false,
+          "explanation": "No interviene la suma completa."
+        }
+      ]
+    },
+    {
+      "id": "poi",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "En (b), con $\\sum_{j=0}^k \\tfrac{e^{-\\lambda}\\lambda^j}{j!}\\tfrac{e^{-\\mu}\\mu^{k-j}}{(k-j)!}$, ¿qué se usa?",
+      "hints": [
+        "Multiplicar y dividir por $k!$."
+      ],
+      "cards": [
+        {
+          "text": "El binomio de Newton",
+          "correct": true,
+          "explanation": "$\\sum_j \\binom kj \\lambda^j\\mu^{k-j} = (\\lambda + \\mu)^k$. Queda $\\tfrac{e^{-(\\lambda+\\mu)}(\\lambda+\\mu)^k}{k!}$."
+        },
+        {
+          "text": "$e^{\\lambda}e^{\\mu} = e^{\\lambda\\mu}$",
+          "correct": false,
+          "explanation": "Las exponenciales suman los exponentes."
+        },
+        {
+          "text": "Vandermonde",
+          "correct": false,
+          "explanation": "No hay dos combinatorios multiplicados."
+        },
+        {
+          "text": "La serie geométrica",
+          "correct": false,
+          "explanation": "No aparece una razón constante."
+        }
+      ]
+    },
+    {
+      "id": "geo",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "En (c), ¿cuánto vale $\\sum_{j=1}^{k-1} (1-p)^{j-1}p\\,(1-p)^{k-j-1}p$?",
+      "hints": [
+        "Los factores no dependen de $j$ salvo en el exponente, que siempre suma $k - 2$."
+      ],
+      "cards": [
+        {
+          "text": "$(1-p)^{k-2}p^2$",
+          "correct": false,
+          "explanation": "Falta contar los $k - 1$ términos."
+        },
+        {
+          "text": "$k(1-p)^{k-1}p$",
+          "correct": false,
+          "explanation": "Revisar exponentes y cantidad de términos."
+        },
+        {
+          "text": "$(k-1)(1-p)^{k-2}p^2$",
+          "correct": true,
+          "explanation": "Hay $k - 1$ términos iguales: es $P(\\text{segundo éxito en el ensayo } k)$."
+        },
+        {
+          "text": "$(1-p)^{k-1}p$",
+          "correct": false,
+          "explanation": "Es una geométrica."
+        }
+      ]
+    },
+    {
+      "id": "gam",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "En (d), la convolución lleva a $\\int_0^z x^{p-1}(z - x)^{q-1}dx$. ¿Cuánto vale?",
+      "hints": [
+        "Sustituir $x = zt$.",
+        "Queda $z^{p+q-1}\\int_0^1 t^{p-1}(1-t)^{q-1}dt$."
+      ],
+      "cards": [
+        {
+          "text": "$z^{p+q}$",
+          "correct": false,
+          "explanation": "Revisar el exponente y la constante."
+        },
+        {
+          "text": "$\\tfrac{z^{p+q-1}}{p+q}$",
+          "correct": false,
+          "explanation": "La integral es una función beta."
+        },
+        {
+          "text": "$z^{p+q-1}\\,B(p, q)$",
+          "correct": true,
+          "explanation": "Con las constantes queda la densidad $\\Gamma(p + q, \\lambda)$."
+        },
+        {
+          "text": "$\\Gamma(p)\\Gamma(q)$",
+          "correct": false,
+          "explanation": "Falta la dependencia en $z$."
+        }
+      ]
+    }
+  ]
+}

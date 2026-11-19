@@ -1,0 +1,325 @@
+{
+  "id": "p5-ej3",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Clientes de un banco",
+  "source": "Práctica 5 · Ejercicio 3",
+  "statement": "(a) El número de personas que ingresa por día a un cierto banco es una variable aleatoria de Poisson de parámetro $\\lambda$. Cada persona que entra tiene probabilidad $p$ de ser hombre y $1 - p$ de ser mujer. Mostrar que el número de hombres y de mujeres que ingresan por día a dicho banco son variables aleatorias independientes con distribución Poisson de parámetros $\\lambda p$ y $\\lambda(1-p)$ respectivamente.\n(b) Recíprocamente, supongamos que el número de hombres y de mujeres que ingresan al banco por día son variables aleatorias de Poisson independientes. ¿Cuál es la distribución del número total de personas que ingresan al banco por día?\n(c) El número de hombres y de mujeres que ingresan por día a un cierto banco son variables aleatorias independientes con distribución Poisson de parámetros 2 y 2,5 respectivamente. Sabiendo que en un determinado día ingresaron únicamente dos personas al banco, calcular la probabilidad de que hayan sido un hombre y una mujer.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "a-cond",
+      "kind": "setup",
+      "prompt": "¿Cómo se calcula $P(H = h, M = m)$?",
+      "hints": [
+        "$\\{H = h, M = m\\} = \\{N = h+m, H = h\\}$.",
+        "Condicionar en la cantidad total de personas."
+      ],
+      "cards": [
+        {
+          "text": "$\\binom{h+m}{h} p^h (1-p)^m$",
+          "correct": false,
+          "explanation": "Falta la probabilidad de que entren $h+m$ personas."
+        },
+        {
+          "text": "$P(N = h+m)\\binom{h+m}{h} p^h (1-p)^m$",
+          "correct": true,
+          "explanation": "Dado $N = n$, $H \\sim \\mathrm{Bi}(n, p)$."
+        },
+        {
+          "text": "$P(N = h)\\,P(N = m)$",
+          "correct": false,
+          "explanation": "Supone lo que se quiere probar y con parámetros incorrectos."
+        },
+        {
+          "text": "$P(N = h+m)\\,p^h(1-p)^m$",
+          "correct": false,
+          "explanation": "Falta elegir quiénes son hombres."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-fact",
+      "kind": "compute",
+      "prompt": "Simplificar:",
+      "hints": [
+        "$e^{-\\lambda} = e^{-\\lambda p} e^{-\\lambda(1-p)}$ y $\\lambda^{h+m} = \\lambda^h\\lambda^m$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{e^{-\\lambda}(\\lambda p)^h (\\lambda(1-p))^m}{(h+m)!}$",
+          "correct": false,
+          "explanation": "No cancela $(h+m)!$ con el combinatorio."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda p}(\\lambda p)^h}{h!} \\cdot \\dfrac{e^{-\\lambda(1-p)}(\\lambda(1-p))^m}{m!}$",
+          "correct": true,
+          "explanation": "Se cancela $(h+m)!$ y se reagrupan factores."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda}\\lambda^h}{h!}\\cdot\\dfrac{e^{-\\lambda}\\lambda^m}{m!}$",
+          "correct": false,
+          "explanation": "Parámetros incorrectos."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda p}(\\lambda p)^h}{h!}$",
+          "correct": false,
+          "explanation": "Se perdió el factor de $M$."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-concl",
+      "kind": "property",
+      "prompt": "¿Qué se concluye?",
+      "hints": [
+        "Una conjunta que factoriza."
+      ],
+      "cards": [
+        {
+          "text": "La conjunta es producto de una función de $h$ y una de $m$",
+          "correct": true,
+          "explanation": "$H \\perp M$, $H \\sim \\mathcal P(\\lambda p)$, $M \\sim \\mathcal P(\\lambda(1-p))$. Factorización de la función de probabilidad conjunta en las marginales."
+        },
+        {
+          "text": "$H \\sim \\mathrm{Bi}(N, p)$ marginalmente",
+          "correct": false,
+          "explanation": "Eso es sólo la condicional dado $N$."
+        },
+        {
+          "text": "$H \\sim \\mathcal{P}(\\lambda)$",
+          "correct": false,
+          "explanation": "El parámetro es $\\lambda p$."
+        },
+        {
+          "text": "$H$ y $M$ son dependientes porque $H + M = N$",
+          "correct": false,
+          "explanation": "$N$ es aleatoria; la factorización prueba independencia."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "b-conv",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $P(H+M = n)$?",
+      "hints": [
+        "Convolución discreta.",
+        "Partir según cuántos hombres hubo."
+      ],
+      "cards": [
+        {
+          "text": "$\\sum_{k=0}^\\infty P(H = k)P(M = k)$",
+          "correct": false,
+          "explanation": "Es $P(H = M)$."
+        },
+        {
+          "text": "$P(H = n)P(M = n)$",
+          "correct": false,
+          "explanation": "Pide $H = M = n$."
+        },
+        {
+          "text": "$\\sum_{k=0}^n P(H = k)P(M = n-k)$",
+          "correct": true,
+          "explanation": "Partición según el valor de $H$ e independencia."
+        },
+        {
+          "text": "$P(H = n) + P(M = n)$",
+          "correct": false,
+          "explanation": "No es la probabilidad de la suma."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-bin",
+      "kind": "compute",
+      "prompt": "Evaluar la suma:",
+      "hints": [
+        "Multiplicar y dividir por $n!$ y usar el binomio de Newton."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{n!}$",
+          "correct": true,
+          "explanation": "Binomio de Newton."
+        },
+        {
+          "text": "$\\dfrac{e^{-\\lambda_1\\lambda_2}(\\lambda_1\\lambda_2)^n}{n!}$",
+          "correct": false,
+          "explanation": "Producto en lugar de suma de parámetros."
+        },
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1^n+\\lambda_2^n)}{n!}$",
+          "correct": false,
+          "explanation": "$(a+b)^n \\neq a^n + b^n$."
+        },
+        {
+          "text": "$\\dfrac{e^{-(\\lambda_1+\\lambda_2)}(\\lambda_1+\\lambda_2)^n}{2^n\\,n!}$",
+          "correct": false,
+          "explanation": "Factor espurio."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-res",
+      "kind": "distribution",
+      "prompt": "Distribución:",
+      "hints": [
+        "Reconocer la función de probabilidad."
+      ],
+      "cards": [
+        {
+          "text": "$H + M \\sim \\mathrm{Bi}(2, \\cdot)$",
+          "correct": false,
+          "explanation": "No hay tope."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}\\left(\\tfrac{\\lambda_1+\\lambda_2}{2}\\right)$",
+          "correct": false,
+          "explanation": "Promedia en lugar de sumar."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(\\lambda_1\\lambda_2)$",
+          "correct": false,
+          "explanation": "Los parámetros se suman."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(\\lambda_1 + \\lambda_2)$",
+          "correct": true,
+          "explanation": "Suma de Poisson independientes."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "c-suma",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene el total $H + M$?",
+      "hints": [
+        "Suma de Poisson independientes (convolución)."
+      ],
+      "cards": [
+        {
+          "text": "$H + M \\sim \\mathcal{P}(4{,}5)$",
+          "correct": true,
+          "explanation": "La suma de Poisson independientes es Poisson con la suma de los parámetros."
+        },
+        {
+          "text": "$H + M \\sim \\mathrm{Bi}(2, \\tfrac49)$",
+          "correct": false,
+          "explanation": "Esa es la distribución de $H$ dado el total, no la del total."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(2{,}25)$",
+          "correct": false,
+          "explanation": "Promedia en lugar de sumar."
+        },
+        {
+          "text": "$H + M \\sim \\mathcal{P}(5)$",
+          "correct": false,
+          "explanation": "Los parámetros se suman: $2 + 2{,}5$."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-cond",
+      "kind": "setup",
+      "prompt": "Plantear:",
+      "hints": [
+        "$\\{H = 1, M = 1\\} \\subseteq \\{H + M = 2\\}$.",
+        "Definición de condicional; los eventos son independientes."
+      ],
+      "cards": [
+        {
+          "text": "$P(H=1)\\,P(M=1)$",
+          "correct": false,
+          "explanation": "Falta condicionar."
+        },
+        {
+          "text": "$\\dfrac{P(H=1)}{P(H+M=2)}$",
+          "correct": false,
+          "explanation": "Falta $M = 1$."
+        },
+        {
+          "text": "$\\dfrac{P(H=1) + P(M=1)}{P(H+M=2)}$",
+          "correct": false,
+          "explanation": "Suma en lugar de intersecar."
+        },
+        {
+          "text": "$\\dfrac{P(H=1)\\,P(M=1)}{P(H+M = 2)}$",
+          "correct": true,
+          "explanation": "Definición de condicional e independencia de $H$ y $M$."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-simp",
+      "kind": "distribution",
+      "prompt": "Al simplificar, ¿qué distribución tiene $H$ dado $H + M = 2$?",
+      "hints": [
+        "Cancelar $e^{-4{,}5}$ y los factoriales."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathrm{Bi}(2, \\tfrac49)$",
+          "correct": true,
+          "explanation": "Cada persona es hombre con probabilidad $\\tfrac{\\lambda_H}{\\lambda_H + \\lambda_M}$."
+        },
+        {
+          "text": "$\\mathrm{Bi}(2, \\tfrac12)$",
+          "correct": false,
+          "explanation": "Las tasas no son iguales."
+        },
+        {
+          "text": "Uniforme en $\\{0, 1, 2\\}$",
+          "correct": false,
+          "explanation": "No hay razón para equiprobabilidad."
+        },
+        {
+          "text": "$\\mathcal P(2)$",
+          "correct": false,
+          "explanation": "Ignora la condición."
+        }
+      ],
+      "item": "(c)"
+    },
+    {
+      "id": "c-res",
+      "kind": "compute",
+      "prompt": "Resultado:",
+      "hints": [
+        "$\\binom21 \\tfrac49 \\cdot \\tfrac59$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{40}{81}$",
+          "correct": true,
+          "explanation": "Binomial en $k = 1$."
+        },
+        {
+          "text": "$\\tfrac{20}{81}$",
+          "correct": false,
+          "explanation": "Falta el factor 2."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "Uniforme en los tres casos."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Supone $p = \\tfrac12$."
+        }
+      ],
+      "item": "(c)"
+    }
+  ]
+}

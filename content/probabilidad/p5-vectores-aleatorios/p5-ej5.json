@@ -1,0 +1,200 @@
+{
+  "id": "p5-ej5",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Promedios de uniformes",
+  "source": "Práctica 5 · Ejercicio 5",
+  "statement": "(a) Sean $X_1$ y $X_2$ variables aleatorias independientes con distribución $\\mathcal U[-1, 1]$. Sea $U = \\tfrac{X_1 + X_2}{2}$. Verificar que $f_U(u) = (u + 1)\\mathbb 1_{(-1, 0)}(u) + (1 - u)\\mathbb 1_{(0,1)}(u)$.\n(b) Sea $Z = \\tfrac{X_1 + X_2 + X_3}{3}$. Usando el ítem anterior verificar que $f_Z(z) = \\tfrac{27}{16}(1 - |z|)^2$ si $\\tfrac13 < |z| < 1$; $\\tfrac98 - \\tfrac{27}{8}z^2$ si $|z| \\le \\tfrac13$; $0$ si $|z| \\ge 1$.\n(c) Verificar que $f_U$ es continua y que $f_Z$ es derivable y hacer un gráfico.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "half",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "¿Qué distribución tiene $\\tfrac{X_i}{2}$?",
+      "hints": [
+        "Escalar una uniforme por $\\tfrac12$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal U[-\\tfrac12, \\tfrac12]$, con densidad 1",
+          "correct": true,
+          "explanation": "El intervalo se achica a la mitad y la densidad se duplica."
+        },
+        {
+          "text": "$\\mathcal U[-\\tfrac12, \\tfrac12]$ con densidad $\\tfrac12$",
+          "correct": false,
+          "explanation": "No integraría 1."
+        },
+        {
+          "text": "$\\mathcal U[-1, 1]$ con densidad $\\tfrac14$",
+          "correct": false,
+          "explanation": "El intervalo también cambia."
+        },
+        {
+          "text": "$\\mathcal N(0, \\tfrac14)$",
+          "correct": false,
+          "explanation": "Escalar una uniforme da una uniforme."
+        }
+      ]
+    },
+    {
+      "id": "conv",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Cómo se calcula $f_U(u)$?",
+      "hints": [
+        "Suma de dos independientes: convolución.",
+        "$f_U(u) = \\int f_{X_1/2}(t)\\,f_{X_2/2}(u - t)\\,dt$."
+      ],
+      "cards": [
+        {
+          "text": "Largo de $[-\\tfrac12, \\tfrac12] \\cap [u - \\tfrac12, u + \\tfrac12]$",
+          "correct": true,
+          "explanation": "Ambas densidades valen 1 en su soporte, así que la integral mide el solapamiento."
+        },
+        {
+          "text": "$\\int f_{X_1/2}(t)\\,dt$",
+          "correct": false,
+          "explanation": "No depende de $u$."
+        },
+        {
+          "text": "$f_{X_1/2}(u)\\,f_{X_2/2}(u)$",
+          "correct": false,
+          "explanation": "La densidad de una suma no es el producto de densidades."
+        },
+        {
+          "text": "$f_{X_1/2}(u) + f_{X_2/2}(u)$",
+          "correct": false,
+          "explanation": "La suma de densidades no integra 1."
+        }
+      ]
+    },
+    {
+      "id": "tri",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto mide ese solapamiento para $-1 < u < 1$?",
+      "hints": [
+        "Dos intervalos de largo 1 desplazados en $|u|$."
+      ],
+      "cards": [
+        {
+          "text": "$|u|$",
+          "correct": false,
+          "explanation": "Es el desplazamiento, no el solapamiento."
+        },
+        {
+          "text": "$1 - |u|$",
+          "correct": true,
+          "explanation": "Es $u + 1$ si $u < 0$ y $1 - u$ si $u > 0$: la densidad triangular pedida."
+        },
+        {
+          "text": "$1$",
+          "correct": false,
+          "explanation": "Los intervalos no coinciden salvo en $u = 0$."
+        },
+        {
+          "text": "$1 - u^2$",
+          "correct": false,
+          "explanation": "El solapamiento cambia linealmente."
+        }
+      ]
+    },
+    {
+      "id": "zdesc",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Para (b), ¿cómo se escribe $Z$ usando $U$?",
+      "hints": [
+        "$X_1 + X_2 = 2U$."
+      ],
+      "cards": [
+        {
+          "text": "$Z = \\tfrac{U + X_3}{2}$",
+          "correct": false,
+          "explanation": "Los pesos de las tres variables deben ser iguales."
+        },
+        {
+          "text": "$Z = \\tfrac13 U + \\tfrac23 X_3$",
+          "correct": false,
+          "explanation": "Los coeficientes están intercambiados."
+        },
+        {
+          "text": "$Z = \\tfrac23 U + \\tfrac13 X_3$",
+          "correct": true,
+          "explanation": "Basta convolucionar dos densidades conocidas."
+        },
+        {
+          "text": "$Z = U + X_3$",
+          "correct": false,
+          "explanation": "Revisar los coeficientes."
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Para verificar la fórmula dada, ¿cuánto valen $f_Z(0)$ y los dos tramos en $z = \\tfrac13$?",
+      "hints": [
+        "Evaluar $\\tfrac98 - \\tfrac{27}{8}z^2$ y $\\tfrac{27}{16}(1 - z)^2$."
+      ],
+      "cards": [
+        {
+          "text": "$f_Z(0) = \\tfrac98$; en $\\tfrac13$ valen $\\tfrac98$ y $\\tfrac34$",
+          "correct": false,
+          "explanation": "El tramo central en $\\tfrac13$ es menor que en 0."
+        },
+        {
+          "text": "$f_Z(0) = \\tfrac98$; ambos tramos valen $\\tfrac34$ en $\\tfrac13$",
+          "correct": true,
+          "explanation": "$\\tfrac98 - \\tfrac38 = \\tfrac{27}{16}\\cdot\\tfrac49$: los tramos empalman."
+        },
+        {
+          "text": "$f_Z(0) = \\tfrac{27}{16}$",
+          "correct": false,
+          "explanation": "Ese es el coeficiente del otro tramo."
+        },
+        {
+          "text": "$f_Z(0) = 1$; los tramos no empalman",
+          "correct": false,
+          "explanation": "Revisar las cuentas."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Qué pasa con la suavidad al promediar más uniformes?",
+      "hints": [
+        "$f_U$ tiene un pico en 0; ¿es derivable allí?",
+        "Derivadas de $f_Z$ en $\\tfrac13$: $-\\tfrac{27}{4}z$ y $-\\tfrac{27}{8}(1 - z)$."
+      ],
+      "cards": [
+        {
+          "text": "$f_Z$ no es continua en $\\tfrac13$",
+          "correct": false,
+          "explanation": "Los tramos empalman."
+        },
+        {
+          "text": "Ninguna es continua",
+          "correct": false,
+          "explanation": "Ambas lo son."
+        },
+        {
+          "text": "Ambas son derivables",
+          "correct": false,
+          "explanation": "$f_U$ tiene un pico en 0."
+        },
+        {
+          "text": "Sólo $f_Z$ es derivable",
+          "correct": true,
+          "explanation": "En $\\tfrac13$ ambas derivadas valen $-\\tfrac94$. Promediar suaviza la densidad."
+        }
+      ]
+    }
+  ]
+}

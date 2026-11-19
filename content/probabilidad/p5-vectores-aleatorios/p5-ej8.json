@@ -1,0 +1,169 @@
+{
+  "id": "p5-ej8",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p5-vectores-aleatorios",
+  "title": "Salto en largo",
+  "source": "Práctica 5 · Ejercicio 8",
+  "statement": "Tres integrantes de un equipo de salto en largo participan en un campeonato. Se asigna al equipo la mejor de las tres distancias obtenidas. La distancia (en metros) que salta el atleta A tiene distribución uniforme en el intervalo $[7, 9]$ mientras que la distancia del salto del atleta B tiene densidad $f(x) = \\tfrac{9-x}{2}\\mathbb 1_{[7,9]}(x)$. La distancia que salta el atleta C tiene densidad $f(x) = \\tfrac{x-7}{2}\\mathbb 1_{[7,9]}(x)$.\n(a) Hallar la distribución de la distancia asignada al equipo. Dar tanto la función de distribución como la función de densidad.\n(b) Encontrar la probabilidad de que la distancia sea mayor que 8,2.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "a-max",
+      "kind": "property",
+      "prompt": "¿Cómo se escribe $F_M(x)$?",
+      "hints": [
+        "$\\{\\max \\le x\\} = \\bigcap \\{\\cdot \\le x\\}$.",
+        "El máximo es menor que $x$ si y sólo si lo son los tres."
+      ],
+      "cards": [
+        {
+          "text": "$F_M(x) = \\tfrac13(F_A + F_B + F_C)$",
+          "correct": false,
+          "explanation": "Corresponde a una mezcla."
+        },
+        {
+          "text": "$F_M(x) = \\max(F_A, F_B, F_C)$",
+          "correct": false,
+          "explanation": "No es una identidad válida."
+        },
+        {
+          "text": "$F_M(x) = 1 - (1-F_A)(1-F_B)(1-F_C)$",
+          "correct": false,
+          "explanation": "Es la acumulada del mínimo."
+        },
+        {
+          "text": "$F_M(x) = F_A(x)F_B(x)F_C(x)$",
+          "correct": true,
+          "explanation": "Intersección de eventos independientes."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-acum",
+      "kind": "compute",
+      "prompt": "Acumuladas en $[7, 9]$:",
+      "hints": [
+        "Integrar cada densidad desde 7."
+      ],
+      "cards": [
+        {
+          "text": "$F_B = \\tfrac{(9-x)^2}4$",
+          "correct": false,
+          "explanation": "Es $P(B > x)$."
+        },
+        {
+          "text": "$F_A = \\tfrac{x}{9}$",
+          "correct": false,
+          "explanation": "Soporte incorrecto."
+        },
+        {
+          "text": "$F_C = \\tfrac{x-7}{2}$",
+          "correct": false,
+          "explanation": "Es la acumulada de $A$."
+        },
+        {
+          "text": "$F_A = \\tfrac{x-7}2$, $F_B = 1 - \\tfrac{(9-x)^2}{4}$, $F_C = \\tfrac{(x-7)^2}{4}$",
+          "correct": true,
+          "explanation": "Integrales directas de las densidades."
+        }
+      ],
+      "item": "(a)"
+    },
+    {
+      "id": "a-res",
+      "kind": "compute",
+      "prompt": "Resultado en $[7, 9]$:",
+      "hints": [
+        "$1 - \\tfrac{(9-x)^2}{4} = \\tfrac{(x-7)(11-x)}{4}$."
+      ],
+      "cards": [
+        {
+          "text": "$F_M(x) = \\dfrac{(x-7)^4(11-x)}{16}$",
+          "correct": false,
+          "explanation": "Da $F_M(9) = 2$."
+        },
+        {
+          "text": "$F_M(x) = \\dfrac{(x-7)^4(11-x)}{32}$, $f_M(x) = \\dfrac{(x-7)^3(51 - 5x)}{32}$",
+          "correct": true,
+          "explanation": "Producto simplificado; $F_M(9) = 1$ y $f_M = F_M^{\\prime}$."
+        },
+        {
+          "text": "$F_M(x) = \\dfrac{(x-7)^4(11-x)}{32}$, $f_M(x) = \\dfrac{4(x-7)^3(11-x)}{32}$",
+          "correct": false,
+          "explanation": "Derivada incompleta: falta el término de $(11-x)$."
+        },
+        {
+          "text": "$F_M(x) = \\dfrac{(x-7)^3}{8}$",
+          "correct": false,
+          "explanation": "Ignora la forma de $F_B$."
+        }
+      ],
+      "timeLimitSec": 240,
+      "item": "(a)"
+    },
+    {
+      "id": "b-eval",
+      "kind": "compute",
+      "prompt": "Valores en $x = 8{,}2$:",
+      "hints": [
+        "$x - 7 = 1{,}2$ y $9 - x = 0{,}8$."
+      ],
+      "cards": [
+        {
+          "text": "$F_A = 0{,}6$, $F_B = 0{,}16$, $F_C = 0{,}36$",
+          "correct": false,
+          "explanation": "$0{,}16$ es $P(B > 8{,}2)$."
+        },
+        {
+          "text": "$F_A = 0{,}6$, $F_B = 0{,}84$, $F_C = 0{,}6$",
+          "correct": false,
+          "explanation": "Usa $F_A$ para $C$."
+        },
+        {
+          "text": "$F_A = 0{,}6$, $F_B = 0{,}84$, $F_C = 0{,}36$",
+          "correct": true,
+          "explanation": "$\\tfrac{1{,}2}{2}$, $1 - \\tfrac{0{,}64}{4}$, $\\tfrac{1{,}44}{4}$."
+        },
+        {
+          "text": "$F_A = 0{,}4$, $F_B = 0{,}84$, $F_C = 0{,}36$",
+          "correct": false,
+          "explanation": "$0{,}4$ es $P(A > 8{,}2)$."
+        }
+      ],
+      "item": "(b)"
+    },
+    {
+      "id": "b-res",
+      "kind": "compute",
+      "prompt": "$P(M > 8{,}2)$:",
+      "hints": [
+        "$1 - F_M(8{,}2)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac13(0{,}4 + 0{,}16 + 0{,}64)$",
+          "correct": false,
+          "explanation": "Promedio de las colas: corresponde a una mezcla."
+        },
+        {
+          "text": "$0{,}18144$",
+          "correct": false,
+          "explanation": "Es $P(M \\le 8{,}2)$."
+        },
+        {
+          "text": "$0{,}81856$",
+          "correct": true,
+          "explanation": "Complemento de la acumulada del máximo."
+        },
+        {
+          "text": "$0{,}4 \\cdot 0{,}16 \\cdot 0{,}64$",
+          "correct": false,
+          "explanation": "Probabilidad de que los tres superen 8,2."
+        }
+      ],
+      "item": "(b)"
+    }
+  ]
+}
