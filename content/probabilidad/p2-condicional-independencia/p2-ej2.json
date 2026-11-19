@@ -1,0 +1,135 @@
+{
+  "id": "p2-ej2",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Tres urnas y dos blancas",
+  "source": "Práctica 2 · Ejercicio 2",
+  "statement": "Se tienen tres urnas numeradas con veinte bolillas de color en cada una. La primer urna contiene veinte bolillas blancas, la segunda quince y la última diez, siendo todas las bolillas restantes negras. Se elige una de las urnas al azar y se extraen de ella con reposición dos bolillas. La probabilidad de elegir la primer urna es la misma que la de elegir la segunda, mientras que la de elegir la última es igual a su suma. Calcular la probabilidad de haber seleccionado la primer urna sabiendo que las dos bolillas extraídas son blancas.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "prior",
+      "kind": "setup",
+      "prompt": "¿Cuánto valen $P(U_1)$, $P(U_2)$ y $P(U_3)$?",
+      "hints": [
+        "Llamar $q = P(U_1) = P(U_2)$; entonces $P(U_3) = 2q$.",
+        "Las tres suman 1."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac14$, $\\tfrac14$ y $\\tfrac12$",
+          "correct": true,
+          "explanation": "$q + q + 2q = 1$."
+        },
+        {
+          "text": "$\\tfrac13$ cada una",
+          "correct": false,
+          "explanation": "No cumple que la tercera sea la suma de las otras dos."
+        },
+        {
+          "text": "$\\tfrac13$, $\\tfrac13$ y $\\tfrac23$",
+          "correct": false,
+          "explanation": "No suman 1."
+        },
+        {
+          "text": "$\\tfrac16$, $\\tfrac16$ y $\\tfrac23$",
+          "correct": false,
+          "explanation": "La tercera queda más grande que la suma de las otras."
+        }
+      ]
+    },
+    {
+      "id": "lik",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(BB \\mid U_i)$ para cada urna?",
+      "hints": [
+        "Con reposición, dada la urna, las dos extracciones son independientes.",
+        "Elevar al cuadrado la proporción de blancas."
+      ],
+      "cards": [
+        {
+          "text": "$1$, $\\tfrac{9}{16}$ y $\\tfrac14$",
+          "correct": true,
+          "explanation": "$(\\tfrac{20}{20})^2$, $(\\tfrac{15}{20})^2$, $(\\tfrac{10}{20})^2$."
+        },
+        {
+          "text": "$1$, $\\tfrac{9}{16}$ y $\\tfrac12$",
+          "correct": false,
+          "explanation": "En la tercera urna falta elevar al cuadrado."
+        },
+        {
+          "text": "$1$, $\\tfrac{15}{20}\\cdot\\tfrac{14}{19}$ y $\\tfrac{10}{20}\\cdot\\tfrac{9}{19}$",
+          "correct": false,
+          "explanation": "Corresponde a extraer sin reposición."
+        },
+        {
+          "text": "$1$, $\\tfrac34$ y $\\tfrac12$",
+          "correct": false,
+          "explanation": "Corresponde a una sola extracción."
+        }
+      ]
+    },
+    {
+      "id": "tot",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(BB)$?",
+      "hints": [
+        "Probabilidad total: sumar $P(BB \\mid U_i) P(U_i)$.",
+        "$\\tfrac14 \\cdot 1 + \\tfrac14 \\cdot \\tfrac9{16} + \\tfrac12 \\cdot \\tfrac14$; denominador 64."
+      ],
+      "cards": [
+        {
+          "text": "$1 \\cdot \\tfrac9{16} \\cdot \\tfrac14$",
+          "correct": false,
+          "explanation": "Multiplica en lugar de sumar ponderado."
+        },
+        {
+          "text": "$\\tfrac{16}{64}$",
+          "correct": false,
+          "explanation": "Es sólo el término de la primera urna."
+        },
+        {
+          "text": "$\\tfrac13\\left(1 + \\tfrac9{16} + \\tfrac14\\right)$",
+          "correct": false,
+          "explanation": "Las urnas no son equiprobables."
+        },
+        {
+          "text": "$\\tfrac{16 + 9 + 8}{64} = \\tfrac{33}{64}$",
+          "correct": true,
+          "explanation": "Partición en las tres urnas."
+        }
+      ]
+    },
+    {
+      "id": "bayes",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $P(U_1 \\mid BB)$?",
+      "hints": [
+        "Bayes: $\\tfrac{P(BB \\mid U_1)P(U_1)}{P(BB)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac14$",
+          "correct": false,
+          "explanation": "Ignora la información de las dos blancas."
+        },
+        {
+          "text": "$\\dfrac{16/64}{33/64} = \\tfrac{16}{33} \\approx 0{,}48$",
+          "correct": true,
+          "explanation": "Numerador: término de la primera urna; denominador: probabilidad total."
+        },
+        {
+          "text": "$\\tfrac{33}{64}$",
+          "correct": false,
+          "explanation": "Falta dividir: es la probabilidad del condicionante."
+        },
+        {
+          "text": "$\\tfrac{16}{29}$",
+          "correct": false,
+          "explanation": "Usa urnas equiprobables."
+        }
+      ]
+    }
+  ]
+}

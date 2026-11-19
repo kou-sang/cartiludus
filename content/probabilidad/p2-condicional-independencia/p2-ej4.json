@@ -1,0 +1,165 @@
+{
+  "id": "p2-ej4",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Paradoja de Simpson",
+  "source": "Práctica 2 · Ejercicio 4",
+  "statement": "Paradoja de Simpson. Se realiza un estudio de la efectividad relativa de dos drogas para el tratamiento de una cierta enfermedad. Se clasifica a la población objetivo en dos grupos, sean estos Grupo A y Grupo B. A cada miembro de cada grupo se le da una sola droga. Se tienen los siguientes resultados:\nGrupo A — Droga 1: cura 200, no cura 1800. Droga 2: cura 10, no cura 190.\nGrupo B — Droga 1: cura 19, no cura 1. Droga 2: cura 1000, no cura 1000.\nAnte la pregunta por cuál droga es mejor, se dan dos argumentos:\n• La droga I tuvo éxito en 219 de 2020 personas a las que se le dio, y la droga II tuvo éxito en 1010 de las 2200 a las que se le dio. Luego, la mejor es la droga II.\n• La droga I tiene un ratio de éxito de $\\tfrac1{10}$ en el grupo A, y de $\\tfrac{19}{20}$ en el grupo B. En cambio, la droga II tiene $\\tfrac1{20}$ y $\\tfrac12$ respectivamente. Luego, la mejor es la droga I.\nExplicar probabilísticamente qué está pasando.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "grupo",
+      "kind": "compute",
+      "prompt": "¿Qué droga cura más dentro de cada grupo?",
+      "hints": [
+        "Comparar $\\tfrac{1}{10}$ con $\\tfrac1{20}$, y $\\tfrac{19}{20}$ con $\\tfrac12$."
+      ],
+      "cards": [
+        {
+          "text": "La droga 2, en ambos grupos",
+          "correct": false,
+          "explanation": "Revisar las proporciones de cada celda."
+        },
+        {
+          "text": "Depende del grupo",
+          "correct": false,
+          "explanation": "En los dos grupos gana la misma droga."
+        },
+        {
+          "text": "Son iguales",
+          "correct": false,
+          "explanation": "Las proporciones difieren."
+        },
+        {
+          "text": "La droga 1, en ambos grupos",
+          "correct": true,
+          "explanation": "En A: 10 % contra 5 %; en B: 95 % contra 50 %."
+        }
+      ]
+    },
+    {
+      "id": "total",
+      "kind": "property",
+      "prompt": "¿Qué identidad relaciona la tasa global de cura con las de cada grupo?",
+      "hints": [
+        "Probabilidad total, condicionando a la droga.",
+        "Los pesos son las proporciones de cada grupo entre quienes recibieron esa droga."
+      ],
+      "cards": [
+        {
+          "text": "$P(C \\mid D_i) = \\tfrac12\\left(P(C\\mid D_i, A) + P(C \\mid D_i, B)\\right)$",
+          "correct": false,
+          "explanation": "Supone que los dos grupos pesan lo mismo."
+        },
+        {
+          "text": "$P(C \\mid D_i) = P(C \\mid D_i, A)P(A \\mid D_i) + P(C \\mid D_i, B)P(B \\mid D_i)$",
+          "correct": true,
+          "explanation": "La tasa global es un promedio ponderado de las tasas por grupo."
+        },
+        {
+          "text": "$P(C\\mid D_i) = P(C\\mid A) + P(C\\mid B)$",
+          "correct": false,
+          "explanation": "Ignora la droga y puede superar 1."
+        },
+        {
+          "text": "$P(C\\mid D_i) = P(C\\mid D_i, A)\\,P(C\\mid D_i, B)$",
+          "correct": false,
+          "explanation": "No es una identidad válida."
+        }
+      ]
+    },
+    {
+      "id": "pesos",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen los pesos $P(A \\mid D_1)$ y $P(A \\mid D_2)$?",
+      "hints": [
+        "Droga 1: 2000 de 2020 personas están en el grupo A.",
+        "Droga 2: 200 de 2200 están en el grupo A."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{2020}{4220}$ y $\\tfrac{2200}{4220}$",
+          "correct": false,
+          "explanation": "Es la proporción de tratados con cada droga."
+        },
+        {
+          "text": "$\\tfrac{2000}{2020} \\approx 0{,}99$ y $\\tfrac{200}{2200} \\approx 0{,}09$",
+          "correct": true,
+          "explanation": "Casi todos los tratados con la droga 1 son del grupo A; con la droga 2, del B."
+        },
+        {
+          "text": "$\\tfrac12$ y $\\tfrac12$",
+          "correct": false,
+          "explanation": "Las drogas no se repartieron por igual entre los grupos."
+        },
+        {
+          "text": "$\\tfrac{200}{2000}$ y $\\tfrac{10}{200}$",
+          "correct": false,
+          "explanation": "Son tasas de cura, no pesos de los grupos."
+        }
+      ]
+    },
+    {
+      "id": "expl",
+      "kind": "interpret",
+      "prompt": "¿Qué explica la inversión?",
+      "hints": [
+        "El grupo A cura mucho menos que el B con cualquier droga.",
+        "Mirar qué grupo domina el promedio de cada droga."
+      ],
+      "cards": [
+        {
+          "text": "Hay un error en los datos",
+          "correct": false,
+          "explanation": "Los totales son consistentes con la tabla."
+        },
+        {
+          "text": "La droga 1 se dio casi sólo al grupo A, el difícil de curar, y la droga 2 casi sólo al B: el promedio global compara grupos distintos",
+          "correct": true,
+          "explanation": "El grupo es una variable de confusión: influye en la cura y en qué droga se recibió."
+        },
+        {
+          "text": "Las muestras son chicas",
+          "correct": false,
+          "explanation": "La inversión ocurre con estas frecuencias, sin importar el tamaño."
+        },
+        {
+          "text": "La droga 2 es mejor en algún grupo",
+          "correct": false,
+          "explanation": "En ambos grupos gana la otra droga."
+        }
+      ]
+    },
+    {
+      "id": "concl",
+      "kind": "interpret",
+      "prompt": "¿Qué comparación es la adecuada?",
+      "hints": [
+        "¿Se comparan pacientes comparables?"
+      ],
+      "cards": [
+        {
+          "text": "Promediar las dos conclusiones",
+          "correct": false,
+          "explanation": "No tiene sentido probabilístico."
+        },
+        {
+          "text": "Dentro de cada grupo: la droga 1 es mejor",
+          "correct": true,
+          "explanation": "Condicionando al grupo se eliminan las diferencias de composición."
+        },
+        {
+          "text": "La global: la droga 2 es mejor",
+          "correct": false,
+          "explanation": "Mezcla grupos de distinta dificultad en proporciones distintas."
+        },
+        {
+          "text": "Ninguna: los datos se contradicen",
+          "correct": false,
+          "explanation": "No hay contradicción: es un efecto de los pesos."
+        }
+      ]
+    }
+  ]
+}

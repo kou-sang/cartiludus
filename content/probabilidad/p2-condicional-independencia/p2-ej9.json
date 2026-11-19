@@ -1,0 +1,133 @@
+{
+  "id": "p2-ej9",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Grafo aleatorio con m aristas",
+  "source": "Práctica 2 · Ejercicio 9",
+  "statement": "Sea $G$ un grafo arbitrario con $n$ vértices y $m$ aristas. Sea $K_n$ el grafo completo con $n$ vértices. Supongamos que, para cada arista de $K_n$, con probabilidad $p$ decidimos dejarla y con $1 - p$ sacarla, de manera independiente. Si se sabe que, después de sacar las aristas que correspondan, el grafo tiene $m$ aristas, calcular la probabilidad de que sea igual a $G$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "aristas",
+      "kind": "property",
+      "prompt": "¿Cuántas aristas tiene $K_n$?",
+      "hints": [
+        "Una por cada par de vértices."
+      ],
+      "cards": [
+        {
+          "text": "$n^2$",
+          "correct": false,
+          "explanation": "Cuenta pares ordenados e incluye lazos."
+        },
+        {
+          "text": "$n - 1$",
+          "correct": false,
+          "explanation": "Es la cantidad de aristas de un árbol."
+        },
+        {
+          "text": "$M = \\binom n2$",
+          "correct": true,
+          "explanation": "Pares no ordenados de vértices distintos."
+        },
+        {
+          "text": "$2^n$",
+          "correct": false,
+          "explanation": "No cuenta aristas."
+        }
+      ]
+    },
+    {
+      "id": "pg",
+      "kind": "compute",
+      "prompt": "¿Cuál es la probabilidad de obtener exactamente el grafo $G$?",
+      "hints": [
+        "Las $m$ aristas de $G$ quedan y las otras $M - m$ se sacan."
+      ],
+      "cards": [
+        {
+          "text": "$p^m$",
+          "correct": false,
+          "explanation": "Falta exigir que las demás aristas no estén."
+        },
+        {
+          "text": "$\\binom Mm p^m(1-p)^{M-m}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de tener $m$ aristas, cualesquiera."
+        },
+        {
+          "text": "$(1-p)^m$",
+          "correct": false,
+          "explanation": "Las aristas de $G$ tienen que quedar."
+        },
+        {
+          "text": "$p^m (1-p)^{M - m}$",
+          "correct": true,
+          "explanation": "Independencia entre aristas."
+        }
+      ]
+    },
+    {
+      "id": "pm",
+      "kind": "compute",
+      "prompt": "¿Cuál es la probabilidad de que el grafo tenga $m$ aristas?",
+      "hints": [
+        "La cantidad de aristas es binomial."
+      ],
+      "cards": [
+        {
+          "text": "$p^m(1-p)^{M-m}$",
+          "correct": false,
+          "explanation": "Es un grafo particular."
+        },
+        {
+          "text": "$\\binom Mm p^m(1-p)^{M-m}$",
+          "correct": true,
+          "explanation": "$\\mathrm{Bi}(M, p)$ evaluada en $m$."
+        },
+        {
+          "text": "$\\tfrac{m}{M}$",
+          "correct": false,
+          "explanation": "No resulta de la binomial."
+        },
+        {
+          "text": "$\\binom Mm p^m$",
+          "correct": false,
+          "explanation": "Faltan las aristas ausentes."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "prompt": "¿Cuánto vale $P(\\text{grafo} = G \\mid m \\text{ aristas})$?",
+      "hints": [
+        "$G$ está contenido en \"tiene $m$ aristas\".",
+        "Dividir; ¿qué pasa con $p$?"
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{\\binom Mm}$: no depende de $p$",
+          "correct": true,
+          "explanation": "Dado el número de aristas, todos los grafos con $m$ aristas son equiprobables."
+        },
+        {
+          "text": "$p^m(1-p)^{M-m}$",
+          "correct": false,
+          "explanation": "Falta condicionar."
+        },
+        {
+          "text": "$\\binom Mm$",
+          "correct": false,
+          "explanation": "No es una probabilidad."
+        },
+        {
+          "text": "Depende de $p$",
+          "correct": false,
+          "explanation": "Los factores con $p$ se cancelan."
+        }
+      ]
+    }
+  ]
+}

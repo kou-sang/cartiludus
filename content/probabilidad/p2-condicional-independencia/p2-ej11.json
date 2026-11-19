@@ -1,0 +1,171 @@
+{
+  "id": "p2-ej11",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Divisibilidad y la función de Euler",
+  "source": "Práctica 2 · Ejercicio 11",
+  "statement": "De un bolillero que contiene $n$ bolillas numeradas de la 1 hasta la $n$ se extrae una al azar. Para cada $1 \\le k \\le n$ definimos el evento $A_k$ = {El número de la bolilla elegida es divisible por $k$}.\n(a) Calcular la probabilidad del evento $A_k$ para todo número natural $k$ divisor de $n$.\n(b) Probar que los eventos $A_{k_1}, \\dots, A_{k_m}$ son independientes si $k_1, \\dots, k_m$ son divisores coprimos de $n$.\n(c) Sea $\\phi$ la función de Euler definida por $\\phi(n) = \\#\\{m \\in \\{1, \\dots, n\\} : m \\text{ es coprimo con } n\\}$. Probar la identidad $\\phi(n) = n \\prod_{p \\text{ primo}: p \\mid n} \\left(1 - \\tfrac1p\\right)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "a",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Si $k \\mid n$, ¿cuánto vale $P(A_k)$?",
+      "hints": [
+        "Contar múltiplos de $k$ en $\\{1, \\dots, n\\}$.",
+        "Como $k \\mid n$, son exactamente $\\tfrac nk$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{k}{n+1}$",
+          "correct": false,
+          "explanation": "No cuenta múltiplos."
+        },
+        {
+          "text": "$\\tfrac kn$",
+          "correct": false,
+          "explanation": "Invierte el cociente."
+        },
+        {
+          "text": "$\\tfrac{\\lfloor n/k \\rfloor + 1}{n}$",
+          "correct": false,
+          "explanation": "Cuenta un múltiplo de más."
+        },
+        {
+          "text": "$\\tfrac1k$",
+          "correct": true,
+          "explanation": "$\\tfrac{n/k}{n}$."
+        }
+      ]
+    },
+    {
+      "id": "inter",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "Si $k_1, \\dots, k_m$ son coprimos dos a dos, ¿qué es $A_{k_1} \\cap \\dots \\cap A_{k_m}$?",
+      "hints": [
+        "Ser divisible por cada $k_i$.",
+        "Para coprimos, el mínimo común múltiplo es el producto."
+      ],
+      "cards": [
+        {
+          "text": "$A_{\\min k_i}$",
+          "correct": false,
+          "explanation": "Ser divisible por el menor no alcanza."
+        },
+        {
+          "text": "$A_{k_1 + \\dots + k_m}$",
+          "correct": false,
+          "explanation": "La divisibilidad conjunta no involucra la suma."
+        },
+        {
+          "text": "$A_{k_1 \\cdots k_m}$, y $k_1 \\cdots k_m$ también divide a $n$",
+          "correct": true,
+          "explanation": "Divisible por todos ⟺ divisible por el mcm, que aquí es el producto."
+        },
+        {
+          "text": "$\\emptyset$",
+          "correct": false,
+          "explanation": "Hay números divisibles por todos (por ejemplo, $n$)."
+        }
+      ]
+    },
+    {
+      "id": "ind",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Por qué esto prueba la independencia?",
+      "hints": [
+        "Aplicar (a) a $k_1 \\cdots k_m$.",
+        "Vale para cualquier subfamilia, que también es coprima."
+      ],
+      "cards": [
+        {
+          "text": "Porque cada uno tiene probabilidad menor que 1",
+          "correct": false,
+          "explanation": "No alcanza."
+        },
+        {
+          "text": "Basta con verificarlo para pares",
+          "correct": false,
+          "explanation": "La independencia mutua pide todas las subfamilias."
+        },
+        {
+          "text": "Porque los eventos son disjuntos",
+          "correct": false,
+          "explanation": "No son disjuntos."
+        },
+        {
+          "text": "$P\\left(\\bigcap A_{k_i}\\right) = \\tfrac{1}{k_1\\cdots k_m} = \\prod P(A_{k_i})$, y lo mismo para cada subfamilia",
+          "correct": true,
+          "explanation": "Esa es la definición de independencia de una familia de eventos."
+        }
+      ]
+    },
+    {
+      "id": "phi",
+      "kind": "setup",
+      "item": "(c)",
+      "prompt": "¿Cómo se escribe $\\tfrac{\\phi(n)}{n}$ en términos de los eventos $A_p$ con $p$ primo, $p \\mid n$?",
+      "hints": [
+        "$m$ es coprimo con $n$ si no lo divide ningún primo de $n$."
+      ],
+      "cards": [
+        {
+          "text": "$P\\left(\\bigcup_{p\\mid n} A_p\\right)$",
+          "correct": false,
+          "explanation": "Es el complemento."
+        },
+        {
+          "text": "$\\prod_{p \\mid n} P(A_p)$",
+          "correct": false,
+          "explanation": "Es ser divisible por todos los primos."
+        },
+        {
+          "text": "$P(A_n)$",
+          "correct": false,
+          "explanation": "Es ser múltiplo de $n$."
+        },
+        {
+          "text": "$P\\left(\\bigcap_{p \\mid n} A_p^c\\right)$",
+          "correct": true,
+          "explanation": "Elegir una bolilla coprima con $n$ es no ser divisible por ninguno de sus primos."
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Cómo se concluye la identidad?",
+      "hints": [
+        "Los primos distintos son coprimos: los $A_p$ son independientes.",
+        "Los complementos de eventos independientes también lo son."
+      ],
+      "cards": [
+        {
+          "text": "$\\sum_p (1 - \\tfrac1p)$",
+          "correct": false,
+          "explanation": "La intersección de independientes da producto, no suma."
+        },
+        {
+          "text": "$P\\left(\\bigcap A_p^c\\right) = \\prod (1 - \\tfrac1p)$, y se multiplica por $n$",
+          "correct": true,
+          "explanation": "Independencia de complementos y (a)."
+        },
+        {
+          "text": "$\\prod_p \\tfrac1p$",
+          "correct": false,
+          "explanation": "Es la probabilidad de ser divisible por todos."
+        },
+        {
+          "text": "$1 - \\prod_p \\tfrac1p$",
+          "correct": false,
+          "explanation": "Esa sería la probabilidad de no ser divisible por todos a la vez."
+        }
+      ]
+    }
+  ]
+}

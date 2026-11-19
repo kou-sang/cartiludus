@@ -1,0 +1,172 @@
+{
+  "id": "p2-ej8",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Torneo de metegol",
+  "source": "Práctica 2 · Ejercicio 8",
+  "statement": "Tres jugadores a, b y c se disponen a jugar un torneo de metegol bajo las siguientes reglas: la modalidad de juego es por turnos bajo la consigna de que el ganador de un partido jugará el siguiente con el jugador que se encontraba afuera y aquel que logre dos victorias consecutivas será el ganador del torneo. En cada partido ambos jugadores involucrados tienen la misma probabilidad de ganar. Comienzan jugando a y b.\n(a) ¿Cuál es la probabilidad de que el torneo continúe indefinidamente? Es decir, hallar la probabilidad de que no haya dos victorias consecutivas de un mismo jugador.\n(b) Calcular la probabilidad de ganar el campeonato para cada uno de los tres jugadores a, b y c. ¿Conviene jugar el primer partido?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "nn",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Sea $N_n$ = {no hay campeón tras $n$ partidos}. ¿Cuánto vale $P(N_n)$?",
+      "hints": [
+        "El primer partido nunca define.",
+        "Desde el segundo, para seguir tiene que ganar el que entra."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac23\\right)^n$",
+          "correct": false,
+          "explanation": "Cada partido tiene dos resultados."
+        },
+        {
+          "text": "$\\tfrac1n$",
+          "correct": false,
+          "explanation": "No corresponde a partidos independientes."
+        },
+        {
+          "text": "$\\left(\\tfrac12\\right)^n$",
+          "correct": false,
+          "explanation": "El primer partido no puede terminar el torneo."
+        },
+        {
+          "text": "$\\left(\\tfrac12\\right)^{n-1}$",
+          "correct": true,
+          "explanation": "Cada uno de los partidos 2 a $n$ lo debe ganar el entrante, con probabilidad $\\tfrac12$."
+        }
+      ]
+    },
+    {
+      "id": "lim",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cómo se pasa al torneo infinito?",
+      "hints": [
+        "Los $N_n$ son decrecientes.",
+        "Continuidad de la probabilidad."
+      ],
+      "cards": [
+        {
+          "text": "$P\\left(\\bigcap N_n\\right) = \\lim P(N_n) = 0$",
+          "correct": true,
+          "explanation": "Continuidad para sucesiones decrecientes de eventos."
+        },
+        {
+          "text": "$\\sum_n P(N_n)$",
+          "correct": false,
+          "explanation": "Los $N_n$ no son disjuntos."
+        },
+        {
+          "text": "Por independencia de los $N_n$",
+          "correct": false,
+          "explanation": "Están encajados, no son independientes."
+        },
+        {
+          "text": "Vale $\\tfrac12$",
+          "correct": false,
+          "explanation": "El límite de las probabilidades es otro."
+        }
+      ]
+    },
+    {
+      "id": "seq",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Si a gana el primer partido, ¿quién sería campeón si el torneo termina en el partido $k = 2, 3, 4, 5, \\dots$?",
+      "hints": [
+        "Partido 2: a contra c. Si gana c, partido 3: c contra b…",
+        "Se repite cada 3 partidos."
+      ],
+      "cards": [
+        {
+          "text": "a, c, b, a, c, b, … (cada secuencia de $k$ partidos tiene probabilidad $(\\tfrac12)^k$)",
+          "correct": true,
+          "explanation": "Cada partido extra lo gana el entrante hasta que alguien repite."
+        },
+        {
+          "text": "a, c, a, c, …",
+          "correct": false,
+          "explanation": "b también vuelve a jugar."
+        },
+        {
+          "text": "a, b, c, a, b, c, …",
+          "correct": false,
+          "explanation": "Revisar quién entra en cada partido."
+        },
+        {
+          "text": "Siempre a",
+          "correct": false,
+          "explanation": "a puede perder el segundo partido."
+        }
+      ]
+    },
+    {
+      "id": "pc",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Con qué probabilidad gana c?",
+      "hints": [
+        "c gana en los partidos 3, 6, 9, …, sin importar quién ganó el primero.",
+        "$2\\sum_{j \\ge 1} (\\tfrac12)^{3j}$: serie geométrica de razón $\\tfrac18$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac17$",
+          "correct": false,
+          "explanation": "Falta considerar los dos posibles ganadores del primer partido."
+        },
+        {
+          "text": "$\\tfrac13$",
+          "correct": false,
+          "explanation": "c no está en la misma situación que a y b."
+        },
+        {
+          "text": "$2 \\cdot \\dfrac{1/8}{1 - 1/8} = \\tfrac27$",
+          "correct": true,
+          "explanation": "Dos secuencias posibles para cada $k = 3j$."
+        },
+        {
+          "text": "$\\tfrac14$",
+          "correct": false,
+          "explanation": "Sólo cuenta el partido 3."
+        }
+      ]
+    },
+    {
+      "id": "pab",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Con qué probabilidad gana a (y b)? ¿Conviene jugar el primer partido?",
+      "hints": [
+        "a y b son simétricos.",
+        "Lo que no gana c se reparte entre a y b."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac37$ cada uno",
+          "correct": false,
+          "explanation": "No suma 1 con la probabilidad de c."
+        },
+        {
+          "text": "$\\tfrac13$ cada uno: da lo mismo",
+          "correct": false,
+          "explanation": "Las probabilidades no son iguales."
+        },
+        {
+          "text": "$\\tfrac{5}{14}$ cada uno: conviene jugar el primer partido",
+          "correct": true,
+          "explanation": "$\\tfrac{1 - 2/7}{2} = \\tfrac5{14} > \\tfrac{4}{14}$."
+        },
+        {
+          "text": "Conviene empezar afuera",
+          "correct": false,
+          "explanation": "El que empieza afuera tiene menor probabilidad."
+        }
+      ]
+    }
+  ]
+}

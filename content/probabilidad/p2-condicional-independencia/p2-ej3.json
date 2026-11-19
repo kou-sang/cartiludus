@@ -1,0 +1,234 @@
+{
+  "id": "p2-ej3",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Test diagnóstico",
+  "source": "Práctica 2 · Ejercicio 3",
+  "statement": "Cuando se realiza un análisis de laboratorio para diagnosticar una cierta enfermedad en un paciente se pueden cometer dos tipos de errores de diagnóstico: si el análisis da positivo (es decir, éste dice que el paciente está enfermo) pero el paciente está sano se dice que tenemos un falso positivo, mientras que si el análisis da negativo pero el paciente está enfermo se dice que tenemos un falso negativo. Consideremos los eventos $E$ = {La persona examinada está enferma} y $A$ = {El resultado del análisis es positivo}. La cantidad $P(A \\mid E)$ se conoce como sensibilidad del test mientras que $P(A^c \\mid E^c)$ se denomina la especificidad del test.\n(a) Supongamos que una cierta prueba de laboratorio es tal que $P(A \\mid E) = P(A^c \\mid E^c) = 0{,}95$ y además que la probabilidad de que un paciente que se examina padezca la enfermedad es 0,005. ¿Cuál es la probabilidad de que una persona cuyo análisis diagnóstico es positivo esté realmente enferma?\n(b) Supongamos que $P(A \\mid E) = P(A^c \\mid E^c) = p$ y $P(E) = 0{,}005$. ¿Para qué valor de $p$ es $P(E \\mid A) = 0{,}95$?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "obj",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Qué probabilidad pide (a)?",
+      "hints": [
+        "Se sabe que el análisis dio positivo.",
+        "¿Cuál es el evento condicionante?"
+      ],
+      "cards": [
+        {
+          "text": "$P(E \\mid A)$",
+          "correct": true,
+          "explanation": "Probabilidad de estar enfermo dado un positivo."
+        },
+        {
+          "text": "$P(A \\mid E)$",
+          "correct": false,
+          "explanation": "Es un dato del problema (la sensibilidad)."
+        },
+        {
+          "text": "$P(E^c \\mid A^c)$",
+          "correct": false,
+          "explanation": "Habla de resultados negativos."
+        },
+        {
+          "text": "$P(A \\cap E)$",
+          "correct": false,
+          "explanation": "Falta condicionar al resultado positivo."
+        }
+      ]
+    },
+    {
+      "id": "fp",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(A \\mid E^c)$?",
+      "hints": [
+        "Es la probabilidad de un falso positivo.",
+        "Complemento de la especificidad."
+      ],
+      "cards": [
+        {
+          "text": "$0{,}995$",
+          "correct": false,
+          "explanation": "Es la probabilidad de estar sano."
+        },
+        {
+          "text": "$0{,}95$",
+          "correct": false,
+          "explanation": "Es la probabilidad de negativo en un sano."
+        },
+        {
+          "text": "$1 - 0{,}95 = 0{,}05$",
+          "correct": true,
+          "explanation": "$P(A \\mid E^c) = 1 - P(A^c \\mid E^c)$."
+        },
+        {
+          "text": "$0{,}005$",
+          "correct": false,
+          "explanation": "Es la prevalencia."
+        }
+      ]
+    },
+    {
+      "id": "pa",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(A)$?",
+      "hints": [
+        "Probabilidad total con $E$ y $E^c$.",
+        "$0{,}95 \\cdot 0{,}005 + 0{,}05 \\cdot 0{,}995$."
+      ],
+      "cards": [
+        {
+          "text": "$0{,}95 \\cdot 0{,}005 + 0{,}95 \\cdot 0{,}995$",
+          "correct": false,
+          "explanation": "Usa mal la probabilidad de positivo en sanos."
+        },
+        {
+          "text": "$0{,}95$",
+          "correct": false,
+          "explanation": "Es la sensibilidad."
+        },
+        {
+          "text": "$0{,}00475 + 0{,}04975 = 0{,}0545$",
+          "correct": true,
+          "explanation": "Positivos verdaderos más falsos positivos."
+        },
+        {
+          "text": "$0{,}00475$",
+          "correct": false,
+          "explanation": "Faltan los falsos positivos."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(E \\mid A)$ y qué indica?",
+      "hints": [
+        "Bayes: $\\tfrac{0{,}00475}{0{,}0545}$.",
+        "0,00475 es menos de la décima parte de 0,0545."
+      ],
+      "cards": [
+        {
+          "text": "$\\approx 0{,}087$: la mayoría de los positivos son falsos",
+          "correct": true,
+          "explanation": "Con baja prevalencia, los falsos positivos superan a los verdaderos."
+        },
+        {
+          "text": "$\\approx 0{,}5$",
+          "correct": false,
+          "explanation": "No resulta del cociente."
+        },
+        {
+          "text": "$0{,}95$",
+          "correct": false,
+          "explanation": "Confunde las dos condicionales."
+        },
+        {
+          "text": "$0{,}005$",
+          "correct": false,
+          "explanation": "Ignora el resultado del análisis."
+        }
+      ]
+    },
+    {
+      "id": "ec",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Para (b), ¿qué ecuación hay que resolver?",
+      "hints": [
+        "Falsos positivos en función de $p$: $1 - p$.",
+        "Bayes con sensibilidad $p$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,(1-p)} = 0{,}95$",
+          "correct": true,
+          "explanation": "Positivos verdaderos sobre todos los positivos."
+        },
+        {
+          "text": "$p = 0{,}95$",
+          "correct": false,
+          "explanation": "Confunde las dos condicionales."
+        },
+        {
+          "text": "$\\dfrac{0{,}005\\,p}{0{,}005\\,p + 0{,}995\\,p} = 0{,}95$",
+          "correct": false,
+          "explanation": "La probabilidad de positivo en un sano no es $p$."
+        },
+        {
+          "text": "$0{,}005\\,p = 0{,}95$",
+          "correct": false,
+          "explanation": "Falta dividir por $P(A)$."
+        }
+      ]
+    },
+    {
+      "id": "p",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "La ecuación se reduce a $0{,}00025\\,p = 0{,}94525\\,(1 - p)$. ¿Cuánto vale $p$?",
+      "hints": [
+        "$p\\,(0{,}00025 + 0{,}94525) = 0{,}94525$."
+      ],
+      "cards": [
+        {
+          "text": "$p = \\tfrac{0{,}94525}{0{,}9455} \\approx 0{,}99974$",
+          "correct": true,
+          "explanation": "Despeje lineal."
+        },
+        {
+          "text": "No existe",
+          "correct": false,
+          "explanation": "El cociente crece con $p$ y tiende a 1: hay solución."
+        },
+        {
+          "text": "$p \\approx 0{,}95$",
+          "correct": false,
+          "explanation": "Ese valor da una probabilidad de enfermedad mucho menor."
+        },
+        {
+          "text": "$p \\approx 0{,}995$",
+          "correct": false,
+          "explanation": "Todavía no alcanza 0,95."
+        }
+      ]
+    },
+    {
+      "id": "int",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "¿Qué muestra el resultado?",
+      "hints": [
+        "Comparar $1 - p$ con la prevalencia 0,005."
+      ],
+      "cards": [
+        {
+          "text": "Con precisión 0,95 alcanza",
+          "correct": false,
+          "explanation": "El ítem (a) muestra lo contrario."
+        },
+        {
+          "text": "Con una enfermedad rara, la tasa de falsos positivos tiene que ser mucho menor que la prevalencia (≈ 0,03 %)",
+          "correct": true,
+          "explanation": "$1 - p \\approx 2{,}6 \\cdot 10^{-4}$."
+        },
+        {
+          "text": "La prevalencia no influye",
+          "correct": false,
+          "explanation": "Aparece en Bayes."
+        },
+        {
+          "text": "Hay que subir sólo la sensibilidad",
+          "correct": false,
+          "explanation": "El problema está en los falsos positivos sobre los sanos."
+        }
+      ]
+    }
+  ]
+}

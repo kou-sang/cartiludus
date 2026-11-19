@@ -1,0 +1,172 @@
+{
+  "id": "p2-ej5",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Esquema de Pólya",
+  "source": "Práctica 2 · Ejercicio 5",
+  "statement": "(★) Esquema de Pólya. De un bolillero que contiene $B$ bolillas blancas y $R$ rojas se extraen sucesivamente y al azar $n$ bolillas, devolviendo en cada instancia la bolilla extraída al bolillero junto con otras $c$ bolillas del mismo color. Para cada $n \\in \\mathbb N$ definimos los eventos $R_n$ = {La $n$-ésima bolilla extraída es roja} y $B_n$ = {La $n$-ésima bolilla extraída es blanca}.\n(a) Probar que $P(R_n) = \\tfrac{R}{R+B}$ para todo $n \\in \\mathbb N$. Sugerencia: condicionar respecto de un evento adecuado que permita hacer inducción en $n$.\n(b) Probar que para todo $m < n$ se tiene $P(R_m \\cap R_n) = \\tfrac{R(R+c)}{(R+B)(R+B+c)}$ y $P(R_m \\cap B_n) = \\tfrac{RB}{(R+B)(R+B+c)}$. Generalizar a más de dos extracciones.\n(c) ¿Son los eventos $R_m$ y $R_n$ independientes para $n \\ne m$?\n(d) Calcular $P(R_3 \\mid R_2)$ y $P(R_1 \\mid R_n)$ para $n \\ge 2$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "cond",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "Para (a), ¿respecto de qué evento conviene condicionar?",
+      "hints": [
+        "Buscar algo que, una vez fijado, deje un bolillero de Pólya con una extracción menos.",
+        "La primera extracción."
+      ],
+      "cards": [
+        {
+          "text": "La cantidad de rojas extraídas hasta $n$",
+          "correct": false,
+          "explanation": "Incluye al evento que se quiere calcular."
+        },
+        {
+          "text": "$R_1$ y $B_1$: después de la primera extracción queda un esquema de Pólya con otra composición",
+          "correct": true,
+          "explanation": "Dado $R_1$, la extracción $n$ es la $(n-1)$-ésima de un Pólya con $R + c$ rojas y $B$ blancas."
+        },
+        {
+          "text": "No hace falta: las extracciones son independientes",
+          "correct": false,
+          "explanation": "No lo son: cada extracción cambia la composición."
+        },
+        {
+          "text": "$R_{n-1}$",
+          "correct": false,
+          "explanation": "Condicionar en la extracción anterior no deja un esquema con la misma estructura."
+        }
+      ]
+    },
+    {
+      "id": "ind",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Por hipótesis inductiva, $P(R_n \\mid R_1) = \\tfrac{R+c}{R+B+c}$ y $P(R_n \\mid B_1) = \\tfrac{R}{R+B+c}$. ¿Cuánto da $P(R_n)$?",
+      "hints": [
+        "Probabilidad total con $P(R_1) = \\tfrac{R}{R+B}$ y $P(B_1) = \\tfrac{B}{R+B}$.",
+        "Sacar factor común $\\tfrac{R}{(R+B)(R+B+c)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{R+c}{R+B+c}$",
+          "correct": false,
+          "explanation": "Es sólo la condicional dado $R_1$."
+        },
+        {
+          "text": "$\\dfrac12$",
+          "correct": false,
+          "explanation": "Sólo si $R = B$."
+        },
+        {
+          "text": "$\\dfrac{R + c}{R + B + 2c}$",
+          "correct": false,
+          "explanation": "No resulta de la probabilidad total."
+        },
+        {
+          "text": "$\\dfrac{R(R+c) + RB}{(R+B)(R+B+c)} = \\dfrac{R}{R+B}$",
+          "correct": true,
+          "explanation": "El numerador es $R(R + B + c)$ y se simplifica."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $P(R_1 \\cap R_2)$?",
+      "hints": [
+        "Regla del producto.",
+        "Después de una roja, hay $R + c$ rojas entre $R + B + c$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{R}{R+B} \\cdot \\dfrac{R}{R+B+c}$",
+          "correct": false,
+          "explanation": "Después de sacar roja se agregan rojas, no blancas."
+        },
+        {
+          "text": "$\\left(\\dfrac{R}{R+B}\\right)^2$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{R}{R+B} \\cdot \\dfrac{R+c}{R+B+c}$",
+          "correct": true,
+          "explanation": "$P(R_1)P(R_2 \\mid R_1)$. El ítem (b) dice que lo mismo vale para cualquier par $m < n$."
+        },
+        {
+          "text": "$\\dfrac{R}{R+B} \\cdot \\dfrac{R+c}{R+B}$",
+          "correct": false,
+          "explanation": "El total también aumenta en $c$."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Son independientes $R_m$ y $R_n$?",
+      "hints": [
+        "Comparar $P(R_m \\cap R_n)$ con $P(R_m)P(R_n) = \\left(\\tfrac{R}{R+B}\\right)^2$.",
+        "¿Es $\\tfrac{R+c}{R+B+c}$ mayor que $\\tfrac{R}{R+B}$ cuando $c > 0$?"
+      ],
+      "cards": [
+        {
+          "text": "Sí, si $m$ y $n$ están lejos",
+          "correct": false,
+          "explanation": "La probabilidad de la intersección no depende de la distancia."
+        },
+        {
+          "text": "No, porque son disjuntos",
+          "correct": false,
+          "explanation": "Pueden ocurrir ambos."
+        },
+        {
+          "text": "No (si $c > 0$): $\\tfrac{R+c}{R+B+c} > \\tfrac{R}{R+B}$, así que la intersección es más probable que el producto",
+          "correct": true,
+          "explanation": "Sacar una roja aumenta la chance de rojas futuras: hay dependencia positiva."
+        },
+        {
+          "text": "Sí, porque $P(R_n)$ no depende de $n$",
+          "correct": false,
+          "explanation": "Que las marginales sean iguales no implica independencia."
+        }
+      ]
+    },
+    {
+      "id": "d",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "¿Cuánto valen $P(R_3 \\mid R_2)$ y $P(R_1 \\mid R_n)$?",
+      "hints": [
+        "$P(R_3 \\mid R_2) = \\tfrac{P(R_2 \\cap R_3)}{P(R_2)}$ y usar (a) y (b).",
+        "Para $P(R_1 \\mid R_n)$, lo mismo: $\\tfrac{P(R_1 \\cap R_n)}{P(R_n)}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{R+c}{R+B+c}$ y $\\dfrac{R}{R+B}$",
+          "correct": false,
+          "explanation": "Mirar \"hacia atrás\" da lo mismo que hacia adelante: el cociente es igual."
+        },
+        {
+          "text": "Ambas valen $\\dfrac{R+c}{R+B+c}$",
+          "correct": true,
+          "explanation": "Por (b) las intersecciones valen lo mismo, y por (a) todas las marginales también."
+        },
+        {
+          "text": "Ambas valen $\\dfrac{R}{R+B}$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\dfrac{R+2c}{R+B+2c}$ y $\\dfrac{R+c}{R+B+c}$",
+          "correct": false,
+          "explanation": "Sólo se sabe que una bolilla (no dos) fue roja."
+        }
+      ]
+    }
+  ]
+}

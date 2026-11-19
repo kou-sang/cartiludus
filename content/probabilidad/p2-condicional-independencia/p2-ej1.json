@@ -1,0 +1,236 @@
+{
+  "id": "p2-ej1",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "Dos urnas y un dado",
+  "source": "Práctica 2 · Ejercicio 1",
+  "statement": "Se dispone de dos urnas cuyo contenido es el siguiente:\nUrna A: 5 bolillas rojas y 3 blancas\nUrna B: 1 bolilla roja y 2 blancas\nSe arroja un dado y, si el resultado es 3 ó 6, se extrae una bolilla de la urna A y se coloca en la urna B para luego extraer una bolilla de esta última. En caso contrario, el procedimiento se realiza a la inversa.\n(a) Calcular la probabilidad de que ambas bolillas extraídas sean rojas.\n(b) ¿Cuál es la probabilidad de que ambas bolillas sean blancas si ambas bolillas son del mismo color? Si ambas bolillas son del mismo color, ¿es más probable que sean rojas?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "part",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "¿Respecto de qué evento conviene condicionar?",
+      "hints": [
+        "El dado decide de qué urna se saca primero.",
+        "Sea $D = \\{3, 6\\}$. ¿Cuánto vale $P(D)$?"
+      ],
+      "cards": [
+        {
+          "text": "No hace falta condicionar",
+          "correct": false,
+          "explanation": "El procedimiento depende del dado."
+        },
+        {
+          "text": "$D$ con $P(D) = \\tfrac12$",
+          "correct": false,
+          "explanation": "Revisar cuántas caras del dado son favorables."
+        },
+        {
+          "text": "El color de la segunda bolilla",
+          "correct": false,
+          "explanation": "Es parte de lo que se quiere calcular."
+        },
+        {
+          "text": "$D$ = {sale 3 ó 6}, con $P(D) = \\tfrac13$, y su complemento",
+          "correct": true,
+          "explanation": "Dado el resultado del dado se conoce el procedimiento y la composición de las urnas."
+        }
+      ]
+    },
+    {
+      "id": "rrd",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Si sale 3 ó 6 (de A a B), ¿cuánto vale $P(\\text{ambas rojas} \\mid D)$?",
+      "hints": [
+        "Primero sale roja de A.",
+        "Después B tiene una roja más: ¿cuántas rojas y cuántas en total?"
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac58 \\cdot \\tfrac13$",
+          "correct": false,
+          "explanation": "No agrega a B la bolilla traspasada."
+        },
+        {
+          "text": "$\\tfrac58 \\cdot \\tfrac14$",
+          "correct": false,
+          "explanation": "Cuenta mal las rojas de B después del traspaso."
+        },
+        {
+          "text": "$\\tfrac58$",
+          "correct": false,
+          "explanation": "Falta la segunda extracción."
+        },
+        {
+          "text": "$\\tfrac58 \\cdot \\tfrac24 = \\tfrac{5}{16}$",
+          "correct": true,
+          "explanation": "Roja de A ($\\tfrac58$); B queda con 2 rojas y 2 blancas, y sale roja con $\\tfrac24$."
+        }
+      ]
+    },
+    {
+      "id": "rrdc",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "En el otro caso (de B a A), ¿cuánto vale $P(\\text{ambas rojas} \\mid D^c)$?",
+      "hints": [
+        "Primero sale roja de B.",
+        "Después A tiene 6 rojas y 3 blancas."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac69 = \\tfrac29$",
+          "correct": true,
+          "explanation": "Roja de B ($\\tfrac13$); A queda con 6 rojas sobre 9."
+        },
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac59$",
+          "correct": false,
+          "explanation": "La bolilla traspasada es roja: suma una roja."
+        },
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac58$",
+          "correct": false,
+          "explanation": "No agrega a A la bolilla traspasada."
+        },
+        {
+          "text": "$\\tfrac58 \\cdot \\tfrac24$",
+          "correct": false,
+          "explanation": "Es el procedimiento en el otro orden."
+        }
+      ]
+    },
+    {
+      "id": "rr",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(\\text{ambas rojas})$?",
+      "hints": [
+        "Probabilidad total con $D$ y $D^c$.",
+        "$\\tfrac13 \\cdot \\tfrac{5}{16} + \\tfrac23 \\cdot \\tfrac29$; denominador común 432."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac12\\left(\\tfrac{5}{16} + \\tfrac29\\right)$",
+          "correct": false,
+          "explanation": "Los dos casos no tienen la misma probabilidad."
+        },
+        {
+          "text": "$\\tfrac{5}{48} + \\tfrac{4}{27} = \\tfrac{109}{432} \\approx 0{,}25$",
+          "correct": true,
+          "explanation": "Cada caso se pondera por la probabilidad del resultado del dado."
+        },
+        {
+          "text": "$\\tfrac{5}{16} \\cdot \\tfrac29$",
+          "correct": false,
+          "explanation": "Los casos son excluyentes: se suman ponderados."
+        },
+        {
+          "text": "$\\tfrac{5}{16} + \\tfrac29$",
+          "correct": false,
+          "explanation": "Falta ponderar por la probabilidad de cada caso."
+        }
+      ]
+    },
+    {
+      "id": "bb",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Del mismo modo, ¿cuánto vale $P(\\text{ambas blancas})$?",
+      "hints": [
+        "Con $D$: $\\tfrac38 \\cdot \\tfrac34$ (B queda 1 roja, 3 blancas).",
+        "Con $D^c$: $\\tfrac23 \\cdot \\tfrac49$ (A queda 5 rojas, 4 blancas)."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac{9}{32} + \\tfrac23 \\cdot \\tfrac{8}{27} = \\tfrac{755}{2592} \\approx 0{,}29$",
+          "correct": true,
+          "explanation": "Mismo esquema que para las rojas."
+        },
+        {
+          "text": "$\\tfrac12 \\cdot \\tfrac{9}{32} + \\tfrac12 \\cdot \\tfrac{8}{27}$",
+          "correct": false,
+          "explanation": "Pondera mal los resultados del dado."
+        },
+        {
+          "text": "$1 - \\tfrac{109}{432}$",
+          "correct": false,
+          "explanation": "El complemento de \"ambas rojas\" incluye los casos de colores distintos."
+        },
+        {
+          "text": "$\\tfrac13 \\cdot \\tfrac38 \\cdot \\tfrac23 + \\tfrac23 \\cdot \\tfrac23 \\cdot \\tfrac38$",
+          "correct": false,
+          "explanation": "No suma la bolilla traspasada a la urna receptora."
+        }
+      ]
+    },
+    {
+      "id": "cond",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "¿Cómo se escribe $P(\\text{ambas blancas} \\mid \\text{mismo color})$?",
+      "hints": [
+        "Mismo color = ambas rojas o ambas blancas (disjuntos).",
+        "Ambas blancas está contenido en \"mismo color\"."
+      ],
+      "cards": [
+        {
+          "text": "$P(BB) \\cdot P(\\text{mismo color})$",
+          "correct": false,
+          "explanation": "Una condicional no es un producto."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{P(RR)}$",
+          "correct": false,
+          "explanation": "El denominador tiene que ser la probabilidad del evento condicionante."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{1 - P(RR)}$",
+          "correct": false,
+          "explanation": "Ese denominador corresponde a otro evento."
+        },
+        {
+          "text": "$\\dfrac{P(BB)}{P(BB) + P(RR)}$",
+          "correct": true,
+          "explanation": "Definición de probabilidad condicional; la intersección es $BB$."
+        }
+      ]
+    },
+    {
+      "id": "res",
+      "kind": "interpret",
+      "item": "(b)",
+      "prompt": "Con $P(RR) = \\tfrac{654}{2592}$ y $P(BB) = \\tfrac{755}{2592}$, ¿qué se concluye?",
+      "hints": [
+        "El cociente es $\\tfrac{755}{755 + 654}$.",
+        "Comparar 755 con 654."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{755}{2592}$: es más probable que sean rojas",
+          "correct": false,
+          "explanation": "Falta condicionar."
+        },
+        {
+          "text": "$\\approx 0{,}46$: es más probable que sean rojas",
+          "correct": false,
+          "explanation": "Revisar cuál de las dos probabilidades va en el numerador."
+        },
+        {
+          "text": "$\\tfrac12$: igualmente probables",
+          "correct": false,
+          "explanation": "Las dos probabilidades no son iguales."
+        },
+        {
+          "text": "$P(BB \\mid \\text{mismo}) = \\tfrac{755}{1409} \\approx 0{,}54$: es más probable que sean blancas",
+          "correct": true,
+          "explanation": "Como $P(BB) > P(RR)$, dado el mismo color predominan las blancas."
+        }
+      ]
+    }
+  ]
+}

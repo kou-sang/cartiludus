@@ -1,0 +1,235 @@
+{
+  "id": "p2-ej6",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "n + 1 urnas",
+  "source": "Práctica 2 · Ejercicio 6",
+  "statement": "Se tienen $n + 1$ urnas numeradas desde la 0 hasta la $n$. La urna $i$ contiene $i$ bolillas blancas y $n - i$ negras.\n(a) Se elige una de las urnas al azar, de forma que todas las urnas tienen igual probabilidad de ser elegidas, y se extrae de ella una bolilla al azar. Luego se la devuelve a la urna correspondiente. Se repite este procedimiento $k$ veces.\ni) Hallar la probabilidad de que la primera bolilla extraída sea blanca.\nii) ¿Cuál es la probabilidad de que la primera bolilla extraída provenga de la urna $i$ si ésta es blanca?\niii) ¿Cuál es la probabilidad de que las $k$ bolillas extraídas sean blancas?\niv) ¿Son los eventos $B_m$ y $B_n$ independientes para $m \\ne n$?\n(b) Se elige al azar una urna y luego se realizan $k$ extracciones con reposición de la urna elegida.\ni) Hallar la probabilidad de que las $k$ bolillas extraídas sean blancas.\nii) Si las $k$ bolillas extraídas son blancas, ¿cuál es la probabilidad de que al realizar una nueva extracción de la misma urna esta última bolilla sea blanca?\niii) ¿Son los eventos $B_1$ y $B_2$ independientes?\nNota: en ambos ítems denotamos por $B_n$ al evento de obtener una bolilla blanca en la $n$-ésima extracción.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "ai",
+      "kind": "compute",
+      "item": "(a) i",
+      "prompt": "(a) i) ¿Cuánto vale $P(B_1)$?",
+      "hints": [
+        "$P(B_1) = \\sum_i P(B_1 \\mid U_i)P(U_i)$ con $P(U_i) = \\tfrac{1}{n+1}$ y $P(B_1 \\mid U_i) = \\tfrac in$.",
+        "$\\sum_{i=0}^n i = \\tfrac{n(n+1)}{2}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{n}{n+1}$",
+          "correct": false,
+          "explanation": "No resulta de promediar $\\tfrac in$."
+        },
+        {
+          "text": "$\\dfrac1{n+1}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de elegir una urna."
+        },
+        {
+          "text": "$\\dfrac{1}{n+1}\\sum_{i=0}^n \\dfrac in = \\dfrac12$",
+          "correct": true,
+          "explanation": "Probabilidad total; por simetría entre blancas y negras también da $\\tfrac12$."
+        },
+        {
+          "text": "$\\dfrac{1}{n}\\sum_{i=0}^n \\dfrac in$",
+          "correct": false,
+          "explanation": "Hay $n + 1$ urnas, no $n$."
+        }
+      ]
+    },
+    {
+      "id": "aii",
+      "kind": "compute",
+      "item": "(a) ii",
+      "prompt": "(a) ii) ¿Cuánto vale $P(U_i \\mid B_1)$?",
+      "hints": [
+        "Bayes: $\\tfrac{P(B_1\\mid U_i)P(U_i)}{P(B_1)}$.",
+        "$\\tfrac{(i/n)\\cdot \\frac{1}{n+1}}{1/2}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{2i}{n(n+1)}$",
+          "correct": true,
+          "explanation": "Las urnas con más blancas son más probables a posteriori."
+        },
+        {
+          "text": "$\\dfrac in$",
+          "correct": false,
+          "explanation": "Es la probabilidad de blanca dada la urna."
+        },
+        {
+          "text": "$\\dfrac{1}{n+1}$",
+          "correct": false,
+          "explanation": "Ignora que la bolilla fue blanca."
+        },
+        {
+          "text": "$\\dfrac{i}{n(n+1)}$",
+          "correct": false,
+          "explanation": "Falta dividir por $P(B_1) = \\tfrac12$."
+        }
+      ]
+    },
+    {
+      "id": "aiii",
+      "kind": "compute",
+      "item": "(a) iii",
+      "prompt": "(a) iii) Si en cada repetición se vuelve a elegir urna al azar, ¿cuánto vale la probabilidad de $k$ blancas?",
+      "hints": [
+        "Cada repetición es un experimento nuevo e idéntico.",
+        "Cada una da blanca con probabilidad $\\tfrac12$, independientemente."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac12\\right)^k$",
+          "correct": true,
+          "explanation": "Las repeticiones son independientes porque se elige urna de nuevo cada vez."
+        },
+        {
+          "text": "$\\left(\\tfrac{1}{n+1}\\right)^k$",
+          "correct": false,
+          "explanation": "Es la probabilidad de elegir siempre una urna fija."
+        },
+        {
+          "text": "$\\dfrac{1}{n+1}\\sum_i \\left(\\dfrac in\\right)^k$",
+          "correct": false,
+          "explanation": "Supone que se usa siempre la misma urna."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Corresponde a una sola extracción."
+        }
+      ]
+    },
+    {
+      "id": "aiv",
+      "kind": "interpret",
+      "item": "(a) iv",
+      "prompt": "(a) iv) ¿Son independientes $B_m$ y $B_n$?",
+      "hints": [
+        "$P(B_m \\cap B_n) = \\tfrac14 = P(B_m)P(B_n)$."
+      ],
+      "cards": [
+        {
+          "text": "No se puede saber",
+          "correct": false,
+          "explanation": "Alcanza con comparar $P(B_m \\cap B_n)$ con el producto."
+        },
+        {
+          "text": "Sólo si $n$ es par",
+          "correct": false,
+          "explanation": "No depende de $n$."
+        },
+        {
+          "text": "Sí: cada repetición elige urna de nuevo, así que no hay información compartida",
+          "correct": true,
+          "explanation": "Son repeticiones independientes del mismo experimento."
+        },
+        {
+          "text": "No: si sale blanca, la urna tenía más blancas",
+          "correct": false,
+          "explanation": "Eso valdría si se usara la misma urna."
+        }
+      ]
+    },
+    {
+      "id": "bi",
+      "kind": "compute",
+      "item": "(b) i",
+      "prompt": "(b) i) Ahora se elige una urna y se extrae $k$ veces de ella. ¿Cuánto vale $P(k \\text{ blancas})$?",
+      "hints": [
+        "Condicionar en la urna elegida.",
+        "Dada la urna $i$, las $k$ extracciones son independientes: $(\\tfrac in)^k$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{n+1}\\sum_i \\dfrac in$",
+          "correct": false,
+          "explanation": "Es una sola extracción."
+        },
+        {
+          "text": "$\\left(\\dfrac{1}{n+1}\\sum_i \\dfrac in\\right)^k$",
+          "correct": false,
+          "explanation": "Eleva el promedio en lugar de promediar las potencias."
+        },
+        {
+          "text": "$\\left(\\tfrac12\\right)^k$",
+          "correct": false,
+          "explanation": "Supone que las extracciones son independientes sin condicionar."
+        },
+        {
+          "text": "$\\dfrac{1}{n+1}\\sum_{i=0}^n \\left(\\dfrac in\\right)^k$",
+          "correct": true,
+          "explanation": "Probabilidad total sobre la urna elegida."
+        }
+      ]
+    },
+    {
+      "id": "bii",
+      "kind": "compute",
+      "item": "(b) ii",
+      "prompt": "(b) ii) ¿Cuánto vale $P(B_{k+1} \\mid B_1 \\cap \\dots \\cap B_k)$?",
+      "hints": [
+        "Cociente de $P(k+1 \\text{ blancas})$ y $P(k \\text{ blancas})$.",
+        "Usar la fórmula anterior con $k + 1$ y con $k$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{k}{k+1}$",
+          "correct": false,
+          "explanation": "No resulta del cociente."
+        },
+        {
+          "text": "$\\dfrac{\\sum_i (i/n)^{k+1}}{\\sum_i (i/n)^k}$",
+          "correct": true,
+          "explanation": "El $\\tfrac{1}{n+1}$ se simplifica."
+        },
+        {
+          "text": "$\\left(\\tfrac12\\right)^{k+1}$",
+          "correct": false,
+          "explanation": "Es una probabilidad conjunta, no condicional."
+        },
+        {
+          "text": "$\\tfrac12$",
+          "correct": false,
+          "explanation": "Ignora lo que dicen las $k$ blancas sobre la urna."
+        }
+      ]
+    },
+    {
+      "id": "biii",
+      "kind": "interpret",
+      "item": "(b) iii",
+      "prompt": "(b) iii) Con $P(B_1 \\cap B_2) = \\tfrac{1}{n+1}\\sum_i (\\tfrac in)^2 = \\tfrac{2n+1}{6n}$, ¿son independientes $B_1$ y $B_2$?",
+      "hints": [
+        "Comparar con $P(B_1)P(B_2) = \\tfrac14$.",
+        "¿Es $\\tfrac{2n+1}{6n} = \\tfrac14$ para algún $n$?"
+      ],
+      "cards": [
+        {
+          "text": "No: $\\tfrac{2n+1}{6n} > \\tfrac14$ para todo $n$",
+          "correct": true,
+          "explanation": "Las extracciones comparten la urna: una blanca hace más probable otra blanca."
+        },
+        {
+          "text": "Sí, porque son con reposición",
+          "correct": false,
+          "explanation": "Con reposición dada la urna, pero la urna es aleatoria y compartida."
+        },
+        {
+          "text": "Sí, porque $P(B_1) = P(B_2) = \\tfrac12$",
+          "correct": false,
+          "explanation": "Igualdad de marginales no implica independencia."
+        },
+        {
+          "text": "Sólo para $n = 1$",
+          "correct": false,
+          "explanation": "Con $n = 1$ da $\\tfrac12 \\neq \\tfrac14$."
+        }
+      ]
+    }
+  ]
+}

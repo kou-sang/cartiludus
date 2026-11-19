@@ -1,0 +1,172 @@
+{
+  "id": "p2-ej7",
+  "version": 3,
+  "subject": "probabilidad",
+  "topic": "p2-condicional-independencia",
+  "title": "La relatividad de la independencia",
+  "source": "Práctica 2 · Ejercicio 7",
+  "statement": "La relatividad de la independencia.\n(a) Se arrojan dos monedas equilibradas. Considerar los eventos $A$ = {La primera sale cara}, $B$ = {La segunda sale cara} y $C$ = {Una sola sale cara}. Estudiar la independencia de los eventos.\n(b) Se tira una moneda equilibrada $n$ veces. Considerar los eventos $D$ = {Sale cara, a lo sumo, una vez} y $E$ = {Sale cara al menos una vez, y sale ceca al menos una vez}. Discutir su independencia.\n(c) Suponiendo que la moneda está desequilibrada, para cada $n$, decidir si existe $p$ (probabilidad de que salga cara) de modo que los eventos sean independientes.\n(d) Para un conjunto $\\Omega$ de cardinal $p$ (donde $p$ ahora es un primo), asumiendo equiprobabilidad, caracterizar todos los pares de eventos independientes.\nSugerencia: realizar los ítems (a), (b) y (d) apelando, tanto a la idea de que $A$ y $B$ son independientes si $P(A \\cap B) = P(A)P(B)$, como a la de que $A$ y $B$ son independientes si $P(A\\mid B) = P(A)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "pares",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "(a) ¿Cuánto valen $P(A \\cap B)$, $P(A \\cap C)$ y $P(B \\cap C)$?",
+      "hints": [
+        "$A$, $B$ y $C$ tienen probabilidad $\\tfrac12$ cada uno.",
+        "$A \\cap C$ = (cara, ceca); $B \\cap C$ = (ceca, cara)."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac14$, $0$ y $0$",
+          "correct": false,
+          "explanation": "\"Una sola cara\" puede ocurrir con la primera o con la segunda."
+        },
+        {
+          "text": "$\\tfrac14$ cada una: los tres pares son independientes",
+          "correct": true,
+          "explanation": "Cada intersección es un solo resultado de 4 y coincide con $\\tfrac12 \\cdot \\tfrac12$."
+        },
+        {
+          "text": "$A \\cap C = \\emptyset$",
+          "correct": false,
+          "explanation": "Primera cara y segunda ceca está en ambos."
+        },
+        {
+          "text": "$\\tfrac12$ cada una",
+          "correct": false,
+          "explanation": "Cada intersección es un solo resultado."
+        }
+      ]
+    },
+    {
+      "id": "tres",
+      "kind": "interpret",
+      "item": "(a)",
+      "prompt": "¿Son $A$, $B$, $C$ independientes los tres juntos?",
+      "hints": [
+        "¿Qué es $A \\cap B \\cap C$?",
+        "Comparar con $\\tfrac18$."
+      ],
+      "cards": [
+        {
+          "text": "No, porque ningún par es independiente",
+          "correct": false,
+          "explanation": "Los pares sí lo son."
+        },
+        {
+          "text": "Sí, porque $P(A \\cap B \\cap C) = \\tfrac18$",
+          "correct": false,
+          "explanation": "Si salen ambas caras, no sale \"una sola\"."
+        },
+        {
+          "text": "Sí, porque lo son de a pares",
+          "correct": false,
+          "explanation": "La independencia de a pares no alcanza."
+        },
+        {
+          "text": "No: $A \\cap B \\cap C = \\emptyset$, pero $P(A)P(B)P(C) = \\tfrac18$",
+          "correct": true,
+          "explanation": "Son independientes de a pares, pero no mutuamente."
+        }
+      ]
+    },
+    {
+      "id": "de",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "(b) Con $n$ tiradas equilibradas: $P(D) = \\tfrac{n+1}{2^n}$ y $P(E) = 1 - \\tfrac{2}{2^n}$. ¿Qué es $D \\cap E$ y cuánto vale?",
+      "hints": [
+        "$D$: 0 o 1 caras. $E$: no todas caras ni todas cecas.",
+        "Con 0 caras son todas cecas, así que eso no está en $E$."
+      ],
+      "cards": [
+        {
+          "text": "$D \\cap E = \\emptyset$",
+          "correct": false,
+          "explanation": "Una sola cara está en ambos."
+        },
+        {
+          "text": "Exactamente una cara: $P(D \\cap E) = \\tfrac{n}{2^n}$ (para $n \\ge 2$)",
+          "correct": true,
+          "explanation": "Una cara y $n-1 \\ge 1$ cecas cumple ambas."
+        },
+        {
+          "text": "$D \\cap E = D$",
+          "correct": false,
+          "explanation": "El caso de cero caras no está en $E$."
+        },
+        {
+          "text": "$P(D \\cap E) = \\tfrac{n+1}{2^n}$",
+          "correct": false,
+          "explanation": "Incluye el caso de cero caras."
+        }
+      ]
+    },
+    {
+      "id": "n3",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Para qué $n$ vale $\\tfrac{n}{2^n} = \\tfrac{n+1}{2^n}\\left(1 - \\tfrac{2}{2^n}\\right)$?",
+      "hints": [
+        "Simplificar: $n = (n+1)(1 - 2^{1-n})$, es decir $n + 1 = 2^{n-1}$.",
+        "Probar valores chicos de $n$."
+      ],
+      "cards": [
+        {
+          "text": "Para todo $n$",
+          "correct": false,
+          "explanation": "Probar con $n = 2$."
+        },
+        {
+          "text": "Para $n = 2$",
+          "correct": false,
+          "explanation": "$3 \\neq 2$."
+        },
+        {
+          "text": "Sólo para $n = 3$",
+          "correct": true,
+          "explanation": "$n + 1 = 2^{n-1}$ vale en $n = 3$ ($4 = 4$) y en ningún otro natural."
+        },
+        {
+          "text": "Para ningún $n$",
+          "correct": false,
+          "explanation": "Revisar $n = 3$."
+        }
+      ]
+    },
+    {
+      "id": "primo",
+      "kind": "property",
+      "item": "(d)",
+      "prompt": "(d) En $\\Omega$ equiprobable con $|\\Omega| = p$ primo, $A$ y $B$ son independientes si $|A \\cap B| \\cdot p = |A| \\cdot |B|$. ¿Qué se deduce?",
+      "hints": [
+        "$p$ divide al producto $|A||B|$.",
+        "Si un primo divide un producto, divide a algún factor; y $|A|, |B| \\le p$."
+      ],
+      "cards": [
+        {
+          "text": "No hay ningún par independiente",
+          "correct": false,
+          "explanation": "Los pares con $\\emptyset$ u $\\Omega$ lo son."
+        },
+        {
+          "text": "Uno de los dos es $\\emptyset$ u $\\Omega$: los únicos pares independientes son los triviales",
+          "correct": true,
+          "explanation": "$p \\mid |A|$ obliga a $|A| \\in \\{0, p\\}$ (o lo mismo para $B$). Esos pares siempre son independientes."
+        },
+        {
+          "text": "Todo par de eventos disjuntos es independiente",
+          "correct": false,
+          "explanation": "Disjuntos con probabilidades positivas no son independientes."
+        },
+        {
+          "text": "Los pares con $|A| = |B|$",
+          "correct": false,
+          "explanation": "Revisar la divisibilidad por $p$."
+        }
+      ]
+    }
+  ]
+}
