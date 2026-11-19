@@ -5,11 +5,12 @@ import { isFinished, isStepDone, newGame, reduce, shuffledOrder, stepResult, typ
 import {
   candidates,
   configFromQuery,
+  stepsToPlay,
+  type Progress,
   effectiveStepLimit,
   pickProblems,
   stepLimitLabel,
   summarizeSession,
-  type ProblemPick,
   type SessionConfig,
 } from '../../shared/session';
 import { Tex } from '../components/Tex';
@@ -24,26 +25,46 @@ const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one :
 
 // ---------- Rutas ----------
 
-/** /partida/<materia>?…: elige problemas al azar según la configuración. */
+/** Un problema listo para jugar: sólo con los pasos pendientes (o a repasar) según el progreso. */
+interface PlayItem {
+  problem: Problem;
+  totalSteps: number;
+  note?: string;
+}
+
+function toPlayItem(full: Problem, progress: Progress, mode: SessionConfig['mode']): PlayItem {
+  const steps = stepsToPlay(full, progress, mode);
+  const total = full.steps.length;
+  const note =
+    mode === 'repaso'
+      ? `Repaso: ${steps.length} ${steps.length === 1 ? 'paso que resolviste' : 'pasos que resolviste'} con errores, pista o fuera de tiempo.`
+      : steps.length < total
+        ? `Ya resolviste ${total - steps.length} de ${total} pasos: seguís desde donde quedaste.`
+        : undefined;
+  return { problem: { ...full, steps }, totalSteps: total, note };
+}
+
+/** /partida/<materia>?…: elige problemas al azar según la configuración y el progreso. */
 export function SessionFromConfig({ subject, search, user, ready }: { subject: string; search: string; user: User | null; ready: boolean }) {
   const config = useMemo(() => configFromQuery(subject, search), [subject, search]);
   const [round, setRound] = useState(0);
-  const needsUser = config.mode === 'repaso';
   const state = useAsync(async () => {
     const index = await loadIndex();
-    let review: Record<string, number> = {};
-    if (needsUser) {
-      if (!user) throw new Error('Ingresá para jugar el repaso de errores.');
-      review = (await loadAggregates(user.uid))?.review ?? {};
-    }
-    const pool = candidates(index, config, review);
-    if (pool.length === 0) throw new Error(needsUser ? 'No hay problemas para repasar en esas prácticas.' : 'No hay problemas con esa selección.');
+    if (config.mode === 'repaso' && !user) throw new Error('Ingresá para jugar el repaso de errores.');
+    const progress: Progress = user ? ((await loadAggregates(user.uid))?.progress ?? {}) : {};
+    const pool = candidates(index, config, progress);
+    if (pool.length === 0)
+      throw new Error(
+        config.mode === 'repaso'
+          ? 'No hay pasos para repasar en esas prácticas.'
+          : 'Ya resolviste todos los problemas de esas prácticas. Probá el repaso de errores o elegí otras prácticas.',
+      );
     const picks = pickProblems(pool, config.count);
-    return loadProblems(subject, picks);
-  }, `${subject}${search}#${round}#${needsUser ? (user?.uid ?? (ready ? 'anon' : 'wait')) : ''}`);
+    const problems = await loadProblems(subject, picks);
+    return problems.map((p) => toPlayItem(p, progress, config.mode)).filter((it) => it.problem.steps.length > 0);
+  }, `${subject}${search}#${round}#${ready ? (user?.uid ?? 'anon') : 'wait'}`);
 
-  if (needsUser && !ready) return <Message>Cargando…</Message>;
-  if (state.status === 'loading') return <Message>Barajando problemas…</Message>;
+  if (!ready || state.status === 'loading') return <Message>Barajando problemas…</Message>;
   if (state.status === 'error')
     return (
       <Message tone="error">
@@ -53,26 +74,50 @@ export function SessionFromConfig({ subject, search, user, ready }: { subject: s
         </Link>
       </Message>
     );
-  return <Runner key={round} problems={state.data} config={config} user={user} onAgain={() => setRound((r) => r + 1)} />;
+  return <Runner key={round} items={state.data} config={config} user={user} onAgain={() => setRound((r) => r + 1)} />;
 }
 
-/** /jugar/<materia>/<tema>/<id>: un problema puntual. */
-export function SessionSingle({ subject, topic, id, user }: { subject: string; topic: string; id: string; user: User | null }) {
+/** /jugar/<materia>/<tema>/<id>: un problema puntual; continúa desde los pasos pendientes. */
+export function SessionSingle({ subject, topic, id, user, ready }: { subject: string; topic: string; id: string; user: User | null; ready: boolean }) {
   const config: SessionConfig = useMemo(
     () => ({ subject, topics: [topic], count: 1, stepLimit: 'contenido', totalMin: null, mode: 'nueva' }),
     [subject, topic],
   );
   const [round, setRound] = useState(0);
-  const pick: ProblemPick[] = useMemo(() => [{ topic, id }], [topic, id]);
-  const state = useAsync(() => loadProblems(subject, pick), `${subject}/${topic}/${id}`);
-  if (state.status === 'loading') return <Message>Cargando…</Message>;
+  const [replayAll, setReplayAll] = useState(false);
+  const state = useAsync(async () => {
+    const [full] = await loadProblems(subject, [{ topic, id }]);
+    const progress: Progress = user ? ((await loadAggregates(user.uid))?.progress ?? {}) : {};
+    return { full: full!, item: toPlayItem(full!, progress, 'nueva') };
+  }, `${subject}/${topic}/${id}#${round}#${ready ? (user?.uid ?? 'anon') : 'wait'}`);
+
+  if (!ready || state.status === 'loading') return <Message>Cargando…</Message>;
   if (state.status === 'error') return <Message tone="error">{state.error}</Message>;
-  return <Runner key={`${id}#${round}`} problems={state.data} config={config} user={user} onAgain={() => setRound((r) => r + 1)} />;
+  const { full, item } = state.data;
+  if (item.problem.steps.length === 0 && !replayAll)
+    return (
+      <div className="anim-in space-y-3">
+        <Message>
+          Ya resolviste todos los pasos de «<Tex>{full.title}</Tex>».
+        </Message>
+        <div className="flex gap-3">
+          <Button variant="ghost" onClick={() => setReplayAll(true)}>
+            Jugarlo de nuevo igualmente
+          </Button>
+          <Link to={subjectPath(subject)} className="rounded-md bg-[var(--ink)] px-4 py-2 text-sm font-medium text-[var(--paper)] hover:opacity-85">
+            Elegir otros problemas
+          </Link>
+        </div>
+      </div>
+    );
+  const items = [replayAll ? { problem: full, totalSteps: full.steps.length } : item];
+  return <Runner key={`${id}#${round}#${replayAll}`} items={items} config={config} user={user} onAgain={() => setRound((r) => r + 1)} />;
 }
 
 // ---------- Partida ----------
 
-function Runner({ problems, config, user, onAgain }: { problems: Problem[]; config: SessionConfig; user: User | null; onAgain: () => void }) {
+function Runner({ items, config, user, onAgain }: { items: PlayItem[]; config: SessionConfig; user: User | null; onAgain: () => void }) {
+  const problems = useMemo(() => items.map((it) => it.problem), [items]);
   const [startedAt] = useState(() => Date.now());
   const [games, setGames] = useState<GameState[]>(() => problems.map((p) => newGame(p, startedAt)));
   const [current, setCurrent] = useState(0);
@@ -114,7 +159,7 @@ function Runner({ problems, config, user, onAgain }: { problems: Problem[]; conf
   const totalDeadline = config.totalMin !== null ? startedAt + config.totalMin * 60_000 : null;
 
   if (ended)
-    return <SessionSummary problems={problems} games={games} config={config} user={user} startedAt={startedAt} onAgain={onAgain} />;
+    return <SessionSummary items={items} games={games} config={config} user={user} startedAt={startedAt} onAgain={onAgain} />;
 
   return (
     <div className="space-y-6">
@@ -150,6 +195,7 @@ function Runner({ problems, config, user, onAgain }: { problems: Problem[]; conf
       <ProblemPlayer
         key={current}
         problem={problem}
+        note={items[current]!.note}
         game={game}
         orders={orders[current]!}
         config={config}
@@ -196,6 +242,7 @@ function Statement({ text }: { text: string }) {
 
 function ProblemPlayer({
   problem,
+  note,
   game,
   orders,
   config,
@@ -204,6 +251,7 @@ function ProblemPlayer({
   advanceLabel,
 }: {
   problem: Problem;
+  note?: string;
   game: GameState;
   orders: number[][];
   config: SessionConfig;
@@ -268,6 +316,7 @@ function ProblemPlayer({
           </button>
         </div>
         {showStatement && <Statement text={problem.statement} />}
+        {note && <p className="mt-3 border-t border-[var(--line)] pt-2 text-sm text-[var(--muted)]">{note}</p>}
       </section>
 
       <div className="flex flex-wrap items-center justify-between gap-3 text-sm">
@@ -529,25 +578,28 @@ function useCountUp(target: number, ms = 700): number {
 }
 
 function SessionSummary({
-  problems,
+  items,
   games,
   config,
   user,
   startedAt,
   onAgain,
 }: {
-  problems: Problem[];
+  items: PlayItem[];
   games: GameState[];
   config: SessionConfig;
   user: User | null;
   startedAt: number;
   onAgain: () => void;
 }) {
-  const summary = useMemo(() => summarizeSession(problems.map((problem, i) => ({ problem, game: games[i]! }))), [problems, games]);
+  const summary = useMemo(
+    () => summarizeSession(items.map((it, i) => ({ problem: it.problem, game: games[i]!, totalSteps: it.totalSteps }))),
+    [items, games],
+  );
   const [save, setSave] = useState<SaveState>({ status: 'idle' });
   const saved = useRef(false);
   const shown = useCountUp(summary.score);
-  const titles = useMemo(() => new Map(problems.map((p) => [p.id, p.title])), [problems]);
+  const titles = useMemo(() => new Map(items.map((it) => [it.problem.id, it.problem.title])), [items]);
 
   useEffect(() => {
     if (!user || saved.current || summary.steps === 0) return;

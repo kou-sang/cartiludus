@@ -89,7 +89,8 @@ function HistoryFor({ uid }: { uid: string }) {
   if (agg === undefined) return <Message>Cargando…</Message>;
   if (agg === null) return <Message>Todavía no jugaste ninguna partida con sesión iniciada.</Message>;
 
-  const reviewIds = Object.keys(agg.review);
+  const reviewIds = Object.keys(agg.progress).filter((id) => (agg.progress[id]?.rev.length ?? 0) > 0);
+  const reviewSteps = reviewIds.reduce((n, id) => n + (agg.progress[id]?.rev.length ?? 0), 0);
   const topicRows = Object.entries(agg.byTopic).sort(
     ([a], [b]) => (lookup.topics.get(a)?.order ?? 99) - (lookup.topics.get(b)?.order ?? 99),
   );
@@ -102,13 +103,14 @@ function HistoryFor({ uid }: { uid: string }) {
         <Stat label="Partidas" value={String(agg.played)} delay={0} />
         <Stat label="Puntaje total" value={fmt(agg.score)} delay={60} />
         <Stat label="A la primera" value={firstPct === null ? '—' : `${firstPct} %`} delay={120} />
-        <Stat label="Para repasar" value={String(reviewIds.length)} delay={180} />
+        <Stat label="Pasos a repasar" value={String(reviewSteps)} delay={180} />
       </section>
 
       {reviewIds.length > 0 && reviewSubject && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-dashed border-[var(--line)] px-4 py-3 text-sm">
           <span>
-            Tenés {reviewIds.length} {reviewIds.length === 1 ? 'problema' : 'problemas'} para repasar.
+            Tenés {reviewSteps} {reviewSteps === 1 ? 'paso' : 'pasos'} para repasar en {reviewIds.length}{' '}
+            {reviewIds.length === 1 ? 'problema' : 'problemas'}.
           </span>
           <Link
             to={sessionPath(reviewSubject, `n=${Math.min(10, reviewIds.length)}&paso=contenido&modo=repaso`)}

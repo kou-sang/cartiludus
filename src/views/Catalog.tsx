@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { User } from 'firebase/auth';
+import { problemStatus, type Progress } from '../../shared/session';
+import { loadAggregates } from '../lib/progress';
 import { Tex } from '../components/Tex';
 import { Dots, Link, Message } from '../components/ui';
 import { playPath, subjectPath } from '../lib/router';
 import { useIndex } from '../lib/useContent';
 
-export function Catalog({ subject: subjectId }: { subject: string }) {
+export function Catalog({ subject: subjectId, user }: { subject: string; user: User | null }) {
   const index = useIndex();
   const [open, setOpen] = useState<string | null>(null);
+  const [progress, setProgress] = useState<Progress>({});
+
+  useEffect(() => {
+    if (!user) return setProgress({});
+    loadAggregates(user.uid).then(
+      (a) => setProgress(a?.progress ?? {}),
+      () => setProgress({}),
+    );
+  }, [user]);
 
   if (index.status === 'loading') return <Message>Cargando…</Message>;
   if (index.status === 'error') return <Message tone="error">{index.error}</Message>;
@@ -54,7 +66,7 @@ export function Catalog({ subject: subjectId }: { subject: string }) {
                             </span>
                             <span className="flex shrink-0 items-center gap-3 text-xs text-[var(--muted)]">
                               {p.difficulty !== undefined && <Dots n={p.difficulty} />}
-                              <span>{p.steps} pasos</span>
+                              <StatusBadge {...problemStatus(progress, p.id, p.version, p.steps)} steps={p.steps} />
                             </span>
                           </Link>
                         </li>
@@ -69,4 +81,20 @@ export function Catalog({ subject: subjectId }: { subject: string }) {
       ))}
     </div>
   );
+}
+
+function StatusBadge({ done, rev, complete, steps }: { done: number; rev: number; complete: boolean; steps: number }) {
+  if (complete)
+    return (
+      <span className="text-[var(--ok)]" title={rev ? `${rev} pasos para repasar` : 'Resuelto'}>
+        ✓ resuelto{rev ? ` · ${rev} a repasar` : ''}
+      </span>
+    );
+  if (done > 0)
+    return (
+      <span title="Pasos resueltos">
+        {done}/{steps} pasos
+      </span>
+    );
+  return <span>{steps} pasos</span>;
 }

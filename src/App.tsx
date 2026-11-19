@@ -43,9 +43,9 @@ export function App() {
       <main key={route.name === 'session' ? loc.key : loc.path}>
         {route.name === 'home' && <Home />}
         {route.name === 'setup' && <Setup subject={route.subject} user={user} />}
-        {route.name === 'catalog' && <Catalog subject={route.subject} />}
+        {route.name === 'catalog' && <Catalog subject={route.subject} user={user} />}
         {route.name === 'session' && <SessionFromConfig subject={route.subject} search={loc.search} user={user} ready={ready} />}
-        {route.name === 'play' && <SessionSingle subject={route.subject} topic={route.topic} id={route.id} user={user} />}
+        {route.name === 'play' && <SessionSingle subject={route.subject} topic={route.topic} id={route.id} user={user} ready={ready} />}
         {route.name === 'history' && <History user={user} ready={ready} />}
         {route.name === 'notFound' && (
           <Message>

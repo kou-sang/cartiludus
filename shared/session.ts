@@ -1,6 +1,6 @@
 // Partida = varios problemas elegidos según la configuración. Funciones puras.
 import { CATEGORIES, type ContentIndex, type Problem } from './model';
-import { isStepDone, shuffledOrder, summarize, type ByCategory, type CategoryStats, type GameState } from './engine';
+import { isStepDone, shuffledOrder, stepResult, summarize, type ByCategory, type CategoryStats, type GameState } from './engine';
 
 // ---------- Configuración ----------
 
@@ -74,15 +74,56 @@ export interface ProblemPick {
   id: string;
 }
 
-/** Candidatos según temas y modo; en repaso, sólo los marcados en `review`. */
-export function candidates(index: ContentIndex, config: SessionConfig, review: Record<string, unknown> = {}): ProblemPick[] {
+/** Progreso de un problema: pasos resueltos y pasos para repasar (resueltos con errores, pista o fuera de tiempo). */
+export interface ProgressEntry {
+  /** Versión del problema a la que corresponde; si cambia, el progreso se descarta. */
+  v: number;
+  done: string[];
+  rev: string[];
+  /** ms de la última actualización. */
+  t: number;
+}
+export type Progress = Record<string, ProgressEntry>;
+
+const entryFor = (progress: Progress, id: string, version: number): ProgressEntry | undefined => {
+  const e = progress[id];
+  return e && e.v === version ? e : undefined;
+};
+
+/**
+ * Candidatos según temas y modo.
+ * - nueva: problemas con pasos sin resolver (los resueltos no se vuelven a jugar).
+ * - repaso: problemas con pasos para repasar.
+ */
+export function candidates(index: ContentIndex, config: SessionConfig, progress: Progress = {}): ProblemPick[] {
   const subject = index.subjects.find((s) => s.id === config.subject);
   if (!subject) return [];
   const topics = new Set(config.topics);
   return subject.topics
     .filter((t) => topics.size === 0 || topics.has(t.id))
-    .flatMap((t) => t.problems.map((p) => ({ topic: t.id, id: p.id })))
-    .filter((p) => config.mode === 'nueva' || p.id in review);
+    .flatMap((t) =>
+      t.problems
+        .filter((p) => {
+          const e = entryFor(progress, p.id, p.version);
+          return config.mode === 'nueva' ? (e?.done.length ?? 0) < p.steps : (e?.rev.length ?? 0) > 0;
+        })
+        .map((p) => ({ topic: t.id, id: p.id })),
+    );
+}
+
+/** Estado de un problema para mostrar en el catálogo. */
+export function problemStatus(progress: Progress, id: string, version: number, steps: number): { done: number; rev: number; complete: boolean } {
+  const e = entryFor(progress, id, version);
+  const done = e?.done.length ?? 0;
+  return { done, rev: e?.rev.length ?? 0, complete: done >= steps };
+}
+
+/** Pasos a jugar de un problema según el progreso y el modo. */
+export function stepsToPlay(problem: Problem, progress: Progress, mode: Mode): Problem['steps'] {
+  const e = entryFor(progress, problem.id, problem.version);
+  if (!e) return problem.steps;
+  if (mode === 'repaso') return problem.steps.filter((s) => e.rev.includes(s.id));
+  return problem.steps.filter((s) => !e.done.includes(s.id));
 }
 
 /** `count` problemas al azar, sin repetir, presentados en orden de práctica. */
@@ -100,8 +141,12 @@ export interface PlayedProblem {
   score: number;
   steps: number;
   firstTry: number;
-  /** Se jugaron todos sus pasos. */
+  /** Se jugaron todos los pasos de esta partida. */
   complete: boolean;
+  /** Sólo para actualizar el progreso (no se guardan en la partida). */
+  solvedIds?: string[];
+  firstTryIds?: string[];
+  totalSteps?: number;
 }
 
 export interface SessionSummary {
@@ -114,9 +159,10 @@ export interface SessionSummary {
   problems: PlayedProblem[];
 }
 
-export function summarizeSession(played: Array<{ problem: Problem; game: GameState }>): SessionSummary {
+/** `problem` puede ser un subconjunto de pasos del original; `totalSteps` es la cantidad del original. */
+export function summarizeSession(played: Array<{ problem: Problem; game: GameState; totalSteps?: number }>): SessionSummary {
   const out: SessionSummary = { score: 0, steps: 0, firstTry: 0, hintsUsed: 0, timeouts: 0, byCategory: {}, problems: [] };
-  for (const { problem, game } of played) {
+  for (const { problem, game, totalSteps } of played) {
     const s = summarize(problem, game);
     if (s.steps === 0) continue;
     out.score += s.score;
@@ -136,6 +182,9 @@ export function summarizeSession(played: Array<{ problem: Problem; game: GameSta
       steps: s.steps,
       firstTry: s.firstTry,
       complete: game.steps.every(isStepDone),
+      solvedIds: problem.steps.filter((_, i) => stepResult(game.steps[i]!).solved).map((st) => st.id),
+      firstTryIds: problem.steps.filter((_, i) => stepResult(game.steps[i]!).firstTry).map((st) => st.id),
+      totalSteps: totalSteps ?? problem.steps.length,
     });
   }
   return out;
@@ -161,11 +210,10 @@ export interface UserAggregates {
   firstTry: number;
   byCategory: ByCategory;
   byTopic: Record<string, TopicStats>;
-  /** Problemas para repasar: id → ms de la última vez que se falló. */
-  review: Record<string, number>;
+  progress: Progress;
 }
 
-export const REVIEW_MAX = 500;
+export const PROGRESS_MAX = 1000;
 
 export function mergeAggregates(prev: Partial<UserAggregates> | undefined, s: SessionSummary, now: number): UserAggregates {
   const byCategory: ByCategory = { ...(prev?.byCategory ?? {}) };
@@ -175,24 +223,36 @@ export function mergeAggregates(prev: Partial<UserAggregates> | undefined, s: Se
   }
 
   const byTopic: Record<string, TopicStats> = { ...(prev?.byTopic ?? {}) };
-  const review: Record<string, number> = { ...(prev?.review ?? {}) };
+  const progress: Progress = { ...(prev?.progress ?? {}) };
   for (const p of s.problems) {
+    const old = progress[p.id]?.v === p.version ? progress[p.id] : undefined;
+    const done = new Set(old?.done ?? []);
+    const rev = new Set(old?.rev ?? []);
+    const firstTry = new Set(p.firstTryIds ?? []);
+    for (const id of p.solvedIds ?? []) {
+      done.add(id);
+      // A la primera → sale del repaso; resuelto con errores, pista o tarde → entra.
+      if (firstTry.has(id)) rev.delete(id);
+      else rev.add(id);
+    }
+    const total = p.totalSteps ?? p.steps;
+    const wasComplete = (old?.done.length ?? 0) >= total;
+    const nowComplete = done.size >= total;
+    progress[p.id] = { v: p.version, done: [...done], rev: [...rev], t: now };
+
     const t = byTopic[p.topic];
     byTopic[p.topic] = {
-      problems: (t?.problems ?? 0) + (p.complete ? 1 : 0),
+      problems: (t?.problems ?? 0) + (nowComplete && !wasComplete ? 1 : 0),
       steps: (t?.steps ?? 0) + p.steps,
       firstTry: (t?.firstTry ?? 0) + p.firstTry,
       score: (t?.score ?? 0) + p.score,
     };
-    // Perfecto y completo → sale del repaso; algún paso no acertado a la primera → entra.
-    if (p.firstTry < p.steps) review[p.id] = now;
-    else if (p.complete) delete review[p.id];
   }
   // Acotar: se descartan los más viejos.
-  const ids = Object.keys(review);
-  if (ids.length > REVIEW_MAX) {
-    ids.sort((a, b) => review[a]! - review[b]!);
-    for (const id of ids.slice(0, ids.length - REVIEW_MAX)) delete review[id];
+  const ids = Object.keys(progress);
+  if (ids.length > PROGRESS_MAX) {
+    ids.sort((a, b) => progress[a]!.t - progress[b]!.t);
+    for (const id of ids.slice(0, ids.length - PROGRESS_MAX)) delete progress[id];
   }
 
   return {
@@ -202,6 +262,6 @@ export function mergeAggregates(prev: Partial<UserAggregates> | undefined, s: Se
     firstTry: (prev?.firstTry ?? 0) + s.firstTry,
     byCategory,
     byTopic,
-    review,
+    progress,
   };
 }

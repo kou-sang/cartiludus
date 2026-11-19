@@ -10,7 +10,6 @@ Stack: Vite + React + TypeScript, KaTeX, Firebase Auth/Firestore (proyecto compa
 npm install
 cp .env.example .env.local   # completar con la config pública de Firebase (la misma que CRYPTICUS)
 npm run dev                  # build:content + vite
-npm test                     # validador de contenido y LaTeX
 npm run deploy               # build + wrangler deploy
 ```
 
@@ -39,7 +38,8 @@ Flujo: materia → configuración → partida → resumen.
 - **Configuración** (`/m/<materia>`): modo (partida nueva o repaso de errores), prácticas, cantidad de problemas (3/5/10/15), límite por paso (según el problema, sin límite, 30/60/120 s) y tiempo total (sin límite, 5/10/20/30 min). Se recuerda la última configuración.
 - **Partida** (`/partida/<materia>?…`): N problemas al azar de las prácticas elegidas. Al agotarse el tiempo total, o con «Terminar partida», cuenta lo jugado hasta ese momento.
 - **Problema puntual** (`/m/<materia>/problemas` → `/jugar/…`): un solo problema con los tiempos del contenido.
-- **Repaso de errores**: problemas donde algún paso no salió a la primera. Salen del repaso al resolverlos perfecto.
+- **Progreso por paso** (con sesión): los pasos resueltos no se vuelven a jugar; un problema a medias continúa desde el primer paso pendiente, también en otra sesión. La partida nueva sólo ofrece problemas con pasos sin resolver.
+- **Repaso de errores**: sólo los pasos resueltos con errores, pista o fuera de tiempo. Salen del repaso al resolverlos a la primera.
 
 Puntaje por paso (`shared/engine.ts`):
 
@@ -52,7 +52,7 @@ Puntaje por paso (`shared/engine.ts`):
 
 Piso de −3 por paso. Al errar no se muestra la correcta. Pistas progresivas (hasta 3 por paso); usar cualquiera hace que el acierto valga 0. Durante el problema se pueden revisar los pasos ya respondidos. Atajos: `1`–`4` cartas, `P` pista, `Enter` siguiente, `←` `→` revisar pasos.
 
-Con sesión iniciada, cada partida se guarda en una transacción: `pq_sessions/{uid}/items/{id}` (la partida, con sus problemas) y `pq_users/{uid}` (totales, `byCategory`, `byTopic` y `review`). `/historial` muestra estadísticas por práctica y por categoría, y las partidas de a 10.
+Con sesión iniciada, cada partida se guarda en una transacción: `pq_sessions/{uid}/items/{id}` (la partida, con sus problemas) y `pq_users/{uid}` (totales, `byCategory`, `byTopic` y `progress`: por problema, versión, pasos resueltos y pasos a repasar). `/historial` muestra estadísticas por práctica y por categoría, y las partidas de a 10.
 
 ## Firebase Auth en `*.workers.dev`
 

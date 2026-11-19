@@ -9,6 +9,7 @@ import {
   stepLimitLabel,
   TOTAL_OPTIONS,
   type Mode,
+  type Progress,
   type SessionConfig,
 } from '../../shared/session';
 import { Button, Field, Link, Message, Segmented } from '../components/ui';
@@ -28,7 +29,7 @@ function loadStored(subject: string): Partial<SessionConfig> {
 
 export function Setup({ subject, user }: { subject: string; user: User | null }) {
   const index = useIndex();
-  const [review, setReview] = useState<Record<string, number> | null>(null);
+  const [progress, setProgress] = useState<Progress | null>(null);
   const [config, setConfig] = useState<SessionConfig | null>(null);
 
   const meta = index.status === 'ok' ? index.data.subjects.find((s) => s.id === subject) : undefined;
@@ -43,20 +44,20 @@ export function Setup({ subject, user }: { subject: string; user: User | null })
   }, [meta, subject, config]);
 
   useEffect(() => {
-    if (!user) return setReview(null);
+    if (!user) return setProgress(null);
     loadAggregates(user.uid).then(
-      (a) => setReview(a?.review ?? {}),
-      () => setReview({}),
+      (a) => setProgress(a?.progress ?? {}),
+      () => setProgress({}),
     );
   }, [user]);
 
   const pool = useMemo(
-    () => (index.status === 'ok' && config ? candidates(index.data, config, review ?? {}) : []),
-    [index, config, review],
+    () => (index.status === 'ok' && config ? candidates(index.data, config, progress ?? {}) : []),
+    [index, config, progress],
   );
   const reviewCount = useMemo(
-    () => (index.status === 'ok' && config ? candidates(index.data, { ...config, mode: 'repaso' }, review ?? {}).length : 0),
-    [index, config, review],
+    () => (index.status === 'ok' && config ? candidates(index.data, { ...config, mode: 'repaso' }, progress ?? {}).length : 0),
+    [index, config, progress],
   );
 
   if (index.status === 'loading' || (meta && !config)) return <Message>Cargando…</Message>;
@@ -100,10 +101,10 @@ export function Setup({ subject, user }: { subject: string; user: User | null })
         label="Modo"
         hint={
           config.mode === 'repaso'
-            ? 'Problemas donde no acertaste todos los pasos a la primera. Salen del repaso al resolverlos perfecto.'
+            ? 'Sólo los pasos que resolviste con errores, pista o fuera de tiempo. Salen del repaso al resolverlos a la primera.'
             : !user
-              ? 'Ingresá para habilitar el repaso de errores.'
-              : undefined
+              ? 'Ingresá para guardar tu avance y habilitar el repaso de errores.'
+              : 'Los pasos que ya resolviste no se repiten: los problemas a medias continúan donde quedaron.'
         }
       >
         <Segmented<Mode>
@@ -112,7 +113,7 @@ export function Setup({ subject, user }: { subject: string; user: User | null })
           value={config.mode}
           onChange={(mode) => set({ mode })}
           disabled={(m) => m === 'repaso' && (!user || reviewCount === 0)}
-          render={(m) => (m === 'nueva' ? 'Partida nueva' : `Repaso de errores${user && review ? ` (${reviewCount})` : ''}`)}
+          render={(m) => (m === 'nueva' ? 'Partida nueva' : `Repaso de errores${user && progress ? ` (${reviewCount})` : ''}`)}
         />
       </Field>
 
@@ -142,7 +143,7 @@ export function Setup({ subject, user }: { subject: string; user: User | null })
         </div>
       </Field>
 
-      <Field label="Cantidad de problemas" hint={`${pool.length} disponibles con esta selección.`}>
+      <Field label="Cantidad de problemas" hint={`${pool.length} ${config.mode === 'repaso' ? 'con pasos para repasar' : user ? 'con pasos sin resolver' : 'disponibles'} con esta selección.`}>
         <Segmented<number>
           label="Cantidad de problemas"
           options={COUNT_OPTIONS}

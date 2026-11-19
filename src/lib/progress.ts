@@ -47,7 +47,8 @@ export async function saveSession(uid: string, config: SessionConfig, summary: S
       subject: config.subject,
       topics: [...new Set(summary.problems.map((p) => p.topic))],
       config: { count: config.count, stepLimit: config.stepLimit, totalMin: config.totalMin, mode: config.mode },
-      problems: summary.problems,
+      // Sin los datos internos de progreso.
+      problems: summary.problems.map(({ solvedIds: _s, firstTryIds: _f, totalSteps: _t, ...p }) => p),
       score: summary.score,
       steps: summary.steps,
       firstTry: summary.firstTry,
@@ -74,7 +75,7 @@ export async function loadAggregates(uid: string): Promise<UserAggregates | null
     firstTry: d.firstTry ?? 0,
     byCategory: d.byCategory ?? {},
     byTopic: d.byTopic ?? {},
-    review: d.review ?? {},
+    progress: d.progress ?? {},
   };
 }
 
