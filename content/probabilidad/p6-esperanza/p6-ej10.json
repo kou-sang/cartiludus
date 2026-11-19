@@ -1,0 +1,170 @@
+{
+  "id": "p6-ej10",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Covarianza nula e independencia",
+  "source": "Práctica 6 · Ejercicio 10",
+  "statement": "(a) Mostrar con un ejemplo que $\\mathrm{Cov}(X, Y) = 0$ no implica que $X$ e $Y$ sean independientes. Sugerencia: puede considerar un vector aleatorio con densidad uniforme en el pentágono de vértices $(-1, 1)$, $(1, 1)$, $(-1, 0)$, $(0, -1)$ y $(1, 0)$.\n(b) Sean $X$ e $Y$ dos variables aleatorias que toman sólo dos valores cada una. Probar que si $\\mathrm{Cov}(X, Y) = 0$ entonces $X$ e $Y$ son independientes. Sugerencia: considerar primero el caso en que los dos valores que toman son 0 y 1.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "sim",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Qué simetría tiene el pentágono?",
+      "hints": [
+        "Mirar qué pasa con los vértices al cambiar $x$ por $-x$."
+      ],
+      "cards": [
+        {
+          "text": "Es simétrico respecto del origen",
+          "correct": false,
+          "explanation": "$(1, 1)$ iría a $(-1, -1)$, fuera del pentágono."
+        },
+        {
+          "text": "Es simétrico respecto del eje $y$: $(x, y) \\mapsto (-x, y)$ lo deja igual",
+          "correct": true,
+          "explanation": "Los vértices se intercambian de a pares y $(0,-1)$ queda fijo."
+        },
+        {
+          "text": "Es simétrico respecto del eje $x$",
+          "correct": false,
+          "explanation": "El vértice $(0, -1)$ iría a $(0, 1)$, que no es vértice."
+        },
+        {
+          "text": "No tiene simetrías",
+          "correct": false,
+          "explanation": "Revisar la reflexión respecto del eje $y$."
+        }
+      ]
+    },
+    {
+      "id": "cov",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Por qué $\\mathrm{Cov}(X,Y) = 0$?",
+      "hints": [
+        "Por la simetría, $(-X, Y)$ tiene la misma distribución que $(X, Y)$.",
+        "Entonces $E(X) = E(-X)$ y $E(XY) = E(-XY)$."
+      ],
+      "cards": [
+        {
+          "text": "Porque el pentágono es convexo",
+          "correct": false,
+          "explanation": "La convexidad no implica covarianza nula."
+        },
+        {
+          "text": "$E(X) = 0$ y $E(XY) = 0$ por la simetría, así que $\\mathrm{Cov} = E(XY) - E(X)E(Y) = 0$",
+          "correct": true,
+          "explanation": "Una cantidad igual a su opuesta vale 0."
+        },
+        {
+          "text": "Porque $X$ e $Y$ son independientes",
+          "correct": false,
+          "explanation": "Justamente se quiere mostrar que no lo son."
+        },
+        {
+          "text": "Porque $E(Y) = 0$",
+          "correct": false,
+          "explanation": "$E(Y)$ no es 0 (hay más área arriba); lo que se anula es lo que involucra a $X$."
+        }
+      ]
+    },
+    {
+      "id": "dep",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Por qué no son independientes?",
+      "hints": [
+        "Si fueran independientes, el soporte sería un producto de intervalos.",
+        "Mirar cerca de $(0{,}9;\\ -0{,}9)$."
+      ],
+      "cards": [
+        {
+          "text": "Porque las marginales no son uniformes",
+          "correct": false,
+          "explanation": "Eso no dice nada sobre independencia."
+        },
+        {
+          "text": "En $(0, 0)$ la densidad es 0",
+          "correct": false,
+          "explanation": "$(0,0)$ está dentro del pentágono."
+        },
+        {
+          "text": "Cerca de $(0{,}9;\\ -0{,}9)$ la densidad es 0, pero $f_X(0{,}9) > 0$ y $f_Y(-0{,}9) > 0$",
+          "correct": true,
+          "explanation": "El producto de las marginales es positivo donde la conjunta se anula."
+        },
+        {
+          "text": "Porque $\\mathrm{Cov} \\neq 0$",
+          "correct": false,
+          "explanation": "La covarianza es 0."
+        }
+      ]
+    },
+    {
+      "id": "b01",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "(b), caso con valores 0 y 1: ¿qué dice $\\mathrm{Cov}(X,Y) = 0$?",
+      "hints": [
+        "$E(XY) = P(X = 1, Y = 1)$ y $E(X) = P(X = 1)$."
+      ],
+      "cards": [
+        {
+          "text": "No dice nada sobre independencia",
+          "correct": false,
+          "explanation": "Para indicadoras, covarianza nula equivale a independencia de los eventos."
+        },
+        {
+          "text": "$P(X = 1, Y = 1) = P(X = 1)P(Y = 1)$: los eventos $\\{X = 1\\}$ e $\\{Y = 1\\}$ son independientes",
+          "correct": true,
+          "explanation": "Si $A$ y $B$ son independientes, también lo son $A$ con $B^c$, $A^c$ con $B$ y $A^c$ con $B^c$: eso cubre los cuatro valores del vector."
+        },
+        {
+          "text": "$P(X = 1) = P(Y = 1)$",
+          "correct": false,
+          "explanation": "La covarianza no compara marginales."
+        },
+        {
+          "text": "$P(X = 1, Y = 1) = 0$",
+          "correct": false,
+          "explanation": "Eso daría $\\mathrm{Cov} = -P(X=1)P(Y=1)$."
+        }
+      ]
+    },
+    {
+      "id": "bgen",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "Si $X$ toma los valores $a \\ne b$, ¿cómo se reduce al caso 0–1?",
+      "hints": [
+        "$X^* = \\tfrac{X - a}{b - a}$ toma valores 0 y 1.",
+        "$\\mathrm{Cov}(cX + d, eY + g) = ce\\,\\mathrm{Cov}(X, Y)$."
+      ],
+      "cards": [
+        {
+          "text": "No se puede: sólo vale para 0 y 1",
+          "correct": false,
+          "explanation": "La transformación afín preserva la covarianza nula y la independencia."
+        },
+        {
+          "text": "Hay que probar cada caso por separado",
+          "correct": false,
+          "explanation": "Una transformación afín reduce todos los casos al 0–1."
+        },
+        {
+          "text": "Con $X^* = \\tfrac{X-a}{b-a}$ e $Y^*$ análoga: $\\mathrm{Cov}(X^*, Y^*) = 0$, y $X^*, Y^*$ son funciones biyectivas de $X, Y$",
+          "correct": true,
+          "explanation": "Por el caso 0–1 son independientes, y funciones biyectivas de variables independientes lo siguen siendo (y al revés)."
+        },
+        {
+          "text": "Tomando $X^* = X^2$",
+          "correct": false,
+          "explanation": "No lleva los valores a 0 y 1 en general."
+        }
+      ]
+    }
+  ]
+}

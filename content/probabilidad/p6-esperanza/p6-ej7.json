@@ -1,0 +1,226 @@
+{
+  "id": "p6-ej7",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Momentos de un vector en un triángulo",
+  "source": "Práctica 6 · Ejercicio 7",
+  "statement": "Sea $(X, Y)$ un vector aleatorio con función de densidad conjunta $f_{XY}(x,y) = \\tfrac67(3y + x)$ si $0 \\le x \\le y \\le 1$ y $0$ en caso contrario. Hallar $E(X)$, $E(Y)$, $\\mathrm{Var}(X)$, $\\mathrm{Var}(Y)$, $\\mathrm{Cov}(X,Y)$, $\\mathrm{Var}(X - Y)$ y $\\rho(X,Y)$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "marg",
+      "kind": "compute",
+      "prompt": "¿Cuáles son las marginales?",
+      "hints": [
+        "$f_Y(y) = \\int_0^y f\\,dx$ y $f_X(x) = \\int_x^1 f\\,dy$.",
+        "$\\int_0^y (3y + x)\\,dx = 3y^2 + \\tfrac{y^2}{2}$."
+      ],
+      "cards": [
+        {
+          "text": "$f_Y(y) = \\tfrac67(3y + \\tfrac12)$",
+          "correct": false,
+          "explanation": "Integra $x$ en $[0,1]$, fuera del triángulo."
+        },
+        {
+          "text": "$f_Y(y) = 3y^2$ y $f_X(x) = \\tfrac17(9 + 6x - 15x^2)$, en $[0,1]$",
+          "correct": true,
+          "explanation": "Integrando en la variable que falta, sobre el triángulo $x \\le y$."
+        },
+        {
+          "text": "$f_Y(y) = \\tfrac72 y^2$",
+          "correct": false,
+          "explanation": "Falta multiplicar por $\\tfrac67$."
+        },
+        {
+          "text": "$f_X(x) = 3x^2$",
+          "correct": false,
+          "explanation": "Copia la marginal de $Y$."
+        }
+      ]
+    },
+    {
+      "id": "ey",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $E(Y)$ y $\\mathrm{Var}(Y)$?",
+      "hints": [
+        "$E(Y) = \\int_0^1 3y^3\\,dy$; $E(Y^2) = \\int_0^1 3y^4\\,dy$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac34$ y $\\tfrac35$",
+          "correct": false,
+          "explanation": "$\\tfrac35$ es $E(Y^2)$."
+        },
+        {
+          "text": "$\\tfrac34$ y $\\tfrac35 - \\tfrac{9}{16} = \\tfrac{3}{80}$",
+          "correct": true,
+          "explanation": "Momentos de $f_Y(y) = 3y^2$."
+        },
+        {
+          "text": "$\\tfrac12$ y $\\tfrac1{12}$",
+          "correct": false,
+          "explanation": "Corresponden a una uniforme."
+        },
+        {
+          "text": "$\\tfrac35$ y $\\tfrac{3}{80}$",
+          "correct": false,
+          "explanation": "Intercambia el primer y el segundo momento."
+        }
+      ]
+    },
+    {
+      "id": "ex",
+      "kind": "compute",
+      "prompt": "Con $E(X) = \\tfrac{11}{28}$ y $E(X^2) = \\tfrac{3}{14}$, ¿cuánto vale $\\mathrm{Var}(X)$?",
+      "hints": [
+        "$\\tfrac{3}{14} - \\left(\\tfrac{11}{28}\\right)^2$, con denominador 784."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{3}{14} - \\tfrac{11}{28}$",
+          "correct": false,
+          "explanation": "Resta $E(X)$ sin elevarlo al cuadrado."
+        },
+        {
+          "text": "$\\tfrac{47}{784}$",
+          "correct": true,
+          "explanation": "$\\tfrac{168}{784} - \\tfrac{121}{784}$."
+        },
+        {
+          "text": "$\\tfrac{121}{784}$",
+          "correct": false,
+          "explanation": "Es $E(X)^2$."
+        },
+        {
+          "text": "$\\tfrac{3}{14}$",
+          "correct": false,
+          "explanation": "Es $E(X^2)$."
+        }
+      ]
+    },
+    {
+      "id": "exy",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $E(XY)$?",
+      "hints": [
+        "$\\int_0^1 \\int_0^y xy \\cdot \\tfrac67(3y + x)\\,dx\\,dy$.",
+        "La interior: $y \\int_0^y (3xy + x^2)\\,dx = \\tfrac{11}{6} y^4$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{11}{28} \\cdot \\tfrac34$",
+          "correct": false,
+          "explanation": "Es $E(X)E(Y)$, que sólo coincide si hay independencia."
+        },
+        {
+          "text": "$\\tfrac{11}{30}$",
+          "correct": false,
+          "explanation": "Falta multiplicar por $\\tfrac67$."
+        },
+        {
+          "text": "$\\tfrac67 \\cdot \\tfrac{11}{30} = \\tfrac{11}{35}$",
+          "correct": true,
+          "explanation": "$\\int_0^1 \\tfrac{11}{6}y^4\\,dy = \\tfrac{11}{30}$."
+        },
+        {
+          "text": "$\\tfrac{6}{7}$",
+          "correct": false,
+          "explanation": "Es la constante de la densidad, no un momento."
+        }
+      ]
+    },
+    {
+      "id": "cov",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\mathrm{Cov}(X, Y)$?",
+      "hints": [
+        "$E(XY) - E(X)E(Y) = \\tfrac{11}{35} - \\tfrac{33}{112}$; denominador común 1120."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{11}{35}$",
+          "correct": false,
+          "explanation": "Es $E(XY)$: falta restar $E(X)E(Y)$."
+        },
+        {
+          "text": "$\\tfrac{11}{560}$",
+          "correct": true,
+          "explanation": "$\\tfrac{352 - 330}{1120} = \\tfrac{22}{1120}$."
+        },
+        {
+          "text": "$-\\tfrac{11}{560}$",
+          "correct": false,
+          "explanation": "Error de signo."
+        },
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "Sólo sería 0 si $E(XY) = E(X)E(Y)$, y no es el caso."
+        }
+      ]
+    },
+    {
+      "id": "varxy",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\mathrm{Var}(X - Y)$?",
+      "hints": [
+        "$\\mathrm{Var}(X - Y) = \\mathrm{Var}(X) + \\mathrm{Var}(Y) - 2\\,\\mathrm{Cov}(X,Y)$.",
+        "$\\tfrac{47}{784} + \\tfrac{3}{80} - \\tfrac{22}{560}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathrm{Var}(X) + \\mathrm{Var}(Y)$",
+          "correct": false,
+          "explanation": "Sólo valdría si la covarianza fuera 0."
+        },
+        {
+          "text": "$\\mathrm{Var}(X) + \\mathrm{Var}(Y) + 2\\mathrm{Cov}$",
+          "correct": false,
+          "explanation": "Ese signo corresponde a $X + Y$."
+        },
+        {
+          "text": "$\\mathrm{Var}(X) - \\mathrm{Var}(Y)$",
+          "correct": false,
+          "explanation": "Las varianzas no se restan: ambas suman."
+        },
+        {
+          "text": "$\\tfrac{57}{980} \\approx 0{,}058$",
+          "correct": true,
+          "explanation": "Fórmula de la varianza de una diferencia."
+        }
+      ]
+    },
+    {
+      "id": "rho",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\rho(X, Y)$?",
+      "hints": [
+        "$\\rho = \\dfrac{\\mathrm{Cov}}{\\sqrt{\\mathrm{Var}(X)\\mathrm{Var}(Y)}}$.",
+        "$\\sqrt{\\tfrac{47}{784}\\cdot\\tfrac{3}{80}} \\approx 0{,}0474$."
+      ],
+      "cards": [
+        {
+          "text": "$\\approx 0{,}02$",
+          "correct": false,
+          "explanation": "Es la covarianza, sin normalizar."
+        },
+        {
+          "text": "$\\approx 4{,}1$",
+          "correct": false,
+          "explanation": "Una correlación siempre está entre $-1$ y $1$."
+        },
+        {
+          "text": "$\\approx 0{,}41$",
+          "correct": true,
+          "explanation": "$\\tfrac{11/560}{0{,}0474} \\approx \\tfrac{0{,}0196}{0{,}0474}$."
+        },
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "La covarianza no es 0."
+        }
+      ]
+    }
+  ]
+}

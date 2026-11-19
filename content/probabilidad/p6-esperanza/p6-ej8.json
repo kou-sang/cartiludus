@@ -1,0 +1,233 @@
+{
+  "id": "p6-ej8",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Hipergeométrica con indicadoras",
+  "source": "Práctica 6 · Ejercicio 8",
+  "statement": "Dada una urna con $N$ bolillas de las cuales $D$ son blancas y $N - D$ son negras, se extraen $n$ sin reposición. Sean $X$ = número de bolillas blancas extraídas y $X_i = 1$ si la $i$-ésima bolilla extraída es blanca, $X_i = 0$ si es negra. Observar que $X \\sim \\mathcal H(N, D, n)$.\n(a) Mostrar que $P(X_i = 1) = \\tfrac DN$ para todo $i = 1, \\dots, n$ y que para $i \\ne j$ se tiene $P(X_i = 1, X_j = 1) = \\tfrac{D(D-1)}{N(N-1)}$. Determinar la distribución conjunta del vector $(X_i, X_j)$.\n(b) Calcular $E(X_i)$, $\\mathrm{Var}(X_i)$.\n(c) Calcular $\\mathrm{Cov}(X_i, X_j)$ para $i \\ne j$.\n(d) Hallar $E(X)$. Verificar que $\\mathrm{Var}(X) = \\dfrac{(N-n)nD(N-D)}{(N-1)N^2}$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "pi",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Por qué $P(X_i = 1) = \\tfrac DN$ para cualquier $i$?",
+      "hints": [
+        "Pensar el orden de extracción como una permutación al azar de las $N$ bolillas.",
+        "La bolilla en la posición $i$ es igualmente probable de ser cualquiera."
+      ],
+      "cards": [
+        {
+          "text": "Sólo vale para $i = 1$",
+          "correct": false,
+          "explanation": "La simetría vale para todas las posiciones."
+        },
+        {
+          "text": "Porque las extracciones son independientes",
+          "correct": false,
+          "explanation": "Sin reposición no lo son; el resultado vale por simetría."
+        },
+        {
+          "text": "Por simetría: la bolilla de la posición $i$ es uniforme entre las $N$, y $D$ son blancas",
+          "correct": true,
+          "explanation": "Igual que la primera extracción; no depende de $i$."
+        },
+        {
+          "text": "Porque $P(X_i = 1) = \\tfrac{D - i + 1}{N - i + 1}$",
+          "correct": false,
+          "explanation": "Esa sería la probabilidad si todas las anteriores fueran blancas."
+        }
+      ]
+    },
+    {
+      "id": "pij",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿De dónde sale $P(X_i = 1, X_j = 1) = \\tfrac{D(D-1)}{N(N-1)}$?",
+      "hints": [
+        "Por simetría, el par de posiciones $(i, j)$ se comporta como $(1, 2)$.",
+        "Primera blanca y, dado eso, segunda blanca."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{D}{N} \\cdot \\tfrac{D-1}{N}$",
+          "correct": false,
+          "explanation": "Después de sacar una bolilla quedan $N - 1$."
+        },
+        {
+          "text": "$\\binom D2 / \\binom N n$",
+          "correct": false,
+          "explanation": "Mezcla conteos de distinto tamaño."
+        },
+        {
+          "text": "$\\tfrac DN \\cdot \\tfrac DN$",
+          "correct": false,
+          "explanation": "Supone independencia, que sin reposición no vale."
+        },
+        {
+          "text": "$P(X_1 = 1)\\,P(X_2 = 1 \\mid X_1 = 1) = \\tfrac DN \\cdot \\tfrac{D-1}{N-1}$",
+          "correct": true,
+          "explanation": "Regla del producto; quitada una blanca quedan $D-1$ blancas entre $N-1$."
+        }
+      ]
+    },
+    {
+      "id": "conj",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(X_i = 1, X_j = 0)$?",
+      "hints": [
+        "$P(X_i = 1) = P(X_i = 1, X_j = 1) + P(X_i = 1, X_j = 0)$."
+      ],
+      "cards": [
+        {
+          "text": "$1 - \\tfrac{D(D-1)}{N(N-1)}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de no ser ambas blancas, que incluye otros casos."
+        },
+        {
+          "text": "$\\tfrac DN - \\tfrac{D(D-1)}{N(N-1)} = \\tfrac{D(N-D)}{N(N-1)}$",
+          "correct": true,
+          "explanation": "Se despeja de la marginal; por simetría $P(X_i = 0, X_j = 1)$ es igual."
+        },
+        {
+          "text": "$\\tfrac DN \\cdot \\tfrac{N-D}{N}$",
+          "correct": false,
+          "explanation": "Supone independencia."
+        },
+        {
+          "text": "$\\tfrac{(N-D)(N-D-1)}{N(N-1)}$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que ambas sean negras."
+        }
+      ]
+    },
+    {
+      "id": "b",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto valen $E(X_i)$ y $\\mathrm{Var}(X_i)$?",
+      "hints": [
+        "$X_i$ es Bernoulli con $p = \\tfrac DN$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac DN$ y $\\tfrac{D^2}{N^2}$",
+          "correct": false,
+          "explanation": "Es $E(X_i)^2$."
+        },
+        {
+          "text": "$\\tfrac DN$ y $\\tfrac DN\\left(1 - \\tfrac DN\\right)$",
+          "correct": true,
+          "explanation": "Esperanza y varianza de una Bernoulli."
+        },
+        {
+          "text": "$\\tfrac nN$ y $\\tfrac nN(1 - \\tfrac nN)$",
+          "correct": false,
+          "explanation": "Confunde la cantidad extraída con la de blancas."
+        },
+        {
+          "text": "$D$ y $D(N - D)$",
+          "correct": false,
+          "explanation": "Una indicadora vale 0 o 1."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "¿Cuánto vale $\\mathrm{Cov}(X_i, X_j)$?",
+      "hints": [
+        "$E(X_iX_j) = P(X_i = 1, X_j = 1)$.",
+        "$\\tfrac{D(D-1)}{N(N-1)} - \\tfrac{D^2}{N^2}$, con denominador $N^2(N-1)$."
+      ],
+      "cards": [
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "Sin reposición las indicadoras no son independientes."
+        },
+        {
+          "text": "$-\\dfrac{D(N-D)}{N^2(N-1)}$",
+          "correct": true,
+          "explanation": "Es negativa: sacar una blanca hace menos probable que la otra lo sea."
+        },
+        {
+          "text": "$\\dfrac{D(D-1)}{N(N-1)}$",
+          "correct": false,
+          "explanation": "Es $E(X_iX_j)$: falta restar $E(X_i)E(X_j)$."
+        },
+        {
+          "text": "$\\dfrac{D(N-D)}{N^2(N-1)}$",
+          "correct": false,
+          "explanation": "Error de signo."
+        }
+      ]
+    },
+    {
+      "id": "ex",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "¿Cuánto vale $E(X)$?",
+      "hints": [
+        "$X = \\sum_{i=1}^n X_i$ y la esperanza es lineal."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{nD}{N}$",
+          "correct": true,
+          "explanation": "$n$ veces $\\tfrac DN$."
+        },
+        {
+          "text": "$\\dfrac{nD}{N - n}$",
+          "correct": false,
+          "explanation": "No resulta de la linealidad."
+        },
+        {
+          "text": "$D$",
+          "correct": false,
+          "explanation": "No se extraen todas las bolillas."
+        },
+        {
+          "text": "$\\dfrac{D}{N}$",
+          "correct": false,
+          "explanation": "Es la esperanza de una sola indicadora."
+        }
+      ]
+    },
+    {
+      "id": "var",
+      "kind": "setup",
+      "item": "(d)",
+      "prompt": "¿Cómo se calcula $\\mathrm{Var}(X)$?",
+      "hints": [
+        "Varianza de una suma: varianzas más todas las covarianzas.",
+        "Hay $n(n-1)$ pares ordenados $(i, j)$ con $i \\ne j$."
+      ],
+      "cards": [
+        {
+          "text": "$n^2\\,\\mathrm{Var}(X_1)$",
+          "correct": false,
+          "explanation": "Las $X_i$ no son la misma variable."
+        },
+        {
+          "text": "$n\\,\\mathrm{Var}(X_1) + n(n-1)\\,\\mathrm{Cov}(X_1, X_2)$",
+          "correct": true,
+          "explanation": "Al simplificar da $\\tfrac{(N-n)nD(N-D)}{(N-1)N^2}$."
+        },
+        {
+          "text": "$n\\,\\mathrm{Var}(X_1)$",
+          "correct": false,
+          "explanation": "Ignora las covarianzas, que no son 0."
+        },
+        {
+          "text": "$n\\,\\mathrm{Var}(X_1) + \\binom n2 \\mathrm{Cov}(X_1, X_2)$",
+          "correct": false,
+          "explanation": "Cada par aparece dos veces en la varianza de la suma."
+        }
+      ]
+    }
+  ]
+}

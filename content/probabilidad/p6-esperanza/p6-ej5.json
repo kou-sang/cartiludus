@@ -1,0 +1,202 @@
+{
+  "id": "p6-ej5",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Urnas vacías: indicadoras",
+  "source": "Práctica 6 · Ejercicio 5",
+  "statement": "Se distribuyen al azar $N$ bolillas indistinguibles en $m$ urnas. Sean $X$ el número de urnas vacías, $Y$ el número de urnas que contienen exactamente una bolilla y $Z$ el número de urnas que contienen dos o más bolillas.\n(a) Hallar $E(X)$. Sugerencia: sea $X_i = 1$ si la $i$-ésima urna está vacía y $X_i = 0$ en caso contrario. Verificar que $X = \\sum_{i=1}^m X_i$.\n(b) Hallar $E(Y)$ y $E(Z)$.\n(c) Un centro cultural dispone de $m$ cuentas de correo electrónico para comunicarse con el público. Durante un día en particular, $N$ personas envían sus inquietudes vía e-mail al centro cultural, eligiendo una cuenta al azar para hacerlo. Hallar la esperanza del número de cuentas de correo que no son usadas durante dicho día.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "ind",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Por qué $E(X) = \\sum_i P(X_i = 1)$?",
+      "hints": [
+        "$X$ cuenta urnas vacías: suma 1 por cada urna vacía.",
+        "Esperanza de una indicadora: $E(X_i) = P(X_i = 1)$."
+      ],
+      "cards": [
+        {
+          "text": "Porque las $X_i$ son independientes",
+          "correct": false,
+          "explanation": "No lo son (si una urna está vacía, las otras reciben más bolillas), y la linealidad no lo necesita."
+        },
+        {
+          "text": "$X = \\sum_i X_i$, la esperanza es lineal y $E(X_i) = P(X_i = 1)$",
+          "correct": true,
+          "explanation": "No hace falta independencia entre las $X_i$: la linealidad vale siempre."
+        },
+        {
+          "text": "Porque $X \\sim \\mathrm{Bi}(m, P(X_1 = 1))$",
+          "correct": false,
+          "explanation": "Las $X_i$ no son independientes, así que $X$ no es binomial."
+        },
+        {
+          "text": "Porque las urnas están numeradas",
+          "correct": false,
+          "explanation": "La numeración no justifica la fórmula."
+        }
+      ]
+    },
+    {
+      "id": "p0",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Cada bolilla se coloca en una urna elegida al azar, independientemente de las demás. ¿Cuánto vale $P(X_i = 1)$?",
+      "hints": [
+        "La urna $i$ queda vacía si ninguna bolilla cae en ella.",
+        "Cada bolilla evita la urna $i$ con probabilidad $1 - \\tfrac1m$."
+      ],
+      "cards": [
+        {
+          "text": "$\\left(\\tfrac1m\\right)^N$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que todas las bolillas caigan en la urna $i$."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac1m\\right)^N$",
+          "correct": false,
+          "explanation": "Mezcla el complemento con la probabilidad de que todas caigan en la urna."
+        },
+        {
+          "text": "$\\left(1 - \\tfrac1m\\right)^N$",
+          "correct": true,
+          "explanation": "Las $N$ bolillas evitan la urna $i$ de manera independiente."
+        },
+        {
+          "text": "$\\tfrac1m$",
+          "correct": false,
+          "explanation": "Es la probabilidad de que una bolilla dada caiga en la urna $i$."
+        }
+      ]
+    },
+    {
+      "id": "ex",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $E(X)$?",
+      "hints": [
+        "Sumar $m$ términos iguales."
+      ],
+      "cards": [
+        {
+          "text": "$m - N$",
+          "correct": false,
+          "explanation": "Supone que cada bolilla ocupa una urna distinta."
+        },
+        {
+          "text": "$\\tfrac{N}{m}$",
+          "correct": false,
+          "explanation": "Es la cantidad media de bolillas por urna."
+        },
+        {
+          "text": "$m\\left(1 - \\tfrac1m\\right)^N$",
+          "correct": true,
+          "explanation": "Las $m$ urnas tienen la misma probabilidad de quedar vacías."
+        },
+        {
+          "text": "$\\left(1 - \\tfrac1m\\right)^N$",
+          "correct": false,
+          "explanation": "Es la probabilidad para una sola urna."
+        }
+      ]
+    },
+    {
+      "id": "uno",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Con indicadoras $Y_i$ = 1 si la urna $i$ tiene exactamente una bolilla, ¿cuánto vale $E(Y)$?",
+      "hints": [
+        "Elegir cuál bolilla cae en la urna $i$ ($N$ maneras) y que las otras $N-1$ la eviten.",
+        "$P(Y_i = 1) = N \\cdot \\tfrac1m \\left(1 - \\tfrac1m\\right)^{N-1}$."
+      ],
+      "cards": [
+        {
+          "text": "$m \\cdot \\tfrac1m \\left(1 - \\tfrac1m\\right)^{N-1}$",
+          "correct": false,
+          "explanation": "Falta elegir cuál de las $N$ bolillas es la que cae."
+        },
+        {
+          "text": "$m \\cdot N \\tfrac1m \\left(1 - \\tfrac1m\\right)^{N-1} = N\\left(1 - \\tfrac1m\\right)^{N-1}$",
+          "correct": true,
+          "explanation": "La cantidad de bolillas en la urna $i$ es $\\mathrm{Bi}(N, \\tfrac1m)$; se evalúa en 1."
+        },
+        {
+          "text": "$N \\tfrac1m$",
+          "correct": false,
+          "explanation": "No exige que las demás bolillas eviten la urna."
+        },
+        {
+          "text": "$m\\left(1 - \\tfrac1m\\right)^{N}$",
+          "correct": false,
+          "explanation": "Es $E(X)$."
+        }
+      ]
+    },
+    {
+      "id": "z",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $E(Z)$?",
+      "hints": [
+        "Cada urna está vacía, tiene una bolilla o tiene dos o más: $X + Y + Z = m$."
+      ],
+      "cards": [
+        {
+          "text": "$N - E(X) - E(Y)$",
+          "correct": false,
+          "explanation": "La suma $X + Y + Z$ cuenta urnas, no bolillas."
+        },
+        {
+          "text": "$\\tfrac{N}{2}$",
+          "correct": false,
+          "explanation": "No resulta de ningún cálculo con las urnas."
+        },
+        {
+          "text": "$m - m\\left(1 - \\tfrac1m\\right)^N - N\\left(1 - \\tfrac1m\\right)^{N-1}$",
+          "correct": true,
+          "explanation": "Linealidad: $E(Z) = m - E(X) - E(Y)$."
+        },
+        {
+          "text": "$m - E(X)$",
+          "correct": false,
+          "explanation": "Falta restar las urnas con exactamente una bolilla."
+        }
+      ]
+    },
+    {
+      "id": "c",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Cuál es la esperanza del número de cuentas no usadas?",
+      "hints": [
+        "Cuentas = urnas; personas = bolillas.",
+        "Cada persona elige una cuenta al azar, independientemente."
+      ],
+      "cards": [
+        {
+          "text": "$N\\left(1 - \\tfrac1m\\right)^{N-1}$",
+          "correct": false,
+          "explanation": "Es la esperanza de las cuentas usadas por exactamente una persona."
+        },
+        {
+          "text": "$m\\left(1 - \\tfrac1m\\right)^N$",
+          "correct": true,
+          "explanation": "Es $E(X)$ con $m$ cuentas y $N$ personas."
+        },
+        {
+          "text": "$N\\left(1 - \\tfrac1N\\right)^m$",
+          "correct": false,
+          "explanation": "Intercambia los papeles de cuentas y personas."
+        },
+        {
+          "text": "$m - N$",
+          "correct": false,
+          "explanation": "Ignora que varias personas pueden elegir la misma cuenta."
+        }
+      ]
+    }
+  ]
+}

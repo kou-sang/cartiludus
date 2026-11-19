@@ -1,0 +1,133 @@
+{
+  "id": "p6-ej17",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Multinomial: momentos",
+  "source": "Práctica 6 · Ejercicio 17",
+  "statement": "Sea $(X_1, \\dots, X_k)$ un vector aleatorio con distribución $\\mathcal M(p_1, \\dots, p_k, n)$ para $n > 2$. Hallar $E(X_i)$, $\\mathrm{Var}(X_i)$ y $\\mathrm{Cov}(X_i, X_j)$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "marg",
+      "kind": "distribution",
+      "prompt": "¿Qué distribución tiene $X_i$?",
+      "hints": [
+        "$X_i$ cuenta cuántos de los $n$ ensayos independientes caen en la categoría $i$."
+      ],
+      "cards": [
+        {
+          "text": "$X_i \\sim \\mathcal P(np_i)$",
+          "correct": false,
+          "explanation": "Es una aproximación, no la distribución exacta."
+        },
+        {
+          "text": "$X_i \\sim \\mathrm{Bi}(n, \\tfrac1k)$",
+          "correct": false,
+          "explanation": "Las categorías no tienen por qué ser equiprobables."
+        },
+        {
+          "text": "$X_i \\sim \\mathcal M(p_i, n)$",
+          "correct": false,
+          "explanation": "La marginal de una coordenada es binomial."
+        },
+        {
+          "text": "$X_i \\sim \\mathrm{Bi}(n, p_i)$",
+          "correct": true,
+          "explanation": "Éxito = caer en la categoría $i$, con probabilidad $p_i$ en cada ensayo."
+        }
+      ]
+    },
+    {
+      "id": "ev",
+      "kind": "compute",
+      "prompt": "¿Cuánto valen $E(X_i)$ y $\\mathrm{Var}(X_i)$?",
+      "hints": [
+        "Usar la binomial."
+      ],
+      "cards": [
+        {
+          "text": "$np_i$ y $np_i(1 - p_i)$",
+          "correct": true,
+          "explanation": "Esperanza y varianza de $\\mathrm{Bi}(n, p_i)$."
+        },
+        {
+          "text": "$np_i$ y $np_i$",
+          "correct": false,
+          "explanation": "Falta el factor $(1 - p_i)$."
+        },
+        {
+          "text": "$np_i$ y $n^2p_i(1-p_i)$",
+          "correct": false,
+          "explanation": "La varianza de la binomial crece con $n$, no con $n^2$."
+        },
+        {
+          "text": "$p_i$ y $p_i(1-p_i)$",
+          "correct": false,
+          "explanation": "Son los de un solo ensayo."
+        }
+      ]
+    },
+    {
+      "id": "suma",
+      "kind": "property",
+      "prompt": "¿Qué distribución tiene $X_i + X_j$ ($i \\ne j$)?",
+      "hints": [
+        "Juntar las categorías $i$ y $j$ en una sola."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathrm{Bi}(2n, p_i + p_j)$",
+          "correct": false,
+          "explanation": "Sigue habiendo $n$ ensayos."
+        },
+        {
+          "text": "$\\mathrm{Bi}(n, p_ip_j)$",
+          "correct": false,
+          "explanation": "Las categorías son excluyentes: se suman."
+        },
+        {
+          "text": "$\\mathrm{Bi}(n, p_i + p_j)$",
+          "correct": true,
+          "explanation": "Un ensayo cae en $i$ o en $j$ con probabilidad $p_i + p_j$."
+        },
+        {
+          "text": "No es binomial",
+          "correct": false,
+          "explanation": "Lo es: contar ensayos en la unión de dos categorías."
+        }
+      ]
+    },
+    {
+      "id": "cov",
+      "kind": "compute",
+      "prompt": "¿Cuánto vale $\\mathrm{Cov}(X_i, X_j)$?",
+      "hints": [
+        "$\\mathrm{Var}(X_i + X_j) = \\mathrm{Var}(X_i) + \\mathrm{Var}(X_j) + 2\\mathrm{Cov}$.",
+        "$n(p_i+p_j)(1 - p_i - p_j) - np_i(1-p_i) - np_j(1-p_j) = -2np_ip_j$."
+      ],
+      "cards": [
+        {
+          "text": "$0$",
+          "correct": false,
+          "explanation": "Las coordenadas no son independientes: suman $n$."
+        },
+        {
+          "text": "$np_ip_j$",
+          "correct": false,
+          "explanation": "Error de signo."
+        },
+        {
+          "text": "$-p_ip_j$",
+          "correct": false,
+          "explanation": "Es la covarianza para un solo ensayo; hay $n$."
+        },
+        {
+          "text": "$-np_ip_j$",
+          "correct": true,
+          "explanation": "Es negativa: si muchos ensayos caen en $i$, quedan menos para $j$."
+        }
+      ]
+    }
+  ]
+}

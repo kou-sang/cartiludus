@@ -1,0 +1,134 @@
+{
+  "id": "p6-ej2",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Televisores vendidos",
+  "source": "Práctica 6 · Ejercicio 2",
+  "statement": "En un comercio de artículos para el hogar hay 6 televisores en stock. El número de clientes que entran a comprar un televisor por semana es una variable aleatoria $X$ con distribución $\\mathcal P(5)$. Cada cliente que entra a comprar un televisor lo comprará si todavía hay stock. ¿Cuál es el número esperado de televisores a ser vendidos durante la próxima semana?",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "va",
+      "kind": "identify",
+      "prompt": "Si $V$ es la cantidad de televisores vendidos, ¿cómo se escribe en función de $X$?",
+      "hints": [
+        "Si entran menos de 6 clientes, cada uno compra.",
+        "Si entran 6 o más, se vende todo el stock."
+      ],
+      "cards": [
+        {
+          "text": "$V = \\min(X, 6)$",
+          "correct": true,
+          "explanation": "Se venden tantos como clientes, hasta agotar los 6."
+        },
+        {
+          "text": "$V = 6$",
+          "correct": false,
+          "explanation": "Ignora que pueden entrar menos de 6 clientes."
+        },
+        {
+          "text": "$V = X$",
+          "correct": false,
+          "explanation": "Ignora que el stock es de 6."
+        },
+        {
+          "text": "$V = \\max(X, 6)$",
+          "correct": false,
+          "explanation": "Nunca se pueden vender más de 6, y esta expresión vale al menos 6."
+        }
+      ]
+    },
+    {
+      "id": "esp",
+      "kind": "setup",
+      "prompt": "¿Cómo se escribe $E(V)$?",
+      "hints": [
+        "$V = k$ si $X = k < 6$; $V = 6$ si $X \\ge 6$.",
+        "Separar la suma en $k < 6$ y la cola $X \\ge 6$."
+      ],
+      "cards": [
+        {
+          "text": "$\\sum_{k=0}^{6} k\\,P(X = k)$",
+          "correct": false,
+          "explanation": "Olvida que con 7 o más clientes también se venden 6."
+        },
+        {
+          "text": "$\\sum_{k=0}^{5} k\\,P(X = k) + 6\\,P(X \\ge 6)$",
+          "correct": true,
+          "explanation": "Esperanza de una función de $X$: cada valor de $X$ se pondera con su probabilidad."
+        },
+        {
+          "text": "$\\min(E(X), 6)$",
+          "correct": false,
+          "explanation": "$E(\\min(X,6))$ no es $\\min(E(X), 6)$."
+        },
+        {
+          "text": "$6\\,P(X \\ge 6)$",
+          "correct": false,
+          "explanation": "Olvida las semanas con menos de 6 clientes."
+        }
+      ]
+    },
+    {
+      "id": "alt",
+      "kind": "property",
+      "prompt": "Otra forma: para $V$ con valores en $\\{0, \\dots, 6\\}$, $E(V) = \\sum_{j=1}^{6} P(V \\ge j)$. ¿A qué es igual $P(V \\ge j)$ para $j \\le 6$?",
+      "hints": [
+        "$V \\ge j$ con $j \\le 6$ ocurre si y sólo si llegan al menos $j$ clientes."
+      ],
+      "cards": [
+        {
+          "text": "$P(X = j)$",
+          "correct": false,
+          "explanation": "Pide exactamente $j$ clientes; alcanza con al menos $j$."
+        },
+        {
+          "text": "$P(X \\le j)$",
+          "correct": false,
+          "explanation": "Invierte la desigualdad."
+        },
+        {
+          "text": "$1 - P(X \\ge j)$",
+          "correct": false,
+          "explanation": "Es la probabilidad del complemento."
+        },
+        {
+          "text": "$P(X \\ge j)$",
+          "correct": true,
+          "explanation": "Para $j \\le 6$, $\\min(X, 6) \\ge j \\iff X \\ge j$."
+        }
+      ]
+    },
+    {
+      "id": "num",
+      "kind": "compute",
+      "prompt": "Con $P(X \\ge j) \\approx 0{,}993;\\ 0{,}960;\\ 0{,}875;\\ 0{,}735;\\ 0{,}560;\\ 0{,}384$ para $j = 1, \\dots, 6$, ¿cuánto vale $E(V)$?",
+      "hints": [
+        "Sumar los seis valores."
+      ],
+      "cards": [
+        {
+          "text": "$\\approx 2{,}30$",
+          "correct": false,
+          "explanation": "Usa sólo algunos de los términos."
+        },
+        {
+          "text": "$5$",
+          "correct": false,
+          "explanation": "Es $E(X)$: no tiene en cuenta el límite de stock."
+        },
+        {
+          "text": "$\\approx 4{,}51$",
+          "correct": true,
+          "explanation": "$0{,}993 + 0{,}960 + 0{,}875 + 0{,}735 + 0{,}560 + 0{,}384$."
+        },
+        {
+          "text": "$6$",
+          "correct": false,
+          "explanation": "Supone que siempre se agota el stock."
+        }
+      ]
+    }
+  ]
+}

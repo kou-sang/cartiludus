@@ -1,0 +1,169 @@
+{
+  "id": "p6-ej6",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Máximo y producto de variables independientes",
+  "source": "Práctica 6 · Ejercicio 6",
+  "statement": "Sean $X_1, \\dots, X_n$ variables aleatorias independientes tales que $P(X_k \\le t) = 0$ si $t < 0$, $P(X_k \\le t) = t^k$ si $0 \\le t \\le 1$, y $P(X_k \\le t) = 1$ si $t > 1$, para $k = 1, \\dots, n$.\n(a) Sea $Y = \\max(X_1, \\dots, X_n)$. Hallar $F_Y$, $f_Y$ y $E(Y)$.\n(b) Hallar $E\\left(\\prod_{i=1}^n X_i\\right)$.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "fy",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "¿Cómo se escribe $F_Y(t) = P(\\max \\le t)$?",
+      "hints": [
+        "El máximo es $\\le t$ si y sólo si todas lo son.",
+        "Usar independencia."
+      ],
+      "cards": [
+        {
+          "text": "$1 - \\prod_k (1 - t^k)$",
+          "correct": false,
+          "explanation": "Es la acumulada del mínimo."
+        },
+        {
+          "text": "$\\prod_{k=1}^n P(X_k \\le t) = \\prod_{k=1}^n t^k$ para $0 \\le t \\le 1$",
+          "correct": true,
+          "explanation": "Intersección de eventos independientes."
+        },
+        {
+          "text": "$t^n$",
+          "correct": false,
+          "explanation": "Supone que todas tienen la acumulada de $X_n$."
+        },
+        {
+          "text": "$\\sum_k t^k$",
+          "correct": false,
+          "explanation": "Suma en lugar de multiplicar; puede superar 1."
+        }
+      ]
+    },
+    {
+      "id": "exp",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale el exponente $\\sum_{k=1}^n k$? Llamémoslo $s$.",
+      "hints": [
+        "Suma de los primeros $n$ naturales."
+      ],
+      "cards": [
+        {
+          "text": "$s = n^2$",
+          "correct": false,
+          "explanation": "Sobrestima la suma."
+        },
+        {
+          "text": "$s = n!$",
+          "correct": false,
+          "explanation": "Multiplica en lugar de sumar los exponentes."
+        },
+        {
+          "text": "$s = \\tfrac{n(n+1)}{2}$, así que $F_Y(t) = t^{s}$ en $[0,1]$",
+          "correct": true,
+          "explanation": "Fórmula de Gauss."
+        },
+        {
+          "text": "$s = n$",
+          "correct": false,
+          "explanation": "Cuenta los factores, no la suma de los exponentes."
+        }
+      ]
+    },
+    {
+      "id": "ey",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "Con $f_Y(t) = s\\,t^{s-1}$ en $(0,1)$, ¿cuánto vale $E(Y)$?",
+      "hints": [
+        "$E(Y) = \\int_0^1 t \\cdot s\\,t^{s-1}\\,dt$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac12$",
+          "correct": false,
+          "explanation": "Corresponde a una uniforme."
+        },
+        {
+          "text": "$\\dfrac{s}{s+1} = \\dfrac{n(n+1)}{n(n+1) + 2}$",
+          "correct": true,
+          "explanation": "$s \\int_0^1 t^{s}\\,dt = \\tfrac{s}{s+1}$."
+        },
+        {
+          "text": "$\\dfrac{s-1}{s}$",
+          "correct": false,
+          "explanation": "Error en el exponente al integrar."
+        },
+        {
+          "text": "$\\dfrac{1}{s+1}$",
+          "correct": false,
+          "explanation": "Falta el factor $s$ de la densidad."
+        }
+      ]
+    },
+    {
+      "id": "prod",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "Para (b): ¿cómo se calcula $E\\left(\\prod X_i\\right)$?",
+      "hints": [
+        "Las variables son independientes."
+      ],
+      "cards": [
+        {
+          "text": "$E(X_1)^n$",
+          "correct": false,
+          "explanation": "Las $X_i$ no tienen la misma distribución."
+        },
+        {
+          "text": "$\\prod_i E(X_i)$, por independencia",
+          "correct": true,
+          "explanation": "La esperanza del producto de variables independientes es el producto de las esperanzas."
+        },
+        {
+          "text": "$\\sum_i E(X_i)$",
+          "correct": false,
+          "explanation": "Eso es la esperanza de la suma."
+        },
+        {
+          "text": "$E(Y)^n$",
+          "correct": false,
+          "explanation": "El máximo no interviene en el producto."
+        }
+      ]
+    },
+    {
+      "id": "exk",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Con $f_{X_k}(t) = k\\,t^{k-1}$ en $(0,1)$, ¿cuánto vale $E(X_k)$ y el producto?",
+      "hints": [
+        "$E(X_k) = \\int_0^1 k\\,t^k\\,dt$.",
+        "En $\\prod_{k=1}^n \\tfrac{k}{k+1}$ cada numerador se cancela con el denominador anterior."
+      ],
+      "cards": [
+        {
+          "text": "$E(X_k) = \\tfrac{k}{k+1}$ y $\\prod_{k=1}^n \\tfrac{k}{k+1} = \\tfrac{1}{n+1}$",
+          "correct": true,
+          "explanation": "Producto telescópico: $\\tfrac12 \\cdot \\tfrac23 \\cdots \\tfrac{n}{n+1}$."
+        },
+        {
+          "text": "$E(X_k) = \\tfrac12$ y el producto es $2^{-n}$",
+          "correct": false,
+          "explanation": "Las $X_k$ no son uniformes."
+        },
+        {
+          "text": "$E(X_k) = \\tfrac{k}{k+1}$ y el producto es $\\tfrac{n}{n+1}$",
+          "correct": false,
+          "explanation": "Ese es sólo el último factor."
+        },
+        {
+          "text": "$E(X_k) = \\tfrac{1}{k+1}$ y el producto es $\\tfrac{1}{(n+1)!}$",
+          "correct": false,
+          "explanation": "Falta el factor $k$ de la densidad."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "p6-ej16",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Muestreo estratificado",
+  "source": "Práctica 6 · Ejercicio 16",
+  "statement": "Muestreo estratificado. Se quiere saber cuántos habitantes viven en una cierta ciudad. Se sabe que dicha ciudad tiene $n$ manzanas, de las cuales $n_j$ tienen $x_j$ habitantes cada una ($n_1 + n_2 + \\cdots = n$). Sea $m = \\sum_j \\tfrac{n_j x_j}{n}$ el número medio de habitantes por manzana y sea $a^2 = \\tfrac1n \\sum_j n_j x_j^2 - m^2$. Para averiguarlo se sortean al azar $r$ manzanas para encuestarlas. Un encuestador es enviado a cada una de las manzanas sorteadas para contar la cantidad de habitantes que viven en ellas. Definamos $Z_i$ = cantidad de habitantes que viven en la $i$-ésima manzana sorteada e $Y$ = cantidad de personas encuestadas.\n(a) Hallar $E(Z_i)$ y $\\mathrm{Var}(Z_i)$.\n(b) Mostrar que $E(Y) = mr$ y $\\mathrm{Var}(Y) = \\dfrac{a^2 r(n-r)}{n-1}$.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "dz",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "¿Qué distribución tiene $Z_i$?",
+      "hints": [
+        "La $i$-ésima manzana sorteada es, por simetría, uniforme entre las $n$.",
+        "$n_j$ de ellas tienen $x_j$ habitantes."
+      ],
+      "cards": [
+        {
+          "text": "Depende de las manzanas sorteadas antes",
+          "correct": false,
+          "explanation": "Condicionalmente sí, pero su distribución marginal no."
+        },
+        {
+          "text": "$Z_i \\sim \\mathrm{Bi}(n, \\tfrac rn)$",
+          "correct": false,
+          "explanation": "Toma los valores $x_j$, no conteos de éxitos."
+        },
+        {
+          "text": "$P(Z_i = x_j) = \\tfrac1n$",
+          "correct": false,
+          "explanation": "Hay $n_j$ manzanas con $x_j$ habitantes, no una."
+        },
+        {
+          "text": "$P(Z_i = x_j) = \\tfrac{n_j}{n}$",
+          "correct": true,
+          "explanation": "Igual que la primera manzana sorteada."
+        }
+      ]
+    },
+    {
+      "id": "ez",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto valen $E(Z_i)$ y $\\mathrm{Var}(Z_i)$?",
+      "hints": [
+        "$E(Z_i) = \\sum_j x_j \\tfrac{n_j}{n}$; $E(Z_i^2) = \\tfrac1n\\sum_j n_j x_j^2$."
+      ],
+      "cards": [
+        {
+          "text": "$m$ y $\\tfrac1n \\sum_j n_j x_j^2$",
+          "correct": false,
+          "explanation": "Es $E(Z_i^2)$: falta restar $m^2$."
+        },
+        {
+          "text": "$m$ y $a$",
+          "correct": false,
+          "explanation": "La varianza es $a^2$."
+        },
+        {
+          "text": "$\\tfrac mr$ y $\\tfrac{a^2}r$",
+          "correct": false,
+          "explanation": "Una sola manzana no depende de cuántas se sorteen."
+        },
+        {
+          "text": "$m$ y $a^2$",
+          "correct": true,
+          "explanation": "Las definiciones de $m$ y $a^2$ son justamente esos momentos."
+        }
+      ]
+    },
+    {
+      "id": "cov",
+      "kind": "property",
+      "item": "(b)",
+      "prompt": "Truco: si se sortearan las $n$ manzanas, $\\sum_{i=1}^n Z_i$ sería la población total, una constante. ¿Qué se deduce para $c = \\mathrm{Cov}(Z_i, Z_j)$, $i \\ne j$?",
+      "hints": [
+        "La varianza de una constante es 0.",
+        "$0 = n a^2 + n(n-1)c$."
+      ],
+      "cards": [
+        {
+          "text": "$c = 0$",
+          "correct": false,
+          "explanation": "Sin reposición las $Z_i$ no son independientes."
+        },
+        {
+          "text": "$c = -\\dfrac{a^2}{n}$",
+          "correct": false,
+          "explanation": "Hay $n(n-1)$ pares, no $n^2$."
+        },
+        {
+          "text": "$c = \\dfrac{a^2}{n-1}$",
+          "correct": false,
+          "explanation": "Error de signo."
+        },
+        {
+          "text": "$c = -\\dfrac{a^2}{n-1}$",
+          "correct": true,
+          "explanation": "Se despeja de que la varianza de la suma total es 0; por simetría todas las covarianzas son iguales."
+        }
+      ]
+    },
+    {
+      "id": "y",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto valen $E(Y)$ y $\\mathrm{Var}(Y)$ con $Y = \\sum_{i=1}^r Z_i$?",
+      "hints": [
+        "$\\mathrm{Var}(Y) = r a^2 + r(r-1)c$.",
+        "Factorizar $\\tfrac{r a^2}{n-1}$."
+      ],
+      "cards": [
+        {
+          "text": "$mr$ y $ra^2 - \\dfrac{r(r-1)a^2}{n-1} = \\dfrac{a^2 r(n-r)}{n-1}$",
+          "correct": true,
+          "explanation": "$r a^2 \\cdot \\tfrac{(n - 1) - (r - 1)}{n-1}$."
+        },
+        {
+          "text": "$m$ y $\\tfrac{a^2}r$",
+          "correct": false,
+          "explanation": "Son la media y varianza del promedio con reposición, no del total."
+        },
+        {
+          "text": "$mr$ y $ra^2$",
+          "correct": false,
+          "explanation": "Ignora las covarianzas negativas del muestreo sin reposición."
+        },
+        {
+          "text": "$mr$ y $r^2a^2$",
+          "correct": false,
+          "explanation": "Las $Z_i$ no son la misma variable."
+        }
+      ]
+    }
+  ]
+}

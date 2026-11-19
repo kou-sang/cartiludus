@@ -3,10 +3,35 @@
   "name": "Probabilidades y Estadística (M)",
   "order": 1,
   "topics": [
-    { "id": "p1-probabilidad-discreta", "name": "Práctica 1 · Probabilidad discreta", "order": 1 },
-    { "id": "p2-condicional-independencia", "name": "Práctica 2 · Probabilidad condicional e independencia", "order": 2 },
-    { "id": "p3-va-discretas", "name": "Práctica 3 · Variables aleatorias discretas", "order": 3 },
-    { "id": "p4-va-continuas", "name": "Práctica 4 · Variables aleatorias continuas", "order": 4 },
-    { "id": "p5-vectores-aleatorios", "name": "Práctica 5 · Vectores aleatorios", "order": 5 }
+    {
+      "id": "p1-probabilidad-discreta",
+      "name": "Práctica 1 · Probabilidad discreta",
+      "order": 1
+    },
+    {
+      "id": "p2-condicional-independencia",
+      "name": "Práctica 2 · Probabilidad condicional e independencia",
+      "order": 2
+    },
+    {
+      "id": "p3-va-discretas",
+      "name": "Práctica 3 · Variables aleatorias discretas",
+      "order": 3
+    },
+    {
+      "id": "p4-va-continuas",
+      "name": "Práctica 4 · Variables aleatorias continuas",
+      "order": 4
+    },
+    {
+      "id": "p5-vectores-aleatorios",
+      "name": "Práctica 5 · Vectores aleatorios",
+      "order": 5
+    },
+    {
+      "id": "p6-esperanza",
+      "name": "Práctica 6 · Esperanza",
+      "order": 6
+    }
   ]
 }

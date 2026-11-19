@@ -1,0 +1,139 @@
+{
+  "id": "p6-ej9",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "El coleccionista de cupones",
+  "source": "Práctica 6 · Ejercicio 9",
+  "statement": "El problema del coleccionista de cupones. Un hombre colecciona cupones de un álbum compuesto por $N$ cupones distintos. El hombre adquiere sus cupones comprando uno por día en el kiosko de la esquina de su casa y, cada vez que adquiere uno, éste tiene igual probabilidad de ser cualquiera de los $N$ que componen el álbum.\n(a) Hallar la esperanza del número de cupones diferentes que hay en un conjunto de $k$ figuritas.\n(b) Hallar el número esperado de cupones que es necesario juntar para completar el álbum.",
+  "difficulty": 2,
+  "steps": [
+    {
+      "id": "ind",
+      "kind": "setup",
+      "item": "(a)",
+      "prompt": "Para (a), ¿qué indicadoras conviene usar?",
+      "hints": [
+        "Contar cupones distintos = sumar, por cada cupón del álbum, si apareció."
+      ],
+      "cards": [
+        {
+          "text": "No se pueden usar indicadoras",
+          "correct": false,
+          "explanation": "La cantidad de distintos es una suma de indicadoras."
+        },
+        {
+          "text": "$I_j = 1$ si el cupón $j$ aparece entre los $k$; la cantidad de distintos es $\\sum_{j=1}^N I_j$",
+          "correct": true,
+          "explanation": "Linealidad: alcanza con $P(I_j = 1)$."
+        },
+        {
+          "text": "$I_j = 1$ si el cupón $j$ sale exactamente una vez",
+          "correct": false,
+          "explanation": "Un cupón repetido también cuenta como \"diferente\" una vez."
+        },
+        {
+          "text": "$I_d = 1$ si el día $d$ sale un cupón nuevo",
+          "correct": false,
+          "explanation": "También funciona, pero su probabilidad depende de los días anteriores y es más difícil."
+        }
+      ]
+    },
+    {
+      "id": "pj",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $P(I_j = 1)$ y la esperanza pedida?",
+      "hints": [
+        "Complemento: el cupón $j$ no sale en ninguna de las $k$ compras.",
+        "Cada compra lo evita con probabilidad $1 - \\tfrac1N$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac kN$; esperanza $k$",
+          "correct": false,
+          "explanation": "Ignora las repeticiones."
+        },
+        {
+          "text": "$1 - \\left(1 - \\tfrac1N\\right)^k$; esperanza $N\\left[1 - \\left(1 - \\tfrac1N\\right)^k\\right]$",
+          "correct": true,
+          "explanation": "Compras independientes; se suman $N$ términos iguales."
+        },
+        {
+          "text": "$1 - \\left(\\tfrac1N\\right)^k$",
+          "correct": false,
+          "explanation": "Mezcla el complemento con la probabilidad de salir siempre."
+        },
+        {
+          "text": "$\\left(1 - \\tfrac1N\\right)^k$; esperanza $N\\left(1 - \\tfrac1N\\right)^k$",
+          "correct": false,
+          "explanation": "Es la cantidad esperada de cupones que faltan."
+        }
+      ]
+    },
+    {
+      "id": "etapas",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "Para (b): sea $T_i$ la cantidad de compras para pasar de $i - 1$ a $i$ cupones distintos. ¿Qué distribución tiene $T_i$?",
+      "hints": [
+        "Teniendo $i - 1$ distintos, una compra da uno nuevo con probabilidad $\\tfrac{N - i + 1}{N}$.",
+        "Se compra hasta el primer éxito."
+      ],
+      "cards": [
+        {
+          "text": "$T_i = 1$",
+          "correct": false,
+          "explanation": "Puede salir un cupón repetido."
+        },
+        {
+          "text": "$T_i \\sim \\mathrm{Bi}\\!\\left(N, \\tfrac{i}{N}\\right)$",
+          "correct": false,
+          "explanation": "No hay una cantidad fija de compras."
+        },
+        {
+          "text": "$T_i \\sim \\mathcal G\\!\\left(\\tfrac{N-i+1}{N}\\right)$",
+          "correct": true,
+          "explanation": "Ensayos independientes hasta el primer cupón nuevo."
+        },
+        {
+          "text": "$T_i \\sim \\mathcal G\\!\\left(\\tfrac{1}{N}\\right)$",
+          "correct": false,
+          "explanation": "Cualquier cupón que todavía falta sirve, no uno en particular."
+        }
+      ]
+    },
+    {
+      "id": "suma",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale la esperanza del total $T = \\sum_{i=1}^N T_i$?",
+      "hints": [
+        "$E(T_i) = \\tfrac{N}{N - i + 1}$.",
+        "Reordenar: $\\sum_{i=1}^N \\tfrac{N}{N - i + 1} = N \\sum_{j=1}^N \\tfrac1j$."
+      ],
+      "cards": [
+        {
+          "text": "$N$",
+          "correct": false,
+          "explanation": "Supone que nunca salen repetidos."
+        },
+        {
+          "text": "$\\sum_{i=1}^N \\tfrac{N - i + 1}{N}$",
+          "correct": false,
+          "explanation": "Usa la probabilidad de éxito en lugar de su inversa."
+        },
+        {
+          "text": "$N\\left(1 + \\tfrac12 + \\cdots + \\tfrac1N\\right) \\approx N \\ln N$",
+          "correct": true,
+          "explanation": "Linealidad de la esperanza y esperanza de la geométrica."
+        },
+        {
+          "text": "$N^2$",
+          "correct": false,
+          "explanation": "Usa la misma probabilidad $\\tfrac1N$ en todas las etapas."
+        }
+      ]
+    }
+  ]
+}

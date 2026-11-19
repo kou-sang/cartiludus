@@ -1,0 +1,139 @@
+{
+  "id": "p6-ej15",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Estadísticos de orden de uniformes",
+  "source": "Práctica 6 · Ejercicio 15",
+  "statement": "Sean $U_1, \\dots, U_n$ variables aleatorias independientes con distribución $\\mathcal U[0,1]$ y consideremos sus estadísticos de orden $U_{(1)}, \\dots, U_{(n)}$.\n(a) Hallar $E(U_{(i)})$. ¿Qué relación guardan las esperanzas entre sí? Sugerencia: recordar la distribución de $U_{(i)}$ calculada en la práctica anterior.\n(b) Calcular $\\mathrm{Var}(U_{(i)})$.\n(c) ¿Para qué valor de $i$ se minimiza la varianza? ¿Para cuál se maximiza?",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "dist",
+      "kind": "distribution",
+      "item": "(a)",
+      "prompt": "¿Qué distribución tiene $U_{(i)}$?",
+      "hints": [
+        "$f_{U_{(i)}}(t) = \\tfrac{n!}{(i-1)!(n-i)!} t^{i-1}(1-t)^{n-i}$ en $(0,1)$.",
+        "Comparar con la densidad beta."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal U[0,1]$",
+          "correct": false,
+          "explanation": "Sólo el caso $n = 1$."
+        },
+        {
+          "text": "$\\mathrm{Bi}(n, \\tfrac in)$",
+          "correct": false,
+          "explanation": "Es una variable continua en $(0, 1)$."
+        },
+        {
+          "text": "$\\beta(i, n - i)$",
+          "correct": false,
+          "explanation": "El exponente de $(1-t)$ es $n - i$, así que $b - 1 = n - i$."
+        },
+        {
+          "text": "$\\beta(i,\\ n - i + 1)$",
+          "correct": true,
+          "explanation": "La densidad tiene la forma $t^{a-1}(1-t)^{b-1}$ con $a = i$, $b = n - i + 1$."
+        }
+      ]
+    },
+    {
+      "id": "e",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "¿Cuánto vale $E(U_{(i)})$ y qué relación hay entre las esperanzas?",
+      "hints": [
+        "Para $\\beta(a,b)$: $E = \\tfrac{a}{a+b}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac in$",
+          "correct": false,
+          "explanation": "El máximo tendría esperanza 1, pero $U_{(n)} < 1$ casi seguramente."
+        },
+        {
+          "text": "$\\tfrac12$ para todo $i$",
+          "correct": false,
+          "explanation": "Los estadísticos de orden están ordenados: sus esperanzas crecen con $i$."
+        },
+        {
+          "text": "$\\tfrac{i}{n+1}$: son equiespaciadas, a distancia $\\tfrac{1}{n+1}$",
+          "correct": true,
+          "explanation": "$a + b = n + 1$; los $n$ puntos dividen $[0,1]$ en $n+1$ partes iguales en promedio."
+        },
+        {
+          "text": "$\\tfrac{i}{n+1}$, pero sin relación entre ellas",
+          "correct": false,
+          "explanation": "Hay una relación: son equiespaciadas."
+        }
+      ]
+    },
+    {
+      "id": "var",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "¿Cuánto vale $\\mathrm{Var}(U_{(i)})$?",
+      "hints": [
+        "Para $\\beta(a,b)$: $\\mathrm{Var} = \\tfrac{ab}{(a+b)^2(a+b+1)}$.",
+        "Con $a = i$, $b = n - i + 1$, $a + b = n + 1$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{i(n-i+1)}{(n+1)^2(n+2)}$",
+          "correct": true,
+          "explanation": "Reemplazo directo en la varianza de la beta."
+        },
+        {
+          "text": "$\\dfrac{i(n-i+1)}{(n+1)^2}$",
+          "correct": false,
+          "explanation": "Falta el factor $(a+b+1) = n+2$."
+        },
+        {
+          "text": "$\\dfrac{1}{12}$",
+          "correct": false,
+          "explanation": "Es la varianza de una uniforme."
+        },
+        {
+          "text": "$\\dfrac{i}{n+1}\\left(1 - \\dfrac{i}{n+1}\\right)$",
+          "correct": false,
+          "explanation": "Es la varianza de una Bernoulli con esa media."
+        }
+      ]
+    },
+    {
+      "id": "opt",
+      "kind": "interpret",
+      "item": "(c)",
+      "prompt": "¿Para qué $i$ se minimiza y para cuál se maximiza la varianza?",
+      "hints": [
+        "Depende de $i$ sólo a través de $i(n + 1 - i)$, una parábola en $i$.",
+        "Una parábola cóncava es máxima en el centro y mínima en los extremos."
+      ],
+      "cards": [
+        {
+          "text": "Máxima en los extremos y mínima en el centro",
+          "correct": false,
+          "explanation": "Invierte los papeles de la parábola cóncava."
+        },
+        {
+          "text": "Mínima en $i = 1$ y $i = n$; máxima en $i$ cercano a $\\tfrac{n+1}{2}$ (la mediana)",
+          "correct": true,
+          "explanation": "$i(n+1-i)$ es simétrica respecto de $\\tfrac{n+1}{2}$."
+        },
+        {
+          "text": "Mínima en $i = 1$ y máxima en $i = n$",
+          "correct": false,
+          "explanation": "La expresión es simétrica en $i \\leftrightarrow n + 1 - i$."
+        },
+        {
+          "text": "Es igual para todo $i$",
+          "correct": false,
+          "explanation": "Depende de $i$."
+        }
+      ]
+    }
+  ]
+}

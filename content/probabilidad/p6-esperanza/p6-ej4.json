@@ -1,0 +1,459 @@
+{
+  "id": "p6-ej4",
+  "version": 1,
+  "subject": "probabilidad",
+  "topic": "p6-esperanza",
+  "title": "Esperanza y varianza de distribuciones conocidas",
+  "source": "Práctica 6 · Ejercicio 4",
+  "statement": "Hallar la esperanza y varianza de las siguientes variables aleatorias:\n(a) $\\mathrm{Bi}(n, p)$. Sugerencia: ¿qué distribución tiene la suma de $n$ variables aleatorias independientes $\\mathrm{Be}(p)$?\n(b) $\\mathcal G(p)$. Sugerencia: recordar que una serie de potencias es derivable dentro de su radio de convergencia.\n(c) $\\mathcal{BN}(r, p)$. Sugerencia: ¿qué distribución tiene la suma de $r$ variables aleatorias independientes $\\mathcal G(p)$?\n(d) $\\mathcal P(\\lambda)$. Sugerencia: para hallar $\\mathrm{Var}(X)$ calcular primero $E(X(X-1))$.\n(e) $\\Gamma(\\alpha, \\lambda)$. Sugerencia: si $X \\sim \\Gamma(\\alpha, \\lambda)$ entonces $\\int_{-\\infty}^{+\\infty} f_X(x)\\,dx = 1$ para cualquier $\\alpha$ y $\\lambda$ positivos.\n(f) $\\mathcal E(\\lambda)$.\n(g) $\\chi^2(n)$.\n(h) $\\mathcal N(\\mu, \\sigma^2)$.\n(i) $\\mathcal U[a, b]$.\n(j) $\\beta(a, b)$. Sugerencia: si $X \\sim \\beta(a, b)$ entonces $\\int_{-\\infty}^{+\\infty} f_X(x)\\,dx = 1$ para cualquier $a$ y $b$ positivos.",
+  "difficulty": 3,
+  "steps": [
+    {
+      "id": "be",
+      "kind": "property",
+      "item": "(a)",
+      "prompt": "Si $Y \\sim \\mathrm{Be}(p)$, ¿cuánto valen $E(Y)$ y $\\mathrm{Var}(Y)$?",
+      "hints": [
+        "$Y$ vale 1 con probabilidad $p$ y 0 si no.",
+        "$Y^2 = Y$."
+      ],
+      "cards": [
+        {
+          "text": "$p$ y $p(1-p)$",
+          "correct": true,
+          "explanation": "$E(Y) = 1\\cdot p$; como $Y^2 = Y$, $E(Y^2) = p$ y $\\mathrm{Var}(Y) = p - p^2$."
+        },
+        {
+          "text": "$\\tfrac12$ y $\\tfrac14$",
+          "correct": false,
+          "explanation": "Sólo vale si $p = \\tfrac12$."
+        },
+        {
+          "text": "$1 - p$ y $p(1-p)$",
+          "correct": false,
+          "explanation": "La esperanza es la probabilidad de que valga 1."
+        },
+        {
+          "text": "$p$ y $p^2$",
+          "correct": false,
+          "explanation": "$p^2 = E(Y)^2$; falta restarlo de $E(Y^2)$."
+        }
+      ]
+    },
+    {
+      "id": "bi",
+      "kind": "compute",
+      "item": "(a)",
+      "prompt": "$X \\sim \\mathrm{Bi}(n,p)$ es la suma de $n$ variables $\\mathrm{Be}(p)$ independientes. ¿Cuánto valen $E(X)$ y $\\mathrm{Var}(X)$?",
+      "hints": [
+        "La esperanza es lineal siempre.",
+        "La varianza de una suma de variables independientes es la suma de las varianzas."
+      ],
+      "cards": [
+        {
+          "text": "$np$ y $n^2p(1-p)$",
+          "correct": false,
+          "explanation": "$\\mathrm{Var}(nY) = n^2\\mathrm{Var}(Y)$ es para una misma variable multiplicada por $n$, no para una suma de independientes."
+        },
+        {
+          "text": "$np$ y $np(1-p)$",
+          "correct": true,
+          "explanation": "Linealidad de la esperanza; por independencia, las covarianzas se anulan y las varianzas se suman."
+        },
+        {
+          "text": "$np$ y $np$",
+          "correct": false,
+          "explanation": "Usa la varianza de otra distribución."
+        },
+        {
+          "text": "$p$ y $p(1-p)$",
+          "correct": false,
+          "explanation": "Son los valores de un solo sumando."
+        }
+      ]
+    },
+    {
+      "id": "ge1",
+      "kind": "setup",
+      "item": "(b)",
+      "prompt": "$X \\sim \\mathcal G(p)$: $P(X = k) = q^{k-1}p$ con $q = 1 - p$, $k \\ge 1$. ¿Qué serie aparece en $E(X)$?",
+      "hints": [
+        "$E(X) = \\sum_{k \\ge 1} k q^{k-1} p$.",
+        "$k q^{k-1}$ es la derivada de $q^k$.",
+        "Derivar $\\sum_{k\\ge0} q^k = \\tfrac{1}{1-q}$ término a término."
+      ],
+      "cards": [
+        {
+          "text": "$E(X) = p$",
+          "correct": false,
+          "explanation": "Es la esperanza de una Bernoulli."
+        },
+        {
+          "text": "$\\sum_{k\\ge1} k q^{k-1} = \\dfrac{1}{(1-q)^2}$, así que $E(X) = \\dfrac{p}{p^2} = \\dfrac1p$",
+          "correct": true,
+          "explanation": "Se deriva la serie geométrica dentro de su radio de convergencia ($|q| < 1$)."
+        },
+        {
+          "text": "$E(X) = \\dfrac{q}{p}$",
+          "correct": false,
+          "explanation": "Corresponde a contar fracasos antes del primer éxito, no al número de ensayo."
+        },
+        {
+          "text": "$\\sum_{k\\ge1} k q^{k-1} = \\dfrac{1}{1-q}$",
+          "correct": false,
+          "explanation": "Es la serie geométrica sin derivar."
+        }
+      ]
+    },
+    {
+      "id": "ge2",
+      "kind": "compute",
+      "item": "(b)",
+      "prompt": "Derivando otra vez, $E(X(X-1)) = \\dfrac{2q}{p^2}$. ¿Cuánto vale $\\mathrm{Var}(X)$?",
+      "hints": [
+        "$E(X^2) = E(X(X-1)) + E(X)$.",
+        "$\\mathrm{Var}(X) = E(X^2) - E(X)^2$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{1}{p^2}$",
+          "correct": false,
+          "explanation": "Es $E(X)^2$, no la varianza."
+        },
+        {
+          "text": "$\\dfrac{q}{p}$",
+          "correct": false,
+          "explanation": "Error de potencias al simplificar."
+        },
+        {
+          "text": "$\\dfrac{2q}{p^2} - \\dfrac1{p^2}$",
+          "correct": false,
+          "explanation": "Olvida sumar $E(X)$ para pasar de $E(X(X-1))$ a $E(X^2)$."
+        },
+        {
+          "text": "$\\dfrac{q}{p^2} = \\dfrac{1-p}{p^2}$",
+          "correct": true,
+          "explanation": "$\\tfrac{2q}{p^2} + \\tfrac1p - \\tfrac1{p^2} = \\tfrac{2q + p - 1}{p^2} = \\tfrac{q}{p^2}$."
+        }
+      ]
+    },
+    {
+      "id": "bn",
+      "kind": "compute",
+      "item": "(c)",
+      "prompt": "$\\mathcal{BN}(r,p)$ (ensayo del $r$-ésimo éxito) es suma de $r$ geométricas $\\mathcal G(p)$ independientes. ¿Esperanza y varianza?",
+      "hints": [
+        "Sumar $r$ veces los resultados de (b).",
+        "Las geométricas son independientes."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac1p$ y $\\dfrac{1-p}{p^2}$",
+          "correct": false,
+          "explanation": "Son los de una sola geométrica."
+        },
+        {
+          "text": "$\\dfrac rp$ y $\\dfrac{r(1-p)}{p^2}$",
+          "correct": true,
+          "explanation": "Linealidad para la esperanza; independencia para sumar varianzas."
+        },
+        {
+          "text": "$\\dfrac rp$ y $\\dfrac{r^2(1-p)}{p^2}$",
+          "correct": false,
+          "explanation": "Multiplica la varianza por $r^2$, como si fuera una sola variable escalada."
+        },
+        {
+          "text": "$rp$ y $rp(1-p)$",
+          "correct": false,
+          "explanation": "Usa los valores de la Bernoulli en lugar de los de la geométrica."
+        }
+      ]
+    },
+    {
+      "id": "po1",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "$X \\sim \\mathcal P(\\lambda)$. ¿Cuánto valen $E(X)$ y $E(X(X-1))$?",
+      "hints": [
+        "$E(X) = \\sum_{k\\ge1} k \\tfrac{e^{-\\lambda}\\lambda^k}{k!}$: simplificar $\\tfrac{k}{k!} = \\tfrac{1}{(k-1)!}$.",
+        "Sacar un factor $\\lambda$ y reconocer la serie de $e^\\lambda$.",
+        "Para $E(X(X-1))$, simplificar $\\tfrac{k(k-1)}{k!}$ y sacar $\\lambda^2$."
+      ],
+      "cards": [
+        {
+          "text": "$\\lambda^2$ y $\\lambda^2$",
+          "correct": false,
+          "explanation": "En la esperanza sale un solo factor $\\lambda$."
+        },
+        {
+          "text": "$\\lambda$ y $\\lambda$",
+          "correct": false,
+          "explanation": "En el segundo caso salen dos factores $\\lambda$."
+        },
+        {
+          "text": "$e^{-\\lambda}$ y $\\lambda^2$",
+          "correct": false,
+          "explanation": "Es $P(X = 0)$, no la esperanza."
+        },
+        {
+          "text": "$\\lambda$ y $\\lambda^2$",
+          "correct": true,
+          "explanation": "$e^{-\\lambda}\\lambda \\sum_{j\\ge0}\\tfrac{\\lambda^j}{j!} = \\lambda$; análogamente $E(X(X-1)) = \\lambda^2$."
+        }
+      ]
+    },
+    {
+      "id": "po2",
+      "kind": "compute",
+      "item": "(d)",
+      "prompt": "¿Cuánto vale $\\mathrm{Var}(X)$ para $X \\sim \\mathcal P(\\lambda)$?",
+      "hints": [
+        "$E(X^2) = E(X(X-1)) + E(X)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\lambda$",
+          "correct": true,
+          "explanation": "$\\lambda^2 + \\lambda - \\lambda^2$."
+        },
+        {
+          "text": "$\\lambda^2$",
+          "correct": false,
+          "explanation": "Es $E(X(X-1))$, no la varianza."
+        },
+        {
+          "text": "$\\sqrt\\lambda$",
+          "correct": false,
+          "explanation": "Es el desvío estándar."
+        },
+        {
+          "text": "$\\lambda^2 - \\lambda$",
+          "correct": false,
+          "explanation": "Resta $E(X)$ en lugar de sumarlo al pasar a $E(X^2)$."
+        }
+      ]
+    },
+    {
+      "id": "ga1",
+      "kind": "setup",
+      "item": "(e)",
+      "prompt": "$X \\sim \\Gamma(\\alpha, \\lambda)$ con $f_X(x) = \\dfrac{\\lambda^\\alpha}{\\Gamma(\\alpha)} x^{\\alpha-1} e^{-\\lambda x}$, $x > 0$. ¿Cómo se calcula $E(X)$ sin integrar?",
+      "hints": [
+        "$x \\cdot x^{\\alpha - 1} = x^{(\\alpha+1)-1}$.",
+        "La integral que queda es, salvo constantes, la de una densidad $\\Gamma(\\alpha+1, \\lambda)$, que vale 1.",
+        "$\\Gamma(\\alpha+1) = \\alpha\\,\\Gamma(\\alpha)$."
+      ],
+      "cards": [
+        {
+          "text": "$E(X) = \\alpha\\lambda$",
+          "correct": false,
+          "explanation": "Los parámetros no se multiplican."
+        },
+        {
+          "text": "$E(X) = \\dfrac{1}{\\lambda}$",
+          "correct": false,
+          "explanation": "Sólo vale para $\\alpha = 1$."
+        },
+        {
+          "text": "$E(X) = \\dfrac{\\lambda^\\alpha}{\\Gamma(\\alpha)} \\cdot \\dfrac{\\Gamma(\\alpha+1)}{\\lambda^{\\alpha+1}} = \\dfrac{\\alpha}{\\lambda}$",
+          "correct": true,
+          "explanation": "$\\int_0^\\infty x^{\\alpha} e^{-\\lambda x}dx = \\tfrac{\\Gamma(\\alpha+1)}{\\lambda^{\\alpha+1}}$ porque la densidad $\\Gamma(\\alpha+1,\\lambda)$ integra 1."
+        },
+        {
+          "text": "$E(X) = \\dfrac{\\lambda}{\\alpha}$",
+          "correct": false,
+          "explanation": "Invierte los parámetros."
+        }
+      ]
+    },
+    {
+      "id": "ga2",
+      "kind": "compute",
+      "item": "(e)",
+      "prompt": "Del mismo modo $E(X^2) = \\dfrac{\\alpha(\\alpha+1)}{\\lambda^2}$. ¿Cuánto vale $\\mathrm{Var}(X)$?",
+      "hints": [
+        "$E(X^2) - E(X)^2$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{\\alpha}{\\lambda}$",
+          "correct": false,
+          "explanation": "Es la esperanza."
+        },
+        {
+          "text": "$\\dfrac{\\alpha^2}{\\lambda^2}$",
+          "correct": false,
+          "explanation": "Es $E(X)^2$."
+        },
+        {
+          "text": "$\\dfrac{\\alpha(\\alpha+1)}{\\lambda^2}$",
+          "correct": false,
+          "explanation": "Es $E(X^2)$: falta restar $E(X)^2$."
+        },
+        {
+          "text": "$\\dfrac{\\alpha}{\\lambda^2}$",
+          "correct": true,
+          "explanation": "$\\tfrac{\\alpha^2 + \\alpha - \\alpha^2}{\\lambda^2}$."
+        }
+      ]
+    },
+    {
+      "id": "exp",
+      "kind": "compute",
+      "item": "(f), (g)",
+      "prompt": "Usando (e): $\\mathcal E(\\lambda) = \\Gamma(1, \\lambda)$ y $\\chi^2(n) = \\Gamma(\\tfrac n2, \\tfrac12)$. ¿Cuánto valen sus esperanzas y varianzas?",
+      "hints": [
+        "Reemplazar $\\alpha$ y $\\lambda$ en $\\tfrac{\\alpha}{\\lambda}$ y $\\tfrac{\\alpha}{\\lambda^2}$."
+      ],
+      "cards": [
+        {
+          "text": "$\\mathcal E(\\lambda)$: $\\tfrac1\\lambda$ y $\\tfrac{1}{\\lambda}$; $\\chi^2(n)$: $\\tfrac n2$ y $n$",
+          "correct": false,
+          "explanation": "Usa fórmulas de la Poisson o parámetros equivocados."
+        },
+        {
+          "text": "$\\mathcal E(\\lambda)$: $\\lambda$ y $\\lambda^2$; $\\chi^2(n)$: $n$ y $2n$",
+          "correct": false,
+          "explanation": "Invierte el parámetro de la exponencial."
+        },
+        {
+          "text": "$\\mathcal E(\\lambda)$: $\\tfrac1\\lambda$ y $\\tfrac{1}{\\lambda^2}$; $\\chi^2(n)$: $n$ y $n$",
+          "correct": false,
+          "explanation": "Error al dividir por $\\lambda^2 = \\tfrac14$."
+        },
+        {
+          "text": "$\\mathcal E(\\lambda)$: $\\tfrac1\\lambda$ y $\\tfrac{1}{\\lambda^2}$; $\\chi^2(n)$: $n$ y $2n$",
+          "correct": true,
+          "explanation": "$\\tfrac{n/2}{1/2} = n$ y $\\tfrac{n/2}{1/4} = 2n$."
+        }
+      ]
+    },
+    {
+      "id": "nor",
+      "kind": "property",
+      "item": "(h)",
+      "prompt": "Si $X = \\mu + \\sigma Z$ con $Z \\sim \\mathcal N(0,1)$, ¿cuánto valen $E(X)$ y $\\mathrm{Var}(X)$?",
+      "hints": [
+        "$E(Z) = 0$ porque la densidad de $Z$ es par.",
+        "$\\mathrm{Var}(Z) = 1$; y $\\mathrm{Var}(a + bZ) = b^2\\mathrm{Var}(Z)$."
+      ],
+      "cards": [
+        {
+          "text": "$0$ y $1$",
+          "correct": false,
+          "explanation": "Son los valores de la normal estándar."
+        },
+        {
+          "text": "$\\mu$ y $\\sigma$",
+          "correct": false,
+          "explanation": "Es el desvío estándar, no la varianza."
+        },
+        {
+          "text": "$\\mu$ y $\\mu^2 + \\sigma^2$",
+          "correct": false,
+          "explanation": "Es $E(X^2)$."
+        },
+        {
+          "text": "$\\mu$ y $\\sigma^2$",
+          "correct": true,
+          "explanation": "Linealidad de la esperanza y $\\mathrm{Var}(a + bZ) = b^2\\mathrm{Var}(Z)$."
+        }
+      ]
+    },
+    {
+      "id": "uni",
+      "kind": "compute",
+      "item": "(i)",
+      "prompt": "$X \\sim \\mathcal U[a,b]$: ¿cuánto valen $E(X)$ y $\\mathrm{Var}(X)$?",
+      "hints": [
+        "Por simetría, la esperanza es el punto medio.",
+        "$X = a + (b-a)U$ con $U \\sim \\mathcal U[0,1]$, y $\\mathrm{Var}(U) = \\tfrac13 - \\tfrac14$."
+      ],
+      "cards": [
+        {
+          "text": "$\\tfrac{a+b}{2}$ y $\\tfrac{(b-a)^2}{4}$",
+          "correct": false,
+          "explanation": "Usa $E(U^2)$ en lugar de la varianza de $U$."
+        },
+        {
+          "text": "$\\tfrac{a+b}{2}$ y $\\tfrac{(b-a)^2}{12}$",
+          "correct": true,
+          "explanation": "$\\mathrm{Var}(U) = \\tfrac1{12}$ y se multiplica por $(b-a)^2$."
+        },
+        {
+          "text": "$\\tfrac{b-a}{2}$ y $\\tfrac{(b-a)^2}{12}$",
+          "correct": false,
+          "explanation": "Es la mitad de la longitud, no el punto medio."
+        },
+        {
+          "text": "$\\tfrac{a+b}{2}$ y $\\tfrac{b-a}{12}$",
+          "correct": false,
+          "explanation": "La varianza escala con el cuadrado de la longitud."
+        }
+      ]
+    },
+    {
+      "id": "beta",
+      "kind": "compute",
+      "item": "(j)",
+      "prompt": "$X \\sim \\beta(a,b)$ con $f_X(x) = \\dfrac{x^{a-1}(1-x)^{b-1}}{B(a,b)}$ y $B(a,b) = \\dfrac{\\Gamma(a)\\Gamma(b)}{\\Gamma(a+b)}$. ¿Cuánto vale $E(X)$?",
+      "hints": [
+        "$x \\cdot x^{a-1} = x^{(a+1)-1}$: aparece una densidad $\\beta(a+1, b)$.",
+        "$E(X) = \\tfrac{B(a+1,b)}{B(a,b)}$; usar $\\Gamma(t+1) = t\\Gamma(t)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{b}{a+b}$",
+          "correct": false,
+          "explanation": "Corresponde a $E(1-X)$."
+        },
+        {
+          "text": "$\\dfrac{a}{b}$",
+          "correct": false,
+          "explanation": "Falta el total $a + b$ en el denominador."
+        },
+        {
+          "text": "$\\dfrac12$",
+          "correct": false,
+          "explanation": "Sólo si $a = b$."
+        },
+        {
+          "text": "$\\dfrac{a}{a+b}$",
+          "correct": true,
+          "explanation": "$\\tfrac{B(a+1,b)}{B(a,b)} = \\tfrac{\\Gamma(a+1)\\Gamma(a+b)}{\\Gamma(a)\\Gamma(a+b+1)} = \\tfrac{a}{a+b}$."
+        }
+      ]
+    },
+    {
+      "id": "beta2",
+      "kind": "compute",
+      "item": "(j)",
+      "prompt": "Análogamente $E(X^2) = \\dfrac{a(a+1)}{(a+b)(a+b+1)}$. ¿Cuánto vale $\\mathrm{Var}(X)$?",
+      "hints": [
+        "$E(X^2) - E(X)^2$ con denominador común $(a+b)^2(a+b+1)$."
+      ],
+      "cards": [
+        {
+          "text": "$\\dfrac{ab}{(a+b)^2}$",
+          "correct": false,
+          "explanation": "Falta el factor $(a+b+1)$."
+        },
+        {
+          "text": "$\\dfrac{a(a+1)}{(a+b)(a+b+1)}$",
+          "correct": false,
+          "explanation": "Es $E(X^2)$."
+        },
+        {
+          "text": "$\\dfrac{a}{a+b}\\left(1 - \\dfrac{a}{a+b}\\right)$",
+          "correct": false,
+          "explanation": "Es la varianza de una Bernoulli con esa media; la beta tiene menos dispersión."
+        },
+        {
+          "text": "$\\dfrac{ab}{(a+b)^2(a+b+1)}$",
+          "correct": true,
+          "explanation": "$\\tfrac{a(a+1)(a+b) - a^2(a+b+1)}{(a+b)^2(a+b+1)} = \\tfrac{ab}{(a+b)^2(a+b+1)}$."
+        }
+      ]
+    }
+  ]
+}
